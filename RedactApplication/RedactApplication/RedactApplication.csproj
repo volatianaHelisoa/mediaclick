@@ -365,6 +365,7 @@
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="Content\themes\smoothness\jquery-ui.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\RobBol.svg" />
     <Content Include="fonts\RobLig.svg" />
     <Content Include="fonts\RobReg.svg" />
@@ -420,6 +421,11 @@
     <Content Include="fonts\RobReg.eot" />
     <Content Include="fonts\RobReg.ttf" />
     <Content Include="fonts\RobReg.woff" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
     <Content Include="Scripts\jquery-1.12.4.min.js" />
