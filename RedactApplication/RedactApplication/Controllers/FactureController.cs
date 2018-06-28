@@ -53,6 +53,8 @@ namespace RedactApplication.Controllers
             }
         }
 
+       
+
         public HtmlString theHtmlTableMomToldYouAbout(FACTURE facture)
         {
             var html = "<html lang = \"en\"><head><meta charset = \"utf-8\" >< title > Media Click </ title > ";
@@ -113,9 +115,11 @@ namespace RedactApplication.Controllers
                 var commandesFacturer = db.COMMANDEs.Where(x => x.date_livraison >= model.dateDebut &&
                                                                  x.date_livraison <= model.dateFin && (x.STATUT_COMMANDE != null &&
                                                                  x.STATUT_COMMANDE.statut_cmde.Contains("Validé"))).ToList();
+                
                 var redacteur = db.UTILISATEURs.SingleOrDefault(x => x.userId == model.listRedacteurId);
-                var montant = commandesFacturer.Count * (Convert.ToDouble(redacteur.redactTarif));
-                newFacture.montant = montant.ToString("0.00");
+                var volume = commandesFacturer.Sum(x => x.nombre_mots);
+                double montant = Convert.ToDouble(volume.ToString())  * (Convert.ToDouble(redacteur.redactTarif));
+                newFacture.montant = montant.ToString("0.0");
                 newFacture.etat = false;
                 newFacture.redacteurId = model.listRedacteurId;
                 newFacture.createurId = _userId;
@@ -123,6 +127,12 @@ namespace RedactApplication.Controllers
                 int maxRef = (db.FACTUREs.ToList().Count != 0) ? db.FACTUREs.Max(u => u.factureNumero): 0;
                 newFacture.factureNumero = maxRef + 1;
                 db.FACTUREs.Add(newFacture);
+
+                foreach (var commande in commandesFacturer)
+                {
+                    commande.factureId = newFacture.factureId;
+                }
+
                 int res = db.SaveChanges();
                 if (res > 0)
                     return RedirectToAction("ListFacture");               
@@ -197,12 +207,12 @@ namespace RedactApplication.Controllers
                         {
 
                             //suppression des relations
-                            var commandes = db.COMMANDEs.Where(x => x.factureId == factureId);
-                            foreach (var cmde in commandes)
-                            {
-                                cmde.factureId = null;
-                                db.SaveChanges();
-                            }
+                            //var commandes = db.COMMANDEs.Where(x => x.factureId == factureId);
+                            //foreach (var cmde in commandes)
+                            //{
+                            //    cmde.factureId = null;
+                            //    db.SaveChanges();
+                            //}
                             //suppression des factures
                             FACTURE facture = db.FACTUREs.SingleOrDefault(x => x.factureId == factureId);
                             db.FACTUREs.Remove(facture);

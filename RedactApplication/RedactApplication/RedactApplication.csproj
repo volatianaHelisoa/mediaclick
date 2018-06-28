@@ -219,6 +219,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CommandesController.cs" />
     <Compile Include="Controllers\FactureController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -300,7 +301,6 @@
     <Compile Include="Models\UTILISATEURViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Controllers\CommandesController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -315,6 +315,90 @@
     <Content Include="Content\css\elements\sites-creation.css" />
     <Content Include="Content\css\jquery-ui.css" />
     <Content Include="Content\css\jquery.dataTables.css" />
+    <Content Include="Content\css\lang\summernote-ar-AR.js" />
+    <Content Include="Content\css\lang\summernote-ar-AR.min.js" />
+    <Content Include="Content\css\lang\summernote-bg-BG.js" />
+    <Content Include="Content\css\lang\summernote-bg-BG.min.js" />
+    <Content Include="Content\css\lang\summernote-ca-ES.js" />
+    <Content Include="Content\css\lang\summernote-ca-ES.min.js" />
+    <Content Include="Content\css\lang\summernote-cs-CZ.js" />
+    <Content Include="Content\css\lang\summernote-cs-CZ.min.js" />
+    <Content Include="Content\css\lang\summernote-da-DK.js" />
+    <Content Include="Content\css\lang\summernote-da-DK.min.js" />
+    <Content Include="Content\css\lang\summernote-de-DE.js" />
+    <Content Include="Content\css\lang\summernote-de-DE.min.js" />
+    <Content Include="Content\css\lang\summernote-el-GR.js" />
+    <Content Include="Content\css\lang\summernote-el-GR.min.js" />
+    <Content Include="Content\css\lang\summernote-es-ES.js" />
+    <Content Include="Content\css\lang\summernote-es-ES.min.js" />
+    <Content Include="Content\css\lang\summernote-es-EU.js" />
+    <Content Include="Content\css\lang\summernote-es-EU.min.js" />
+    <Content Include="Content\css\lang\summernote-fa-IR.js" />
+    <Content Include="Content\css\lang\summernote-fa-IR.min.js" />
+    <Content Include="Content\css\lang\summernote-fi-FI.js" />
+    <Content Include="Content\css\lang\summernote-fi-FI.min.js" />
+    <Content Include="Content\css\lang\summernote-fr-FR.js" />
+    <Content Include="Content\css\lang\summernote-fr-FR.min.js" />
+    <Content Include="Content\css\lang\summernote-gl-ES.js" />
+    <Content Include="Content\css\lang\summernote-gl-ES.min.js" />
+    <Content Include="Content\css\lang\summernote-he-IL.js" />
+    <Content Include="Content\css\lang\summernote-he-IL.min.js" />
+    <Content Include="Content\css\lang\summernote-hr-HR.js" />
+    <Content Include="Content\css\lang\summernote-hr-HR.min.js" />
+    <Content Include="Content\css\lang\summernote-hu-HU.js" />
+    <Content Include="Content\css\lang\summernote-hu-HU.min.js" />
+    <Content Include="Content\css\lang\summernote-id-ID.js" />
+    <Content Include="Content\css\lang\summernote-id-ID.min.js" />
+    <Content Include="Content\css\lang\summernote-it-IT.js" />
+    <Content Include="Content\css\lang\summernote-it-IT.min.js" />
+    <Content Include="Content\css\lang\summernote-ja-JP.js" />
+    <Content Include="Content\css\lang\summernote-ja-JP.min.js" />
+    <Content Include="Content\css\lang\summernote-ko-KR.js" />
+    <Content Include="Content\css\lang\summernote-ko-KR.min.js" />
+    <Content Include="Content\css\lang\summernote-lt-LT.js" />
+    <Content Include="Content\css\lang\summernote-lt-LT.min.js" />
+    <Content Include="Content\css\lang\summernote-lt-LV.js" />
+    <Content Include="Content\css\lang\summernote-lt-LV.min.js" />
+    <Content Include="Content\css\lang\summernote-mn-MN.js" />
+    <Content Include="Content\css\lang\summernote-mn-MN.min.js" />
+    <Content Include="Content\css\lang\summernote-nb-NO.js" />
+    <Content Include="Content\css\lang\summernote-nb-NO.min.js" />
+    <Content Include="Content\css\lang\summernote-nl-NL.js" />
+    <Content Include="Content\css\lang\summernote-nl-NL.min.js" />
+    <Content Include="Content\css\lang\summernote-pl-PL.js" />
+    <Content Include="Content\css\lang\summernote-pl-PL.min.js" />
+    <Content Include="Content\css\lang\summernote-pt-BR.js" />
+    <Content Include="Content\css\lang\summernote-pt-BR.min.js" />
+    <Content Include="Content\css\lang\summernote-pt-PT.js" />
+    <Content Include="Content\css\lang\summernote-pt-PT.min.js" />
+    <Content Include="Content\css\lang\summernote-ro-RO.js" />
+    <Content Include="Content\css\lang\summernote-ro-RO.min.js" />
+    <Content Include="Content\css\lang\summernote-ru-RU.js" />
+    <Content Include="Content\css\lang\summernote-ru-RU.min.js" />
+    <Content Include="Content\css\lang\summernote-sk-SK.js" />
+    <Content Include="Content\css\lang\summernote-sk-SK.min.js" />
+    <Content Include="Content\css\lang\summernote-sl-SI.js" />
+    <Content Include="Content\css\lang\summernote-sl-SI.min.js" />
+    <Content Include="Content\css\lang\summernote-sr-RS-Latin.js" />
+    <Content Include="Content\css\lang\summernote-sr-RS-Latin.min.js" />
+    <Content Include="Content\css\lang\summernote-sr-RS.js" />
+    <Content Include="Content\css\lang\summernote-sr-RS.min.js" />
+    <Content Include="Content\css\lang\summernote-sv-SE.js" />
+    <Content Include="Content\css\lang\summernote-sv-SE.min.js" />
+    <Content Include="Content\css\lang\summernote-ta-IN.js" />
+    <Content Include="Content\css\lang\summernote-ta-IN.min.js" />
+    <Content Include="Content\css\lang\summernote-th-TH.js" />
+    <Content Include="Content\css\lang\summernote-th-TH.min.js" />
+    <Content Include="Content\css\lang\summernote-tr-TR.js" />
+    <Content Include="Content\css\lang\summernote-tr-TR.min.js" />
+    <Content Include="Content\css\lang\summernote-uk-UA.js" />
+    <Content Include="Content\css\lang\summernote-uk-UA.min.js" />
+    <Content Include="Content\css\lang\summernote-vi-VN.js" />
+    <Content Include="Content\css\lang\summernote-vi-VN.min.js" />
+    <Content Include="Content\css\lang\summernote-zh-CN.js" />
+    <Content Include="Content\css\lang\summernote-zh-CN.min.js" />
+    <Content Include="Content\css\lang\summernote-zh-TW.js" />
+    <Content Include="Content\css\lang\summernote-zh-TW.min.js" />
     <Content Include="Content\css\layout\layout.css" />
     <Content Include="Content\css\libs\bootstrap-grid.css" />
     <Content Include="Content\css\summernote.css" />
@@ -366,6 +450,7 @@
     <Content Include="Content\themes\smoothness\jquery-ui.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\RobBol.svg" />
     <Content Include="fonts\RobLig.svg" />
     <Content Include="fonts\RobReg.svg" />
@@ -426,6 +511,13 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\css\font\summernote.eot" />
+    <Content Include="Content\css\font\summernote.ttf" />
+    <Content Include="Content\css\font\summernote.woff" />
+    <None Include="Properties\PublishProfiles\redact.pubxml" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
     <Content Include="Scripts\jquery-1.12.4.min.js" />
@@ -446,6 +538,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\summernote.js" />
+    <Content Include="Scripts\tinymce.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -572,7 +665,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>49838</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:8020/</IISUrl>
+          <IISUrl>http://localhost:8040/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

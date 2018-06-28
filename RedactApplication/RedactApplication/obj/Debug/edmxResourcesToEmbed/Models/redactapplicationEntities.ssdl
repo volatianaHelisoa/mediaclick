@@ -198,7 +198,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_COMMANDE_REDACTEUR">
-    <End Role="UTILISATEUR" Type="Self.UTILISATEUR" Multiplicity="0..1" />
+    <End Role="UTILISATEUR" Type="Self.UTILISATEUR" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="COMMANDE" Type="Self.COMMANDE" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="UTILISATEUR">
@@ -270,7 +272,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_NOTIFICATION_COMMANDE">
-    <End Role="COMMANDE" Type="Self.COMMANDE" Multiplicity="0..1" />
+    <End Role="COMMANDE" Type="Self.COMMANDE" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="NOTIFICATION" Type="Self.NOTIFICATION" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="COMMANDE">

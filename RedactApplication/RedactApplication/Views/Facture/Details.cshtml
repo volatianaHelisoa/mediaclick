@@ -7,64 +7,87 @@
 <head>
     <meta charset="utf-8">
     <title>Example 1</title>
-    <link rel="stylesheet" href="style.css" media="all" />
+   
 </head>
-<body>
-    <header class="clearfix">
-        <div id="logo">
-            <img src="~/images/logo_mc_large.png" alt="MediaClick" srcset="">
-        </div>
-        <h1>@Model.factureNumero</h1>
-        <div id="company" class="clearfix">
-            <div>Media Click</div>
-            <div>455 Foggy Heights,<br /> AZ 85004, US</div>
-            <div>(602) 519-0450</div>
-            <div><a href="mailto:company@example.com">company@example.com</a></div>
-        </div>
-        <div id="project">
-            <div><span>Facturer à : </span> @Model.REDACTEUR.userNom @Model.REDACTEUR.userPrenom </div>           
-            <div>Rédacteur, </div>
-            <div><span>Tél :</span> @Model.REDACTEUR.redactPhone</div>
-            <div><span>Date : </span>@Model.dateEmission.ToString("dd/MM/yyyy")</div>
-           
-        </div>
-    </header>
-    <main>
-        <table>
-            <thead>
-                <tr>
-                    <th class="service">N° Commande</th>
-                    <th class="desc">Titre article</th>
-                    <th> Nombre de mot </th>
-                    <th>Tarif au mot</th>
-                    <th>Cout article</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.COMMANDEs)
-                {
-                <tr>
-                    <td class="commande-ref">@item.commandeREF</td>
-                    <td class="balise-titre">@item.balise_titre</td>
-                    <td class="nb-mot">@item.nombre_mots</td>
-                    <td class="tarif-mot">@item.REDACTEUR.redactTarif</td>
-                    <td class="total">@(item.nombre_mots * Convert.ToDouble(item.REDACTEUR.redactTarif))</td>
-                </tr>
-                }
-                
-                <tr>
-                    <td colspan="4" class="grand total">GRAND TOTAL</td>
-                    <td class="grand-total">@Model.montant</td>
-                </tr>
-            </tbody>
-        </table>
-        <div id="notices">
-            <div>NOTICE:</div>
-            <div class="notice">A finance charge of 1.5% will be made on unpaid balances after 30 days.</div>
-        </div>
-    </main>
-    <footer>
-        Invoice was created on a computer and is valid without the signature and seal.
-    </footer>
+<body >
+    <input type="hidden" name="GridHtml" />
+    <div id="Grid">
+        <header class="clearfix">
+            <div id="logo">
+                <img src="~/images/logo_mc_large.png" alt="MediaClick" srcset="">
+            </div>
+            <h1>@Model.factureNumero</h1>
+            <div id="company" class="clearfix">
+                <div>Media Click</div>
+                <div>455 Foggy Heights,<br /> AZ 85004, US</div>
+                <div>(602) 519-0450</div>
+                <div><a href="mailto:company@example.com">company@example.com</a></div>
+            </div>
+            <div id="project">
+                <div><span>Facturer à : </span> @Model.REDACTEUR.userNom @Model.REDACTEUR.userPrenom </div>
+                <div>Rédacteur, </div>
+                <div><span>Tél :</span> @Model.REDACTEUR.redactPhone</div>
+                <div><span>Date : </span>@Model.dateEmission.ToString("dd/MM/yyyy")</div>
+
+            </div>
+        </header>
+        <main>
+            <table>
+                <thead>
+                    <tr>
+                        <th class="service">N° Commande</th>
+                        <th class="desc">Titre article</th>
+                        <th> Nombre de mot </th>
+                        <th>Tarif au mot</th>
+                        <th>Cout article</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.COMMANDEs)
+                    {
+                        <tr>
+                            <td class="commande-ref">@item.commandeREF</td>
+                            <td class="balise-titre">@item.balise_titre</td>
+                            <td class="nb-mot">@item.nombre_mots</td>
+                            <td class="tarif-mot">@item.REDACTEUR.redactTarif</td>
+                            <td class="total">@(item.nombre_mots * Convert.ToDouble(item.REDACTEUR.redactTarif))</td>
+                        </tr>
+                    }
+
+                    <tr>
+                        <td colspan="4" class="grand total">GRAND TOTAL</td>
+                        <td class="grand-total">@Model.montant</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            @Scripts.Render("~/bundles/jquery")
+        </main>
+        <footer>
+            Invoice was created on a computer and is valid without the signature and seal.
+        </footer>
+    </div>
 </body>
 </html>
+
+<script type="text/javascript">
+    jQuery(document).ready(function () {           
+        $("input[name='GridHtml']").val($("#Grid").html());
+        $("input[name='GridHtml']").change(function () {
+            var dID = $(this).val();
+            $.ajax({
+                type: 'POST',
+                url: '/Facture/Export',
+                data: { hash: dID },
+                error: function (ex) {
+                    alert('Error: ' + ex.statusText);
+                },
+                success: function () {
+                    console.log("export");
+                },
+                async: true,
+                processData: true
+            });
+        });
+        });
+</script>

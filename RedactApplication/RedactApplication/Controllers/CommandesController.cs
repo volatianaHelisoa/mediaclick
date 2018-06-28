@@ -9,6 +9,7 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -369,12 +370,6 @@ namespace RedactApplication.Controllers
                     COMMANDE cmde = db.COMMANDEs.SingleOrDefault(x => x.commandeId == hash);
                     if (cmde != null)
                     {
-                        var notifications = db.NOTIFICATIONs.Where(x => x.commandeId == hash).ToList();
-                        foreach(var notif in notifications)
-                        {
-                            db.NOTIFICATIONs.Remove(notif);
-                        }
-                       
                         db.COMMANDEs.Remove(cmde);
                         db.SaveChanges();
                         return View();
@@ -688,7 +683,7 @@ namespace RedactApplication.Controllers
                 newcommande.date_livraison = model.date_livraison;
                 newcommande.date_cmde = DateTime.Now;
                 int? maxRef = db.COMMANDEs.Max(u => u.commandeREF);
-                newcommande.commandeREF = (maxRef != null) ? maxRef + 1 : 1;
+                newcommande.commandeREF = maxRef + 1;
                 newcommande.commandeId = Guid.NewGuid();
                 int? volume = GetVolumeEnCours(newcommande.commandeRedacteurId);
                 if (newcommande.REDACTEUR != null && volume > Convert.ToInt32(newcommande.REDACTEUR.redactVolume) && Session["VolumeInfo"] == null)
@@ -934,9 +929,9 @@ namespace RedactApplication.Controllers
             if (currentCommande.consigne_type_contenuId != null)
                 currentCommande.listContenuTypeId = (Guid)currentCommande.consigne_type_contenuId;
 
-
             if (currentCommande.commandeStatutId != null)
                 currentCommande.listStatutId = (Guid)currentCommande.commandeStatutId;
+
 
             Session["cmdeEditModif"] = null;
             return View(currentCommande);
@@ -964,7 +959,15 @@ namespace RedactApplication.Controllers
 
                     commande.balise_titre = model.balise_titre;
                     commande.contenu_livre = model.contenu_livre;
+                    string contenu = Regex.Replace(commande.contenu_livre, "<.*?>", string.Empty);
 
+
+                    if (contenu.Split(' ').ToList().Count > commande.nombre_mots)
+                    {
+                        ViewBag.ErrorMessage = "Erreur contenu ";
+                        COMMANDEViewModel cmd = SetCommandeViewModelDetails(commande);
+                        return View("Edit", cmd);
+                    }
                     commande.dateLivraisonReel = DateTime.Now;
                     toId = commande.commandeReferenceurId;
                 }
@@ -978,8 +981,7 @@ namespace RedactApplication.Controllers
                     var selectedCommandeTypeId = model.listCommandeTypeId;
                     var selectedContentTypeId = model.listContenuTypeId;
                     var selectedReferenceurId = Guid.Parse(HttpContext.User.Identity.Name);
-
-                    var selectedStatut = model.listStatutId;
+                    var selectedStatutId = model.listStatutId;
 
                     model.mot_cle_secondaire =
                         StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.mot_cle_secondaire));
@@ -1009,8 +1011,6 @@ namespace RedactApplication.Controllers
                     commande.commandeTypeId = selectedCommandeTypeId;
                     commande.CONTENU_TYPE = db.CONTENU_TYPE.Find(selectedContentTypeId);
                     commande.consigne_type_contenuId = selectedContentTypeId;
-
-                    commande.commandeStatutId = selectedStatut;
                     commande.mot_cle_pricipal =
                         StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.mot_cle_pricipal));
                     commande.mot_cle_secondaire =
@@ -1024,6 +1024,9 @@ namespace RedactApplication.Controllers
                         StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.consigne_autres));
 
                     commande.date_livraison = model.date_livraison;
+                    commande.commandeStatutId = selectedStatutId;
+                    commande.STATUT_COMMANDE = db.STATUT_COMMANDE.Find(selectedStatutId);
+
                     int? volume = GetVolumeEnCours(commande.commandeRedacteurId);
                     if (commande.REDACTEUR != null && volume > Convert.ToInt32(commande.REDACTEUR.redactVolume) && Session["VolumeInfo"] == null)
                     {

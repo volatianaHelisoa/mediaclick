@@ -319,6 +319,8 @@ C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication\b
 C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication\bin\fr\Microsoft.Owin.Security.Google.resources.dll
 C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication\bin\fr\Microsoft.Owin.Security.Twitter.resources.dll
 C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication\bin\fr\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
-C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication\obj\Debug\RedactApplication.csprojResolveAssemblyReference.cache
 C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication\obj\Debug\RedactApplication.dll
 C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication\obj\Debug\RedactApplication.pdb
+C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication\obj\Debug\RedactApplication.csproj.CoreCompileInputs.cache
+C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication\obj\Debug\RedactApplication.csproj.CopyComplete
+C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication\obj\Debug\RedactApplication.csprojAssemblyReference.cache
