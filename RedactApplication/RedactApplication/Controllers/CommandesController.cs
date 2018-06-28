@@ -918,7 +918,7 @@ namespace RedactApplication.Controllers
             currentCommande.ListRedacteur = val.GetListRedacteurItem();
             currentCommande.ListCommandeType = val.GetListCommandeTypeItem();
             currentCommande.ListContenuType = val.GetListContenuTypeItem();
-            currentCommande.ListStatut =val.GetListStatutItem();
+            currentCommande.ListStatut = val.GetListStatutItem();
             if (currentCommande.commandeProjetId != null)
                 currentCommande.listprojetId = (Guid) currentCommande.commandeProjetId;
 
@@ -934,8 +934,9 @@ namespace RedactApplication.Controllers
             if (currentCommande.consigne_type_contenuId != null)
                 currentCommande.listContenuTypeId = (Guid)currentCommande.consigne_type_contenuId;
 
-            
-               
+
+            if (currentCommande.commandeStatutId != null)
+                currentCommande.listStatutId = (Guid)currentCommande.commandeStatutId;
 
             Session["cmdeEditModif"] = null;
             return View(currentCommande);
