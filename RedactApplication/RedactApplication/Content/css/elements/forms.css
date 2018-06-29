@@ -14,7 +14,8 @@ input[type="search"]::-webkit-search-decoration {
     -webkit-appearance: none;
     -moz-appearance: none;
     -ms-appearance: none;
-    appearance: none;    
+    appearance: none;
+    font-family: 'RR', Arial, Helvetica, sans-serif   
 }
 
 /* Champs */
@@ -36,11 +37,47 @@ select,
 textarea {
     border:1px solid #eaeaea;
 }
-
+input[type="file"] {
+    display: none !important;
+}
+.input-custom {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 10px 0
+}
+.input-custom .file-name {
+    flex: 1;
+    white-space: nowrap;
+    display: inline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.input-custom label{
+    background: #eaeaea;
+    display: inline-block;
+    vertical-align: middle;
+    padding: 8px 14px;
+    text-transform: uppercase;
+    border-radius: 3px;
+    border: 1px solid #eaeaea;
+    margin-right: 20px;
+}
+.input-custom label:hover {
+    cursor: pointer;
+    color: white;
+    background-color: #26b5ff;
+    border-color: #26b5ff;
+}
+textarea {
+    font-family: 'RR', Arial, Helvetica, sans-serif ;
+    color: #999999;
+    line-height: 21px;
+}
 select {
     display: block;
     width: 100%;
-    background: url(../../../images/select_arrow.png) no-repeat right center;
+    background: url(../../images/select_arrow.png) no-repeat right center;
     -webkit-appearance: none;
     -moz-appearance: none;
     -ms-appearance: none;
@@ -64,11 +101,11 @@ label.pass-input::before  {
     z-index: 10;
 }
 label.mail-input::before {
-    background: url(../../../images/email-picto.svg) no-repeat center #26b5ff;
+    background: url(../../images/email-picto.svg) no-repeat center #26b5ff;
     background-size: 25px;
 }
 label.pass-input::before {
-    background: url(../../../images/password-picto.svg) no-repeat center #26b5ff;
+    background: url(../../images/password-picto.svg) no-repeat center #26b5ff;
     background-size: 19px;
 }
 input[type="date"] {
