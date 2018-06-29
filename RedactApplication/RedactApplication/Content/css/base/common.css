@@ -151,3 +151,24 @@ body {
     -ms-transition: all ease-in-out linear 300ms;
     -moz-transition: all ease-in-out linear 300ms;
 }
+
+
+/* POPUPS */
+#pop-up .pop-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    margin: -70px auto 20px;
+    background-image: url(../../../images/success-picto.svg);
+    display: block;
+    background-size: 30px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#pop-up .content-section p {
+    margin: 40px 0 60px;
+}

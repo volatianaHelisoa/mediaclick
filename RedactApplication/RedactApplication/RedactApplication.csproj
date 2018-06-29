@@ -416,6 +416,7 @@
     <Content Include="Content\css\elements\commandes.css" />
     <Content Include="Content\css\elements\forms.css" />
     <Content Include="Content\css\elements\login.css" />
+    <Content Include="Content\css\elements\profil.css" />
     <Content Include="Content\css\elements\sites-creation.css" />
     <Content Include="Content\css\facture.css" />
     <Content Include="Content\css\jquery-ui.css" />
@@ -656,6 +657,7 @@
     <Content Include="Views\Facture\DeletedAllFactureConfirmation.cshtml" />
     <Content Include="Views\Facture\DeletedFactureConfirmation.cshtml" />
     <Content Include="Views\Login\AccueilUser.cshtml" />
+    <Content Include="Views\Shared\Popup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

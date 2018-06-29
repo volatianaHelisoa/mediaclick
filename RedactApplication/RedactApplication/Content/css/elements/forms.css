@@ -77,7 +77,7 @@ textarea {
 select {
     display: block;
     width: 100%;
-    background: url(../../images/select_arrow.png) no-repeat right center;
+    background: url(../../../images/select_arrow.png) no-repeat right center;
     -webkit-appearance: none;
     -moz-appearance: none;
     -ms-appearance: none;
@@ -101,11 +101,11 @@ label.pass-input::before  {
     z-index: 10;
 }
 label.mail-input::before {
-    background: url(../../images/email-picto.svg) no-repeat center #26b5ff;
+    background: url(../../../images/email-picto.svg) no-repeat center #26b5ff;
     background-size: 25px;
 }
 label.pass-input::before {
-    background: url(../../images/password-picto.svg) no-repeat center #26b5ff;
+    background: url(../../../images/password-picto.svg) no-repeat center #26b5ff;
     background-size: 19px;
 }
 input[type="date"] {
