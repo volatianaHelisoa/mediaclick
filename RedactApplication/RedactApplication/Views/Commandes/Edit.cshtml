@@ -136,7 +136,7 @@
                             </label>
                             <label for="" class="col-100">
                                 Contenu
-                                @Html.TextAreaFor(m => m.contenu_livre, new { rows = "20", style = "resize:none;width:400px;", @class = "textarea-editor", maxlength = @Html.DisplayNameFor(m => m.nombre_mots) })
+                                @Html.TextAreaFor(m => m.contenu_livre, new { rows = "20", style = "resize:none;", @class = "textarea-editor", maxlength = @Html.DisplayNameFor(m => m.nombre_mots) })
                             </label>
                             <span class="left_char">0 sur <div id="data-limit-input">@Html.DisplayFor(model => model.nombre_mots)</div> caractère(s) utilisé(s)</span>
                             </section>

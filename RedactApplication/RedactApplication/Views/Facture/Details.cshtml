@@ -1,43 +1,43 @@
 ﻿
+
 @using RedactApplication.Models
 @model RedactApplication.Models.FACTUREViewModel
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Example 1</title>
-   
+    <title>Facture rédaction</title>
+    <link href="~/Content/css/facture.css" rel="stylesheet" />
+    
 </head>
-<body >
-    <input type="hidden" name="GridHtml" />
-    <div id="Grid">
+<body>
+
+    <div id="wrapper-facture">
         <header class="clearfix">
-            <div id="logo">
-                <img src="~/images/logo_mc_large.png" alt="MediaClick" srcset="">
-            </div>
-            <h1>@Model.factureNumero</h1>
+
             <div id="company" class="clearfix">
-                <div>Media Click</div>
-                <div>455 Foggy Heights,<br /> AZ 85004, US</div>
-                <div>(602) 519-0450</div>
-                <div><a href="mailto:company@example.com">company@example.com</a></div>
+                <div class="id">
+                    <span>Explorer business Park - Bat A1 Ankorondrano - Tana 101</span>
+                    <span><strong>Tél:</strong> +261 34 53 003 64</span>
+                </div>
+                <div class="facture-numero">Facture <span id="factureNumero" data-last-value="@Model.factureNumero">000-@Model.factureNumero</span></div>
             </div>
             <div id="project">
-                <div><span>Facturer à : </span> @Model.REDACTEUR.userNom @Model.REDACTEUR.userPrenom </div>
-                <div>Rédacteur, </div>
-                <div><span>Tél :</span> @Model.REDACTEUR.redactPhone</div>
-                <div><span>Date : </span>@Model.dateEmission.ToString("dd/MM/yyyy")</div>
-
+                <div class="client-info">
+                    <h3>Facturer à</h3>
+                    <span><strong>Mr</strong> @Model.REDACTEUR.userNom @Model.REDACTEUR.userPrenom,</span>
+                    <span>Redacteur,</span><span>Tél: @Model.REDACTEUR.redactPhone</span>
+                </div>
+                <span class="date">@Model.dateEmission.ToString("dd/MMMM/yyyy")</span>
             </div>
         </header>
-        <main>
+        <div id="content">
             <table>
                 <thead>
                     <tr>
-                        <th class="service">N° Commande</th>
+                        <th class="service">N° c/de</th>
                         <th class="desc">Titre article</th>
-                        <th> Nombre de mot </th>
+                        <th>Nombre de mot</th>
                         <th>Tarif au mot</th>
                         <th>Cout article</th>
                     </tr>
@@ -54,40 +54,85 @@
                         </tr>
                     }
 
+
                     <tr>
-                        <td colspan="4" class="grand total">GRAND TOTAL</td>
-                        <td class="grand-total">@Model.montant</td>
+                        <td colspan="4"><strong>Total</strong></td>
+                        <td class="grand total">@Model.montant Ar</td>
                     </tr>
                 </tbody>
             </table>
-            
-            @Scripts.Render("~/bundles/jquery")
-        </main>
-        <footer>
-            Invoice was created on a computer and is valid without the signature and seal.
+            <div id="notices">
+                <div class="notice"><strong>La direction,</strong>Tojo Ramino</div>
+            </div>
+        </div>
+        <footer class="clearfix">
+            <div>
+                <span>Explorer business Park - Bat A1 Ankorondrano - Tana 101</span>
+                <span><strong>Tél:</strong> +261 34 53 003 64</span>
+            </div>
+
         </footer>
     </div>
+
+    <a class="fileDownloadPdf" href=""  >Télécharger</a>
+
+    @Scripts.Render("~/bundles/jquery")
+    <script type="text/javascript" src="~/Scripts/js/jquery.fileDownload.js"></script>
 </body>
 </html>
 
+
+
 <script type="text/javascript">
-    jQuery(document).ready(function () {           
-        $("input[name='GridHtml']").val($("#Grid").html());
-        $("input[name='GridHtml']").change(function () {
-            var dID = $(this).val();
-            $.ajax({
-                type: 'POST',
-                url: '/Facture/Export',
-                data: { hash: dID },
-                error: function (ex) {
-                    alert('Error: ' + ex.statusText);
-                },
-                success: function () {
-                    console.log("export");
-                },
-                async: true,
-                processData: true
+    jQuery(document).ready(function () {
+        var numFacture = $("#factureNumero").data("lastValue");
+        console.log(numFacture);
+        var d = new Date();
+
+        var month = d.getMonth() + 1;
+
+        var filename = "Facture-" + numFacture + "-" + month + ".pdf";
+        console.log(filename);
+        var html = $('#wrapper-facture').html(); // document.body.innerHTML;
+        $.ajax({
+            url: "/Facture/DownloadPDFIText",
+
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({
+                htmlContent: html,
+                numFacture: numFacture,
+            }),
+            dataType: "json",
+            //processdata: false,
+            success: function (response) {
+                if (response.Valid) {
+
+                    var url = "http://"+$(location).attr('host') + "/Pdf/" + filename;
+                    
+                    $(".fileDownloadPdf").attr("href", url);
+                    console.log($(".fileDownloadPdf").prop('href'));
+                    $(".fileDownloadPdf").trigger("click");
+                }
+
+                else {
+                    console.log('download failed.');
+                    //alert(response.Errors);
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                console.log("XMLHttpRequest=" + XMLHttpRequest.responseText + "\ntextStatus=" + textStatus + "\nerrorThrown=" + errorThrown);
+            }
+        });
+
+        $(".fileDownloadPdf").on("click", function (e) {
+          
+            $.fileDownload($(this).prop('href'), {
+                preparingMessageHtml: "We are preparing your report, please wait...",
+                failMessageHtml: "There was a problem generating your report, please try again."
             });
+            return false; 
+            
         });
-        });
+    });
 </script>

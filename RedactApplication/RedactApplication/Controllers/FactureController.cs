@@ -1,18 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Web;
+using System.Text;
 using System.Web.Mvc;
-using System.Web.Routing;
 using iTextSharp.text;
+using iTextSharp.text.html.simpleparser;
 using iTextSharp.text.pdf;
 using iTextSharp.tool.xml;
+using iTextSharp.tool.xml.parser;
+using iTextSharp.tool.xml.pipeline.css;
+using iTextSharp.tool.xml.pipeline.end;
+using iTextSharp.tool.xml.pipeline.html;
 using RedactApplication.Models;
+
 
 namespace RedactApplication.Controllers
 {
@@ -35,36 +39,7 @@ namespace RedactApplication.Controllers
             return View();
         }
 
-        [HttpPost]
-        [ValidateInput(false)]
-        public FileResult Export(Guid? hash)
-        {
-            FACTURE fACTURE = db.FACTUREs.Find(hash);
-            string GridHtml = "";
-            using (MemoryStream stream = new System.IO.MemoryStream())
-            {
-                StringReader sr = new StringReader(GridHtml);
-                Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 100f, 0f);
-                PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
-                pdfDoc.Open();
-                XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
-                pdfDoc.Close();
-                return File(stream.ToArray(), "application/pdf", "Grid.pdf");
-            }
-        }
-
-       
-
-        public HtmlString theHtmlTableMomToldYouAbout(FACTURE facture)
-        {
-            var html = "<html lang = \"en\"><head><meta charset = \"utf-8\" >< title > Media Click </ title > ";
-           
- 
-  
-            
-            
-            return new HtmlString(html);
-        }
+        
 
         // GET: Facture/Details/5
         public ActionResult Details(Guid? hash)
@@ -74,9 +49,12 @@ namespace RedactApplication.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var factureVm = new Factures().GetDetailsFacture(hash);
-          
+            Session["factureNum"] = factureVm.factureNumero;
+            Session["logo"] = Server.MapPath("~/images/logo_mc_large.png");
+            
             return View(factureVm);
         }
+
 
         // GET: Facture/Create
         public ActionResult Create()
@@ -87,6 +65,119 @@ namespace RedactApplication.Controllers
             factureVm.dateFin = DateTime.Now;
             factureVm.ListRedacteur = val.GetListRedacteurItem(); 
             return View(factureVm);
+        }
+        public byte[] GetPDF(string pHTML)
+        {
+            byte[] bPDF = null;
+            var cssText = System.IO.File.ReadAllText(Server.MapPath("~/Content/css/facture.css"));
+            MemoryStream ms = new MemoryStream();
+            TextReader txtReader = new StringReader(pHTML);
+
+            // 1: create object of a itextsharp document class
+            Document doc = new Document(PageSize.A4, 25, 25, 25, 25);
+
+            // 2: we create a itextsharp pdfwriter that listens to the document and directs a XML-stream to a file
+            PdfWriter oPdfWriter = PdfWriter.GetInstance(doc, ms);
+
+            // 3: we create a worker parse the document
+            HTMLWorker htmlWorker = new HTMLWorker(doc);
+           
+
+            // 4: we open document and start the worker on the document
+            doc.Open();
+            htmlWorker.StartDocument();
+
+            // 5: parse the html into the document
+            htmlWorker.Parse(txtReader);
+
+            // 6: close the document and the worker
+            htmlWorker.EndDocument();
+            htmlWorker.Close();
+            doc.Close();
+
+            bPDF = ms.ToArray();
+
+            return bPDF;
+        }
+
+        private byte[] BindPdf(string pHTML)
+        {
+            var cssText = "~/Content/css/facture.css";
+            byte[] bPDF = null;
+            
+            var memoryStream = new MemoryStream();
+           
+            var input = new MemoryStream(Encoding.UTF8.GetBytes(pHTML));
+            var document = new Document(PageSize.A4, 10f, 10f, 100f, 0f);
+            var writer = PdfWriter.GetInstance(document, memoryStream);
+            writer.CloseStream = false;
+
+            document.Open();
+            var htmlContext = new HtmlPipelineContext(null);
+            htmlContext.SetTagFactory(iTextSharp.tool.xml.html.Tags.GetHtmlTagProcessorFactory());
+
+            ICSSResolver cssResolver = XMLWorkerHelper.GetInstance().GetDefaultCssResolver(false);
+            cssResolver.AddCssFile(System.Web.HttpContext.Current.Server.MapPath(cssText), true);
+
+            var pipeline = new CssResolverPipeline(cssResolver, new HtmlPipeline(htmlContext, new PdfWriterPipeline(document, writer)));
+            var worker = new XMLWorker(pipeline, true);
+            var p = new XMLParser(worker);
+            p.Parse(input);
+            document.Close();
+
+            bPDF = memoryStream.ToArray();
+            return bPDF;
+
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult DownloadPDFIText(string htmlContent)
+        {
+            try
+            {
+                var numFacture = Session["factureNum"].ToString();
+                var bytes = BindPdf(htmlContent);
+                string filename = "Facture-" + numFacture + "-" + DateTime.Now.Month + ".pdf";
+                var filePath = Server.MapPath("~/Pdf/" + filename);
+                System.IO.File.WriteAllBytes(filePath, bytes);
+               
+                return Json(new
+                {
+                    Valid = true,
+                });
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    Valid = false,
+                });
+            }
+        }
+
+       
+        public string RenderViewAsString(string viewName, object model)
+        {
+            // create a string writer to receive the HTML code
+            StringWriter stringWriter = new StringWriter();
+
+            // get the view to render
+            ViewEngineResult viewResult = ViewEngines.Engines.FindView(ControllerContext, viewName, null);
+            // create a context to render a view based on a model
+            ViewContext viewContext = new ViewContext(
+                    ControllerContext,
+                    viewResult.View,
+                    new ViewDataDictionary(model),
+                    new TempDataDictionary(),
+                    stringWriter
+                    );
+
+            // render the view to a HTML code
+            viewResult.View.Render(viewContext, stringWriter);
+
+            // return the HTML code
+            return stringWriter.ToString();
         }
 
         // POST: Facture/Create
