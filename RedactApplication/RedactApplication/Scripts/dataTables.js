@@ -33,17 +33,38 @@
 
 
     
-    if (jQuery('#myDataTableListCampaign').length > 0) {
-        $('#myDataTableListCampaign').dataTable({
-            "dom": '<"top"f>rt<"bottom"ipl><"clear">',
+    if (jQuery('#myDataTableListCommande').length > 0) {
+        //$('#myDataTableListCampaign').dataTable({
+        //    "dom": '<"top"f>rt<"bottom"ipl><"clear">',
+        //    "dom": 'ftipr',
+        //    "language": {
+        //        "search": '<i class="fa fa-search"></i>',
+        //        "searchPlaceholder": "search",
+        //        "emptyTable": "No records found.",
+        //        "zeroRecords": "No records found."
+        //    },
+        //    "stripeClasses": ['odd-row', 'even-row'],
+        //});
+        $('#myDataTableListCommande').DataTable({
+            "dom": 'ftipr',
             "language": {
                 "search": '<i class="fa fa-search"></i>',
                 "searchPlaceholder": "search",
-                "emptyTable": "No records found.",
-                "zeroRecords": "No records found."
+                "emptyTable": "Aucun enregistrement trouvé.",
+                "zeroRecords": "Aucun enregistrement trouvé."
             },
-            "stripeClasses": ['odd-row', 'even-row'],
+            columnDefs: [{
+                orderable: false,
+                className: 'select-checkbox',
+                targets: 0
+            }],
+            select: {
+                style: 'os',
+                selector: 'td:first-child'
+            },
+            order: [[1, 'asc']]
         });
+      
     }
     
     if (jQuery('#myDataTable').length > 0) {
