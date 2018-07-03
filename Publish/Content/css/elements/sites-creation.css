@@ -1,0 +1,47 @@
+.theme-select {
+    padding: 30px;
+}
+.theme-select h1 {
+    border-bottom: 1px solid #dfdfdf;
+    padding: 0 0 10px;
+    margin-bottom: 30px;
+    font-size: 25px;
+}
+.theme-select a {
+    display: block;
+    text-align: center;
+}
+.theme-select a .thumb {
+    display: block;
+    overflow: hidden;
+}
+.theme-select a img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: ease-in-out all 300ms;
+    -webkit-transition: ease-in-out all 300ms;
+    -moz-transition: ease-in-out all 300ms;
+    -ms-transition: ease-in-out all 300ms;
+}
+.theme-select a > span {
+    display: block;
+    width: 100%;
+    background: #cfcfcf;
+    color: white;
+    text-transform: uppercase;
+    padding: 12px 0;
+    margin-top: 10px;
+    transition: ease-in-out all 300ms;
+    -webkit-transition: ease-in-out all 300ms;
+    -moz-transition: ease-in-out all 300ms;
+    -ms-transition: ease-in-out all 300ms;
+}
+@media(min-width:1201px) {
+    .theme-select a:hover img {
+        transform: scale(1.2);
+    }
+    .theme-select a:hover > span {
+        background-color: #26b5ff
+    }
+}

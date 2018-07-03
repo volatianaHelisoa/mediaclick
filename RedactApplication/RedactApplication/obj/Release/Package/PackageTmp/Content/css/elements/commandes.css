@@ -1,0 +1,100 @@
+.icon-create-command {
+    background: url(../../../images/creercommande-picto.png) no-repeat center;
+    background-size: 100%;
+}
+.icon-edit-command {
+    background: url(../../../images/editcomande-picto.png) no-repeat center;
+    background-size: 100%;
+}
+
+.head-list .resume {
+    text-align: center;
+    padding: 20px 0;
+    position: relative;
+}
+
+.head-list .resume ul {
+    margin: 0;
+    padding:8px 25px;
+    border: 1px solid #ebebeb;
+    background: #fafafa;
+    display: inline-block;
+}
+
+.head-list .resume li{
+    list-style: none;
+    display: inline-block;
+    text-transform: uppercase;
+    border-right: 1px solid #868686;
+    padding: 0 20px;
+    margin-left: -2px;
+}
+
+.head-list .resume li:last-of-type {
+    border-right: none;
+}
+/** Commande view **/
+.commande-view .wrap span,
+.commande-resume .wrap span {
+    display: block;
+    margin-bottom: 10px;
+    color: #898989;
+}
+.commande-resume .wrap strong,
+.commande-resume .wrap strong {
+    color: #525252;
+}
+
+.commande-view .section-title,
+.commande-resume .section-title {
+    margin: 0;
+    padding: 0;
+}
+
+.commande-view .section-title {
+    margin-bottom: 20px;
+}
+
+.commande-view .commande-contenu {
+    padding: 20px;
+    border: 1px solid #dadada;
+    margin-top: 10px;
+    min-height: 339px;
+}
+
+.commande-resume .wrap  {
+    background-color: #f9f9f9;
+    padding: 20px;
+}
+.commande-resume .section-title {
+    border: none;
+}
+
+.commande-view .contenu-footer{
+    border-right: 1px solid #dadada;
+    border-bottom: 1px solid #dadada;
+    border-left: 1px solid #dadada;
+    font-size: 12px;
+    padding-left: 20px;
+    background: #f9f9f9;
+}
+.commande-view .contenu-footer span {
+    margin: 0
+}
+.commande-view .contenu-footer #copy {
+    padding: 7px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #26b5ff;
+    margin-right: -1px;
+    text-transform: uppercase;
+}
+
+.commande-resume .wrap span strong {
+    margin-right: 10px;
+}
+.commande-resume td {
+    vertical-align: top;
+}
+
+}

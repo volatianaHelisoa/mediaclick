@@ -1,0 +1,48 @@
+﻿   @model RedactApplication.Models.COMMANDEViewModel
+@{
+    ViewBag.Title = "Confirmer Commande";
+    if (Model != null)
+    {
+        ViewBag.commandeId = Model.commandeId;
+    }
+    Layout = "~/Views/Shared/LayoutConnectedPage.cshtml";
+ }
+
+
+<main id="wrapper">
+    <div id="single-container">       
+        <div class="card back-office with-shadow">
+            <div class="head">
+                <h1>Commande n° @Model.commandeREF</h1>
+            </div>
+
+            <!-- Champs -->
+            <div class="container clearfix">
+                <div class="row">
+                    <section class="col-md-7 commande-view">
+                        <div class="wrap">
+                            <span>
+                                <strong>Site : </strong>@Html.DisplayFor(model => Model.projet, new { @class = "input" })
+                            </span>
+                            <span>
+                                <strong>Thème : </strong> @Html.DisplayFor(model => Model.thematique, new { @class = "input" })
+                            </span>
+                            <span>
+                                <strong>Type de Textes :</strong> @Html.DisplayFor(model => Model.commandeType, new { @class = "input" })
+                            </span>
+                            <span>
+                                <strong>Nombre de mots : </strong>  @Html.DisplayFor(model => Model.nombre_mots, new { @class = "input" })
+                            </span>
+                        </div>
+                    </section>
+                    <section class="clearfix submit-area">
+                        <input type="submit" value="Accepter" class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("AcceptCommande", "Commandes", new {hash = ViewBag.hashCmde}) + "' ");">
+                        @Html.ActionLink("Retour", "ListCommandes", "Commandes", new { @class = "btn btn-warning" })
+                    </section>
+                    
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>

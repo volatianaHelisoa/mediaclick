@@ -1,0 +1,137 @@
+﻿@using RedactApplication.Models
+@model RedactApplication.Models.FACTUREViewModel
+
+@{
+    ViewBag.Title = "Créer facture";
+    Layout = "~/Views/Shared/LayoutConnected.cshtml";
+
+}
+
+@if (ViewBag.succes != null)
+{
+    if (ViewBag.succes == 1)
+    {
+        <script>
+            $("#addUserPopUp").modal();
+            $("div#addUserPopUp").css("display", "block");
+        </script>
+    }
+    else if (ViewBag.succes == 2)
+    {
+        <script>
+            $("#errorLimitUserPopUp").modal();
+            $("div#errorLimitUserPopUp").css("display", "block");
+        </script>
+    }
+    else if (ViewBag.succes == 3)
+    {
+        <script>
+            $("#errorValidDataUserPopUp").modal();
+            $("div#errorValidDataUserPopUp").css("display", "block");
+        </script>
+    }
+}
+}
+@section Scripts{
+    <link rel="stylesheet" href="~/Content/css/bootstrap-datepicker3.css" />
+    <script type="text/javascript" src="~/Scripts/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="~/Content/css/elements/factures.css">
+    
+
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+             var date = new Date();
+			date.setDate(date.getDate());
+            var dateDebut = $('input[name="dateDebut"]'); //our date input has the name "date"
+            var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+            var options = {
+                format: 'dd/mm/yyyy',
+                container: container,
+                todayHighlight: true,
+                autoclose: true,
+                weekStart: 1
+            };
+            dateDebut.datepicker(options);
+            
+
+            var date_input_fin = $('input[name="dateFin"]'); //our date input has the name "date"
+            var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+            var options_fin = {
+                format: 'dd/mm/yyyy',
+                container: container,
+                todayHighlight: true,
+                autoclose: true,
+                weekStart: 1
+            };
+            date_input_fin.datepicker(options_fin);
+           
+        });
+
+
+
+    </script>
+}
+
+<main id="wrapper">
+    <div id="single-container">
+        <div class="onglets ease-in-out">
+            <ul>
+                <li><a href="~/Home/ListeUser">Utilisateurs</a></li>
+                <li><a href="~/Commandes/ListCommandes" class="active">Commandes</a></li>
+                <li><a href="~/Facture/ListFacture">Factures</a></li>
+            </ul>
+        </div>
+        <div class="card back-office with-shadow">
+            <div class="head">
+                <i class="icon icon-create-facture"></i>
+                <h1>Créer facture</h1>
+            </div>
+             @*@if (ViewBag.ErrorMessage != null)
+                {
+                    <label class="error-msg ltl-consign">Selectionner au moins un rédacteur.</label>
+                }*@
+@using (Html.BeginForm("CreateFacture", "Facture", FormMethod.Post, new { @class = "form-horizontal", role = "form", @id = "createfacture" }))
+{
+    @Html.AntiForgeryToken()
+            <!-- Champs -->
+            <section class="clearfix">
+                <label for="" class="col-50">
+                    Choisir Redacteur
+                    @Html.DropDownListFor(x => Model.listRedacteurId, new SelectList(Model.ListRedacteur, "Value", "Text"), htmlAttributes: new { id = "SelectItemRedacteur" })
+                </label>
+               
+            </section>
+            <section class="clearfix">
+                <label for="" class="col-50 pull-left">
+                    <span style="display: inline-block; vertical-align: middle; margin-right: 8px;">De</span>
+                   
+                    @Html.TextBoxFor(x => x.dateDebut, "{0:dd/MM/yyyy}", new { @style = "display: inline-block; width: calc(100% - 30px);", type = "date" })
+                    @Html.ValidationMessageFor(m => m.dateDebut)
+                </label>
+                <label for="" class="col-50 pull-right">
+                    <span style="display: inline-block; vertical-align: middle; margin-right: 8px;">Au</span>                    
+                    @Html.TextBoxFor(x => x.dateDebut, "{0:dd/MM/yyyy}", new { @style = "display: inline-block; width: calc(100% - 30px);", type = "date" })
+                    @Html.ValidationMessageFor(m => m.dateDebut)
+                </label>
+            </section>
+            <section class="clearfix submit-area">                
+                <button type="submit" value="Sauver" class="btn btn-success">Sauver</button>
+                @Html.ActionLink("Annuler", "ListFacture", "Facture", new { }, new { @class = "btn btn-warning" })
+            </section>
+}
+        </div>
+    </div>
+
+</main>
+
+
+<!--  Dialogue succès ajout user   -->
+<div id="addUserPopUp">
+
+</div>
+
+<!--  Dialogue error valid data   -->
+<div id="errorValidDataUserPopUp">
+
+</div>
+

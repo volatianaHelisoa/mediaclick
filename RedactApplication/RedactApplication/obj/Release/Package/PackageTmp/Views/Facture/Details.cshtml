@@ -1,0 +1,138 @@
+﻿
+
+@using RedactApplication.Models
+@model RedactApplication.Models.FACTUREViewModel
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Facture rédaction</title>
+    <link href="~/Content/css/facture.css" rel="stylesheet" />
+    
+</head>
+<body>
+
+    <div id="wrapper-facture">
+        <header class="clearfix">
+
+            <div id="company" class="clearfix">
+                <div class="id">
+                    <span>Explorer business Park - Bat A1 Ankorondrano - Tana 101</span>
+                    <span><strong>Tél:</strong> +261 34 53 003 64</span>
+                </div>
+                <div class="facture-numero">Facture <span id="factureNumero" data-last-value="@Model.factureNumero">000-@Model.factureNumero</span></div>
+            </div>
+            <div id="project">
+                <div class="client-info">
+                    <h3>Facturer à</h3>
+                    <span><strong>Mr</strong> @Model.REDACTEUR.userNom @Model.REDACTEUR.userPrenom,</span>
+                    <span>Redacteur,</span><span>Tél: @Model.REDACTEUR.redactPhone</span>
+                </div>
+                <span class="date">@Model.dateEmission.ToString("dd/MMMM/yyyy")</span>
+            </div>
+        </header>
+        <div id="content">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="service">N° c/de</th>
+                        <th class="desc">Titre article</th>
+                        <th>Nombre de mot</th>
+                        <th>Tarif au mot</th>
+                        <th>Cout article</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.COMMANDEs)
+                    {
+                        <tr>
+                            <td class="commande-ref">@item.commandeREF</td>
+                            <td class="balise-titre">@item.balise_titre</td>
+                            <td class="nb-mot">@item.nombre_mots</td>
+                            <td class="tarif-mot">@item.REDACTEUR.redactTarif</td>
+                            <td class="total">@(item.nombre_mots * Convert.ToDouble(item.REDACTEUR.redactTarif))</td>
+                        </tr>
+                    }
+
+
+                    <tr>
+                        <td colspan="4"><strong>Total</strong></td>
+                        <td class="grand total">@Model.montant Ar</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div id="notices">
+                <div class="notice"><strong>La direction,</strong>Tojo Ramino</div>
+            </div>
+        </div>
+        <footer class="clearfix">
+            <div>
+                <span>Explorer business Park - Bat A1 Ankorondrano - Tana 101</span>
+                <span><strong>Tél:</strong> +261 34 53 003 64</span>
+            </div>
+
+        </footer>
+    </div>
+
+    <a class="fileDownloadPdf" href=""  >Télécharger</a>
+
+    @Scripts.Render("~/bundles/jquery")
+    <script type="text/javascript" src="~/Scripts/js/jquery.fileDownload.js"></script>
+</body>
+</html>
+
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        var numFacture = $("#factureNumero").data("lastValue");
+        console.log(numFacture);
+        var d = new Date();
+
+        var month = d.getMonth() + 1;
+
+        var filename = "Facture-" + numFacture + "-" + month + ".pdf";
+        console.log(filename);
+        var html = $('#wrapper-facture').html(); // document.body.innerHTML;
+        $.ajax({
+            url: "/Facture/DownloadPDFIText",
+
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({
+                htmlContent: html,
+                numFacture: numFacture,
+            }),
+            dataType: "json",
+            //processdata: false,
+            success: function (response) {
+                if (response.Valid) {
+
+                    var url = "http://"+$(location).attr('host') + "/Pdf/" + filename;
+                    
+                    $(".fileDownloadPdf").attr("href", url);
+                    console.log($(".fileDownloadPdf").prop('href'));
+                    $(".fileDownloadPdf").trigger("click");
+                }
+
+                else {
+                    console.log('download failed.');
+                    //alert(response.Errors);
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                console.log("XMLHttpRequest=" + XMLHttpRequest.responseText + "\ntextStatus=" + textStatus + "\nerrorThrown=" + errorThrown);
+            }
+        });
+
+        $(".fileDownloadPdf").on("click", function (e) {
+          
+            $.fileDownload($(this).prop('href'), {
+                preparingMessageHtml: "We are preparing your report, please wait...",
+                failMessageHtml: "There was a problem generating your report, please try again."
+            });
+            return false; 
+            
+        });
+    });
+</script>

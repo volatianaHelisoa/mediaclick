@@ -749,7 +749,8 @@ namespace RedactApplication.Controllers
                     utilisateur.redactNiveau = model.redactNiveau;
                     utilisateur.redactReferenceur = model.redactReferenceur;
                     utilisateur.redactThemes = model.redactThemes;
-                    SaveRedactThemes(model.redactThemes, utilisateur.userId);
+                    if(model.redactThemes != null)
+                        SaveRedactThemes(model.redactThemes, utilisateur.userId);
                     utilisateur.redactVolume = model.redactVolume;
                     utilisateur.redactTarif = model.redactTarif;
 
@@ -759,36 +760,13 @@ namespace RedactApplication.Controllers
                     utilisateur.userId = Guid.NewGuid();
                     db.UTILISATEURs.Add(utilisateur);
 
+                  
+                    UserRole userRole = new UserRole();
+                    userRole.idRole = int.Parse(selectedRole[0]);
+                    userRole.idUser = utilisateur.userId;
+                    db.UserRoles.Add(userRole);
                     
-                    if (selectedRole.Count() == 1)
-                    {
-                        UserRole userRole = new UserRole();
-                        userRole.idRole = int.Parse(selectedRole[0]);
-                        userRole.idUser = utilisateur.userId;
-                        db.UserRoles.Add(userRole);
-                    }
-                    else
-                    {
-                        bool test = false;
-                        foreach (var val in selectedRole)
-                        {
-                            if (val.Contains("1") || val.Contains("2"))
-                            {
-                                test = true;
-                            }
-                            else
-                            {
-                                test = false;
-                            }
-                        }
-                        if (test == true)
-                        {
-                            UserRole userRole = new UserRole();
-                            userRole.idRole = 4;
-                            userRole.idUser = utilisateur.userId;
-                            db.UserRoles.Add(userRole);
-                        }
-                    }
+                    
                     db.SaveChanges();
 
                     return RedirectToRoute("Home", new RouteValueDictionary {
@@ -902,35 +880,12 @@ namespace RedactApplication.Controllers
                     {
                         db.UserRoles.Remove(listeUserRole[i]);
                     }
-                    if (selectedRole.Count() == 1)
-                    {
-                        UserRole userRole = new UserRole();
-                        userRole.idRole = int.Parse(selectedRole[0]);
-                        userRole.idUser = user.userId;
-                        db.UserRoles.Add(userRole);
-                    }
-                    else
-                    {
-                        bool test = false;
-                        foreach (var val in selectedRole)
-                        {
-                            if (val.Contains("1") || val.Contains("2"))
-                            {
-                                test = true;
-                            }
-                            else
-                            {
-                                test = false;
-                            }
-                        }
-                        if (test == true)
-                        {
-                            UserRole userRole = new UserRole();
-                            userRole.idRole = 4;
-                            if (user != null) userRole.idUser = user.userId;
-                            db.UserRoles.Add(userRole);
-                        }
-                    }
+                  
+                    UserRole userRole = new UserRole();
+                    userRole.idRole = int.Parse(selectedRole[0]);
+                    userRole.idUser = user.userId;
+                    db.UserRoles.Add(userRole);
+                   
                    
                     // mise à jour de user
                     user.userNom = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(model.userNom.ToLower());

@@ -1,14 +1,13 @@
 ﻿
-@model RedactApplication.Models.UTILISATEURViewModel
 @{
     ViewBag.Title = "Confirmation modification de l'utilisateur";
     if (Model != null)
     {
-       
+
         ViewBag.userId = Model.userId;
     }
 
-    Layout = "~/Views/Shared/LayoutFullPage.cshtml";
+    Layout = "~/Views/Shared/LayoutConnected.cshtml";
 
 <div class="flex-content flex-jcenter-acenter flex-col pop-up">
     <div class="popup-container with-shadow">
@@ -18,9 +17,9 @@
         <div class="content-section text-centered icon-bottom">
             <i class="pop-icon green-bg"></i>
             <p>Veuillez entrer des données valides</p>
-            <form action="" method="post">
+            
                 <input type="submit" value="Ok" class="btn btn-primary"  onclick="@(" window.location.href='" + @Url.RouteUrl("Home", new {controller = "Home", action = "ListeUser"}) + "' ");">
-            </form>
+            
         </div>
     </div>
 

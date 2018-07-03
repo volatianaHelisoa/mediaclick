@@ -1,0 +1,180 @@
+﻿@model RedactApplication.Models.UTILISATEURViewModel
+@{
+    ViewBag.Title = "Utilisateur";
+
+    if (Model != null)
+    {
+        ViewBag.userId = Model.userId;
+    }
+
+
+    Layout = "~/Views/Shared/LayoutConnected.cshtml";
+}
+@section Scripts{
+
+    <link rel="stylesheet" href="~/Content/css/elements/profil.css">
+    <script>
+          $("#checkReferenceur").prop('checked', false);
+    $("#checkRedacteur").prop('checked', false);
+    $("#checkManager").prop('checked', false);
+    @if (ViewBag.userRole == 1)
+    {
+        @:jQuery("#checkReferenceur").prop('checked', true);
+    }
+    @if (ViewBag.userRole == 2)
+    {
+        @:jQuery("#checkRedacteur").prop('checked', true);
+
+    }
+    @if (@ViewBag.userRole == 3)
+    {
+        @:jQuery("#checkManager").prop('checked', true);
+    }
+    </script>
+
+
+
+}
+@if (ViewBag.succes != null)
+{
+    if (ViewBag.succes == 1)
+    {
+        <script>
+            $("#EditUserPopUp").modal();
+            $("div#EditUserPopUp").css("display", "block");
+        </script>
+    }
+}
+}
+
+<main id="wrapper">
+    <div id="single-container">
+        <div class="onglets ease-in-out">
+            <ul>
+                <li><a href="~/Home/ListeUser">Utilisateurs</a></li>
+                <li><a href="~/Commandes/ListCommandes" class="active">Commandes</a></li>
+                <li><a href="~/Facture/ListFacture">Factures</a></li>
+            </ul>
+        </div>
+        <div class="card back-office with-shadow">
+
+
+
+            @if (Model != null)
+            {<fieldset>
+                    <input type="hidden" value="@Model.userId" name="idUser">
+                    <div class="head">
+                        <div class="flex-content flex-jcenter-acenter edit-avatar">
+                            <span>
+
+                                @if (!string.IsNullOrEmpty(Model.logoUrl))
+                                {
+                                    <img src="@Model.logoUrl" alt="@Model.userNom" title="@Model.userNom" />
+                                }
+                                else
+                                { <img src="~/images/avatar.png" alt="" srcset="" />}
+                            </span>
+                            <div class="flex-content flex-col change-avatar">
+                                Votre avatar
+                                @Html.DisplayFor(m => m.logoUrl, new { type = "file", name = "file", id = "site-logo" })
+                                <div class="input-custom">
+                                    <label for="site-logo" class="label-file">Choisir</label><span class="file-name"></span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Champs -->
+                    <section class="clearfix">
+                        <label for="" class="col-50 pull-left">
+                            Nom
+                            <span> @Html.DisplayFor(x => x.userNom)</span>
+                        </label>
+                        <label for="" class="col-50 pull-left">
+                            Prénom
+                            @Html.DisplayFor(x => x.userPrenom, new { @required = true })
+                        </label>
+                        <label for="" class="col-50 pull-left">
+                            E-mail
+                            @Html.DisplayFor(x => x.userMail, new { @required = true, @type = "email" })
+                        </label>
+                        <label for="" class="col-50 pull-right">
+                            Skype
+                            @Html.DisplayFor(x => x.redactSkype, new { @required = true })
+                        </label>
+                        <label for="" class="col-50 pull-left">
+                            Téléphone
+                            @Html.DisplayFor(x => x.redactPhone, new { @type = "tel", @required = true })
+                        </label>
+                    </section>
+                    <section class="clearfix">
+                        <div class="section-title">
+                            <span>Role</span>
+                        </div>
+                        <label for="" class="col-100">
+                            <label for="" class="col-100">
+                                <input type="checkbox" name="selectedRole" value="1" id="checkReferenceur" style="display: inline-block; width: auto; vertical-align: middle; margin: 10px 0;" /> Referenceur
+                            </label>
+
+                            <label for="" class="col-100">
+
+                                <input type="checkbox" name="selectedRole" value="2" id="checkRedacteur" style="display: inline-block; width: auto; vertical-align: middle; margin: 10px 0;" /> Redacteur
+                            </label>
+                            <label for="" class="col-100">
+
+                                <input type="checkbox" name="selectedRole" value="3" id="checkManager" style="display: inline-block; width: auto; vertical-align: middle; margin: 10px 0;" />  Manager
+                            </label>
+
+                        </label>
+
+                    </section>
+                    @if (ViewBag.userRole == 2) //if redacteur user
+                    {
+                        <section class="clearfix" id="CheckEditRedacteur">
+                            <div class="section-title">
+                                <span>Redacteur informations</span>
+                            </div>
+                            <label for="" class="col-50 pull-right">
+                                Volume / Jour
+                                @Html.DisplayFor(x => x.redactVolume, new { @type = "number" })
+                            </label>
+                            <label for="" class="col-50 pull-left">
+                                Tarif (Ariary)
+                                @Html.DisplayFor(x => x.redactTarif, new { @type = "number" })
+                            </label>
+                            <label for="" class="col-50 pull-right">
+                                Thèmes
+                                @Html.DisplayFor(x => x.redactThemes)
+                            </label>
+                            <label for="" class="col-50 pull-left">
+                                Niveau
+                                @Html.DisplayFor(x => x.redactNiveau)
+                               
+                            </label>
+                            <label for="" class="col-50 pull-right">
+                                Référenceur
+                                @Html.DisplayFor(x => x.redactReferenceur)
+                            </label>
+                            <label for="" class="col-50 pull-left">
+                                Mode de paiement
+                                @Html.DisplayFor(x => x.redactModePaiement)
+                               
+                            </label>
+
+                        </section>
+                    }
+                        <section class="clearfix submit-area" style=" margin: 70px auto 0;">
+                            
+                            @Html.ActionLink("Edit", "EditUser", "Home", new { hash = Model.userId }, new { @class = "btn btn-success" })
+                            @Html.ActionLink("Annuler", "ListeUser", "Home", new { }, new { @class = "btn btn-warning" })
+
+                        </section>
+                </fieldset>
+            }
+        </div>
+    </div>
+</main>
+
+
+
