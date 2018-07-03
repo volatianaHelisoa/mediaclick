@@ -9,7 +9,7 @@
 {
     <link href="@Url.Content("~/Content/css/jquery-ui.css")" rel="stylesheet" />
     <link href="@Url.Content("~/Content/css/jquery.dataTables.css")" rel="stylesheet" />
-    <link href="@Url.Content("~/Content/css/dataTables.css")" rel="stylesheet" />
+    @*<link href="@Url.Content("~/Content/css/dataTables.css")" rel="stylesheet" />*@
     <link href="~/Content/themes/smoothness/jquery-ui.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/Content/css/elements/commandes.css">
 }
@@ -27,147 +27,161 @@
 
 }
 
-<main id="wrapper">
-    <div id="single-container">
-        <div class="onglets ease-in-out">
-            <ul>
-                @if (@Session["role"] != null && @Session["role"].ToString() != "2")
+@if (Session["name"] != null)
+{
+
+    <main id="wrapper">
+        <div id="single-container">
+            <div class="onglets ease-in-out">
+                <ul>
+                    @if (@Session["role"] != null && @Session["role"].ToString() != "2")
+                    {
+                        <li><a href="~/Home/ListeUser">Utilisateurs</a></li>
+                    }
+                    <li><a href="~/Commandes/ListCommandes" class="active">Commandes</a></li>
+                    <li><a href="~/Facture/ListFacture">Factures</a></li>
+                </ul>
+            </div>
+            <div class="head-list">
+                @if (@Session["role"] != null && @Session["role"].ToString() == "2")
                 {
-                    <li><a href="~/Home/ListeUser">Utilisateurs</a></li>
+                    <div class="resume with-shadow">
+                        <ul>
+                            <li>Commande en cours : @ViewBag.commandesEnCours</li>
+                            <li>Commande en attente : @ViewBag.commandesEnAttente</li>
+                            <li>Commande à valider : @ViewBag.commandesAValider</li>
+                            <li>Commande en retard : @ViewBag.commandesEnRetard</li>
+                            <li>Commande livrée : @ViewBag.commandesLivrer</li>
+                            <li>Commande à facturer : @ViewBag.commandesFacturer</li>
+                        </ul>
+                    </div>
                 }
-                <li><a href="~/Commandes/ListCommandes" class="active">Commandes</a></li>
-                <li><a href="~/Facture/ListFacture">Factures</a></li>
-            </ul>
-        </div>
-        <div class="head-list">
-            @if (@Session["role"] != null && @Session["role"].ToString() == "2")
-            {
-                <div class="resume with-shadow">
-                    <ul>
-                        <li>Commande en cours : @ViewBag.commandesEnCours</li>
-                        <li>Commande en attente : @ViewBag.commandesEnAttente</li>
-                        <li>Commande en retard : @ViewBag.commandesEnRetard</li>
-                        <li>Commande livrée : @ViewBag.commandesLivrer</li>
-                        <li>Commande à facturer : @ViewBag.commandesFacturer</li>
-                    </ul>
-                </div>
-            }
 
-        </div>
-        <div class="card back-office with-shadow">
-            <div class="action-bar flex-content flex-jsbet-acenter">
-                <div>
-
-                    @using (Html.BeginForm("CommandesSearch", "Commandes", FormMethod.Post, new { @class = "usr-srch" }))
-                    {
-                        <div class="usr-srch--input-wrapper">
-                            @Html.AntiForgeryToken()
-                            <i class="fa fa-times-circle cancelText"></i>
-                            <input class="usr-srch--input" type="search" placeholder="Rechercher" name="searchValue" id="ValUserSearch" title="Search by name,surname,email">
-                        </div>
-                        
-                    }
-
-                </div>
-                <div class="submit-area">
-                    <input type="button" value="Commande à valider" class="btn btn-warm btn-medium" onclick="@(" window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "ListCommandeAValider" }) + "' ");">
-                    <input type="button" value="Créer commande" class="btn btn-success btn-medium" onclick="@(" window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "Create" }) + "' ");">
-                </div>
             </div>
-            <div class="filters flex-content flex-jsbet-acenter">
-                <div class="flex-content flex-jsbet-acenter">
-                    Sélection
-                    <span onclick="CheckedCmdeClick()">Tous</span>
-                    <span onclick="DecheckedCmdeClick()">Aucun</span>
-                    <button class="btn btn-small" onclick="DeleteAllCommandeSelected(@ViewBag.nbrow)">Supprimer la sélection</button>
-                </div>
-                <div class="flex-content flex-jsbet-acenter">
-                    <!-- select affichage -->
-                    Afficher
-                    <select name="" id="">
-                        <option value="">5</option>
-                        <option value="">10</option>
-                        <option value="">15</option>
-                    </select>
-                </div>
-            </div>
-            <table id="myDataTableListCommande">
-                <thead>
-                    <tr>
-                        <th>
-                            <input type="checkbox" class="checkbox" onclick="ClickAllCommandeInListCommande()" id="checkAllCmde" />
-                        </th>
-                        <th>#</th>
-                        <th>Demandeur</th>
-                        <th>Redacteur</th>
-                        <th>Date de la commande</th>
-                        <th>Date de la livraison</th>
-                        <th>Projet</th>
-                        <th>Thématique</th>
-                        <th>Type de textes</th>
-                        <th>Etat commande </th>
-                        <th>Notification paiement</th>
-                        <th class="option">Action</th>
-                    </tr>
-                </thead>
-                <tbody class="t1">
-                    @if (ViewBag.listeCommandeVms != null)
-                    {
-                        int count = 0;
-                        foreach (var item in ViewBag.listeCommandeVms)
-                        {
-                            <tr>
-                                <td><input type="checkbox" class="checkbox" name="selectedCmde" value="@item.commandeId" /></td>
-                                <td>@item.commandeREF</td>
-                                <td>@item.commandeDemandeur</td>
-                                <td>@item.commandeRedacteur</td>
-                                <td>@item.date_cmde</td>
-                                <td>@item.date_livraison</td>
-                                <td>@item.projet </td>
-                                <td>@item.thematique</td>
-                                <td>@item.commandeType</td>
-                                <td>@item.statut_cmde</td>
-                                <td>
-                                    @if (@item.etat_paiement == true)
-                                    {
-                                        <span>Payé</span>
-                                    }
-                                    else
-                                    {
-                                        <span>Non payé</span>
-                                    }
-                                </td>
-                                <td>
-                                    <!--ViewBag.numpage/ViewBag.nbrow-->
-                                    <div class="option">
-                                        <a href="~/Commandes/DetailsCommande/@item.commandeId" title="Détails Commande"><i class="fa fa-eye"></i></a>
-                                        <a href="~/Commandes/Edit/@item.commandeId" title="Edit user"><i class="fa fa-edit"></i></a>
-                                        <a onclick="DeleteCommandeClick('@item.commandeId')" title="Delete commande"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            count++;
-                        }
-                        if (ViewBag.listeCommandeVms.Count == 0)
-                        {
-                            <tr><td>No records found.</td></tr>
-                        }
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>
-   
-</main>
+            <div class="card back-office with-shadow">
+                <div class="action-bar flex-content flex-jsbet-acenter">
+                    <div>
 
-<div id="DeleteDatadialog" style="display: none">
+                        @using (Html.BeginForm("CommandesSearch", "Commandes", FormMethod.Post, new { @class = "usr-srch" }))
+                        {
+                            <div class="usr-srch--input-wrapper">
+                                @Html.AntiForgeryToken()
+                                <i class="fa fa-times-circle cancelText"></i>
+                                <input class="usr-srch--input" type="search" placeholder="Rechercher" name="searchValue" id="ValUserSearch" title="Rechercher ...">
+                            </div>
+
+                        }
+
+                    </div>
+                    <div class="submit-area">
+                        <input type="button" value="Commande à valider" class="btn btn-warm btn-medium" onclick="@(" window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "ListCommandeAValider" }) + "' ");">
+                        @if (@Session["role"] != null && @Session["role"].ToString() != "2")
+                        {
+                            <input type="button" value="Créer commande" class="btn btn-success btn-medium" onclick="@(" window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "Create" }) + "' ");">
+                        }
+                    </div>
+                </div>
+                <div class="filters flex-content flex-jsbet-acenter">
+                    <div class="flex-content flex-jsbet-acenter">
+                        Sélection
+                        <span onclick="CheckedCmdeClick()">Tous</span>
+                        <span onclick="DecheckedCmdeClick()">Aucun</span>
+                        <button class="btn btn-small" onclick="DeleteAllCommandeSelected(@ViewBag.nbrow)">Supprimer la sélection</button>
+                    </div>
+
+                </div>
+                <table id="myDataTable">
+                    <thead>
+                        <tr>
+                            <th>
+                                <input type="checkbox" class="checkbox" onclick="ClickAllCommandeInListCommande()" id="checkAllCmde" />
+                            </th>
+                            <th>#</th>
+                            <th>Demandeur</th>
+                            <th>Redacteur</th>
+                            <th>Date de la commande</th>
+                            <th>Date de la livraison</th>
+                            <th>Projet</th>
+                            <th>Thématique</th>
+                            <th>Type de textes</th>
+                            <th>Etat commande </th>
+                            <th>Notification paiement</th>
+                            <th class="option">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="t1">
+                        @if (ViewBag.listeCommandeVms != null)
+                        {
+                            int count = 0;
+                            foreach (var item in ViewBag.listeCommandeVms)
+                            {
+                                <tr>
+                                    <td><input type="checkbox" class="checkbox" name="selectedCmde" value="@item.commandeId" /></td>
+                                    <td>@item.commandeREF</td>
+                                    <td>@item.commandeDemandeur</td>
+                                    <td>@item.commandeRedacteur</td>
+                                    <td>@item.date_cmde</td>
+                                    <td>@item.date_livraison</td>
+                                    <td>@item.projet </td>
+                                    <td>@item.thematique</td>
+                                    <td>@item.commandeType</td>
+
+                                    <td>@item.statut_cmde</td>
+                                    
+                                        @if (@item.etat_paiement == true)
+                                        {
+                                            <td> Payé</td>
+                                        }
+                                        else
+                                        {
+                                        <td>Non payé</td>
+                                        }
+                                   
+                                    <td>
+                                        <!--ViewBag.numpage/ViewBag.nbrow-->
+                                        <div class="option">
+                                            @if (@Session["role"] != null && @Session["role"].ToString() == "2")
+                                            {
+                                                <a href="~/Commandes/DetailsCommandeAValider/@item.commandeId" title="Détails Commande"><i class="fa fa-eye"></i></a>
+                                            }
+                                            else
+                                            {
+                                                <a href="~/Commandes/DetailsCommande/@item.commandeId" title="Détails Commande"><i class="fa fa-eye"></i></a>
+                                            }
+
+                                            @if (@item.statut_cmde == "En attente")
+                                            {
+                                                <a href="~/Commandes/Edit/@item.commandeId" title="Edit user"><i class="fa fa-edit"></i></a>
+                                            }
+                                            <a onclick="DeleteCommandeClick('@item.commandeId')" title="Delete commande"><i class="fa fa-trash"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                count++;
+                            }
+                            if (ViewBag.listeCommandeVms.Count == 0)
+                            {
+                                <tr><td>No records found.</td></tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+}
+else
+{ Response.Redirect("~/Login/Accueil"); }
+
+<div id="DeleteDatadialog" style="display: none" class="popup-notif">
     @Html.Partial("~/Views/Commandes/ErrorNoSelection.cshtml")
 </div>
-<div id="SearchUserNoResultat" style="display: none">
+<div id="SearchUserNoResultat" style="display: none" class="popup-notif">
     @Html.Partial("~/Views/Shared/SearchNoResultat.cshtml")
 </div>
 <!--  Dialogue de confirmation suppression d'utilisateur  -->
-<div id="deleteAllUserPoPup" style="display: none">
+<div id="deleteAllUserPoPup" style="display: none" class="popup-notif">
     @Html.Partial("~/Views/Commandes/DeleteCommande.cshtml")
 </div>
 

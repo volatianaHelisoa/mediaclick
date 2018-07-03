@@ -10,7 +10,11 @@ namespace RedactApplication.Models
         public System.Guid commandeId { get; set; }
         public Nullable<System.Guid> commandeReferenceurId { get; set; }
         public Nullable<System.Guid> commandeRedacteurId { get; set; }
+
+        [DataType(DataType.Date)]
         public Nullable<System.DateTime> date_cmde { get; set; }
+
+        [DataType(DataType.Date)]
         public Nullable<System.DateTime> date_livraison { get; set; }
         public string ordrePriorite { get; set; }
         public Nullable<System.Guid> commandeTypeId { get; set; }
@@ -26,6 +30,7 @@ namespace RedactApplication.Models
       
 
         public Nullable<int> commandeREF { get; set; }
+        [DataType(DataType.Date)]
         public Nullable<System.DateTime> dateLivraisonReel { get; set; }
 
         [AllowHtml]

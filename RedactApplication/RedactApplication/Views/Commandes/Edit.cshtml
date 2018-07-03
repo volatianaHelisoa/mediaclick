@@ -5,125 +5,127 @@
     Layout = "~/Views/Shared/LayoutConnected.cshtml";
 
 }
+@if (Session["name"] != null)
+{
+    <main id="wrapper">
+        <div id="single-container">
+            <div class="onglets">
+                <ul>
+                    <li><a href="">Utilisateurs</a></li>
+                    <li><a href="" class="active">Commandes</a></li>
+                    <li><a href="">Dolor sit amet</a></li>
+                </ul>
+            </div>
+            <div class="card back-office with-shadow">
+                <div class="head">
+                    <i class="icon icon-edit-command"></i>
+                    <h1>Editer commande</h1>
+                    <p>Veuillez remplir les champs Requis et appuyez sur Enregistrer pour éditer une commande</p>
+                </div>
+                @using (Html.BeginForm("EditCommande", "Commandes", FormMethod.Post, new { @class = "formfields" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <!-- Champs -->
+                    <input type="hidden" name="idCommande" value="@Model.commandeId">
+                    <input type="hidden" id="limit" value="@Model.nombre_mots">
+                    if (ViewBag.ErrorMessage != null)
+                    {
+                        <p class="error-msg text-centered">
+                        Le nombre de mots maximal est atteint, veuillez revoir votre contenu.</p>
+                    }
+                    if (Session["VolumeInfo"] != null)
+                    {
+                        <p class="error-msg text-centered">@Session["VolumeInfo"].ToString()</p>
+                    }
 
-<main id="wrapper">
-    <div id="single-container">
-        <div class="onglets">
-            <ul>
-                <li><a href="">Utilisateurs</a></li>
-                <li><a href="" class="active">Commandes</a></li>
-                <li><a href="">Dolor sit amet</a></li>
-            </ul>
-        </div>
-        <div class="card back-office with-shadow">
-    <div class="head">
-        <i class="icon icon-edit-command"></i>
-        <h1>Editer commande</h1>
-        <p>Veuillez remplir les champs Requis et appuyez sur Enregistrer pour éditer une commande</p>
-    </div>
-    @using (Html.BeginForm("EditCommande", "Commandes", FormMethod.Post, new { @class = "formfields" }))
-            {
-        @Html.AntiForgeryToken()
-                <!-- Champs -->
-        <input type="hidden" name="idCommande" value="@Model.commandeId">
-        <input type="hidden" id="limit" value="@Model.nombre_mots">
-        if (ViewBag.ErrorMessage != null)
-        {
-            <label class="error-msg ltl-consign">Le nombre de mots maximal est atteint, veuillez revoir votre contenu.</label>
-        }
-        if (Session["VolumeInfo"] != null)
-        {
-            <label class="error-msg ltl-consign"> @Session["VolumeInfo"] </label>
-        }
+                    if (@Session["role"] != null && @Session["role"].ToString() != "2")
+                    {
+                        <section class="clearfix">
+                            <label for="" class="col-50 pull-left">
+                                Projet
+                                @Html.DropDownListFor(x => Model.listprojetId, new SelectList(Model.ListProjet, "Value", "Text"), htmlAttributes: new { @id = "SelectItemProjet" })
+                            </label>
+                            <label for="" class="col-50 pull-right">
+                                Thématique
+                                @Html.DropDownListFor(x => Model.listThemeId, new SelectList(Model.ListTheme, "Value", "Text"), htmlAttributes: new { id = "SelectItemTheme" })
+                            </label>
+                            <label for="" class="col-50 pull-left">
+                                Rédacteur
+                                @Html.DropDownListFor(x => Model.listRedacteurId, new SelectList(Model.ListRedacteur, "Value", "Text"), htmlAttributes: new { id = "SelectItemRedacteur" })
+                            </label>
+                            <label for="" class="col-50 pull-right">
+                                Type de texte
+                                @Html.DropDownListFor(x => Model.listCommandeTypeId, new SelectList(Model.ListCommandeType, "Value", "Text"), htmlAttributes: new { @id = "SelectItemCommandeType" })
+                            </label>
+                        </section>
+                        <section class="clearfix">
+                            <div class="section-title">
+                                <span>Mots clés</span>
+                            </div>
 
-        if (@Session["role"] != null && @Session["role"].ToString() != "2")
-        {
-            <section class="clearfix">
-                <label for="" class="col-50 pull-left">
-                    Projet
-                    @Html.DropDownListFor(x => Model.listprojetId, new SelectList(Model.ListProjet, "Value", "Text"), htmlAttributes: new { @id = "SelectItemProjet" })
-                </label>
-                <label for="" class="col-50 pull-right">
-                    Thématique
-                    @Html.DropDownListFor(x => Model.listThemeId, new SelectList(Model.ListTheme, "Value", "Text"), htmlAttributes: new { id = "SelectItemTheme" })
-                </label>
-                <label for="" class="col-50 pull-left">
-                    Rédacteur
-                    @Html.DropDownListFor(x => Model.listRedacteurId, new SelectList(Model.ListRedacteur, "Value", "Text"), htmlAttributes: new { id = "SelectItemRedacteur" })
-                </label>
-                <label for="" class="col-50 pull-right">
-                    Type de texte
-                    @Html.DropDownListFor(x => Model.listCommandeTypeId, new SelectList(Model.ListCommandeType, "Value", "Text"), htmlAttributes: new { @id = "SelectItemCommandeType" })
-                </label>
-            </section>
-                    <section class="clearfix">
-                        <div class="section-title">
-                            <span>Mots clés</span>
-                        </div>
+                            <label for="" class="col-50 pull-left">
+                                Mot clé principal
+                                @Html.TextBoxFor(x => x.mot_cle_pricipal, new { @name = "name" })
+                            </label>
+                            <label for="" class="col-50 pull-right">
+                                Mot clé secondaire
+                                @Html.TextBoxFor(x => x.mot_cle_secondaire, new { @name = "name" })
+                            </label>
+                            <label for="" class="col-50 pull-left">
+                                Texte d'ancrage
+                                @Html.TextBoxFor(x => x.texte_ancrage, new { @name = "name" })
+                            </label>
+                            <label for="" class="col-50 pull-right">
+                                Nombre de mots
+                                @Html.TextBoxFor(x => x.nombre_mots, new { @name = "name" })
 
-                        <label for="" class="col-50 pull-left">
-                            Mot clé principal
-                            @Html.TextBoxFor(x => x.mot_cle_pricipal, new { @name = "name" })
-                        </label>
-                        <label for="" class="col-50 pull-right">
-                            Mot clé secondaire
-                            @Html.TextBoxFor(x => x.mot_cle_secondaire, new { @name = "name" })
-                        </label>
-                        <label for="" class="col-50 pull-left">
-                            Texte d'ancrage
-                            @Html.TextBoxFor(x => x.texte_ancrage, new { @name = "name" })
-                        </label>
-                        <label for="" class="col-50 pull-right">
-                            Nombre de mots
-                            @Html.TextBoxFor(x => x.nombre_mots, new { @name = "name" })
+                            </label>
+                        </section>
+                        <section class="clearfix">
+                            <div class="section-title">
+                                <span>Consignes</span>
+                            </div>
 
-                        </label>
-                    </section>
-                    <section class="clearfix">
-                        <div class="section-title">
-                            <span>Consignes</span>
-                        </div>
+                            <label for="" class="col-50 pull-left">
+                                Références
+                                @Html.TextBoxFor(x => x.consigne_references, new { @name = "name" })
+                            </label>
+                            <label for="" class="col-50 pull-right">
+                                Autres
+                                @Html.TextBoxFor(x => x.consigne_autres, new { @name = "name" })
+                            </label>
+                            <label for="" class="col-50 pull-left">
+                                Type de contenu
+                                @Html.DropDownListFor(x => Model.listContenuTypeId, new SelectList(Model.ListContenuType, "Value", "Text"), htmlAttributes: new { @id = "SelectItemContenuType" })
+                            </label>
+                            <label for="" class="col-50 pull-right">
+                                Date de livraison
+                                @Html.TextBoxFor(x => x.date_livraison, "{0:dd/MM/yyyy}", new { type = "text" })
+                                @Html.ValidationMessageFor(m => m.date_livraison)
+                            </label>
 
-                        <label for="" class="col-50 pull-left">
-                            Références
-                            @Html.TextAreaFor(x => x.consigne_references, new { @name = "name" })
-                        </label>
-                        <label for="" class="col-50 pull-right">
-                            Autres
-                            @Html.TextBoxFor(x => x.consigne_autres, new { @name = "name" })
-                        </label>
-                        <label for="" class="col-50 pull-left">
-                            Type de contenu
-                            @Html.DropDownListFor(x => Model.listContenuTypeId, new SelectList(Model.ListContenuType, "Value", "Text"), htmlAttributes: new { @id = "SelectItemContenuType" })
-                        </label>
-                        <label for="" class="col-50 pull-right">
-                            Date de livraison
-                            @Html.TextBoxFor(x => x.date_livraison, "{0:dd/MM/yyyy}", new { type = "text" })
-                            @Html.ValidationMessageFor(m => m.date_livraison)
-                        </label>
-                        
 
-                       
-                    </section>
-                    <section class="clearfix">
-                        <div class="section-title">
-                            <span>Autres</span>
-                        </div>
-                        <label for="" class="col-50 pull-left">
-                            Notification via sms ?
-                            <input type="checkbox" id="SavePass" style="display: inline-block; width: auto; vertical-align: middle; margin: 0 0 0 10px;">
-                        </label>
+
+                        </section>
+                        <section class="clearfix">
+                            <div class="section-title">
+                                <span>Autres</span>
+                            </div>
+                            <label for="" class="col-50 pull-left">
+                                Notification via sms ?
+                                <input type="checkbox" id="SavePass" style="display: inline-block; width: auto; vertical-align: middle; margin: 0 0 0 10px;">
+                            </label>
                             <label for="" class="col-50 pull-left">
                                 Statut
                                 @Html.DropDownListFor(x => Model.listStatutId, new SelectList(Model.ListStatut, "Value", "Text"), htmlAttributes: new { @id = "SelectItemStatut" })
-                            </label>                           
+                            </label>
 
 
-                </section>
-        }
-        else
-        {
-             <!-- WYSIWYG ICI -->
+                        </section>
+                    }
+                    else
+                    {
+                        <!-- WYSIWYG ICI -->
 
                         <section class="clearfix">
                             <div class="section-title">
@@ -139,42 +141,45 @@
                                 @Html.TextAreaFor(m => m.contenu_livre, new { rows = "20", style = "resize:none;", @class = "textarea-editor", maxlength = @Html.DisplayNameFor(m => m.nombre_mots) })
                             </label>
                             <span class="left_char">0 sur <div id="data-limit-input">@Html.DisplayFor(model => model.nombre_mots)</div> caractère(s) utilisé(s)</span>
-                            </section>
+                        </section>
                     }
 
-                <section class="clearfix submit-area">
-                    <input type="submit" value="Enregistrer" class="btn btn-success" />
-                    @Html.ActionLink("Annuler", "ListCommandes", "Commandes", new { @class = "btn btn-warning" })
-                </section>
-            }
+                    <section class="clearfix submit-area">
+                        <input type="submit" value="Enregistrer" class="btn btn-success" />
+                        @Html.ActionLink("Annuler", "ListCommandes", "Commandes", new { @class = "btn btn-warning" })
+                    </section>
+                }
+            </div>
+
         </div>
-
-    </div>
-</main>
+    </main>
+}
+else
+{ Response.Redirect("~/Login/Accueil");}
 <!--  Dialogue succès ajout user   -->
-    <div id="addUserPopUp">
+<div id="addUserPopUp">
 
-    </div>
+</div>
 
-    <!--  Dialogue error valid data   -->
-    <div id="errorValidDataUserPopUp">
+<!--  Dialogue error valid data   -->
+<div id="errorValidDataUserPopUp">
 
-    </div>
-    @section Scripts
+</div>
+@section Scripts
 {
-        <link rel="stylesheet" href="~/Content/css/bootstrap-datepicker3.css" />
-        <script type="text/javascript" src="~/Scripts/js/bootstrap-datepicker.min.js"></script>
-        <script type="text/javascript" src="~/Scripts/scriptredacteur.js"></script>
-        
-     
-      <script type="text/javascript" src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-      
+    <link rel="stylesheet" href="~/Content/css/bootstrap-datepicker3.css" />
+    <script type="text/javascript" src="~/Scripts/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/scriptredacteur.js"></script>
 
-        <script type="text/javascript">
-        $(document).ready(function() {
+
+    <script type="text/javascript" src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
             var date = new Date();
-			date.setDate(date.getDate());
-			 var date_input = $('input[name="date_livraison"]'); //our date input has the name "date"
+            date.setDate(date.getDate());
+            var date_input = $('input[name="date_livraison"]'); //our date input has the name "date"
             var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
             var options = {
                 format: 'dd/mm/yyyy',
@@ -182,30 +187,30 @@
                 todayHighlight: true,
                 autoclose: true,
                 weekStart: 1,
-				startDate: date
+                startDate: date
             };
             date_input.datepicker(options);
-                       
+
             tinymce.init({
                 selector: 'textarea',
                 height: 500,
                 width: 500,
                 menubar: true,
                 plugins: [
-                  'advlist autolink lists link image charmap print preview anchor textcolor',
-                  'searchreplace visualblocks code fullscreen',
-                  'insertdatetime media table contextmenu paste code help wordcount'
+                    'advlist autolink lists link image charmap print preview anchor textcolor',
+                    'searchreplace visualblocks code fullscreen',
+                    'insertdatetime media table contextmenu paste code help wordcount'
                 ],
                 toolbar: 'insert | undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
                 content_css: [
-                  '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
-                  '//www.tinymce.com/css/codepen.min.css']
+                    '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+                    '//www.tinymce.com/css/codepen.min.css']
             });
 
 
         });
 
 
-        </script>
-    }
+    </script>
+}
 

@@ -21,9 +21,14 @@
         $("#checkReferenceur").prop('checked', false);
         $("#checkRedacteur").prop('checked', false);
         $("#checkManager").prop('checked', false);
+       
         jQuery(document).ready(function () {
+          
             jQuery("input[name='selectedRole']").change(function () {
                 var val = $(this).attr('id');
+                if (val.checked != true) {
+                    alert('you need to be fluent in English to apply for the job');
+                }
                 switch (val) {
                     case "checkReferenceur":
                         if ($(this).is(':checked')) {

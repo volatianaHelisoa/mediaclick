@@ -33,16 +33,16 @@
 }
 
 @section Scripts{
-    <link rel="stylesheet" href="~/Content/css/bootstrap-datepicker3.css"/>
+    <link rel="stylesheet" href="~/Content/css/bootstrap-datepicker3.css" />
     <script type="text/javascript" src="~/Scripts/js/bootstrap-datepicker.min.js"></script>
-   
+
     <link rel="stylesheet" href="~/Content/css/elements/commandes.css">
 
     <script type="text/javascript">
         jQuery(document).ready(function () {
-             var date = new Date();
-			date.setDate(date.getDate());
-			 var date_input = $('input[name="date_livraison"]'); //our date input has the name "date"
+            var date = new Date();
+            date.setDate(date.getDate());
+            var date_input = $('input[name="date_livraison"]'); //our date input has the name "date"
             var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
             var options = {
                 format: 'dd/mm/yyyy',
@@ -50,15 +50,15 @@
                 todayHighlight: true,
                 autoclose: true,
                 weekStart: 1,
-				startDate: date
+                startDate: date
             };
             date_input.datepicker(options);
 
 
             $("#SelectItemTheme").change(function () {
-              
+
                 var dID = $(this).val();
-                
+
                 $.getJSON("../Commandes/LoadRedacteurByTheme", { theme: dID },
                     function (data) {
                         var select = $("#SelectItemRedacteur");
@@ -76,111 +76,119 @@
                     });
             });
         });
-      
 
-        
+
+
     </script>
 }
 
-
-<main id="wrapper">
-    <div id="single-container">
-        <div class="onglets">
-            <ul>
-                <li><a href="">Utilisateurs</a></li>
-                <li><a href="" class="active">Commandes</a></li>
-                <li><a href="">Dolor sit amet</a></li>
-            </ul>
-        </div>
-        <div class="card back-office with-shadow">
-            <div class="head">
-                <i class="icon icon-create-command"></i>
-                <h1>Creer commande</h1>
-                <p>Veuillez remplir les champs Requis et appuyez sur Enregistrer pour éditer une commande</p>
-            </div>
-
-@using (Html.BeginForm("CreateCommande", "Commandes", FormMethod.Post, new { role = "form", @id = "createcommande" }))
+@if (Session["name"] != null)
 {
-    @Html.AntiForgeryToken()
-            <!-- Champs -->
-            <section class="clearfix">
-                <label for="" class="col-50 pull-left">
-                    Projet
-                    @Html.DropDownListFor(x => Model.listprojetId, new SelectList(Model.ListProjet, "Value", "Text"), htmlAttributes: new { @id = "SelectItemProjet" })
-                </label>
-                <label for="" class="col-50 pull-right">
-                    Thématique
-                    @Html.DropDownListFor(x => Model.listThemeId, new SelectList(Model.ListTheme, "Value", "Text"), htmlAttributes: new { id = "SelectItemTheme" })
-                </label>
-                <label for="" class="col-50 pull-left">
-                    Rédacteur
-                    @Html.DropDownListFor(x => Model.listRedacteurId, new SelectList(Model.ListRedacteur, "Value", "Text"), htmlAttributes: new { id = "SelectItemRedacteur" })
-                </label>
-                <label for="" class="col-50 pull-right">
-                    Type de texte
-                   @Html.DropDownListFor(x => Model.listCommandeTypeId, new SelectList(Model.ListCommandeType, "Value", "Text"), htmlAttributes: new { @id = "SelectItemCommandeType" })
-                </label>
-            </section>
-            <section class="clearfix">
-                <div class="section-title">
-                    <span>Mots clés</span>
+    <main id="wrapper">
+        <div id="single-container">
+            <div class="onglets">
+                <ul>
+                    <li><a href="">Utilisateurs</a></li>
+                    <li><a href="" class="active">Commandes</a></li>
+                    <li><a href="">Dolor sit amet</a></li>
+                </ul>
+            </div>
+            <div class="card back-office with-shadow">
+                <div class="head">
+                    <i class="icon icon-create-command"></i>
+                    <h1>Créer commande</h1>
+                    <p>Veuillez remplir les champs Requis et appuyez sur Enregistrer pour éditer une commande</p>
+                    @if (Session["VolumeInfo"] != null)
+                    {
+                        <p class="error-msg text-centered">@Session["VolumeInfo"].ToString()</p>
+                    }
                 </div>
 
-                <label for="" class="col-50 pull-left">
-                    Mot clé principal
-                   @Html.TextBoxFor(x => x.mot_cle_pricipal, new { @required = true, @name = "name" })
-                </label>
-                <label for="" class="col-50 pull-right">
-                    Mot clé secondaire
-                    @Html.TextBoxFor(x => x.mot_cle_secondaire, new { @required = true, @name = "name" })
-                </label>
-                <label for="" class="col-50 pull-left">
-                    Texte d'ancrage
-                    @Html.TextBoxFor(x => x.texte_ancrage, new { @required = true, @name = "name" })
-                </label>
-                <label for="" class="col-50 pull-right">
-                    Nombre de mots
-                    @Html.TextBoxFor(x => x.nombre_mots, new { @required = true, @name = "name" })
-                </label>
-            </section>
-            <section class="clearfix">
-                <div class="section-title">
-                    <span>Consignes</span>
-                </div>
+                @using (Html.BeginForm("CreateCommande", "Commandes", FormMethod.Post, new { role = "form", @id = "createcommande" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <!-- Champs -->
+                    <section class="clearfix">
+                        <label for="" class="col-50 pull-left">
+                            Projet
+                            @Html.DropDownListFor(x => Model.listprojetId, new SelectList(Model.ListProjet, "Value", "Text"), htmlAttributes: new { @id = "SelectItemProjet" })
+                        </label>
+                        <label for="" class="col-50 pull-right">
+                            Thématique
+                            @Html.DropDownListFor(x => Model.listThemeId, new SelectList(Model.ListTheme, "Value", "Text"), htmlAttributes: new { id = "SelectItemTheme" })
+                        </label>
+                        <label for="" class="col-50 pull-left">
+                            Rédacteur
+                            @Html.DropDownListFor(x => Model.listRedacteurId, new SelectList(Model.ListRedacteur, "Value", "Text"), htmlAttributes: new { id = "SelectItemRedacteur" })
+                        </label>
+                        <label for="" class="col-50 pull-right">
+                            Type de texte
+                            @Html.DropDownListFor(x => Model.listCommandeTypeId, new SelectList(Model.ListCommandeType, "Value", "Text"), htmlAttributes: new { @id = "SelectItemCommandeType" })
+                        </label>
+                    </section>
+                    <section class="clearfix">
+                        <div class="section-title">
+                            <span>Mots clés</span>
+                        </div>
 
-                <label for="" class="col-50 pull-left">
-                    Références
-                    @Html.TextAreaFor(x => x.consigne_references, new { @required = true, @name = "name" })
-                </label>
-                <label for="" class="col-50 pull-right">
-                    Autres
-                    @Html.TextAreaFor(x => x.consigne_autres, new { @required = true, @name = "name" })
-                </label>
-                <label for="" class="col-50 pull-left">
-                    Type de contenu
-                    @Html.DropDownListFor(x => Model.listContenuTypeId, new SelectList(Model.ListContenuType, "Value", "Text"), htmlAttributes: new { @id = "SelectItemContenuType" })
-                </label>
-                <label for="" class="col-50 pull-right">
-                    Date de livraison
-                    @Html.TextBoxFor(x => x.date_livraison, "{0:dd/MM/yyyy}", new { type = "text" })
-                    @Html.ValidationMessageFor(m => m.date_livraison)
-                </label>
-                <span class="pull-left" style="margin-bottom: 20px;">
-                    Notification sms
-                    
-                    <input id="SavePass" name="checkResp" type="checkbox" style="display: inline-block; width: auto; vertical-align: middle; margin: 0 0 0 10px;" />
-                </span>
-               
-            </section>
-            <section class="clearfix submit-area">
-                <input type="submit" value="Enregistrer" class="btn btn-success" />
-               
-                @Html.ActionLink("Annuler", "ListCommandes", "Commandes", new { @class = "btn btn-warning" })
-            </section>
-}
+                        <label for="" class="col-50 pull-left">
+                            Mot clé principal
+                            @Html.TextBoxFor(x => x.mot_cle_pricipal, new { @required = true, @name = "name" })
+                        </label>
+                        <label for="" class="col-50 pull-right">
+                            Mot clé secondaire
+                            @Html.TextBoxFor(x => x.mot_cle_secondaire, new { @required = true, @name = "name" })
+                        </label>
+                        <label for="" class="col-50 pull-left">
+                            Texte d'ancrage
+                            @Html.TextBoxFor(x => x.texte_ancrage, new { @required = true, @name = "name" })
+                        </label>
+                        <label for="" class="col-50 pull-right">
+                            Nombre de mots
+                            @Html.TextBoxFor(x => x.nombre_mots, new { @required = true, @name = "name", type = "number" })
+                        </label>
+                    </section>
+                    <section class="clearfix">
+                        <div class="section-title">
+                            <span>Consignes</span>
+                        </div>
+
+                        <label for="" class="col-50 pull-left">
+                            Références
+                            @Html.TextAreaFor(x => x.consigne_references, new { @required = true, @name = "name" })
+                        </label>
+                        <label for="" class="col-50 pull-right">
+                            Autres
+                            @Html.TextAreaFor(x => x.consigne_autres, new { @required = true, @name = "name" })
+                        </label>
+                        <label for="" class="col-50 pull-left">
+                            Type de contenu
+                            @Html.DropDownListFor(x => Model.listContenuTypeId, new SelectList(Model.ListContenuType, "Value", "Text"), htmlAttributes: new { @id = "SelectItemContenuType" })
+                        </label>
+                        <label for="" class="col-50 pull-right">
+                            Date de livraison
+                            @Html.TextBoxFor(x => x.date_livraison, "{0:dd/MM/yyyy}", new { type = "text" })
+                            @Html.ValidationMessageFor(m => m.date_livraison)
+                        </label>
+                        <span class="pull-left" style="margin-bottom: 20px;">
+                            Notification sms
+
+                            <input id="SavePass" name="checkResp" type="checkbox" style="display: inline-block; width: auto; vertical-align: middle; margin: 0 0 0 10px;" />
+                        </span>
+
+                    </section>
+                    <section class="clearfix submit-area">
+                        <input type="submit" value="Enregistrer" class="btn btn-success" />
+
+                        @Html.ActionLink("Annuler", "ListCommandes", "Commandes", new { @class = "btn btn-warning" })
+                    </section>
+                }
+            </div>
         </div>
-    </div>
-</main>
+    </main>
+}
+else
+{ Response.Redirect("~/Login/Accueil"); }
 
 <!--  Dialogue succès ajout user   -->
 <div id="addUserPopUp">
@@ -198,11 +206,11 @@
 
 <!--  Dialogue succès ajout user   -->
 <div id="addUserPopUp">
-   
+
 </div>
 
 <!--  Dialogue error valid data   -->
 <div id="errorValidDataUserPopUp">
-  
+
 </div>
 

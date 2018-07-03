@@ -100,16 +100,18 @@ namespace RedactApplication.Controllers
                 var currentrole = (new Utilisateurs()).GetUtilisateurRoleToString(_userId);
                 if (currentrole != null)
                 {
+                    string etat = "En attente";
+                    var statut = db.STATUT_COMMANDE.SingleOrDefault(x => x.statut_cmde.Contains(etat));
                     if (currentrole.Contains("2"))
                     {
                         ViewBag.listeCommandeVms = listeDataCmde
-                            .Where(x => x.commandeRedacteurId == _userId && x.commandeStatutId == null).ToList();
-                        //GetRedacteurInformations(_userId);
+                            .Where(x => x.commandeRedacteurId == _userId && x.commandeStatutId == statut.statutCommandeId).ToList();
+                        GetRedacteurInformations(_userId);
                     }
 
                     else
                     {
-                        ViewBag.listeCommandeVms = listeDataCmde.Where(x => x.commandeStatutId == null).ToList();
+                        ViewBag.listeCommandeVms = listeDataCmde.Where(x => x.commandeStatutId == statut.statutCommandeId).ToList();
                     }
 
                 }
@@ -176,10 +178,9 @@ namespace RedactApplication.Controllers
 
                 ViewBag.commandesEnCours = commandesEnCours;
 
-                var commandesEnAttente = db.COMMANDEs.Count(x => x.date_cmde >= startOfMonth &&
+                var commandesEnAttente = db.COMMANDEs.Where(x => x.date_cmde >= startOfMonth &&
                                              x.date_cmde <= lastDay &&
-                                                                 (x.STATUT_COMMANDE != null && x.STATUT_COMMANDE.statut_cmde.Contains("En attente")));
-
+                                                                 (x.STATUT_COMMANDE != null && x.STATUT_COMMANDE.statut_cmde.Contains("En attente"))).Distinct().ToList().Count;
                 ViewBag.commandesEnAttente = commandesEnAttente;
 
                 var commandesAValider = db.COMMANDEs.Count(x => x.date_cmde >= startOfMonth &&
@@ -479,7 +480,7 @@ namespace RedactApplication.Controllers
                 commandeVm.ListRedacteur = val.GetListRedacteurItem();
                 commandeVm.ListCommandeType = val.GetListCommandeTypeItem();
                 commandeVm.ListContenuType = val.GetListContenuTypeItem();
-
+                commandeVm.ListStatut = val.GetListStatutItem();
                 if (commande.commandeProjetId != null)
                     commandeVm.listprojetId = (Guid)commande.commandeProjetId;
 
@@ -503,7 +504,7 @@ namespace RedactApplication.Controllers
                     string priorite = commande.ordrePriorite == "0" ? "Moyen" : "Haut";
                     string projet = val.GetProjet(commande.commandeProjetId).projet_name;
                     string theme = val.GetTheme(commande.commandeThemeId).theme_name;
-                    string statutcmde = (commande.commandeStatutId != null) ? val.GetStatutCommande(commande.commandeStatutId).statut_cmde:"";
+                    string statutcmde = (commande.commandeStatutId != Guid.Empty) ? val.GetStatutCommande(commande.commandeStatutId).statut_cmde:"";
 
                     commandeVm.commandeId = commande.commandeId;
                     commandeVm.commandeDemandeur = referenceur;
@@ -528,74 +529,81 @@ namespace RedactApplication.Controllers
                 
 
                 if (commandeVm.contenu_livre != null) ViewBag.ComptMetaContenu = commandeVm.contenu_livre.Length;
-
+                string contenu = (!string.IsNullOrEmpty( commande.contenu_livre))? Regex.Replace(commande.contenu_livre, "<.*?>", string.Empty):string.Empty;
+                if (contenu.Split(' ').ToList().Count > 0)
+                    ViewBag.ContentLength = contenu.Split(' ').ToList().Count;
                 return commandeVm;
             }
 
             return null;
         }
 
-        private COMMANDEViewModel SetCommandeDetails(Guid? commandeId)
-        {
-            if (!string.IsNullOrEmpty(Request.QueryString["not"]))
-            {
-                Guid? notificationId;
-                notificationId = Guid.Parse(Request.QueryString["not"]);
-                int res = UpdateStatutNotification(notificationId);
-            }
+        //private COMMANDEViewModel SetCommandeDetails(Guid? commandeId)
+        //{
+        //    if (!string.IsNullOrEmpty(Request.QueryString["not"]))
+        //    {
+        //        Guid? notificationId;
+        //        notificationId = Guid.Parse(Request.QueryString["not"]);
+        //        int res = UpdateStatutNotification(notificationId);
+        //    }
 
 
-            Commandes val = new Commandes();
-            COMMANDEViewModel commandeVm = val.GetDetailsCommande(commandeId);
+        //    Commandes val = new Commandes();
+        //    COMMANDEViewModel commandeVm = val.GetDetailsCommande(commandeId);
 
-            if (commandeVm != null)
-            {
-                if (Session["cmdeEditModif"] != null)
-                {
-                    COMMANDEViewModel commande = (COMMANDEViewModel)Session["cmdeEditModif"];
-                    string referenceur = val.GetUtilisateurReferenceur(commande.commandeReferenceurId).userNom;
-                    string cmdeType = val.GetCommandeType(commande.commandeTypeId).Type;
-                    string consigneType = val.GetCommandeContenuType(commande.consigne_type_contenuId).Type;
-                    string redacteur = val.GetUtilisateurReferenceur(commande.commandeRedacteurId).userNom;
-                    string priorite = commande.ordrePriorite == "0" ? "Moyen" : "Haut";
-                    string projet = val.GetProjet(commande.commandeProjetId).projet_name;
-                    string theme = val.GetTheme(commande.commandeThemeId).theme_name;
-                    string statutcmde = val.GetStatutCommande(commande.commandeStatutId).statut_cmde;
+        //    if (commandeVm != null)
+        //    {
+        //        if (Session["cmdeEditModif"] != null)
+        //        {
+        //            COMMANDEViewModel commande = (COMMANDEViewModel)Session["cmdeEditModif"];
+        //            string referenceur = val.GetUtilisateurReferenceur(commande.commandeReferenceurId).userNom;
+        //            string cmdeType = val.GetCommandeType(commande.commandeTypeId).Type;
+        //            string consigneType = val.GetCommandeContenuType(commande.consigne_type_contenuId).Type;
+        //            string redacteur = val.GetUtilisateurReferenceur(commande.commandeRedacteurId).userNom;
+        //            string priorite = commande.ordrePriorite == "0" ? "Moyen" : "Haut";
+        //            string projet = val.GetProjet(commande.commandeProjetId).projet_name;
+        //            string theme = val.GetTheme(commande.commandeThemeId).theme_name;
+        //            commandeVm.ListStatut = val.GetListStatutItem();
+        //            if (commande.commandeStatutId != null)                       
+        //            {
+        //                commandeVm.listStatutId = (Guid)commande.commandeStatutId;
+        //                statutcmde = val.GetStatutCommande(commande.commandeStatutId).statut_cmde;
+        //            }
+        //            commandeVm.commandeId = commande.commandeId;
+        //            commandeVm.commandeDemandeur = referenceur;
+        //            commandeVm.date_cmde = commande.date_cmde;
+        //            commandeVm.date_livraison = commande.date_livraison;
+        //            commandeVm.commandeType = cmdeType;
+        //            commandeVm.nombre_mots = commande.nombre_mots;
+        //            commandeVm.mot_cle_pricipal = commande.mot_cle_pricipal;
+        //            commandeVm.mot_cle_secondaire = commande.mot_cle_secondaire;
+        //            commandeVm.consigne_references = commande.consigne_references;
+        //            commandeVm.consigneType = consigneType;
+        //            commandeVm.consigne_autres = commande.consigne_autres;
+        //            commandeVm.etat_paiement = commande.etat_paiement;
+        //            commandeVm.commandeRedacteur = redacteur;
+        //            commandeVm.ordrePriorite = priorite;
+        //            commandeVm.balise_titre = commande.balise_titre;
+        //            commandeVm.contenu_livre = commande.contenu_livre;
+        //            commandeVm.projet = projet;
+        //            commandeVm.thematique = theme;
+        //            commandeVm.statut_cmde = statutcmde;
+        //            Session["cmdeEditModif"] = null;
+        //        }
 
-                    commandeVm.commandeId = commande.commandeId;
-                    commandeVm.commandeDemandeur = referenceur;
-                    commandeVm.date_cmde = commande.date_cmde;
-                    commandeVm.date_livraison = commande.date_livraison;
-                    commandeVm.commandeType = cmdeType;
-                    commandeVm.nombre_mots = commande.nombre_mots;
-                    commandeVm.mot_cle_pricipal = commande.mot_cle_pricipal;
-                    commandeVm.mot_cle_secondaire = commande.mot_cle_secondaire;
-                    commandeVm.consigne_references = commande.consigne_references;
-                    commandeVm.consigneType = consigneType;
-                    commandeVm.consigne_autres = commande.consigne_autres;
-                    commandeVm.etat_paiement = commande.etat_paiement;
-                    commandeVm.commandeRedacteur = redacteur;
-                    commandeVm.ordrePriorite = priorite;
-                    commandeVm.balise_titre = commande.balise_titre;
-                    commandeVm.contenu_livre = commande.contenu_livre;
-                    commandeVm.projet = projet;
-                    commandeVm.thematique = theme;
-                    commandeVm.statut_cmde = statutcmde;
-                    Session["cmdeEditModif"] = null;
-                }
+        //        if (commandeVm.contenu_livre != null) ViewBag.ComptMetaContenu = commandeVm.contenu_livre.Length;
 
-                if (commandeVm.contenu_livre != null) ViewBag.ComptMetaContenu = commandeVm.contenu_livre.Length;
+        //        return commandeVm;
+        //    }
 
-                return commandeVm;
-            }
-
-            return null;
-        }
+        //    return null;
+        //}
 
         // GET: COMMANDEs/Details/5
         public ActionResult DetailsCommande(Guid? hash, string not ="")
         {
-            COMMANDEViewModel commandeVm = SetCommandeDetails(hash);
+            var commande = db.COMMANDEs.Find(hash);
+            COMMANDEViewModel commandeVm = SetCommandeViewModelDetails(commande);
             if (commandeVm != null)
             {
               
@@ -609,7 +617,8 @@ namespace RedactApplication.Controllers
         // GET: COMMANDEs/Details/5
         public ActionResult DetailsCommandeAValider(Guid? hash, string not = "")
         {
-            COMMANDEViewModel commandeVm = SetCommandeDetails(hash);
+            var commande = db.COMMANDEs.Find(hash);
+            COMMANDEViewModel commandeVm = SetCommandeViewModelDetails(commande);
             if (commandeVm != null)
                 return View(commandeVm);
             return View("ErrorException");
@@ -670,7 +679,11 @@ namespace RedactApplication.Controllers
                 newcommande.commandeReferenceurId = selectedReferenceurId;
                 newcommande.REDACTEUR = db.UTILISATEURs.Find(selectedRedacteurId);
                 newcommande.commandeRedacteurId = selectedRedacteurId;
-            
+
+                string etat = "En attente";
+                var statut = db.STATUT_COMMANDE.SingleOrDefault(x => x.statut_cmde.Contains(etat));
+                newcommande.commandeStatutId = statut.statutCommandeId;
+
                 newcommande.COMMANDE_TYPE = db.COMMANDE_TYPE.Find(selectedCommandeTypeId);
                 newcommande.commandeTypeId = selectedCommandeTypeId;
                 newcommande.CONTENU_TYPE = db.CONTENU_TYPE.Find(selectedContentTypeId);

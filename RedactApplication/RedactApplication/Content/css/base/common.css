@@ -172,3 +172,25 @@ body {
 #pop-up .content-section p {
     margin: 40px 0 60px;
 }
+
+
+input[type='number'] {
+    -moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.popup-notif {
+    position: absolute;
+    z-index: 10000;
+    left: 0;
+    right: 0;
+    top: 50%;
+}
+
+.error-msg {
+    color: #ff4026;
+}

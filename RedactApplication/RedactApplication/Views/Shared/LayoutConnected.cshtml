@@ -36,23 +36,25 @@
                 <a href="#" class="profil">
                     <span id="user-name">@Session["name"] @Session["surname"] </span>
                     <span id="user-avatar">
-                        <img src="~/images/avatar.png" alt="" srcset="">
+                        @if (Session["logoUrl"] != null)
+                        {
+                            <img src="@Session["logoUrl"]" alt="@Session["name"]" title="@Session["name"]" />
+                        }
+                        else
+                        { <img src="~/images/avatar.png" alt="" srcset="" />}
                     </span>
                 </a>
                 <div class="profil-menu with-shadow">
                     <div class="flex-content flex-jsbet-acenter profil-setting">
                         <span>
-                            <img src="images/avatar.png" alt="" srcset="" class="user-photo" />
+                            <img src="~/images/avatar.png" alt="" srcset="" class="user-photo" />
                         </span>
                         <div>
-                            <span class="user-name">Rakoto be</span>
-                            <a href="#" class="user-mail link">rakotobe@gmail.com</a>
-                            <button class="btn btn-success btn-small">Modifier</button>
+                            <span class="user-name">@Session["name"] @Session["surname"]</span>
+                            <a href="#" class="user-mail link">@Session["mail"]</a>
+                            <button class="btn btn-success btn-small" onclick="@("window.location.href='" + @Url.Action("Edit", "Home") + "'");">Modifier</button>
                         </div>
-                    </div>
-                    <a href="javascript:void(0)">Lorem ipsum dolor</a>
-                    <a href="javascript:void(0)">Lorem ipsum dolor</a>
-                    <a href="javascript:void(0)">Lorem ipsum dolor</a>
+                    </div>                   
                     <button class="logout"  onclick="@("window.location.href='" + @Url.Action("LogoutPage", "Login") + "'");">Deconnexion</button>
                 </div>                
             </div>

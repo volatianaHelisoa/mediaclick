@@ -5,15 +5,15 @@
         ViewBag.Title = "Utilisateur";
         ViewBag.UserId = Model.userId;
     }
-    Layout = "~/Views/Shared/LayoutFullPage.cshtml";
-} 
+    Layout = "~/Views/Shared/LayoutConnected.cshtml";
+}
 
 @section css
 {
     <link href="@Url.Content("~/Content/css/jquery-ui.css")" rel="stylesheet" />
-    <link href="@Url.Content("~/Content/css/jquery.dataTables.css")" rel="stylesheet" />
-    <link href="@Url.Content("~/Content/css/dataTables.css")" rel="stylesheet" />
+    @*<link href="@Url.Content("~/Content/css/dataTables.css")" rel="stylesheet" />*@
     <link href="~/Content/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/css/elements/commandes.css">
 }
 
 @section Scripts
@@ -25,9 +25,140 @@
     <script>
         $("ul.LinkSearchClear").css("display", "none");
     </script>
-    
+
 }
-<main class="wrapperpages">
+
+<main id="wrapper">
+    <div id="single-container">
+        <div class="onglets ease-in-out">
+            <ul>              
+               <li><a href="~/Home/ListeUser" class="active">Utilisateurs</a></li>                
+                <li><a href="~/Commandes/ListCommandes">Commandes</a></li>
+                <li><a href="~/Facture/ListFacture">Factures</a></li>
+            </ul>
+        </div>
+
+        <div class="card back-office with-shadow">
+            <div class="action-bar flex-content flex-jsbet-acenter">
+                <div>
+                    <div class="usr-srch--input-wrapper">
+
+                        <i class="fa fa-times-circle cancelText"></i>
+                        <input class="usr-srch--input" type="search" placeholder="Rechercher" name="searchValue" id="ValUserSearch" title="Search by name,surname,email">
+                    </div>
+                   
+                </div>
+                <div class="submit-area">
+
+                    <input type="button" value="Créer utilisateur" class="btn btn-success btn-medium" onclick="@("window.location.href='" + @Url.RouteUrl("Home", new { controller = "Home", action = "GotoCreateUser" }) + "'");">
+
+                </div>
+            </div>
+            <div class="filters flex-content flex-jsbet-acenter">
+                <div class="flex-content flex-jsbet-acenter">
+                    Sélection
+                    <span onclick="CheckedClick()">Tous</span>
+                    <span onclick="DecheckedClick()">Aucun</span>
+                    <button class="btn btn-small" onclick="DeleteAllUserSelected(@ViewBag.nbrow)">Supprimer la sélection</button>
+                </div>
+
+            </div>
+            <table id="myDataTable">
+                <thead>
+                    <tr>
+                        <th>
+                            <input type="checkbox" class="checkbox" onclick="ClickAllUserInListUser()" id="checkAllUser" />
+                        </th>
+                        <th>#</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Email</th>
+                        <th>Skype</th>
+                        <th>Volume / jour</th>
+                        <th>Tarif</th>
+                        <th>Thèmes</th>
+                        <th>Niveau</th>
+                        <th>Disponible</th>
+                        <th>Roles</th>
+                        <th class="option">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="t1">
+                    @if (ViewBag.listeUserVm != null)
+                    {
+                        int count = 0;
+                        foreach (var item in ViewBag.listeUserVm)
+                        {
+                            <tr>
+                                <td><input type="checkbox" class="checkbox" name="selectedUser" value="@item.userId" /></td>
+                                <td>@(count + 1)</td>
+                                <td>@item.userNom</td>
+                                <td>@item.userPrenom</td>
+                                <td>@item.userMail</td>
+                                <td>@item.redactSkype</td>
+                                <td>@item.redactVolume</td>
+                                <td>@item.redactTarif</td>
+                                <td>@item.redactThemes</td>
+                                <td>@item.redactNiveau</td>
+                                <td>
+
+                                    @if (@item.redactVolumeRestant == "0")
+                                    {
+                                        <span>Non</span>
+                                    }
+                                    else if (@item.redactVolumeRestant != "0")
+                                    {
+                                        <span>Oui</span>
+                                    }
+
+                                </td>
+                                <td>
+                                    <ul>
+                                        @if (@item.userRole == "1")
+                                        {
+                                            <li>Referenceur </li>
+                                        }
+                                        @if (@item.userRole == "2")
+                                        {
+                                            <li>Redacteur </li>
+                                        }
+                                        @if (@item.userRole == "3")
+                                        {
+                                            <li> Manager </li>
+                                        }
+                                        @if (@item.userRole == "4")
+                                        {
+                                            <li>Administrateur </li>
+
+                                        }
+                                    </ul>
+                                </td>
+                                <td>
+                                    <!--ViewBag.numpage/ViewBag.nbrow-->
+                                    <div class="option">
+                                        <a href="~/Home/EditUser/@item.userId" title="Edit user"><i class="fa fa-edit"></i></a>
+                                        <a href="~/Home/DetailsRedacteurs/@item.userId" title="Détails Redacteur"><i class="fa fa-eye"></i></a>
+                                        <a href="~/Home/sendMailRecovery/@item.userId" title="Send password recovery Instructions to the user"><i class="fa fa-lock"></i></a>
+                                        <a onclick="DeleteUserClick('@item.userId')" title="Delete user"><i class="fa fa-trash"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            count++;
+                        }
+                        if (ViewBag.listeUserVm.Count == 0)
+                        {
+                            <tr><td>No records found.</td></tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</main>
+
+
+@*<main class="wrapperpages">
     <div>
         <section>
             <div class="page pagesDivision clear">
@@ -47,18 +178,18 @@
                                 <span>User management</span>
                                 <hr />
                             </div>
-                          
+
                             <!-- top panel -->
                             <div id="inner-top-panel" class="showpanel clear">
                                 <div class="left search-bloc">
-                                  
-                                        <div class="usr-srch--input-wrapper">
-                                            
-                                            <i class="fa fa-times-circle cancelText"></i>
-                                            <input class="usr-srch--input" type="search" placeholder="Rechercher" name="searchValue" id="ValUserSearch" title="Search by name,surname,email">
-                                        </div>
-                                        <input class="usr-srch--submit" type="submit" value="&#xf002;" id="UserSearchSubmit">
-                                                                     
+
+                                    <div class="usr-srch--input-wrapper">
+
+                                        <i class="fa fa-times-circle cancelText"></i>
+                                        <input class="usr-srch--input" type="search" placeholder="Rechercher" name="searchValue" id="ValUserSearch" title="Search by name,surname,email">
+                                    </div>
+                                    <input class="usr-srch--submit" type="submit" value="&#xf002;" id="UserSearchSubmit">
+
                                 </div>
                                 <div class="right usr-create">
                                     <input type="submit" value="Create user" class="green-btn" onclick="@("window.location.href='" + @Url.RouteUrl("Home", new { controller = "Home", action = "GotoCreateUser" }) + "'");">
@@ -98,7 +229,7 @@
                                             <th>Roles</th>
                                             <th class="option">Action</th>
                                         </tr>
-                                    </thead>                 
+                                    </thead>
                                     <tbody class="t1">
                                         @if (ViewBag.listeUserVm != null)
                                         {
@@ -145,7 +276,7 @@
                                                             @if (@item.userRole == "4")
                                                             {
                                                                 <li>Administrateur </li>
-                                                                
+
                                                             }
                                                         </ul>
                                                     </td>
@@ -175,16 +306,16 @@
             </div>
         </section>
     </div>
-</main>
+</main>*@
 
-<div id="DeleteDatadialog" style="display: none">
-   @Html.Partial("~/Views/Home/ErrorNoSelection.cshtml")
+<div id="DeleteDatadialog" style="display: none" class="popup-notif">
+    @Html.Partial("~/Views/Home/ErrorNoSelection.cshtml")
 </div>
-<div id="SearchUserNoResultat" style="display: none">
+<div id="SearchUserNoResultat" style="display: none" class="popup-notif">
     @Html.Partial("~/Views/Shared/SearchNoResultat.cshtml")
 </div>
 <!--  Dialogue de confirmation suppression d'utilisateur  -->
-<div id="deleteAllUserPoPup" style="display: none">
+<div id="deleteAllUserPoPup" style="display: none" class="popup-notif">
     @Html.Partial("~/Views/Home/DeleteUser.cshtml")
 </div>
 
@@ -193,7 +324,7 @@
     var DeleteUserClick = function (user) {
         //alert(user);
         if (user !== '') {
-          
+
             $.ajax({
                 type: 'POST',
                 url: '/Home/SelecteAllUserToDelete',
@@ -224,7 +355,7 @@
                     //alert('Error: ' + ex.statusText);
                 },
                 success: function () {
-                    $("#deleteAllUserPoPup").modal();                   
+                    $("#deleteAllUserPoPup").modal();
                 },
                 async: true,
                 processData: true
@@ -246,9 +377,9 @@
             }
         });
     }
-   
+
 </script>
 
 
-   
+
 

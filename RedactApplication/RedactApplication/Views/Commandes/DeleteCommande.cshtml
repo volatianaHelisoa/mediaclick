@@ -13,11 +13,9 @@
         <div class="content-section text-centered icon-bottom">
             <i class="pop-icon green-bg"></i>
             <p>Voulez-vous vraiment supprimer la sélection ?</p>
-           
-            <ul class="bouttons_area">
-                <li><button type="submit" class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("DeleteAllCommandeSelected", "Commandes") + "' ");">Supprimer</button></li>
-                <li><button class="btn btn-primary" data-dismiss="modal" onclick="DecheckedClick()">Non</button></li>
-            </ul>
+
+            <input type="submit" value="Supprimer" class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("DeleteAllCommandeSelected", "Commandes") + "' ");">
+            <input type="submit" value="Retour" class="btn btn-warning" onclick="DecheckedClick()">
         </div>
     </div>
 

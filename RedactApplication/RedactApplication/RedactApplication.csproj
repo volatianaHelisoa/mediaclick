@@ -630,7 +630,6 @@
     <Content Include="Views\Home\ViewRedacteur.cshtml" />
     <Content Include="Views\Home\DetailsRedacteurs.cshtml" />
     <Content Include="Views\Commandes\Create.cshtml" />
-    <Content Include="Views\Commandes\Delete.cshtml" />
     <Content Include="Views\Commandes\DetailsCommande.cshtml" />
     <Content Include="Views\Commandes\Edit.cshtml" />
     <Content Include="Views\Commandes\Index.cshtml" />

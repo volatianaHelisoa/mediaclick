@@ -42,7 +42,7 @@ namespace RedactApplication.Controllers
                 if (utilisateur != null)
                 {
                     FormsAuthentication.SetAuthCookie(utilisateur.userId.ToString(), model.saveOnComputer);/*CREATION COOKIES*/
-                    //Session["mail"] = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(utilisateur.userMail);
+                    Session["mail"] = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(utilisateur.userMail);
                     //Session["pass"] = pwdCrypte;
                     Session["logoUrl"] = utilisateur.logoUrl;
                     Session["name"] = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(utilisateur.userNom);

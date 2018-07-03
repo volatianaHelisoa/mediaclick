@@ -157,7 +157,7 @@ a.watermark-mc > img {
 #top-bar #notification-bell {
     width: 20px;
     height: 20px;
-    background: url(../../images/notification-picto.svg) no-repeat center;
+    background: url(../../../images/notification-picto.svg) no-repeat center;
     display: inline-block;
     vertical-align: middle;
 }
@@ -363,6 +363,20 @@ a.watermark-mc > img {
     margin: 0;
     padding: 10px 20px;
 }
+.action-bar .submit-area {
+    display:flex;
+}
+.action-bar .submit-area input {
+    margin:0 5px;
+}
+.usr-srch--input-wrapper {
+    position: relative
+}
+i.fa.fa-times-circle.cancelText {
+    position: absolute;
+    right: 10px;
+    top: 13px;
+}
 .card .filters {
     border-top: 1px solid #ebebeb;
     border-bottom: 1px solid #ebebeb;
@@ -385,3 +399,75 @@ a.watermark-mc > img {
     font-size: 14px;
     padding: 6px 20px;
 }
+
+
+#myDataTable .odd {
+    background: #f9f9f9;
+}
+
+
+#myDataTable_length {
+    float: right;
+    margin: -39px 0 40px;
+    background: white;
+}
+
+    #myDataTable_length label {
+        margin: 0;
+    }
+
+    #myDataTable_length select {
+        width: auto;
+        display: inline-block;
+        margin: 0;
+        padding: 7px 40px 7px 15px;
+        background-size: 30px;
+    }
+
+#myDataTable th {
+    font-weight: normal;
+    padding: 18px 12px;
+    text-align: left;
+    background-color: #013956;
+    color: white;
+}
+
+#myDataTable input[type="checkbox"] {
+    margin: 0;
+    width: auto;
+}
+
+#myDataTable td {
+    color: #868686;
+    border: none;
+    padding: 15px 10px;
+}
+
+#myDataTable tfoot {
+    display: none;
+}
+
+#myDataTable_paginate {
+    float: none;
+    text-align: center;
+    padding-top: 0.25em;
+    margin-top: 20px;
+}
+
+    #myDataTable_paginate .paginate_button.current {
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        padding: 0;
+        border: 1px solid #26b5ff;
+        color: #26b5ff !important;
+        background: white;
+    }
+
+#myDataTable_filter {
+    display: none;
+}
+
+table#myDataTable {
+    width: 100%;
