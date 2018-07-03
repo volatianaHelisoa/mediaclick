@@ -5,13 +5,13 @@
         ViewBag.Title = "Facture";
         ViewBag.FactureId = Model.factureId;
     }
-    Layout = "~/Views/Shared/LayoutFullPage.cshtml";
+    Layout = "~/Views/Shared/LayoutConnected.cshtml";
 }
 
 @section css
 {
     <link href="@Url.Content("~/Content/css/jquery-ui.css")" rel="stylesheet" />
-    <link href="@Url.Content("~/Content/css/jquery.dataTables.css")" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/css/elements/commandes.css">
     <link href="@Url.Content("~/Content/css/dataTables.css")" rel="stylesheet" />
     <link href="~/Content/themes/smoothness/jquery-ui.css" rel="stylesheet" />
 }
@@ -90,14 +90,14 @@
                                             <th>Date d’émission</th>
                                             <th>Période concerné</th>
                                             <th>Montant facture</th>
-                                            <th>Etat</th>                                            
+                                            <th>Etat</th>
                                             <th class="option">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody class="t1">
                                         @if (ViewBag.listeFactureVm != null)
                                         {
-                                          
+
                                             foreach (var item in ViewBag.listeFactureVm)
                                             {
                                                 <tr>
@@ -115,15 +115,15 @@
                                                         {
                                                             <span>Payé</span>
                                                         }
-                                                    </td>                                                    
+                                                    </td>
                                                     <td>
-                                                       <div class="option">                                                         
-                                                            <a href="~/Facture/Details/@item.factureId" title="Détails"><i class="fa fa-eye"></i></a>                                                         
+                                                        <div class="option">
+                                                            <a href="~/Facture/Details/@item.factureId" title="Détails"><i class="fa fa-eye"></i></a>
                                                             <a onclick="DeleteFactureClick('@item.factureId')" title="Supprimer Facture"><i class="fa fa-trash"></i></a>
                                                         </div>
                                                     </td>
                                                 </tr>
-                                                
+
                                             }
                                             if (ViewBag.listeFactureVm.Count == 0)
                                             {
@@ -155,7 +155,7 @@
 <script>
     /*pour la suppression des utilisateurs séléctionnés*/
     var DeleteFactureClick = function (facture) {
-      //  alert(facture);
+        //  alert(facture);
         if (facture !== '') {
 
             $.ajax({
