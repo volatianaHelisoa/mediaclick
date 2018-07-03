@@ -154,13 +154,13 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>05/24/2018 14:11:13</publishTime>
     </File>
     <File Include="bin/RedactApplication.dll">
-      <publishTime>07/03/2018 13:55:37</publishTime>
+      <publishTime>07/03/2018 17:48:15</publishTime>
     </File>
     <File Include="bin/RedactApplication.dll.config">
       <publishTime>06/28/2018 14:07:01</publishTime>
     </File>
     <File Include="bin/RedactApplication.pdb">
-      <publishTime>07/03/2018 13:55:37</publishTime>
+      <publishTime>07/03/2018 17:48:15</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>05/24/2018 14:11:16</publishTime>
@@ -997,25 +997,25 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>07/02/2018 17:51:43</publishTime>
     </File>
     <File Include="Views/Facture/Create.cshtml">
-      <publishTime>07/03/2018 09:31:06</publishTime>
+      <publishTime>07/03/2018 16:52:54</publishTime>
     </File>
     <File Include="Views/Facture/DeletedAllFactureConfirmation.cshtml">
-      <publishTime>07/03/2018 11:00:30</publishTime>
+      <publishTime>07/03/2018 11:52:36</publishTime>
     </File>
     <File Include="Views/Facture/DeletedFactureConfirmation.cshtml">
-      <publishTime>07/02/2018 17:03:40</publishTime>
+      <publishTime>07/03/2018 11:53:38</publishTime>
     </File>
     <File Include="Views/Facture/DeleteFacture.cshtml">
-      <publishTime>07/02/2018 17:01:12</publishTime>
+      <publishTime>07/03/2018 17:08:09</publishTime>
     </File>
     <File Include="Views/Facture/Details.cshtml">
-      <publishTime>06/29/2018 14:37:43</publishTime>
+      <publishTime>06/29/2018 14:37:44</publishTime>
     </File>
     <File Include="Views/Facture/ErrorNoSelection.cshtml">
-      <publishTime>07/02/2018 16:55:04</publishTime>
+      <publishTime>07/03/2018 17:07:01</publishTime>
     </File>
     <File Include="Views/Facture/ListFacture.cshtml">
-      <publishTime>06/28/2018 15:57:10</publishTime>
+      <publishTime>07/03/2018 16:59:18</publishTime>
     </File>
     <File Include="Views/Home/About.cshtml">
       <publishTime>09/13/2017 18:14:28</publishTime>
@@ -1024,22 +1024,22 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>09/13/2017 18:14:28</publishTime>
     </File>
     <File Include="Views/Home/CreatedUserConfirmation.cshtml">
-      <publishTime>07/02/2018 11:46:44</publishTime>
+      <publishTime>07/03/2018 13:11:36</publishTime>
     </File>
     <File Include="Views/Home/DeletedAllUserConfirmation.cshtml">
-      <publishTime>07/03/2018 11:14:26</publishTime>
+      <publishTime>07/03/2018 13:14:12</publishTime>
     </File>
     <File Include="Views/Home/DeletedAllUserWaitting.cshtml">
-      <publishTime>07/03/2018 11:14:04</publishTime>
+      <publishTime>07/03/2018 17:08:42</publishTime>
     </File>
     <File Include="Views/Home/DeletedUserConfirmation.cshtml">
-      <publishTime>07/03/2018 10:58:38</publishTime>
+      <publishTime>07/03/2018 13:15:36</publishTime>
     </File>
     <File Include="Views/Home/DeletedUserWaitting.cshtml">
-      <publishTime>07/03/2018 10:59:45</publishTime>
+      <publishTime>07/03/2018 17:08:42</publishTime>
     </File>
     <File Include="Views/Home/DeleteUser.cshtml">
-      <publishTime>07/03/2018 10:17:58</publishTime>
+      <publishTime>07/03/2018 13:13:14</publishTime>
     </File>
     <File Include="Views/Home/DetailsRedacteurs.cshtml">
       <publishTime>06/29/2018 16:49:05</publishTime>
@@ -1048,16 +1048,16 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>06/29/2018 16:37:45</publishTime>
     </File>
     <File Include="Views/Home/EditUserConfirmation.cshtml">
-      <publishTime>07/02/2018 15:52:49</publishTime>
+      <publishTime>07/03/2018 13:16:02</publishTime>
     </File>
     <File Include="Views/Home/ErrorEditUser.cshtml">
-      <publishTime>07/03/2018 11:00:05</publishTime>
+      <publishTime>07/03/2018 15:25:58</publishTime>
     </File>
     <File Include="Views/Home/ErrorNoSelection.cshtml">
-      <publishTime>07/03/2018 11:00:12</publishTime>
+      <publishTime>07/03/2018 17:07:21</publishTime>
     </File>
     <File Include="Views/Home/ErrorUser.cshtml">
-      <publishTime>07/03/2018 11:00:20</publishTime>
+      <publishTime>07/03/2018 13:16:22</publishTime>
     </File>
     <File Include="Views/Home/GererUtilisateur.cshtml">
       <publishTime>07/03/2018 13:41:03</publishTime>
@@ -1066,10 +1066,10 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>05/25/2018 16:43:19</publishTime>
     </File>
     <File Include="Views/Home/ListeUser.cshtml">
-      <publishTime>07/02/2018 17:53:21</publishTime>
+      <publishTime>07/03/2018 17:38:42</publishTime>
     </File>
     <File Include="Views/Home/sendMailRecovery.cshtml">
-      <publishTime>07/03/2018 11:22:00</publishTime>
+      <publishTime>07/03/2018 14:19:50</publishTime>
     </File>
     <File Include="Views/Home/ViewRedacteur.cshtml">
       <publishTime>05/28/2018 11:06:19</publishTime>
@@ -1081,22 +1081,22 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>06/22/2018 16:33:32</publishTime>
     </File>
     <File Include="Views/Login/ErrrorForgotPassword.cshtml">
-      <publishTime>07/02/2018 10:21:48</publishTime>
+      <publishTime>07/03/2018 15:25:14</publishTime>
     </File>
     <File Include="Views/Login/ExpiredLink.cshtml">
-      <publishTime>07/02/2018 10:58:10</publishTime>
+      <publishTime>07/03/2018 15:25:14</publishTime>
     </File>
     <File Include="Views/Login/ForgotPassword.cshtml">
       <publishTime>06/22/2018 16:17:56</publishTime>
     </File>
     <File Include="Views/Login/SendMailSuccess.cshtml">
-      <publishTime>07/02/2018 10:14:38</publishTime>
+      <publishTime>07/03/2018 15:25:14</publishTime>
     </File>
     <File Include="Views/Login/UpdatePassword.cshtml">
       <publishTime>07/02/2018 10:27:32</publishTime>
     </File>
     <File Include="Views/Login/UpdatePasswordSuccess.cshtml">
-      <publishTime>07/02/2018 10:28:42</publishTime>
+      <publishTime>07/03/2018 15:25:13</publishTime>
     </File>
     <File Include="Views/Manage/AddPhoneNumber.cshtml">
       <publishTime>05/24/2018 14:11:10</publishTime>
@@ -1157,6 +1157,9 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
     </File>
     <File Include="Views/Shared/_MessagesList.cshtml">
       <publishTime>06/19/2018 13:33:34</publishTime>
+    </File>
+    <File Include="Views/Template/ListTemplate.cshtml">
+      <publishTime>07/03/2018 14:38:11</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>05/24/2018 14:10:57</publishTime>
