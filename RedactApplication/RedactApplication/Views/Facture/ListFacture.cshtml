@@ -27,128 +27,111 @@
     </script>
 
 }
-<main class="wrapperpages">
-    <div>
-        <section>
-            <div class="page pagesDivision clear">
-                <section class="column2 rightDivision fullWidth">
-                    <div class="rowpad">
-                        <div>
-                            <div class="admin-link-menu">
 
-                                <a href="~/Home/ListeFacture" class="admin-link ">Utilisateurs</a>
-                                <a href="~/Commandes/ListCommandes" class="admin-link">Commandes</a>
-                                <a href="~/Facture/ListFacture" class="admin-link active">Factures</a>
-                            </div>
-                            <!-- end admin menu -->
+<main id="wrapper">
+    <div id="single-container">
+        <div class="onglets ease-in-out">
+            <ul>
+                <li><a href="~/Home/ListeUser">Utilisateurs</a></li>
+                <li><a href="~/Commandes/ListCommandes">Commandes</a></li>
+                <li><a href="~/Facture/ListFacture" class="active">Factures</a></li>
+                <li><a href="~/Template/ListTemplate">Templates</a></li>
+            </ul>
+        </div>
+
+        <div class="card back-office with-shadow">
+            <div class="action-bar flex-content flex-jsbet-acenter">
+                <div class="left search-bloc">
+                    @using (Html.BeginForm("FactureSearch", "Facture", FormMethod.Post, new { @class = "facture-srch" }))
+                    {
+                        <div class="usr-srch--input-wrapper">
+                            @Html.AntiForgeryToken()
+                            <i class="fa fa-times-circle cancelText"></i>
+                            <input class="usr-srch--input" type="search" placeholder="Rechercher" name="searchValue" id="ValFactureSearch" title="Search...">
                         </div>
-                        <div id="divisionContent">
-                            <div class="breadcrumb">
-                                <span>Factures</span>
-                                <hr />
-                            </div>
+                    }
+                </div>
+                <div class="submit-area">
 
-                            <!-- top panel -->
-                            <div id="inner-top-panel" class="showpanel clear">
-                                <div class="left search-bloc">
-                                    @using (Html.BeginForm("FactureSearch", "Facture", FormMethod.Post, new { @class = "facture-srch" }))
-                                    {
-                                        <div class="usr-srch--input-wrapper">
-                                            @Html.AntiForgeryToken()
-                                            <i class="fa fa-times-circle cancelText"></i>
-                                            <input class="usr-srch--input" type="search" placeholder="Search" name="searchValue" id="ValFactureSearch" title="Search...">
-                                        </div>
-                                        <input class="usr-srch--submit" type="submit" value="&#xf002;" id="FactureSearchSubmit">
-                                    }
-                                </div>
-                                <div class="right usr-create">
-                                    <input type="submit" value="Créer une facture" class="green-btn" onclick="@("window.location.href='" + @Url.RouteUrl("Home", new { controller = "Facture", action = "Create" }) + "'");">
-                                </div>
-                            </div>
-                            <!-- end top panel -->
-                            <div class="select_cat">
-                                <span>Select</span>
-                                <ul>
-                                    <li><a href="#" onclick="CheckedClick()">All</a></li>
-                                    <li><a href="#" onclick="DecheckedClick()">None</a></li>
-                                    <li class="line"></li>
-                                    <li><a href="#" onclick="DeleteAllFactureSelected(@ViewBag.nbrow)">Delete selection</a></li>
-                                </ul>
-                                <ul class="LinkSearchClear">
-                                    <li class="line"></li>
-                                    <li><a href="~/Facture/ListFacture">Clear</a></li>
-                                </ul>
-                            </div>
-                            <div class="tab_fx tab_fxs">
-                                <table id="myDataTable" class="trig_table table">
-                                    <thead>
-                                        <tr>
-                                            <th>
-                                                <input type="checkbox" class="checkbox" onclick="ClickAllFactureInListFacture()" id="checkAllFacture" />
-                                            </th>
-                                            <th>N° facture </th>
-                                            <th>Date d’émission</th>
-                                            <th>Période concerné</th>
-                                            <th>Montant facture</th>
-                                            <th>Etat</th>
-                                            <th class="option">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="t1">
-                                        @if (ViewBag.listeFactureVm != null)
-                                        {
-
-                                            foreach (var item in ViewBag.listeFactureVm)
-                                            {
-                                                <tr>
-                                                    <td><input type="checkbox" class="checkbox" name="selectedFacture" value="@item.factureId" /></td>
-                                                    <td>@item.factureNumero</td>
-                                                    <td>@item.dateEmission</td>
-                                                    <td>@item.periode</td>
-                                                    <td>@item.montant</td>
-                                                    <td>
-                                                        @if (@item.etat == false)
-                                                        {
-                                                            <span>Non payé</span>
-                                                        }
-                                                        else if (@item.etat == true)
-                                                        {
-                                                            <span>Payé</span>
-                                                        }
-                                                    </td>
-                                                    <td>
-                                                        <div class="option">
-                                                            <a href="~/Facture/Details/@item.factureId" title="Détails"><i class="fa fa-eye"></i></a>
-                                                            <a onclick="DeleteFactureClick('@item.factureId')" title="Supprimer Facture"><i class="fa fa-trash"></i></a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-
-                                            }
-                                            if (ViewBag.listeFactureVm.Count == 0)
-                                            {
-                                                <tr><td>No records found.</td></tr>
-                                            }
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                    <input type="submit" value="Créer une facture" class="btn btn-success btn-medium" onclick="@("window.location.href='" + @Url.RouteUrl("Home", new { controller = "Facture", action = "Create" }) + "'");">
+                </div>
             </div>
-        </section>
+            <div class="filters flex-content flex-jsbet-acenter">
+                <div class="flex-content flex-jsbet-acenter">
+                    Sélection
+                    <span onclick="CheckedFactureClick()">Tous</span>
+                    <span onclick="DecheckedFactureClick()">Aucun</span>
+                    <button class="btn btn-small" onclick="DeleteAllFactureSelected(@ViewBag.nbrow)">Supprimer la sélection</button>
+                </div>
+
+            </div>
+            <table id="myDataTable" class="trig_table table">
+                <thead>
+                    <tr>
+                        <th>
+                            <input type="checkbox" class="checkbox" onclick="ClickAllFactureInListFacture()" id="checkAllFacture" />
+                        </th>
+                        <th>N° facture </th>
+                        <th>Date d’émission</th>
+                        <th>Période concerné</th>
+                        <th>Montant facture</th>
+                        <th>Etat</th>
+                        <th class="option">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="t1">
+                    @if (ViewBag.listeFactureVm != null)
+                    {
+
+                        foreach (var item in ViewBag.listeFactureVm)
+                        {
+                    <tr>
+                        <td><input type="checkbox" class="checkbox" name="selectedFacture" value="@item.factureId" /></td>
+                        <td>@item.factureNumero</td>
+                        <td>@item.dateEmission</td>
+                        <td>@item.periode</td>
+                        <td>@item.montant</td>
+                        @if (@item.etat == false)
+                        {
+                            <td>Non payé</td>
+                        }
+                        else if (@item.etat == true)
+                        {
+                            <td>Payé</td>
+                        }
+                        
+                        <td>
+                            <div class="option">
+                                <a href="~/Facture/Details/@item.factureId" title="Détails"><i class="fa fa-eye"></i></a>
+                                <a onclick="DeleteFactureClick('@item.factureId')" title="Supprimer Facture"><i class="fa fa-trash"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+
+                        }
+                        if (ViewBag.listeFactureVm.Count == 0)
+                        {
+                            <tr><td>No records found.</td></tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
+
 </main>
 
-<div id="DeleteDatadialog" style="display: none">
+
+
+
+<div id="DeleteDatadialog" style="display: none" class="popup-notif">
     @Html.Partial("~/Views/Facture/ErrorNoSelection.cshtml")
 </div>
-<div id="SearchFactureNoResultat" style="display: none">
+<div id="SearchFactureNoResultat" style="display: none" class="popup-notif">
     @Html.Partial("~/Views/Shared/SearchNoResultat.cshtml")
 </div>
 <!--  Dialogue de confirmation suppression d'utilisateur  -->
-<div id="deleteAllFacturePoPup" style="display: none">
+<div id="deleteAllFacturePoPup" style="display: none" class="popup-notif">
     @Html.Partial("~/Views/Facture/DeleteFacture.cshtml")
 </div>
 
