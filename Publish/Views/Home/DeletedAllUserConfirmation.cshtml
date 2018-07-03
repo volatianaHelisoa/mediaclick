@@ -1,6 +1,6 @@
 ﻿
 
-@model RedactApplication.Models.UTILISATEURViewModel
+
 @{
     ViewBag.Title = "Confirmation de suppresion de tous les utilisateurs";
     if (Model != null)
@@ -20,9 +20,9 @@
         <div class="content-section text-centered icon-bottom">
             <i class="pop-icon green-bg"></i>
             <p>Tous les utilisateurs ont été supprimés avec succès!</p>
-            <form action="" method="post">
+            
                 <input type="submit" value="Ok" class="btn btn-primary" onclick="@("window.location.href='" + @Url.RouteUrl("Home", new { controller = "Home", action = "ListeUser" }) + "'");">
-            </form>
+           
         </div>
     </div>
 

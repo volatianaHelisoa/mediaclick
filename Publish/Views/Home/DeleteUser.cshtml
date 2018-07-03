@@ -1,6 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "Supprimer l'utilisateur";
+    Layout = "~/Views/Shared/LayoutConnected.cshtml";
 }
 @section Scripts
 {
@@ -14,10 +15,10 @@
         <div class="content-section text-centered icon-bottom">
             <i class="pop-icon green-bg"></i>
             <p>Voulez-vous vraiment supprimer la sélection ?</p>
-            <form action="" method="post">
+          
                 <input type="submit" data-dismiss="modal" value="Supprimer" class="btn btn-primary"  onclick="@("window.location.href='" + @Url.Action("DeleteAllUserSelected", "Home") + "' ");" />
                 <input type="submit" value="Annuler" class="btn btn-warning" onclick="DecheckedClick()">
-            </form>
+            
         </div>
     </div>
 

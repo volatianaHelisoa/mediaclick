@@ -1,4 +1,5 @@
-﻿@{
+﻿@model RedactApplication.Models.UTILISATEURViewModel
+@{
     ViewBag.Title = "Suppression facture";
 }
 
@@ -10,11 +11,10 @@
         </div>
         <div class="content-section text-centered icon-bottom">
             <i class="pop-icon green-bg"></i>
-            <p>Voulez-vous vraiment supprimer la sélection ?</p>
-            <form action="" method="post">
-                <input type="submit" value="Non" class="btn btn-primary" data-dismiss="modal" onclick="DecheckedFactureClick()">
-                <input type="submit" value="Supprimer" class="btn btn-warning" onclick="@("window.location.href='" + @Url.Action("DeleteAllFactureSelected", "Facture") + "' ");">
-            </form>
+            <p>Voulez-vous vraiment supprimer la sélection ?</p>           
+                
+                <input type="submit" value="Supprimer" class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("DeleteAllFactureSelected", "Facture") + "' ");">
+                <input type="submit" value="Non" class="btn btn-warning" data-dismiss="modal" onclick="DecheckedFactureClick()">
         </div>
     </div>
 

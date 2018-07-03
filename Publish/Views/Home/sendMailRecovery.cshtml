@@ -20,9 +20,9 @@
         <div class="content-section text-centered icon-bottom">
             <i class="pop-icon green-bg"></i>
             <p>Nous venons d'envoyer les instructions de réinitialisation du mot de passe à <strong class="green-text">@ViewBag.mail</strong></p>
-            <form action="" method="post">
+            
                 <input type="submit" value="Ok" class="btn btn-primary" onclick="@("window.location.href='" + @Url.RouteUrl("Home", new {controller = "Home", action = "ListeUser"}) + "'");">
-            </form>
+            
         </div>
     </div>
 

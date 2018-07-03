@@ -1,4 +1,4 @@
-﻿@using RedactApplication.Models
+﻿
 @model RedactApplication.Models.FACTUREViewModel
 
 @{
@@ -31,7 +31,7 @@
         </script>
     }
 }
-}
+
 @section Scripts{
     <link rel="stylesheet" href="~/Content/css/bootstrap-datepicker3.css" />
     <script type="text/javascript" src="~/Scripts/js/bootstrap-datepicker.min.js"></script>
@@ -77,8 +77,9 @@
         <div class="onglets ease-in-out">
             <ul>
                 <li><a href="~/Home/ListeUser">Utilisateurs</a></li>
-                <li><a href="~/Commandes/ListCommandes" class="active">Commandes</a></li>
-                <li><a href="~/Facture/ListFacture">Factures</a></li>
+                <li><a href="~/Commandes/ListCommandes">Commandes</a></li>
+                <li><a href="~/Facture/ListFacture" class="active">Factures</a></li>
+                <li><a href="~/Template/ListTemplate">Templates</a></li>
             </ul>
         </div>
         <div class="card back-office with-shadow">
@@ -86,10 +87,10 @@
                 <i class="icon icon-create-facture"></i>
                 <h1>Créer facture</h1>
             </div>
-             @*@if (ViewBag.ErrorMessage != null)
+             @if (ViewBag.ErrorMessage != null)
                 {
-                    <label class="error-msg ltl-consign">Selectionner au moins un rédacteur.</label>
-                }*@
+                    <label class="error-msg text-centered">Selectionner au moins un rédacteur.</label>
+                }
 @using (Html.BeginForm("CreateFacture", "Facture", FormMethod.Post, new { @class = "form-horizontal", role = "form", @id = "createfacture" }))
 {
     @Html.AntiForgeryToken()
@@ -105,13 +106,13 @@
                 <label for="" class="col-50 pull-left">
                     <span style="display: inline-block; vertical-align: middle; margin-right: 8px;">De</span>
                    
-                    @Html.TextBoxFor(x => x.dateDebut, "{0:dd/MM/yyyy}", new { @style = "display: inline-block; width: calc(100% - 30px);", type = "date" })
+                    @Html.TextBoxFor(x => x.dateDebut, "{0:dd/MM/yyyy}", new { @style = "display: inline-block; width: calc(100% - 30px);", type = "text" })
                     @Html.ValidationMessageFor(m => m.dateDebut)
                 </label>
                 <label for="" class="col-50 pull-right">
                     <span style="display: inline-block; vertical-align: middle; margin-right: 8px;">Au</span>                    
-                    @Html.TextBoxFor(x => x.dateDebut, "{0:dd/MM/yyyy}", new { @style = "display: inline-block; width: calc(100% - 30px);", type = "date" })
-                    @Html.ValidationMessageFor(m => m.dateDebut)
+                    @Html.TextBoxFor(x => x.dateFin, "{0:dd/MM/yyyy}", new { @style = "display: inline-block; width: calc(100% - 30px);", type = "text" })
+                    @Html.ValidationMessageFor(m => m.dateFin)
                 </label>
             </section>
             <section class="clearfix submit-area">                
