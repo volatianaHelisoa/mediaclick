@@ -17,17 +17,13 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-<main class="wrapperpages">
-    <div class="body-content">
-        @RenderBody()
-        <footer>
-       
-        </footer>
-    </div>
+    @RenderBody()
+    <footer>
+    
+    </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-    
-</main>
+
 </body>
 </html>
