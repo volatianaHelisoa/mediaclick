@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Content/css/layout/layout.css" rel="stylesheet" />
     <link href="~/Content/style.css" rel="stylesheet" />
     <link href="~/Content/font-awesome.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/Content/bootstrap.css">
@@ -53,23 +54,17 @@
         </div>
     </div>
 </header>
-    <div id="cachepage"><span><img src="~/images/spinner.gif" /></span></div>
-    <main class="wrapperpages">
-        <div class="body-content">
+<!-- Loading spinner -->
+<div id="cachepage"><span><img src="~/images/spinner.gif" /></span></div>    
+<!-- End loading spinner -->
+@RenderBody()
+<footer></footer>
 
-            @RenderBody()
-            <footer></footer>
-            
-        </div>
-
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @RenderSection("scripts", required: false)
-        @RenderSection("AddToHead", required: false)
-        <script src="~/Scripts/GestionVue.js"></script>
-
-       
-    </main>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)
+@RenderSection("AddToHead", required: false)
+<script src="~/Scripts/GestionVue.js"></script>
     
 </body>
 
