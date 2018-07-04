@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <title>Facture rédaction</title>
     <link href="~/Content/css/facture.css" rel="stylesheet" />
-    
+
 </head>
 <body>
 
@@ -21,7 +21,7 @@
                             <div id="company" class="clearfix">
                                 <div class="id">
                                     <div id="logo">
-                                       Media click
+                                        Media click
                                     </div>
                                     <span>Explorer business Park - Bat A1 Ankorondrano - Tana 101</span>
                                     <span><strong>Tél:</strong> +261 34 53 003 64</span>
@@ -83,16 +83,17 @@
     </div>
     <div id="toast" class="with-shadow">
         <a class="fileDownloadPdf btn btn-primary" href=""><i class="fa fa-download"></i> Télécharger</a>
-        <a class="btn btn-warning" href="" onclick="@(" window.location.href='" + @Url.RouteUrl("Home", new {controller = "Facture", action = "ListFacture"}) + "' ");"><i class="fa fa-download"></i> Retour</a>
-       
+        
+        @Html.ActionLink("Retour", "ListFacture", new { controller = "Facture" }, new { @class = "btn btn-warning" })
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     <script type="text/javascript" src="~/Scripts/js/jquery.fileDownload.js"></script>
+
+
+
 </body>
 </html>
-
-
 
 <script type="text/javascript">
     jQuery(document).ready(function () {
@@ -119,8 +120,8 @@
             success: function (response) {
                 if (response.Valid) {
 
-                    var url = "http://"+$(location).attr('host') + "/Pdf/" + filename;
-                    
+                    var url = "http://" + $(location).attr('host') + "/Pdf/" + filename;
+
                     $(".fileDownloadPdf").attr("href", url);
                     console.log($(".fileDownloadPdf").prop('href'));
                     $(".fileDownloadPdf").trigger("click");
@@ -137,13 +138,15 @@
         });
 
         $(".fileDownloadPdf").on("click", function (e) {
-          
+
             $.fileDownload($(this).prop('href'), {
                 preparingMessageHtml: "We are preparing your report, please wait...",
                 failMessageHtml: "There was a problem generating your report, please try again."
             });
-            return false; 
-            
+            return false;
+
         });
     });
 </script>
+
+
