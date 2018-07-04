@@ -190,7 +190,7 @@ a.watermark-mc > img {
     text-align: center;
     padding: 15px 0;
     z-index: 30;
-    max-width: 570px;
+    max-width: 600px;
     margin: 0 auto;
     transition: all ease-in-out linear 300ms;
     -webkit-transition: all ease-in-out linear 300ms;
@@ -440,6 +440,11 @@ i.fa.fa-times-circle.cancelText {
     -ms-border-radius: 3px;
     -moz-border-radius: 3px;
 }
+#myDataTable th.option {
+    background-color: #013956;
+    border: none;
+    border-radius: inherit;
+}
 #myDataTable .option a {
     display: inline-block;
     padding: 7px;
@@ -454,7 +459,7 @@ i.fa.fa-times-circle.cancelText {
 
 #myDataTable_length {
     float: right;
-    margin: -39px 0 40px;
+    margin: -61px 0 40px;
     background: white;
 }
 
@@ -466,8 +471,8 @@ i.fa.fa-times-circle.cancelText {
     width: auto;
     display: inline-block;
     margin: 0;
-    padding: 7px 40px 7px 15px;
-    background-size: 30px;
+    padding: 7px 43px 7px 15px;
+    background-size: 36px;
 }
 
 #myDataTable th {
