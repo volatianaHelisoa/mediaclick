@@ -5,6 +5,9 @@ $(document).ready(function () {
     var userProfil = $('.profil');
     var popup = userProfil.next('.profil-menu');
 
+    var notifsActionner = $('#notification-bell');
+    var notifsContent = notifsActionner.next('.notifs-content');
+
     $(window).scroll(function (e) {
         // Scroll events
         var winScroll = $(window).scrollTop();
@@ -26,6 +29,8 @@ $(document).ready(function () {
         if (e.keyCode === 27) {
             popup.slideUp();
             popup.css('display', 'none');
+            notifsContent.slideUp();
+            notifsContent.css('display', 'none');
         }
     });
 
@@ -38,9 +43,7 @@ $(document).ready(function () {
                 popup.toggleClass('open').slideDown();
             }
         });
-    });
-
-   
+    });   
 
 });
 
