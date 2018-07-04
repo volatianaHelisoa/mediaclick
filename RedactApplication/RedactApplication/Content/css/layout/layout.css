@@ -37,31 +37,31 @@ main#wrapper {
     z-index: 50;
 }
 
-    .login-form form {
-        text-align: center;
+.login-form form {
+    text-align: center;
+}
+
+.login-form .head,
+.popup-container .head {
+    color: white;
+    text-align: center;
+    padding: 40px 25px;
+}
+
+    .login-form .head p,
+    .popup-container .head p {
+        margin: 0;
     }
 
-    .login-form .head,
-    .popup-container .head {
-        color: white;
-        text-align: center;
-        padding: 40px 25px;
-    }
+.login-form .content-section,
+.popup-container .content-section {
+    padding: 30px;
+}
 
-        .login-form .head p,
-        .popup-container .head p {
-            margin: 0;
-        }
-
-    .login-form .content-section,
-    .popup-container .content-section {
-        padding: 30px;
-    }
-
-        .login-form .content-section label {
-            margin: 0 0 15px;
-            display: block;
-        }
+.login-form .content-section label {
+    margin: 0 0 15px;
+    display: block;
+}
 
 a.watermark-mc {
     margin-top: 30px;
@@ -332,7 +332,7 @@ a.watermark-mc > img {
     right: 40px;
     width: 260px;
     background: white;
-    padding: 15px;
+    padding: 15px 15px 52px;
 }
 
 .profil-menu > div > div {
@@ -353,6 +353,18 @@ a.watermark-mc > img {
 .profil-menu .user-name {
     font-family: 'RL',Arial, Helvetica, sans-serif;
     line-height: 13px;
+}
+
+.profil-menu .logout {
+    position: absolute;
+    width: 100%;
+    color: white;
+    left: 0;
+    bottom: 0;
+    background-color: #ff4026;
+    border: none;
+    padding: 12px 0;
+    font-size: 16px;
 }
 
 /* Filtres datatables */
@@ -381,11 +393,13 @@ i.fa.fa-times-circle.cancelText {
     border-top: 1px solid #ebebeb;
     border-bottom: 1px solid #ebebeb;
     padding: 5px 0;
+    margin-bottom: 20px;
 }
 .card .filters span {
     padding: 0 20px;
     color: #26b5ff;
     border-right: 1px solid #ebebeb;
+    cursor: pointer;
 }
 .card .filters select{
     margin: 0 0 0 15px;
@@ -399,10 +413,32 @@ i.fa.fa-times-circle.cancelText {
     font-size: 14px;
     padding: 6px 20px;
 }
-
+.card .filters button:hover {
+    background: #ff4026;
+}
 
 #myDataTable .odd {
     background: #f9f9f9;
+}
+
+#myDataTable .option {
+    text-align: center;
+    background: #f5f5f5;
+    border: 1px solid #dadada;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -moz-border-radius: 3px;
+}
+#myDataTable .option a {
+    display: inline-block;
+    padding: 7px;
+    color: #636363;
+    border-right: 1px solid #dadada;
+}
+
+#myDataTable .option a:last-of-type {
+    border: none;
 }
 
 
@@ -412,17 +448,17 @@ i.fa.fa-times-circle.cancelText {
     background: white;
 }
 
-    #myDataTable_length label {
-        margin: 0;
-    }
+#myDataTable_length label {
+    margin: 0;
+}
 
-    #myDataTable_length select {
-        width: auto;
-        display: inline-block;
-        margin: 0;
-        padding: 7px 40px 7px 15px;
-        background-size: 30px;
-    }
+#myDataTable_length select {
+    width: auto;
+    display: inline-block;
+    margin: 0;
+    padding: 7px 40px 7px 15px;
+    background-size: 30px;
+}
 
 #myDataTable th {
     font-weight: normal;
@@ -454,16 +490,21 @@ i.fa.fa-times-circle.cancelText {
     margin-top: 20px;
 }
 
-    #myDataTable_paginate .paginate_button.current {
-        border-radius: 50%;
-        width: 30px;
-        height: 30px;
-        line-height: 30px;
-        padding: 0;
-        border: 1px solid #26b5ff;
-        color: #26b5ff !important;
-        background: white;
-    }
+#myDataTable_paginate .paginate_button.current {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    line-height: 29px;
+    padding: 0;
+    border: 1px solid #26b5ff;
+    color: #26b5ff !important;
+    background: white;
+    display: inline-block;
+    margin: 0 10px;
+}
+#myDataTable_paginate .paginate_button {
+    cursor: pointer;
+}
 
 #myDataTable_filter {
     display: none;
@@ -471,4 +512,14 @@ i.fa.fa-times-circle.cancelText {
 
 table#myDataTable {
     width: 100%;
+}
+
+#toast {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    padding: 24px 40px;
+    background: white;
+    width: 100%;
+    text-align: center;
 }

@@ -13,15 +13,15 @@ body {
 #wrapper-facture {
     position: relative;
     width: 827px;
-    margin: 0 auto;
+    margin: 0 auto 110px;
     padding: 20px 30px;
     background: white; /* border-top: #23acf2 4px solid;border-bottom: #23acf2 4px solid;*/
 }
 
-    #wrapper-facture header {
-        padding: 10px 0;
-        margin-bottom: 30px;
-    }
+#wrapper-facture header {
+    padding: 10px 0;
+    margin-bottom: 30px;
+}
 
 #logo {
     text-align: center;
@@ -38,6 +38,121 @@ h1 {
     text-align: center;
     margin: 0 0 20px 0;
     background: url(dimension.png);
+}
+/* ----------------------------- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-bottom: 20px;
+}
+
+thead {
+    background-color: #24acf2;
+    font-size: 16px;
+    color: white;
+}
+
+table tr:nth-child(2n+1) td {
+    background-color: #F5F5F5;
+}
+
+table tr:last-of-type td {
+    background-color: none;
+}
+
+table th,
+table td {
+    text-align: center;
+}
+
+table th {
+    padding: 20px;
+    color: #fff;
+    white-space: nowrap;
+    font-weight: normal;
+}
+
+table .service,
+table .desc {
+    text-align: left;
+}
+
+table td {
+    padding: 20px;
+    text-align: left;
+}
+
+table tr td:last-of-type,
+table tr:last-of-type {
+    border-left: none;
+}
+
+table td.service,
+table td.desc {
+    vertical-align: top;
+}
+
+table td.unit,
+table td.qty,
+table td.total {
+    font-size: 1.2em;
+}
+
+table td.grand {
+    color: #24acf2;
+    font-weight: bold;
+}
+
+#notices .notice {
+    color: #5D6975;
+    font-size: 15px;
+    text-align: center;
+    line-height: 21px;
+    display: inline-block;
+    position: absolute;
+    bottom: 9em;
+    right: 40px;
+}
+
+footer {
+    border-top: 1px solid #d0d0d0;
+    padding: 20px 0;
+    width: 100%;
+    margin-top: 150px;
+}
+
+footer .left {
+    float: left;
+    width: 140px;
+}
+
+footer .left img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+footer .right {
+    float: right;
+    font-size: 12px;
+    color: #d0d0d0;
+}
+
+footer .right span {
+    display: block;
+    padding: 5px 0
+}
+
+header tr,
+header td {
+    background-color: transparent !important;
+    border: none !important;
+}
+
+
+#content .totalLigne {
+    text-align: right;
 }
 
 #company .id {
@@ -95,114 +210,9 @@ h1 {
     margin: 0;
     padding: 10px 20px;
 }
-/* ----------------------------- */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    border-spacing: 0;
-    margin-bottom: 20px;
-}
 
-thead {
-    background-color: #24acf2;
-    font-size: 16px;
-    color: white;
-}
-
-table tr:nth-child(2n+1) td {
-    background-color: #F5F5F5;
-}
-
-table tr:last-of-type td {
-    background-color: none;
-}
-
-table th,
-table td {
+.table-foot span {
+    display: block;
     text-align: center;
+    font-size: 12px;
 }
-
-table th {
-    padding: 20px;
-    color: #fff;
-    white-space: nowrap;
-    font-weight: normal;
-}
-
-table .service,
-table .desc {
-    text-align: left;
-}
-
-table td {
-    padding: 20px;
-    text-align: right;
-}
-
-table tr td:last-of-type,
-table tr:last-of-type {
-    border-left: none;
-}
-
-table td.service,
-table td.desc {
-    vertical-align: top;
-}
-
-table td.unit,
-table td.qty,
-table td.total {
-    font-size: 1.2em;
-}
-
-table td.grand {
-    color: #24acf2;
-    font-weight: bold;
-}
-
-#notices .notice {
-    color: #5D6975;
-    font-size: 15px;
-    text-align: center;
-    line-height: 21px;
-    display: inline-block;
-    position: absolute;
-    bottom: 9em;
-    right: 40px;
-}
-
-footer {
-    border-top: 1px solid #d0d0d0;
-    padding: 20px 0;
-    width: 100%;
-    margin-top: 150px;
-}
-
-    footer .left {
-        float: left;
-        width: 140px;
-    }
-
-        footer .left img {
-            display: block;
-            width: 100%;
-            height: auto;
-        }
-
-    footer .right {
-        float: right;
-        font-size: 12px;
-        color: #d0d0d0;
-    }
-
-        footer .right span {
-            display: block;
-            padding: 5px 0
-        }
-
-header tr,
-header td {
-    background-color: transparent !important;
-    border: none !important;
-}
-
