@@ -135,6 +135,22 @@ input[type="search"]::placeholder {
     font-family: 'RR', Arial, Helvetica, sans-serif;
     text-transform: uppercase;
     min-width: 140px;
+    cursor: pointer;
+    -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+       -o-user-select: none;
+          user-select: none;
+}
+.btn.disabled,
+.btn[disabled],
+fieldset[disabled] .btn {
+  pointer-events: none;
+  cursor: not-allowed;
+  opacity: 0.65;
+  filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
+          box-shadow: none;
 }
 .btn-medium {
     padding: 12px 24px;
