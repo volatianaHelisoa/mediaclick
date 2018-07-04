@@ -32,10 +32,13 @@
     <div id="single-container">
         <div class="onglets ease-in-out">
             <ul>
-                <li><a href="~/Home/ListeUser" class="active">Utilisateurs</a></li>
-                <li><a href="~/Commandes/ListCommandes">Commandes</a></li>
-                <li><a href="~/Facture/ListFacture">Factures</a></li>
-                <li><a href="~/Template/ListTemplate">Templates</a></li>
+                @if (@Session["role"] != null && @Session["role"].ToString() != "2")
+                {
+                    <li> @Html.ActionLink("Utilisateurs", "ListeUser", new { controller = "Home" }, new { @class = "active" }) </li>
+                }
+                <li>@Html.ActionLink("Commandes", "ListCommandes", new { controller = "Commandes" })</li>
+                <li>@Html.ActionLink("Factures", "ListFacture", new { controller = "Facture" })</li>
+                <li>@Html.ActionLink("Templates", "ListTemplate", new { controller = "Template" })</li>
             </ul>
         </div>
 

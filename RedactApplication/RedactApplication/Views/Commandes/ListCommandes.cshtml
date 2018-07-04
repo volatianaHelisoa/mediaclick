@@ -36,10 +36,11 @@
                 <ul>
                     @if (@Session["role"] != null && @Session["role"].ToString() != "2")
                     {
-                        <li><a href="~/Home/ListeUser">Utilisateurs</a></li>
+                        <li> @Html.ActionLink("Utilisateurs", "ListeUser", new { controller = "Home" }) </li>
                     }
-                    <li><a href="~/Commandes/ListCommandes" class="active">Commandes</a></li>
-                    <li><a href="~/Facture/ListFacture">Factures</a></li>
+                    <li>@Html.ActionLink("Commandes", "ListCommandes", new { controller = "Commandes" }, new { @class = "active" })</li>
+                    <li>@Html.ActionLink("Factures", "ListFacture", new { controller = "Facture" })</li>
+                    <li>@Html.ActionLink("Templates", "ListTemplate", new { controller = "Template" })</li>
                 </ul>
             </div>
             <div class="head-list">

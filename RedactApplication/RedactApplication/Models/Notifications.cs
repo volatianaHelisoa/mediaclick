@@ -96,7 +96,7 @@ namespace RedactApplication.Models
                 }
             }
 
-            return messages;
+            return messages.OrderByDescending(x=>x.datenotif).Take(6);
         }
 
         private void dependency_OnChange(object sender, SqlNotificationEventArgs e)
