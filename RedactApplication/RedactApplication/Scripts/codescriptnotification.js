@@ -37,7 +37,7 @@
             success: function(response) {
                 console.log(response.d);
                 $('#notiContent').empty();
-               
+                $('.count-notif').value = 1;
                 if (response.length == 0) {
                     
                     $('#notiContent').append($('<li>Aucune nouvelle notification.</li>'));

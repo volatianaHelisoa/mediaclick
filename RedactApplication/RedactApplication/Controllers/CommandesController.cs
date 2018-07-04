@@ -1123,10 +1123,10 @@ namespace RedactApplication.Controllers
                                 mailBody.AppendFormat("<br />");
                                 mailBody.AppendFormat("Mediaclick Company.");
 
-                                //bool isSendMail = MailClient.SendResetPasswordMail(commande.REDACTEUR.userMail,
-                                //    mailBody.ToString(), "Redact application - nouvelle commande.");
-                                //if (isSendMail)
-                                //{
+                                bool isSendMail = MailClient.SendResetPasswordMail(commande.REDACTEUR.userMail,
+                                    mailBody.ToString(), "Redact application - nouvelle commande.");
+                                if (isSendMail)
+                                {
 
                                     if (SendNotification(commande,fromId,toId) > 0)
                                         return View("EditCommandeConfirmation");
@@ -1137,7 +1137,7 @@ namespace RedactApplication.Controllers
                                         {"action", "Edit"}
                                     });
 
-                                //}
+                                }
                             }
                         }
                     }

@@ -27,10 +27,7 @@
 
             <div class="pull-right">
                 <div class="notifications">
-                    <i id="notification-bell"></i>
-                    <div>
-
-                    </div>
+                    @Html.Partial("~/Views/Shared/_MessagesList.cshtml")
                 </div>
 
                 <a href="#" class="profil">
@@ -54,24 +51,26 @@
                             <a href="#" class="user-mail link">@Session["mail"]</a>
                             <button class="btn btn-success btn-small" onclick="@("window.location.href='" + @Url.Action("Edit", "Home") + "'");">Modifier</button>
                         </div>
-                    </div>                   
-                    <button class="logout"  onclick="@("window.location.href='" + @Url.Action("LogoutPage", "Login") + "'");">Deconnexion</button>
-                </div>                
+                    </div>
+                    <button class="logout" onclick="@("window.location.href='" + @Url.Action("LogoutPage", "Login") + "'");">Deconnexion</button>
+                </div>
             </div>
         </div>
     </header>
 
 
     @RenderBody()
-    <footer>
-    </footer> 
+    <footer></footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
     @RenderSection("AddToHead", required: false)
     <script src="~/Scripts/GestionVue.js"></script>
-
+    <script src="~/Scripts/jquery.signalR-2.2.3.min.js"></script>
+    <script src="~/SignalR/hubs"></script>
+    <script src="~/Scripts/codescriptnotification.js"></script>
+   
     <script src="~/Scripts/codescript.js"></script>
 
 </body>

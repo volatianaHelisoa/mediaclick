@@ -23,5 +23,10 @@ namespace RedactApplication
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<MessagesHub>();
             context.Clients.All.updateMessages();
         }
+
+        public void HelloServer()
+        {
+            Clients.All.hello("Hello message to all clients");
+        }
     }
 }

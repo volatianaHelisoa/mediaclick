@@ -510,6 +510,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\summernote.js" />
+    <Content Include="Scripts\timer.js" />
     <Content Include="Scripts\tinymce.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />

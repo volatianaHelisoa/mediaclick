@@ -538,7 +538,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>05/14/2018 23:25:08</publishTime>
     </File>
     <File Include="Content/css/layout/layout.css">
-      <publishTime>07/02/2018 17:51:08</publishTime>
+      <publishTime>07/04/2018 13:54:35</publishTime>
     </File>
     <File Include="Content/css/libs/bootstrap-grid.css">
       <publishTime>06/27/2018 10:45:26</publishTime>
