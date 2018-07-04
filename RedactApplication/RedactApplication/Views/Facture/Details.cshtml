@@ -45,7 +45,7 @@
             </table>
         </header>
         <div id="content">
-            <table>
+            <table style="border: 1px solid #dadada;">
                 <thead>
                     <tr>
                         <th class="service">N° c/de</th>
@@ -66,16 +66,14 @@
                             <td class="total">@(item.nombre_mots * Convert.ToDouble(item.REDACTEUR.redactTarif))</td>
                         </tr>
                     }
-
-
-                    <tr>
+                    <tr class="totalLigne">
                         <td colspan="4"><strong>Total</strong></td>
                         <td class="grand total">@Model.montant Ar</td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <footer class="clearfix">
+        <footer class="clearfix table-foot">
             <div>
                 <span>Explorer business Park - Bat A1 Ankorondrano - Tana 101</span>
                 <span><strong>Tél:</strong> +261 34 53 003 64</span>
@@ -83,12 +81,10 @@
 
         </footer>
     </div>
-
-
-
-
-
-    <a class="fileDownloadPdf" href="">Télécharger</a>
+    <div id="toast" class="with-shadow">
+        <a class="fileDownloadPdf btn btn-primary" href=""><i class="fa fa-download"></i> Télécharger</a>
+        <a class="fileDownloadPdf btn btn-warning" href=""><i class="fa fa-download"></i> Retour</a>
+    </div>
 
     @Scripts.Render("~/bundles/jquery")
     <script type="text/javascript" src="~/Scripts/js/jquery.fileDownload.js"></script>
