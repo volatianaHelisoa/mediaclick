@@ -522,4 +522,12 @@ table#myDataTable {
     background: white;
     width: 100%;
     text-align: center;
+    box-shadow: 0px -14px 20px rgba(0, 0, 0, .15);
+    -webkit-box-shadow: 0px -14px 20px rgba(0, 0, 0, .15);
+    -moz-box-shadow: 0px -14px 20px rgba(0, 0, 0, .15);
+    -ms-box-shadow: 0px -14px 20px rgba(0, 0, 0, .15);
+}
+
+.totalLigne td {
+    text-align: right;
 }
