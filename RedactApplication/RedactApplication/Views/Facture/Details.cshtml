@@ -14,22 +14,35 @@
 
     <div id="wrapper-facture">
         <header class="clearfix">
-
-            <div id="company" class="clearfix">
-                <div class="id">
-                    <span>Explorer business Park - Bat A1 Ankorondrano - Tana 101</span>
-                    <span><strong>Tél:</strong> +261 34 53 003 64</span>
-                </div>
-                <div class="facture-numero">Facture <span id="factureNumero" data-last-value="@Model.factureNumero">000-@Model.factureNumero</span></div>
-            </div>
-            <div id="project">
-                <div class="client-info">
-                    <h3>Facturer à</h3>
-                    <span><strong>Mr</strong> @Model.REDACTEUR.userNom @Model.REDACTEUR.userPrenom,</span>
-                    <span>Redacteur,</span><span>Tél: @Model.REDACTEUR.redactPhone</span>
-                </div>
-                <span class="date">@Model.dateEmission.ToString("dd/MMMM/yyyy")</span>
-            </div>
+            <table>
+                <tbody>
+                    <tr>
+                        <td style="display: table-caption;">
+                            <div id="company" class="clearfix">
+                                <div class="id">
+                                    <div id="logo">
+                                       Media click
+                                    </div>
+                                    <span>Explorer business Park - Bat A1 Ankorondrano - Tana 101</span>
+                                    <span><strong>Tél:</strong> +261 34 53 003 64</span>
+                                </div>
+                                <div class="facture-numero">Facture <span id="factureNumero" data-last-value="@Model.factureNumero">000-@Model.factureNumero</span></div>
+                            </div>
+                        </td>
+                        <td></td>
+                        <td colspan="1">
+                            <div id="project">
+                                <div class="client-info">
+                                    <h3>Facturer à</h3>
+                                    <span><strong>Mr</strong> @Model.REDACTEUR.userNom @Model.REDACTEUR.userPrenom,</span>
+                                    <span>Redacteur,</span><span>Tél: @Model.REDACTEUR.redactPhone</span>
+                                </div>
+                                <span class="date">@Model.dateEmission.ToString("dd/MMMM/yyyy")</span>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </header>
         <div id="content">
             <table>
@@ -61,9 +74,6 @@
                     </tr>
                 </tbody>
             </table>
-            <div id="notices">
-                <div class="notice"><strong>La direction,</strong>Tojo Ramino</div>
-            </div>
         </div>
         <footer class="clearfix">
             <div>
@@ -74,7 +84,11 @@
         </footer>
     </div>
 
-    <a class="fileDownloadPdf" href=""  >Télécharger</a>
+
+
+
+
+    <a class="fileDownloadPdf" href="">Télécharger</a>
 
     @Scripts.Render("~/bundles/jquery")
     <script type="text/javascript" src="~/Scripts/js/jquery.fileDownload.js"></script>
