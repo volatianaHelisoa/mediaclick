@@ -151,7 +151,7 @@
                                             {
                                                 <a href="~/Commandes/Edit/@item.commandeId" title="Editer"><i class="fa fa-edit"></i></a>
                                             }
-                                            @if (@Session["role"] != null && @Session["role"].ToString() != "2" && @item.statut_cmde == "Validé")
+                                            @if (@Session["role"] != null && @Session["role"].ToString() != "2" && (@item.statut_cmde == "Validé" || @item.statut_cmde == "Annulé"))
                                             {
                                                 <a onclick="DeleteCommandeClick('@item.commandeId')" title="Supprimer"><i class="fa fa-trash"></i></a>
                                             }

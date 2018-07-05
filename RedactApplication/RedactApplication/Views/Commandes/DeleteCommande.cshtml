@@ -13,9 +13,12 @@
         <div class="content-section text-centered icon-bottom">
             <i class="pop-icon green-bg"></i>
             <p>Voulez-vous vraiment supprimer la sélection ?</p>
-
-            <input type="submit" value="Supprimer" class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("DeleteAllCommandeSelected", "Commandes") + "' ");">
-            <input type="submit" value="Retour" class="btn btn-warning" onclick="DecheckedClick()">
+            @using (Html.BeginForm("ListCommandes", "Commandes", FormMethod.Post))
+            {
+                @Html.ActionLink("Supprimer", "DeleteAllCommandeSelected", new { controller = "Commandes" }, new { @class = "btn btn-primary" })
+                <input type="submit" value="Annuler" class="btn btn-warning" onclick="DecheckedCmdeClick()">
+            }
+            
         </div>
     </div>
 
