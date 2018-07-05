@@ -15,7 +15,7 @@ body {
     width: 827px;
     margin: 0 auto 110px;
     padding: 20px 30px;
-    background: white; /* border-top: #23acf2 4px solid;border-bottom: #23acf2 4px solid;*/
+    background: white; 
 }
 
 #wrapper-facture header {
@@ -29,8 +29,9 @@ body {
 }
 
 h1 {
-    border-top: 1px solid #5D6975;
-    border-bottom: 1px solid #5D6975;
+    border-width: 1px 0 1px 0;
+    border-style: solid;
+    border-color:  #5D6975;
     color: #5D6975;
     font-size: 2.4em;
     line-height: 1.4em;
@@ -53,12 +54,8 @@ thead {
     color: white;
 }
 
-table tr:nth-child(2n+1) td {
+table tr td.odd {
     background-color: #F5F5F5;
-}
-
-table tr:last-of-type td {
-    background-color: none;
 }
 
 table th,
@@ -162,10 +159,10 @@ header td {
     text-align: left;
 }
 
-    #company .id > span:last-of-type {
-        margin-top: 10px;
-        display: block;
-    }
+#company .id > span:last-of-type {
+    margin-top: 10px;
+    display: block;
+}
 
 #company .facture-numero {
     text-align: center;
@@ -176,17 +173,21 @@ header td {
     padding: 20px 0;
 }
 
-    #company .facture-numero span {
-        border: 1px solid #000;
-        color: #3f3f3f;
-        font-size: 14px;
-        padding: 10px 20px;
-        display: inline-block;
-        margin-left: 20px;
-    }
+#company .facture-numero span {
+    border-width: 1px 1px 1px 1px;
+    border-style: solid;
+    border-color:  #000;
+    color: #3f3f3f;
+    font-size: 14px;
+    padding: 10px 20px;
+    display: inline-block;
+    margin-left: 20px;
+}
 
 #project .client-info {
-    border-top: 1px solid #ebebeb;
+    border-width: 1px 0 0 0;
+    border-style: solid;
+    border-color:  #ebebeb;
     padding: 10px 20px;
     margin-top: 110px;
 }
@@ -204,8 +205,9 @@ header td {
 }
 
 #project .date {
-    border-top: 1px solid #ebebeb;
-    border-bottom: 1px solid #ebebeb;
+    border-width: 1px 0 1px 0;
+    border-style: solid;
+    border-color:  #ebebeb;
     display: block;
     margin: 0;
     padding: 10px 20px;

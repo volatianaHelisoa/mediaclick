@@ -498,6 +498,7 @@ i.fa.fa-times-circle.cancelText {
     text-align: left;
     background-color: #013956;
     color: white;
+    border: none;
 }
 
 #myDataTable input[type="checkbox"] {
