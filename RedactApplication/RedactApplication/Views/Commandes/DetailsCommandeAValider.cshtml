@@ -58,27 +58,30 @@
                                         <span><strong>Texte d'ancrage :</strong>@Html.DisplayFor(model => model.texte_ancrage)</span>
 
                                     </div>
+                                    <div>
+                                        <span><strong>Remarques :</strong> @Html.DisplayFor(model => model.remarques)</span>
+                                    </div>
+                                    </div>
+                                    <div>
+                                        <table>
+                                            <tr>
+                                                <td><strong>Consignes:</strong></td>
+                                                <td>
+                                                    @Html.DisplayFor(model => model.consigne_references)
+
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(model => model.consigneType)
+
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(model => model.consigne_autres)
+
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
                                 </div>
-                                <div>
-                                    <table>
-                                        <tr>
-                                            <td><strong>Consignes:</strong></td>
-                                            <td>
-                                                @Html.DisplayFor(model => model.consigne_references)
-
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(model => model.consigneType)
-
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(model => model.consigne_autres)
-
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
                         </section>
                     </div>
 
