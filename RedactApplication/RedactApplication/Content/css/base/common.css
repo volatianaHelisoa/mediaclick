@@ -203,3 +203,11 @@ input::-webkit-inner-spin-button {
 .error-msg {
     color: #ff4026;
 }
+
+.sep {
+    display: block;
+    clear: both;
+    margin: 1em 0;
+    width: 100%;
+    height: 1px;
+}
