@@ -1,3 +1,9 @@
+main * {
+    transition: ease-in-out 300ms all;
+    -webkit-transition: ease-in-out 300ms all;
+    -moz-transition: ease-in-out 300ms all;
+    -ms-transition: ease-in-out 300ms all;
+}
 main {
     min-height: calc(100vh - 71px);
 }
@@ -523,6 +529,36 @@ i.fa.fa-times-circle.cancelText {
     margin-top: 20px;
 }
 
+#myDataTable_paginate .paginate_button {
+    cursor: pointer;
+    background: url(../../../images/table-navigation-arrow.svg) no-repeat;
+    width: 26px;
+    height: 26px;
+    filter: grayscale(1);
+    -webkit-filter: grayscale(1);
+    -moz-filter: grayscale(1);
+    -ms-filter: grayscale(1);
+    font-size: 0;    
+    border: none;
+    background-size: 51px;
+    display: inline-block;
+    margin: 0 20px;
+}
+
+#myDataTable_paginate .paginate_button:hover {
+    filter: grayscale(0);
+    -webkit-filter: grayscale(0);
+    -moz-filter: grayscale(0);
+    -ms-filter: grayscale(0);
+}
+
+#myDataTable_paginate .paginate_button.next {
+    background-position: right center;
+}
+#myDataTable_paginate .paginate_button.previous {
+    background-position: right center;
+}
+
 #myDataTable_paginate .paginate_button.current {
     border-radius: 50%;
     width: 30px;
@@ -534,9 +570,6 @@ i.fa.fa-times-circle.cancelText {
     background: white;
     display: inline-block;
     margin: 0 10px;
-}
-#myDataTable_paginate .paginate_button {
-    cursor: pointer;
 }
 
 #myDataTable_filter {
