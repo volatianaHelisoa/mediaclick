@@ -157,17 +157,17 @@
             </div>
         </div>
 
+    <div id="DeleteDatadialog" style="display: none" class="modal-popup">
+        @Html.Partial("~/Views/Commandes/ErrorNoSelection.cshtml")
+    </div>
+    <div id="SearchUserNoResultat" style="display: none" class="modal-popup">
+        @Html.Partial("~/Views/Shared/SearchNoResultat.cshtml")
+    </div>
     </main>
 }
 else
 { Response.Redirect("~/Login/Accueil"); }
 
-<div id="DeleteDatadialog" style="display: none" class="popup-notif">
-    @Html.Partial("~/Views/Commandes/ErrorNoSelection.cshtml")
-</div>
-<div id="SearchUserNoResultat" style="display: none" class="popup-notif">
-    @Html.Partial("~/Views/Shared/SearchNoResultat.cshtml")
-</div>
 
 
   
