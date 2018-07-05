@@ -168,22 +168,23 @@
                 </table>
             </div>
         </div>
+        
+    <div id="DeleteDatadialog" style="display: none" class="modal-popup">
+        @Html.Partial("~/Views/Commandes/ErrorNoSelection.cshtml")
+    </div>
+    <div id="SearchUserNoResultat" style="display: none" class="modal-popup">
+        @Html.Partial("~/Views/Shared/SearchNoResultat.cshtml")
+    </div>
+    <!--  Dialogue de confirmation suppression d'utilisateur  -->
+    <div id="deleteAllUserPoPup" style="display: none" class="modal-popup">
+        @Html.Partial("~/Views/Commandes/DeleteCommande.cshtml")
+    </div>
 
     </main>
 }
 else
 { Response.Redirect("~/Login/Accueil"); }
 
-<div id="DeleteDatadialog" style="display: none" class="popup-notif">
-    @Html.Partial("~/Views/Commandes/ErrorNoSelection.cshtml")
-</div>
-<div id="SearchUserNoResultat" style="display: none" class="popup-notif">
-    @Html.Partial("~/Views/Shared/SearchNoResultat.cshtml")
-</div>
-<!--  Dialogue de confirmation suppression d'utilisateur  -->
-<div id="deleteAllUserPoPup" style="display: none" class="popup-notif">
-    @Html.Partial("~/Views/Commandes/DeleteCommande.cshtml")
-</div>
 
 <script>
     /*pour la suppression des utilisateurs séléctionnés*/
