@@ -8,6 +8,8 @@ $(document).ready(function () {
     var notifsActionner = $('#notification-bell');
     var notifsContent = notifsActionner.next('.notifs-content');
 
+    var mainWrapper = $('main#wrapper');
+
     $(window).scroll(function (e) {
         // Scroll events
         var winScroll = $(window).scrollTop();
@@ -30,20 +32,28 @@ $(document).ready(function () {
             popup.slideUp();
             popup.css('display', 'none');
             notifsContent.slideUp();
-            notifsContent.css('display', 'none');
+            mainWrapper.removeClass('fade-bg');
         }
     });
 
-    $(function () {
-        $win.on("click", function (event) {
-            if (userProfil.has(event.target).length == 0 && !userProfil.is(event.target)) {
-                popup.slideUp();
-                popup.css('display', 'none');
-            } else {
-                popup.toggleClass('open').slideDown();
-            }
+    $(function (){
+        notifsActionner.click(function() {
+          notifsContent.slideToggle();      
+          mainWrapper.toggleClass('fade-bg');
+        });	 
+        $win.on("click", function(event){
+          
+          if ( userProfil.has(event.target).length == 0 && !userProfil.is(event.target) ){
+            popup.slideUp();
+            popup.css('display','none');
+            mainWrapper.removeClass('fade-bg');
+          }
+          else {
+            popup.toggleClass('open').slideToggle();
+            mainWrapper.toggleClass('fade-bg');
+          }
         });
-    });   
+    }); 
 
 });
 
