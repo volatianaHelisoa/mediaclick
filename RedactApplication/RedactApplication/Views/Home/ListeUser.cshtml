@@ -115,28 +115,24 @@
                                         <span>Oui</span>
                                     }
 
-                                </td>
-                                <td>
-                                    <ul>
-                                        @if (@item.userRole == "1")
-                                        {
-                                            <li>Referenceur </li>
-                                        }
-                                        @if (@item.userRole == "2")
-                                        {
-                                            <li>Redacteur </li>
-                                        }
-                                        @if (@item.userRole == "3")
-                                        {
-                                            <li> Manager </li>
-                                        }
-                                        @if (@item.userRole == "4")
-                                        {
-                                            <li>Administrateur </li>
+                                </td>                                
+                                @if (@item.userRole == "1")
+                                {
+                                    <td>Referenceur</td>
+                                }
+                                @if (@item.userRole == "2")
+                                {
+                                    <td>Redacteur</td>
+                                }
+                                @if (@item.userRole == "3")
+                                {
+                                    <td>Manager</td>
+                                }
+                                @if (@item.userRole == "4")
+                                {
+                                    <td>Administrateur</td>
 
-                                        }
-                                    </ul>
-                                </td>
+                                }
                                 <td>
                                     <!--ViewBag.numpage/ViewBag.nbrow-->
                                     <div class="option">
@@ -158,21 +154,18 @@
             </table>
         </div>
     </div>
+    <div id="DeleteDatadialog" style="display: none" class="modal-popup">
+        @Html.Partial("~/Views/Home/ErrorNoSelection.cshtml")
+    </div>
+    <div id="SearchUserNoResultat" style="display: none" class="modal-popup">
+        @Html.Partial("~/Views/Shared/SearchNoResultat.cshtml")
+    </div>
+    <!--  Dialogue de confirmation suppression d'utilisateur  -->
+    <div id="deleteAllUserPoPup" style="display: none" class="modal-popup">
+        @Html.Partial("~/Views/Home/DeleteUser.cshtml")
+    </div>
 
 </main>
-
-
-
-<div id="DeleteDatadialog" style="display: none" class="popup-notif">
-    @Html.Partial("~/Views/Home/ErrorNoSelection.cshtml")
-</div>
-<div id="SearchUserNoResultat" style="display: none" class="popup-notif">
-    @Html.Partial("~/Views/Shared/SearchNoResultat.cshtml")
-</div>
-<!--  Dialogue de confirmation suppression d'utilisateur  -->
-<div id="deleteAllUserPoPup" style="display: none" class="popup-notif">
-    @Html.Partial("~/Views/Home/DeleteUser.cshtml")
-</div>
 
 <script>
     /*pour la suppression des utilisateurs séléctionnés*/

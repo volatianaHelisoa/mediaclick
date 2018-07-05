@@ -191,6 +191,15 @@ input::-webkit-inner-spin-button {
     top: 50%;
 }
 
+.modal-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 0 auto;
+    right: 0;
+    z-index: 2000;
+}
+
 .error-msg {
     color: #ff4026;
 }
