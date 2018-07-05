@@ -14,7 +14,11 @@
             var clipboard = new ClipboardJS('.btn-copy', {
                 text: function () {
                     var htmlBlock = document.querySelector('.commande-contenu');
-                    return htmlBlock.innerHTML;
+
+
+                    var res = htmlBlock.innerHTML;
+                    var contenu = res.replace(/(style="([^"]*)")/g, "");
+                    return contenu;
                 }
             });
             clipboard.on('success', function (e) {
@@ -61,9 +65,9 @@
                                     <div class="commande-contenu">
                                         @Html.Raw(Model.contenu_livre)
                                     </div>
-                                   
+
                                     <div class="contenu-footer flex-content flex-jsbet-acenter">
-                                        <span> @ViewBag.ContentLength  sur @Html.DisplayFor(model => model.nombre_mots) mot(s) utilisé(s)</span>
+                                        @*<span> @ViewBag.ContentLength  sur @Html.DisplayFor(model => model.nombre_mots) mot(s) utilisé(s)</span>*@
                                         <button class="btn-copy" data-clipboard-action="copy" data-clipboard-target=".commande-contenu">Copier</button>
                                     </div>
                                 </div>
@@ -110,13 +114,25 @@
                                         </tr>
                                     </table>
                                 </span>
+                                <span>
+                                    <strong>Remarques :</strong> @Html.DisplayFor(model => model.remarques)
+                                </span>
                             </div>
 
                         </section>
                         <section class="clearfix submit-area">
-                            <input type="submit" value="Editer" class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("Edit", "Commandes", new {hash = Model.commandeId}) + "' ");">
-                            <input type="submit" value="Retour" class="btn btn-warning" onclick="@("window.location.href='" + @Url.RouteUrl("Home", new {controller = "Commandes", action = "ListCommandes"}) + "' ");">
 
+                            @if (Model.statut_cmde == "Livré")
+                            {
+                                <button type="submit" class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("ValidCommande", "Commandes", new { hash = Model.commandeId }) + "' ");">Accepter</button>
+                                <a onclick="UpdateCommandeClick(' @Model.commandeId')" title="Modifier" class="btn btn-primary">A corriger</a>
+                                <a onclick="RefuserCommandeClick(' @Model.commandeId')" title="Refuser" class="btn btn-warning">Refuser</a>
+                                @Html.ActionLink("Retour", "ListCommandes", "Commandes", new { }, new { @class = "btn btn-primary" })
+                            }
+                            else if (Model.statut_cmde != "Livré")
+                            {
+                                @Html.ActionLink("Retour", "ListCommandes", "Commandes", new { }, new { @class = "btn btn-primary" })
+                            }
                         </section>
                     </div>
                 </div>
@@ -124,12 +140,66 @@
             </div>
         </div>
     </main>
+
+    <!--  Dialogue de modification   -->
+    <div id="updateCommandePoPup" style="display: none" class="popup-notif">
+        @Html.Partial("~/Views/Commandes/CommandeUpdateNote.cshtml")
+    </div>
+
+    <div id="refuserCommandePoPup" style="display: none" class="popup-notif">
+        @Html.Partial("~/Views/Commandes/CommandeRefuser.cshtml")
+    </div>
 }
 else
 { Response.Redirect("~/Login/Accueil"); }
 
 
+<script>
+    /*pour la modifier commande*/
+    var UpdateCommandeClick = function (commande) {
+        //alert(user);
+        if (commande !== '') {
 
+            $.ajax({
+                type: 'POST',
+                url: '/Commandes/CorrectCommande',
+                data: { hash: commande },
+                error: function (ex) {
+                    alert('Error: ' + ex.statusText);
+                },
+                success: function () {
+                    $("#updateCommandePoPup").modal();
+                },
+                async: true,
+                processData: true
+            });
+        }
+    }
+
+
+    var RefuserCommandeClick = function (commande) {
+        //alert(user);
+        if (commande !== '') {
+
+            $.ajax({
+                type: 'POST',
+                url: '/Commandes/RefuserCommande',
+                data: { hash: commande },
+                error: function (ex) {
+                    alert('Error: ' + ex.statusText);
+                },
+                success: function () {
+                    $("#refuserCommandePoPup").modal();
+                },
+                async: true,
+                processData: true
+            });
+        }
+    }
+
+
+
+</script>
 
 
 

@@ -20,8 +20,10 @@
 {
     <script src="@Url.Content("~/Scripts/jquery-ui-1.12.1.js")"></script>
     <script src="@Url.Content("~/Scripts/jquery.dataTables.js")"></script>
+    <link href="@Url.Content("~/Content/css/jquery.dataTables.css")" rel="stylesheet" />
     <script src="@Url.Content("~/Scripts/dataTables.js")"></script>
     <script src="@Url.Content("~/Scripts/codescript.js")"></script>
+ 
     <script>
         $("ul.LinkSearchClear").css("display", "none");
     </script>
@@ -50,7 +52,7 @@
                         <i class="fa fa-times-circle cancelText"></i>
                         <input class="usr-srch--input" type="search" placeholder="Rechercher" name="searchValue" id="ValUserSearch" title="Search by name,surname,email">
                     </div>
-                   
+
                 </div>
                 <div class="submit-area">
 
@@ -104,33 +106,31 @@
                                 <td>@item.redactTarif</td>
                                 <td>@item.redactThemes</td>
                                 <td>@item.redactNiveau</td>
-                                <td>
 
-                                    @if (@item.redactVolumeRestant == "0")
-                                    {
-                                        <span>Non</span>
-                                    }
-                                    else if (@item.redactVolumeRestant != "0")
-                                    {
-                                        <span>Oui</span>
-                                    }
-
-                                </td>                                
+                                @if (item.redactVolumeRestant != null && Convert.ToInt32(item.redactVolumeRestant) < Convert.ToInt32(item.redactVolume))
+                                {
+                                    <td>Non</td>
+                                }
+                                else
+                                {
+                                    <td>Oui</td>
+                                }
+                                
                                 @if (@item.userRole == "1")
                                 {
-                                    <td>Referenceur</td>
+                                    <td>Referenceur </td>
                                 }
                                 @if (@item.userRole == "2")
                                 {
-                                    <td>Redacteur</td>
+                                    <td>Redacteur </td>
                                 }
                                 @if (@item.userRole == "3")
                                 {
-                                    <td>Manager</td>
+                                    <td> Manager </td>
                                 }
                                 @if (@item.userRole == "4")
                                 {
-                                    <td>Administrateur</td>
+                                    <td>Administrateur </td>
 
                                 }
                                 <td>
@@ -147,7 +147,7 @@
                         }
                         if (ViewBag.listeUserVm.Count == 0)
                         {
-                            <tr><td>No records found.</td></tr>
+                            <tr><td>Aucun enregistrement trouvé.</td></tr>
                         }
                     }
                 </tbody>

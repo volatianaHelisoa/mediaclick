@@ -110,7 +110,7 @@
                     <tbody class="t1">
                         @if (ViewBag.listeCommandeVms != null)
                         {
-                            int count = 0;
+                           
                             foreach (var item in ViewBag.listeCommandeVms)
                             {
                                 <tr>
@@ -140,26 +140,33 @@
                                         <div class="option">
                                             @if (@Session["role"] != null && @Session["role"].ToString() == "2")
                                             {
-                                                <a href="~/Commandes/DetailsCommandeAValider/@item.commandeId" title="Détails Commande"><i class="fa fa-eye"></i></a>
+                                                <a href="~/Commandes/DetailsCommandeAValider/@item.commandeId" title="Détails"><i class="fa fa-eye"></i></a>
                                             }
                                             else
                                             {
-                                                <a href="~/Commandes/DetailsCommande/@item.commandeId" title="Détails Commande"><i class="fa fa-eye"></i></a>
+                                                <a href="~/Commandes/DetailsCommande/@item.commandeId" title="Détails"><i class="fa fa-eye"></i></a>
                                             }
 
-                                            @if (@item.statut_cmde == "En attente")
+                                            @if ((@item.statut_cmde == "En cours" || @item.statut_cmde == "A corriger" ) && @Session["role"] != null && @Session["role"].ToString() == "2")
                                             {
-                                                <a href="~/Commandes/Edit/@item.commandeId" title="Edit user"><i class="fa fa-edit"></i></a>
+                                                <a href="~/Commandes/Edit/@item.commandeId" title="Editer"><i class="fa fa-edit"></i></a>
                                             }
-                                            <a onclick="DeleteCommandeClick('@item.commandeId')" title="Delete commande"><i class="fa fa-trash"></i></a>
+                                            @if (@Session["role"] != null && @Session["role"].ToString() != "2" && @item.statut_cmde == "Validé")
+                                            {
+                                                <a onclick="DeleteCommandeClick('@item.commandeId')" title="Supprimer"><i class="fa fa-trash"></i></a>
+                                            }
+                                            @if (Session["role"] != null && Session["role"].ToString() != "2")
+                                            {
+                                                <a href="~/Commandes/CancelCommande/@item.commandeId" title="Annuler"><i class="fa fa-undo"></i></a>
+                                            }
                                         </div>
                                     </td>
                                 </tr>
-                                count++;
+                               
                             }
                             if (ViewBag.listeCommandeVms.Count == 0)
                             {
-                                <tr><td>No records found.</td></tr>
+                                <tr><td>Aucun enregistrement trouvé.</td></tr>
                             }
                         }
                     </tbody>

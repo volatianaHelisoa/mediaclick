@@ -27,7 +27,7 @@ namespace RedactApplication.Models
         public string consigne_autres { get; set; }
         public string balise_titre { get; set; }
 
-      
+        public string remarques { get; set; }
 
         public Nullable<int> commandeREF { get; set; }
         [DataType(DataType.Date)]
