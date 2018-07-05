@@ -45,6 +45,7 @@ namespace RedactApplication.Models
         public Nullable<int> commandeREF { get; set; }
         public Nullable<System.DateTime> dateLivraisonReel { get; set; }
         public Nullable<System.Guid> factureId { get; set; }
+        public string remarques { get; set; }
     
         public virtual COMMANDE_TYPE COMMANDE_TYPE { get; set; }
         public virtual CONTENU_TYPE CONTENU_TYPE { get; set; }

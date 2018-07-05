@@ -204,9 +204,54 @@ else
                 toolbar: 'insert | undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
                 content_css: [
                     '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
-                    '//www.tinymce.com/css/codepen.min.css']
-            });
+                    '//www.tinymce.com/css/codepen.min.css'],
+                setup: function (ed) {
+                    ed.on('keyup', function (e) {
+                        tinyMceChange(ed);
+                        var contenu = $.trim($(this).text());
 
+                        var contenu_res = ed.getContent().replace(/(style="([^"]*)")/g, "");
+                        var regex = /(&nbsp;|<([^>]+)>)/ig;
+                        contenu_res = contenu_res.replace(regex, "");
+                        var words = ed.plugins.wordcount.getCount();
+
+                        var charLength = words.length;
+                        var charLimit = $("#limit").val();
+                        // Displays count
+                        $(".left_char").html(charLength + " sur " + charLimit + " caractère(s) utilisé(s)");
+                        // Alert when max is reached
+                        if (charLength > charLimit) {
+                            $(".left_char").html("<strong>Le nombre de caractères maximum de " +
+                                charLimit +
+                                " atteint.</strong>");
+                        }
+                    });
+                    ed.on('change', function (e) {
+                        tinyMceChange(ed);
+                    });
+                }
+            });
+            function tinyMceChange(ed) {
+                console.debug('Editor contents was modified. Contents: ' + ed.getContent());
+            }
+
+            $("#tinymce").keypress(function () {
+                alert("tests0");
+                var contenu = $.trim($(this).text());
+                var charLength = contenu.length;
+                var charLimit = $("#limit").val();
+                console.log(charLimit);
+                console.log(charLength);
+
+                // Displays count
+                $(".left_char").html(charLength + " sur " + charLimit + " caractère(s) utilisé(s)");
+                // Alert when max is reached
+                if (charLength > charLimit) {
+                    $(".left_char").html("<strong>Le nombre de caractères maximum de " +
+                        charLimit +
+                        " atteint.</strong>");
+                }
+            });
 
         });
 

@@ -42,7 +42,7 @@ namespace RedactApplication.Models
                         consigneType = consigneType.Type,
                         consigne_autres = commande.consigne_autres,
                         etat_paiement = commande.etat_paiement,
-                       commandeREF = commande.commandeREF,
+                        commandeREF = commande.commandeREF,
                         ordrePriorite = priorite,
                         balise_titre = commande.balise_titre,
                         contenu_livre = commande.contenu_livre,
@@ -53,9 +53,10 @@ namespace RedactApplication.Models
                         commandeStatutId = commande.commandeStatutId,
                         commandeTypeId = commande.commandeTypeId,
                         consigne_type_contenuId = commande.consigne_type_contenuId,
-                        dateLivraisonReel = commande.dateLivraisonReel
+                        dateLivraisonReel = commande.dateLivraisonReel,
+                        remarques = commande.remarques
 
-            });
+                });
                 
             }
             return listeCmde.OrderBy(x => x.date_cmde).ThenBy(x => x.date_livraison).ToList();
@@ -138,6 +139,7 @@ namespace RedactApplication.Models
                 commandeVm.commandeTypeId = commande.commandeTypeId;
                 commandeVm.consigne_type_contenuId = commande.consigne_type_contenuId;
             commandeVm.dateLivraisonReel = commande.dateLivraisonReel;
+            commandeVm.remarques = commande.remarques;
 
             return commandeVm;
 

@@ -68,6 +68,11 @@ namespace RedactApplication.Controllers
                     ViewBag.listeCommandeVms = listeDataCmde.Where(x => x.commandeRedacteurId == _userId).ToList();
                     GetRedacteurInformations(_userId);
                 }
+                 if (currentrole.Contains("1"))
+                {
+                    ViewBag.listeCommandeVms = listeDataCmde.Where(x => x.commandeReferenceurId == _userId).ToList();
+                   
+                }
             }
 
                
@@ -526,7 +531,7 @@ namespace RedactApplication.Controllers
                     commandeVm.thematique = theme;
                     commandeVm.statut_cmde = statutcmde;
                     Session["cmdeEditModif"] = null;
-                
+                commandeVm.commandeREF = commande.commandeREF;
 
                 if (commandeVm.contenu_livre != null) ViewBag.ComptMetaContenu = commandeVm.contenu_livre.Length;
                 string contenu = (!string.IsNullOrEmpty( commande.contenu_livre))? Regex.Replace(commande.contenu_livre, "<.*?>", string.Empty):string.Empty;
@@ -669,6 +674,7 @@ namespace RedactApplication.Controllers
 
             COMMANDE newcommande = new COMMANDE();
             var commande = db.COMMANDEs.Count(x => x.commandeProjetId == selectedProjetId && x.commandeThemeId == selectedThemeId && x.commandeTypeId == model.listCommandeTypeId && x.date_livraison == model.date_livraison) ;
+            
             if (commande <= 0)
             {
                 newcommande.PROJET = db.PROJETS.Find(selectedProjetId);
@@ -705,16 +711,23 @@ namespace RedactApplication.Controllers
                 newcommande.commandeREF = (maxRef != null) ? maxRef + 1 : 1;
                 newcommande.commandeId = Guid.NewGuid();
                 int? volume = GetVolumeEnCours(newcommande.commandeRedacteurId);
-                if (newcommande.REDACTEUR != null && volume > Convert.ToInt32(newcommande.REDACTEUR.redactVolume) && Session["VolumeInfo"] == null)
+                if (newcommande.REDACTEUR != null && volume > Convert.ToInt32(newcommande.REDACTEUR.redactVolumeRestant) && Session["VolumeInfo"] == null)
                 {
                     Session["VolumeInfo"] = "Le volume maximal du mois pour le rédacteur " + newcommande.REDACTEUR.userNom + " est atteint. Vous confirmez l'envoi de la commande ? ";
                     COMMANDEViewModel cmd = SetCommandeViewModelDetails(newcommande);
                     return View("Create", cmd);
                 }
+               
 
                 Session["VolumeInfo"] = null;
 
                 db.COMMANDEs.Add(newcommande);
+
+                /*update volume redacteur*/
+                var redact = newcommande.REDACTEUR;
+                int volumeRestant = (Convert.ToInt32(redact.redactVolume) == 0)? Convert.ToInt32(redact.redactVolume) - Convert.ToInt32(newcommande.nombre_mots): Convert.ToInt32(redact.redactVolumeRestant) - Convert.ToInt32(newcommande.nombre_mots);
+                redact.redactVolumeRestant = volumeRestant.ToString();
+
                 try
                 {
                     db.SaveChanges();
@@ -765,7 +778,7 @@ namespace RedactApplication.Controllers
                         if (newcommande.REDACTEUR != null)
                         {
                             mailBody.AppendFormat(
-                                "Dear " + CultureInfo.CurrentCulture.TextInfo.ToTitleCase(newcommande.REDACTEUR.userNom
+                                "Monsieur / Madame " + CultureInfo.CurrentCulture.TextInfo.ToTitleCase(newcommande.REDACTEUR.userNom
                                     .ToLower()));
                             mailBody.AppendFormat("<br />");
                             mailBody.AppendFormat(
@@ -882,6 +895,129 @@ namespace RedactApplication.Controllers
             });
         }
 
+       
+        public ActionResult ValidCommande(Guid? hash)
+        {
+            redactapplicationEntities db = new Models.redactapplicationEntities();
+          
+            COMMANDE commande;
+            commande = db.COMMANDEs.SingleOrDefault(x => x.commandeId == hash);
+
+
+               
+                var status = db.STATUT_COMMANDE.SingleOrDefault(s => s.statut_cmde.Contains("Validé"));
+                commande.STATUT_COMMANDE = status;
+                if (status != null) commande.commandeStatutId = status.statutCommandeId;
+                db.SaveChanges();
+                SendNotification(commande, commande.commandeRedacteurId, commande.commandeReferenceurId);
+            string mailbody = "<p> Votre livraison commande "+commande.commandeREF +" a été bien validée, nous vous remercions de votre collaboration.</p>";
+                string mailobject = "Media click App - Validation de la commande";
+            bool isSendMail = SendeMailNotification(commande, mailbody, mailobject);
+
+            if (isSendMail)
+            return RedirectToRoute("Home", new RouteValueDictionary
+            {
+                {"controller", "Commandes"},
+                {"action", "ListCommandes"}
+            });
+            else
+                return View("ErrorException");
+        }
+
+        public ActionResult CancelCommande(Guid? hash)
+        {
+            redactapplicationEntities db = new Models.redactapplicationEntities();
+
+            COMMANDE commande;
+            commande = db.COMMANDEs.SingleOrDefault(x => x.commandeId == hash);
+
+
+
+            var status = db.STATUT_COMMANDE.SingleOrDefault(s => s.statut_cmde.Contains("Annulé"));
+            commande.STATUT_COMMANDE = status;
+            if (status != null) commande.commandeStatutId = status.statutCommandeId;
+            db.SaveChanges();
+            SendNotification(commande, commande.commandeRedacteurId, commande.commandeReferenceurId);
+            string mailbody = "<p> Votre commande " + commande.commandeREF + " a été annulée, vous pouvez contacter le responsable pour plus de détails.</p>";
+            string mailobject = "Media click App - Annulation de la commande";
+            bool isSendMail = SendeMailNotification(commande, mailbody, mailobject);
+
+            if (isSendMail)
+                return RedirectToRoute("Home", new RouteValueDictionary
+            {
+                {"controller", "Commandes"},
+                {"action", "ListCommandes"}
+            });
+            else
+                return View("ErrorException");
+        }
+
+        [HttpPost]
+        [Authorize]
+        [ValidateInput(false)]
+        [MvcApplication.CheckSessionOut]
+        public ActionResult RefuserCommande(Guid? hash, COMMANDEViewModel model)
+        {
+            redactapplicationEntities db = new Models.redactapplicationEntities();
+
+            COMMANDE commande;
+            commande = db.COMMANDEs.SingleOrDefault(x => x.commandeId == hash);
+
+
+
+            var status = db.STATUT_COMMANDE.SingleOrDefault(s => s.statut_cmde.Contains("Annulé"));
+            commande.STATUT_COMMANDE = status;
+            if (status != null) commande.commandeStatutId = status.statutCommandeId;
+            commande.remarques = model.remarques;
+            db.SaveChanges();
+            SendNotification(commande, commande.commandeRedacteurId, commande.commandeReferenceurId);
+            string mailbody = "<p> Votre commande " + commande.commandeREF + " a été annulée, vous pouvez contacter le responsable pour plus de détails.</p>";
+            string mailobject = "Media click App - Annulation de la commande";
+            bool isSendMail = SendeMailNotification(commande, mailbody, mailobject);
+
+            if (isSendMail)
+                return RedirectToRoute("Home", new RouteValueDictionary
+            {
+                {"controller", "Commandes"},
+                {"action", "ListCommandes"}
+            });
+            else
+                return View("ErrorException");
+        }
+
+        [HttpPost]
+        [Authorize]
+        [ValidateInput(false)]
+        [MvcApplication.CheckSessionOut]      
+        public ActionResult CorrectCommande(Guid? hash, COMMANDEViewModel model)
+        {
+            redactapplicationEntities db = new Models.redactapplicationEntities();
+
+            COMMANDE commande;
+            commande = db.COMMANDEs.SingleOrDefault(x => x.commandeId == hash);
+
+
+
+            var status = db.STATUT_COMMANDE.SingleOrDefault(s => s.statut_cmde.Contains("A corriger"));
+            commande.STATUT_COMMANDE = status;
+            if (status != null) commande.commandeStatutId = status.statutCommandeId;
+            commande.remarques = model.remarques;
+            db.SaveChanges();
+            SendNotification(commande, commande.commandeRedacteurId, commande.commandeReferenceurId);
+            string mailbody = "<p> Votre livraison commande " + commande.commandeREF + " a été modifié,veuillez revoir la commande s'il vous plait. Nous vous remercions de votre collaboration.</p>";
+            string mailobject = "Media click App - Validation de la commande";
+
+            bool isSendMail = SendeMailNotification(commande, mailbody, mailobject);
+            if (isSendMail)
+                return RedirectToRoute("Home", new RouteValueDictionary
+            {
+                {"controller", "Commandes"},
+                {"action", "ListCommandes"}
+            });
+            else
+                return View("ErrorException");
+        }
+
         public int SendNotification( COMMANDE commande,Guid? fromId, Guid? toId)
         {
             var notif = new  NOTIFICATION();
@@ -897,6 +1033,46 @@ namespace RedactApplication.Controllers
             return res;
 
         }
+
+        private bool SendeMailNotification(COMMANDE newcommande,string mailbody,string mailobject)
+        {
+            bool isSendMail = false;
+
+              var url = Request.Url.Scheme;
+            if (Request.Url != null)
+            {
+
+                string callbackurl = Request.Url.Host != "localhost"
+                    ? Request.Url.Host
+                    : Request.Url.Authority;
+                var port = Request.Url.Port;
+                if (!string.IsNullOrEmpty(port.ToString()) && Request.Url.Host != "localhost")
+                    callbackurl += ":" + port;
+
+                url += "://" + callbackurl;
+            }
+
+
+            StringBuilder mailBody = new StringBuilder();
+            if (newcommande.REDACTEUR != null)
+            {
+                mailBody.AppendFormat(
+                    "Monsieur / Madame " + CultureInfo.CurrentCulture.TextInfo.ToTitleCase(newcommande.REDACTEUR.userNom
+                        .ToLower()));
+                mailBody.AppendFormat("<br />");
+                mailBody.AppendFormat(mailbody);
+                mailBody.AppendFormat("<br />");
+                mailBody.AppendFormat(url + "/Commandes/ListCommandes");
+                mailBody.AppendFormat("<br />");
+                mailBody.AppendFormat("Cordialement,");
+                mailBody.AppendFormat("<br />");
+                mailBody.AppendFormat("Mediaclick Company.");
+
+                isSendMail = MailClient.SendResetPasswordMail(newcommande.REDACTEUR.userMail,
+                    mailBody.ToString(), mailobject);
+            }
+            return isSendMail;
+            }
 
         public int UpdateStatutNotification(Guid? notificationId)
         {
@@ -1111,7 +1287,7 @@ namespace RedactApplication.Controllers
                             if (commande.REDACTEUR != null)
                             {
                                 mailBody.AppendFormat(
-                                    "Dear " + CultureInfo.CurrentCulture.TextInfo.ToTitleCase(commande.REDACTEUR.userNom
+                                    "Monsieur / Madame " + CultureInfo.CurrentCulture.TextInfo.ToTitleCase(commande.REDACTEUR.userNom
                                         .ToLower()));
                                 mailBody.AppendFormat("<br />");
                                 mailBody.AppendFormat(

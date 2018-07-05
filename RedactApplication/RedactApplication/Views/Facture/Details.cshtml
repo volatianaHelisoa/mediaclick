@@ -83,19 +83,21 @@
     </div>
     <div id="toast" class="with-shadow">
         <a class="fileDownloadPdf btn btn-primary" href=""><i class="fa fa-download"></i> Télécharger</a>
-        
+
         @Html.ActionLink("Retour", "ListFacture", new { controller = "Facture" }, new { @class = "btn btn-warning" })
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     <script type="text/javascript" src="~/Scripts/js/jquery.fileDownload.js"></script>
 
+    
 
 
 </body>
 </html>
 
 <script type="text/javascript">
+ 
     jQuery(document).ready(function () {
         var numFacture = $("#factureNumero").data("lastValue");
         console.log(numFacture);

@@ -34,6 +34,7 @@
           <Property Name="commandeREF" Type="int" />
           <Property Name="dateLivraisonReel" Type="datetime" />
           <Property Name="factureId" Type="uniqueidentifier" />
+          <Property Name="remarques" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="COMMANDE_TYPE">
           <Key>
@@ -630,6 +631,7 @@
           <NavigationProperty Name="THEME" Relationship="redactapplicationModel.FK_COMMANDE_THEMES" FromRole="COMMANDE" ToRole="THEME" />
           <NavigationProperty Name="REFERENCEUR" Relationship="redactapplicationModel.FK_COMMANDE_UTILISATEUR" FromRole="COMMANDE" ToRole="UTILISATEUR" />
           <NavigationProperty Name="NOTIFICATIONs" Relationship="redactapplicationModel.FK_NOTIFICATION_COMMANDE" FromRole="COMMANDE" ToRole="NOTIFICATION" />
+          <Property Name="remarques" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="COMMANDE_TYPE">
           <Key>
@@ -1030,6 +1032,7 @@
           <EntitySetMapping Name="COMMANDEs">
             <EntityTypeMapping TypeName="redactapplicationModel.COMMANDE">
               <MappingFragment StoreEntitySet="COMMANDE">
+                <ScalarProperty Name="remarques" ColumnName="remarques" />
                 <ScalarProperty Name="factureId" ColumnName="factureId" />
                 <ScalarProperty Name="dateLivraisonReel" ColumnName="dateLivraisonReel" />
                 <ScalarProperty Name="commandeREF" ColumnName="commandeREF" />

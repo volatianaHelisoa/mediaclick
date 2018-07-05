@@ -66,31 +66,16 @@ namespace RedactApplication.Controllers
                 {
                     if (data.Count == 1)
                     {
-                        if (data[0] == 1)
-                        {  return RedirectToRoute("Home", new RouteValueDictionary
-                            {
-                                {"controller", "Contact"},
-                                {"action", "ListeContact"}
-                            });
-                        }
-                        if (data[0] == 2)
+                       
+                        if (data[0] == 2 )
                         {
                             return RedirectToRoute("Home", new RouteValueDictionary {
                                 { "controller", "Commandes" },
                                 { "action", "ListCommandes" }
                             });
-                        }
+                        }                       
 
-                        if (data[0] == 4)
-                        {
-                            return RedirectToRoute("Home", new RouteValueDictionary
-                            {
-                                {"controller", "Contact"},
-                                {"action", "ListeContact"}
-                            });
-                        }
-
-                        if (data[0] == 3 || data[0] == 5)
+                        if (data[0] == 3 || data[0] == 4 || data[0] == 5 || data[0] == 1)
                         {
                             return RedirectToRoute("Home", new RouteValueDictionary {
                                     { "controller", "Home" },
