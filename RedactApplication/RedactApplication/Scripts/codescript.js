@@ -49,7 +49,7 @@ $(document).ready(function () {
             mainWrapper.removeClass('fade-bg');
           }
           else {
-            popup.toggleClass('open').slideToggle();
+            popup.toggleClass('open').slideDown();
             mainWrapper.toggleClass('fade-bg');
           }
         });
