@@ -30,29 +30,20 @@ $(document).ready(function () {
     $('body').on('keydown', function (e) {
         if (e.keyCode === 27) {
             popup.slideUp();
-            popup.css('display', 'none');
             notifsContent.slideUp();
             mainWrapper.removeClass('fade-bg');
         }
     });
 
-    $(function (){
-        notifsActionner.click(function() {
-		  notifsContent.slideToggle();
-		});
-        $win.on("click", function(event){
-          
-          if ( userProfil.has(event.target).length == 0 && !userProfil.is(event.target) ){
-            popup.slideUp();
-            popup.css('display','none');
-            mainWrapper.removeClass('fade-bg');
-          }
-          else {
-            popup.toggleClass('open').slideDown();
-            mainWrapper.toggleClass('fade-bg');
-          }
-        });
-    }); 
+    notifsActionner.click(function() {
+        $(this).toggleClass("active");
+        notifsContent.fadeToggle();
+    });
+    
+    userProfil.click(function() {
+        $(this).toggleClass("active");
+        popup.fadeToggle();
+    });
 
 });
 
