@@ -80,6 +80,8 @@ a.watermark-mc > img {
     width: 100%;
     display: block;
     padding-left: 80px;
+	margin: 0;
+    max-width: inherit;
 }
 
 .login-form form input[type="submit"]:first-of-type {
@@ -172,12 +174,21 @@ a.watermark-mc > img {
 #top-bar #user-avatar {
     max-width: 35px;
     margin-left: 25px;
+	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-ms-border-radius: 50%;
+    overflow: hidden;
 }
 
 #top-bar #user-avatar img {
-    width: 100%;
-    height: auto;
+    width: 35px;
+    height: 35px;
     display: block;
+	object-fit: cover;
+	-webkit-object-fit: cover;
+	-ms-object-fit: cover;
+	-moz-object-fit: cover;
 }
 
 #single-container .card{
@@ -372,8 +383,16 @@ a.watermark-mc > img {
     padding: 0 0 0 20px;
 }
 
+
+.profil-menu .profil-setting > span{
+    overflow: hidden;
+    border-radius: 50%;
+}
+
 .profil-menu .user-photo {
-    max-width: 60px;
+	width: 60px;
+    height: 60px;
+    object-fit: cover;
 }
 
 .profil-menu .user-mail {
@@ -444,9 +463,11 @@ i.fa.fa-times-circle.cancelText {
     text-transform: inherit;
     font-size: 14px;
     padding: 6px 20px;
+	color: #646464;
 }
 .card .filters button:hover {
     background: #ff4026;
+	color: white;
 }
 
 #myDataTable .odd {
@@ -466,6 +487,7 @@ i.fa.fa-times-circle.cancelText {
     background-color: #013956;
     border: none;
     border-radius: inherit;
+	min-width: 140px!important;
 }
 #myDataTable .option a {
     display: inline-block;
@@ -515,6 +537,7 @@ i.fa.fa-times-circle.cancelText {
     color: #868686;
     border: none;
     padding: 15px 10px;
+	font-size: 14px;
 }
 
 #myDataTable tfoot {
@@ -583,6 +606,7 @@ i.fa.fa-times-circle.cancelText {
 
 table#myDataTable {
     width: 100%;
+	border: none;
 }
 
 #toast {

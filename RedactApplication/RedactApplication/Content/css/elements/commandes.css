@@ -81,13 +81,14 @@
 .commande-view .contenu-footer span {
     margin: 0
 }
-.commande-view .contenu-footer #copy {
+.commande-view .contenu-footer button.btn-copy {
     padding: 7px 20px;
     font-size: 16px;
     color: white;
     background-color: #26b5ff;
     margin-right: -1px;
     text-transform: uppercase;
+	border:none;
 }
 
 .commande-resume .wrap span strong {

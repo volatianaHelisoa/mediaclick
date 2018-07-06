@@ -64,7 +64,7 @@
                         Sélection
                         <span onclick="CheckedFactureClick()">Tous</span>
                         <span onclick="DecheckedFactureClick()">Aucun</span>
-                        <button class="btn btn-small" onclick="DeleteAllFactureSelected(@ViewBag.nbrow)">Supprimer la sélection</button>
+                        <button class="btn btn-small" onclick="DeleteAllFactureSelected(@ViewBag.nbrow)"><i class="fa fa-trash"></i> Supprimer la sélection</button>
                     </div>
 
                 </div>
@@ -111,10 +111,6 @@
                                     </td>
                                 </tr>
 
-                            }
-                            if (ViewBag.listeFactureVm.Count == 0)
-                            {
-                                <tr><td>No records found.</td></tr>
                             }
                         }
                     </tbody>

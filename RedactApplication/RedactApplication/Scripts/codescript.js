@@ -6,7 +6,7 @@ $(document).ready(function () {
     var popup = userProfil.next('.profil-menu');
 
     var notifsActionner = $('#notification-bell');
-    var notifsContent = notifsActionner.next('.notifs-content');
+    var notifsContent = $('#notification-bell').next('.notifs-content');
 
     var mainWrapper = $('main#wrapper');
 
@@ -38,9 +38,8 @@ $(document).ready(function () {
 
     $(function (){
         notifsActionner.click(function() {
-          notifsContent.slideToggle();      
-          mainWrapper.toggleClass('fade-bg');
-        });	 
+		  notifsContent.slideToggle();
+		});
         $win.on("click", function(event){
           
           if ( userProfil.has(event.target).length == 0 && !userProfil.is(event.target) ){

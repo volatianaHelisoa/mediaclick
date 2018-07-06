@@ -46,7 +46,14 @@
                 <div class="profil-menu with-shadow">
                     <div class="flex-content flex-jsbet-acenter profil-setting">
                         <span>
-                            <img src="~/images/avatar.png" alt="" srcset="" class="user-photo" />
+						@if (Session["logoUrl"] != null)
+                        {
+                            <img src="@Session["logoUrl"]" alt="@Session["name"]" title="@Session["name"]" class="user-photo"/>
+                        }
+                        else
+                        {
+							<img src="~/images/avatar.png" alt="" srcset="" class="user-photo"/>
+						}
                         </span>
                         <div>
                             <span class="user-name">@Session["name"] @Session["surname"]</span>
