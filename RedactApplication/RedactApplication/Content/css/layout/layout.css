@@ -571,7 +571,7 @@ i.fa.fa-times-circle.cancelText {
     -ms-filter: grayscale(1);
     font-size: 0;    
     border: none;
-    background-size: 53px;
+    background-size: 200%;
     display: inline-block;
     vertical-align: middle;
     margin: 0 20px;
@@ -622,6 +622,7 @@ table#myDataTable {
     display: block;
     position: fixed;
     bottom: 0;
+    left: 0;
     padding: 24px 40px;
     background: white;
     width: 100%;
