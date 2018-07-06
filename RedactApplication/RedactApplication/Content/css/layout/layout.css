@@ -169,6 +169,16 @@ a.watermark-mc > img {
     display: inline-block;
     vertical-align: middle;
     cursor: pointer;
+    position: relative;
+}
+#notification-bell .count-notif {
+    position: absolute;
+    top: 3px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #ff8400;
+    right: 0;
 }
 
 #top-bar #user-avatar {
@@ -499,7 +509,6 @@ i.fa.fa-times-circle.cancelText {
 #myDataTable .option a:last-of-type {
     border: none;
 }
-
 
 #myDataTable_length {
     float: right;
