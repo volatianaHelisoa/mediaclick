@@ -500,7 +500,8 @@ namespace RedactApplication.Controllers
 
                 if (commande.consigne_type_contenuId != null)
                     commandeVm.listContenuTypeId = (Guid)commande.consigne_type_contenuId;
-
+                if (commande.commandeStatutId != null)
+                    commandeVm.listStatutId = (Guid)commande.commandeStatutId;
 
                 string referenceur = val.GetUtilisateurReferenceur(commande.commandeReferenceurId).userNom;
                     string cmdeType = val.GetCommandeType(commande.commandeTypeId).Type;
@@ -532,6 +533,7 @@ namespace RedactApplication.Controllers
                     commandeVm.statut_cmde = statutcmde;
                     Session["cmdeEditModif"] = null;
                 commandeVm.commandeREF = commande.commandeREF;
+                commandeVm.remarques = commande.remarques;
 
                 if (commandeVm.contenu_livre != null) ViewBag.ComptMetaContenu = commandeVm.contenu_livre.Length;
                 string contenu = (!string.IsNullOrEmpty( commande.contenu_livre))? Regex.Replace(commande.contenu_livre, "<.*?>", string.Empty):string.Empty;
@@ -915,7 +917,7 @@ namespace RedactApplication.Controllers
             bool isSendMail = SendeMailNotification(commande, mailbody, mailobject);
 
             if (isSendMail)
-            return RedirectToRoute("Home", new RouteValueDictionary
+                return RedirectToRoute("Home", new RouteValueDictionary
             {
                 {"controller", "Commandes"},
                 {"action", "ListCommandes"}
@@ -952,27 +954,39 @@ namespace RedactApplication.Controllers
                 return View("ErrorException");
         }
 
+        public ActionResult CommandeRefuser(Guid hash)
+        {
+            Guid user = Guid.Parse(HttpContext.User.Identity.Name);
+            ViewBag.hashCmde = hash;
+            var commande = db.COMMANDEs.Find(hash);
+            COMMANDEViewModel commandeVm = SetCommandeViewModelDetails(commande);
+            if (commandeVm != null)
+                return View(commandeVm);
+            return View("ErrorException");
+        }
+
+
         [HttpPost]
         [Authorize]
         [ValidateInput(false)]
         [MvcApplication.CheckSessionOut]
-        public ActionResult RefuserCommande(Guid? hash, COMMANDEViewModel model)
+        public ActionResult RefuserCommande(Guid idCommande, COMMANDEViewModel model)
         {
             redactapplicationEntities db = new Models.redactapplicationEntities();
 
             COMMANDE commande;
-            commande = db.COMMANDEs.SingleOrDefault(x => x.commandeId == hash);
+            commande = db.COMMANDEs.SingleOrDefault(x => x.commandeId == idCommande);
 
 
 
-            var status = db.STATUT_COMMANDE.SingleOrDefault(s => s.statut_cmde.Contains("Annulé"));
+            var status = db.STATUT_COMMANDE.SingleOrDefault(s => s.statut_cmde.Contains("Refusé"));
             commande.STATUT_COMMANDE = status;
             if (status != null) commande.commandeStatutId = status.statutCommandeId;
             commande.remarques = model.remarques;
             db.SaveChanges();
             SendNotification(commande, commande.commandeRedacteurId, commande.commandeReferenceurId);
-            string mailbody = "<p> Votre commande " + commande.commandeREF + " a été annulée, vous pouvez contacter le responsable pour plus de détails.</p>";
-            string mailobject = "Media click App - Annulation de la commande";
+            string mailbody = "<p> Votre commande " + commande.commandeREF + " a été refusé, vous pouvez contacter le responsable pour plus de détails.</p>";
+            string mailobject = "Media click App - Refus de la commande";
             bool isSendMail = SendeMailNotification(commande, mailbody, mailobject);
 
             if (isSendMail)
@@ -989,12 +1003,12 @@ namespace RedactApplication.Controllers
         [Authorize]
         [ValidateInput(false)]
         [MvcApplication.CheckSessionOut]      
-        public ActionResult CorrectCommande(Guid? hash, COMMANDEViewModel model)
+        public ActionResult CorrectCommande(Guid idCommande, COMMANDEViewModel model)
         {
             redactapplicationEntities db = new Models.redactapplicationEntities();
 
             COMMANDE commande;
-            commande = db.COMMANDEs.SingleOrDefault(x => x.commandeId == hash);
+            commande = db.COMMANDEs.SingleOrDefault(x => x.commandeId == idCommande);
 
 
 
@@ -1016,6 +1030,17 @@ namespace RedactApplication.Controllers
             });
             else
                 return View("ErrorException");
+        }
+
+        public ActionResult CommandeUpdateNote(Guid hash)
+        {
+            Guid user = Guid.Parse(HttpContext.User.Identity.Name);
+            ViewBag.hashCmde = hash;
+            var commande = db.COMMANDEs.Find(hash);
+            COMMANDEViewModel commandeVm = SetCommandeViewModelDetails(commande);
+            if (commandeVm != null)
+                return View(commandeVm);
+            return View("ErrorException");
         }
 
         public int SendNotification( COMMANDE commande,Guid? fromId, Guid? toId)

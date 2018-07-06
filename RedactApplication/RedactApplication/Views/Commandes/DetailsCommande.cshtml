@@ -39,9 +39,13 @@
         <div id="single-container">
             <div class="onglets ease-in-out">
                 <ul>
-                    <li><a href="">Utilisateurs</a></li>
-                    <li><a href="" class="active">Commandes</a></li>
-                    <li><a href="">Dolor sit amet</a></li>
+                    @if (@Session["role"] != null && @Session["role"].ToString() != "2")
+                    {
+                        <li> @Html.ActionLink("Utilisateurs", "ListeUser", new { controller = "Home" }) </li>
+                    }
+                    <li>@Html.ActionLink("Commandes", "ListCommandes", new { controller = "Commandes" }, new { @class = "active" })</li>
+                    <li>@Html.ActionLink("Factures", "ListFacture", new { controller = "Facture" })</li>
+                    <li>@Html.ActionLink("Templates", "ListTemplate", new { controller = "Template" })</li>
                 </ul>
             </div>
             <div class="card back-office with-shadow">
@@ -124,9 +128,13 @@
 
                             @if (Model.statut_cmde == "Livré")
                             {
-                                <button type="submit" class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("ValidCommande", "Commandes", new { hash = Model.commandeId }) + "' ");">Accepter</button>
-                                <a onclick="UpdateCommandeClick(' @Model.commandeId')" title="Modifier" class="btn btn-primary">A corriger</a>
-                                <a onclick="RefuserCommandeClick(' @Model.commandeId')" title="Refuser" class="btn btn-warning">Refuser</a>
+                            
+                                @Html.ActionLink("Accepter", "ValidCommande", "Commandes", new { @hash = Model.commandeId }, new { @class = "btn btn-primary" })
+
+                                <button type="submit" class="btn btn-primary" onclick="UpdateCommandeClick(' @Model.commandeId ')">A corriger</button>
+
+                                <button type="submit" class="btn btn-primary" onclick="RefuserCommandeClick(' @Model.commandeId ')">Refuser</button>
+
                                 @Html.ActionLink("Retour", "ListCommandes", "Commandes", new { }, new { @class = "btn btn-primary" })
                             }
                             else if (Model.statut_cmde != "Livré")
@@ -162,7 +170,7 @@ else
 
             $.ajax({
                 type: 'POST',
-                url: '/Commandes/CorrectCommande',
+                url: '/Commandes/CommandeUpdateNote',
                 data: { hash: commande },
                 error: function (ex) {
                     alert('Error: ' + ex.statusText);
@@ -183,7 +191,7 @@ else
 
             $.ajax({
                 type: 'POST',
-                url: '/Commandes/RefuserCommande',
+                url: '/Commandes/CommandeRefuser',
                 data: { hash: commande },
                 error: function (ex) {
                     alert('Error: ' + ex.statusText);

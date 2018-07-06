@@ -284,17 +284,21 @@ namespace RedactApplication.Controllers
         {
             var listids = new List<Guid>();
             var listThemes = themes.Split(',');
-            redactapplicationEntities db = new Models.redactapplicationEntities();
-            foreach (var theme in listThemes)
+            if(listThemes.ToList().Count > 1)
             {
-                var _theme = db.THEMES.SingleOrDefault(x => x.theme_name.Contains(theme));
-                if (_theme != null)
+                redactapplicationEntities db = new Models.redactapplicationEntities();
+                foreach (var theme in listThemes)
                 {
-                    REDACT_THEME redactTheme = new REDACT_THEME{themeId = _theme.themeId,userId = redactGuid };
-                    db.REDACT_THEME.Add(redactTheme);
-                   
+                    var _theme = db.THEMES.SingleOrDefault(x => x.theme_name.Contains(theme));
+                    if (_theme != null)
+                    {
+                        REDACT_THEME redactTheme = new REDACT_THEME { themeId = _theme.themeId, userId = redactGuid };
+                        db.REDACT_THEME.Add(redactTheme);
+
+                    }
                 }
             }
+            
         }
 
         /// <summary>

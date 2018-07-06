@@ -131,14 +131,11 @@ namespace RedactApplication
                             if (userRole != null)
                             {
                                 int id = userRole.roleId;
-                                if (userRole.roleNom.Contains("administrateur") || userRole.roleNom.Contains("manager utilisateur"))
+                                if (userRole.roleNom.Contains("administrateur") || userRole.roleNom.Contains("manager utilisateur") || userRole.roleNom.Contains("referenceur"))
                                 {
                                     access = LoadAccess(0);
                                 }
-                                else if (userRole.roleNom.Contains("referenceur"))
-                                {
-                                    access = LoadAccess(1);
-                                }
+                               
                                 else if (userRole.roleNom.Contains("redacteur"))
                                 {
                                     access = LoadAccess(0);

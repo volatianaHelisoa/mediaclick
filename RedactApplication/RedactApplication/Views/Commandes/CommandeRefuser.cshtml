@@ -18,35 +18,39 @@
 
             <!-- Champs -->
             <div class="container clearfix">
-                <div class="row">
-                    <section class="col-md-7 commande-view">
-                        <div class="wrap">
-                            <span>
-                                <strong>Site : </strong>@Html.DisplayFor(model => Model.projet)
-                            </span>
-                            <span>
-                                <strong>Thème : </strong> @Html.DisplayFor(model => Model.thematique)
-                            </span>
-                            <span>
-                                <strong>Type de Textes :</strong> @Html.DisplayFor(model => Model.commandeType)
-                            </span>
-                            <span>
-                                <strong>Nombre de mots : </strong>  @Html.DisplayFor(model => Model.nombre_mots)
-                            </span>
-                            @if (Model.remarques  != "")
-                            {
+                @using (Html.BeginForm("RefuserCommande", "Commandes", FormMethod.Post, new { @hash = ViewBag.hashCmde }))
+                {
+                    <input type="hidden" name="idCommande" value="@Model.commandeId">
+                    <div class="row">
+                        <section class="col-md-7 commande-view">
+                            <div class="wrap">
                                 <span>
-                                    <strong>Remarques : </strong>  @Html.TextAreaFor(model => Model.remarques)
+                                    <strong>Site : </strong>@Html.DisplayFor(model => Model.projet)
                                 </span>
-                            }
+                                <span>
+                                    <strong>Thème : </strong> @Html.DisplayFor(model => Model.thematique)
+                                </span>
+                                <span>
+                                    <strong>Type de Textes :</strong> @Html.DisplayFor(model => Model.commandeType)
+                                </span>
+                                <span>
+                                    <strong>Nombre de mots : </strong>  @Html.DisplayFor(model => Model.nombre_mots)
+                                </span>
+                                @if (Model.remarques != "")
+                                {
+                                    <span>
+                                        <strong>Remarques : </strong>  @Html.TextAreaFor(model => Model.remarques)
+                                    </span>
+                                }
                             </div>
-                    </section>
-                    <section class="clearfix submit-area">
-                        <input type="submit" value="Envoyer" class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("RefuserCommande", "Commandes", new {hash = ViewBag.hashCmde}) + "' ");">
-                        @Html.ActionLink("Retour", "ListCommandes", "Commandes", new { @class = "btn btn-warning" })
-                    </section>
-                    
-                </div>
+                        </section>
+                        <section class="clearfix submit-area">
+                            <input type="submit" value="Envoyer" class="btn btn-primary">
+                            @Html.ActionLink("Retour", "ListCommandes", "Commandes", new { @class = "btn btn-warning" })
+                        </section>
+
+                    </div>
+                }
             </div>
 
         </div>
