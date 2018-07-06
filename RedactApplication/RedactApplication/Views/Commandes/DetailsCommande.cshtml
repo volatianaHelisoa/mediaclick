@@ -124,18 +124,19 @@
                             </div>
 
                         </section>
+						<div class="sep"></div>
                         <section class="clearfix submit-area">
 
                             @if (Model.statut_cmde == "Livré")
                             {
                             
-                                @Html.ActionLink("Accepter", "ValidCommande", "Commandes", new { @hash = Model.commandeId }, new { @class = "btn btn-primary" })
+                                @Html.ActionLink("Accepter", "ValidCommande", "Commandes", new { @hash = Model.commandeId }, new { @class = "btn btn-success small" })
 
-                                <button type="submit" class="btn btn-primary" onclick="UpdateCommandeClick(' @Model.commandeId ')">A corriger</button>
+                                <button type="submit" class="btn btn-warm small" onclick="UpdateCommandeClick(' @Model.commandeId ')">A corriger</button>
 
-                                <button type="submit" class="btn btn-primary" onclick="RefuserCommandeClick(' @Model.commandeId ')">Refuser</button>
+                                <button type="submit" class="btn btn-warning small" onclick="RefuserCommandeClick(' @Model.commandeId ')">Refuser</button>
 
-                                @Html.ActionLink("Retour", "ListCommandes", "Commandes", new { }, new { @class = "btn btn-primary" })
+                                @Html.ActionLink("Retour", "ListCommandes", "Commandes", new { }, new { @class = "btn btn-primary small" })
                             }
                             else if (Model.statut_cmde != "Livré")
                             {

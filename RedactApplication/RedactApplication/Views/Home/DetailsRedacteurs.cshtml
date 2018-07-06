@@ -85,25 +85,31 @@
                 <!-- Champs -->
                 <section class="clearfix" id="user-profil-detail">
                     <div class="col-50 pull-left">
-                        <strong>Nom</strong>
-                        <span>@Html.DisplayFor(x => x.userNom)</span>
-
-                        <strong>Prénom</strong>
-                        <span>@Html.DisplayFor(x => x.userPrenom, new { @required = true })</span>
+						<div class="item">
+							<strong><i class="fa fa-user"></i> Nom</strong>
+							<span>@Html.DisplayFor(x => x.userNom)</span>
+						</div>
+						<div class="item">
+							<strong><i class="fa fa-user"></i> Prénom</strong>
+							<span>@Html.DisplayFor(x => x.userPrenom, new { @required = true })</span>
+						</div>
+						<div class="item">
+							<strong><i class="fa fa-phone"></i> Téléphone</strong>
+							<span>@Html.DisplayFor(x => x.redactPhone, new { @type = "tel", @required = true })</span>
+						</div>
 
                     </div>
 
                     <div class="col-50 pull-right">
-                        <strong><i class="fa fa-envelope-open"></i> E-mail</strong>
-                        <span>@Html.DisplayFor(x => x.userMail, new { @required = true, @type = "email" })</span>
-
-                        <strong><i class="fa fa-skype"></i> Skype</strong>
-                        <span>@Html.DisplayFor(x => x.redactSkype, new { @required = true })</span>
-
-                        <strong><i class="fa fa-phone"></i>Téléphone</strong>
-                        <span>@Html.DisplayFor(x => x.redactPhone, new { @type = "tel", @required = true })</span>
-                    </div>
-
+						<div class="item">
+							<strong><i class="fa fa-envelope-open"></i> E-mail</strong>
+							<span>@Html.DisplayFor(x => x.userMail, new { @required = true, @type = "email" })</span>
+						</div>
+						<div class="item">
+							<strong><i class="fa fa-skype"></i> Skype</strong>
+							<span>@Html.DisplayFor(x => x.redactSkype, new { @required = true })</span>
+						</div>
+					</div>
                 </section>
                 <div class="sep"></div>
                 <section class="clearfix" id="user-profil-role">
@@ -124,41 +130,53 @@
                         
                     </div>
                 </section>
+				<div class="sep"></div>
                 @if (ViewBag.userRole == 2) //if redacteur user
                 {
-                    <section class="clearfix" id="CheckEditRedacteur">
+                    <section class="clearfix user-info" id="CheckEditRedacteur">
                         <div class="section-title">
                             <span>Redacteur informations</span>
                         </div>
                         <label for="" class="col-50 pull-right">
-                            Volume / Jour
-                            @Html.DisplayFor(x => x.redactVolume, new { @type = "number" })
+							<div class="item">
+								<strong>Volume / Jour</strong>
+								<span>@Html.DisplayFor(x => x.redactVolume, new { @type = "number" })</span>
+							</div>
                         </label>
                         <label for="" class="col-50 pull-left">
-                            Tarif (Ariary)
-                            @Html.DisplayFor(x => x.redactTarif, new { @type = "number" })
+							<div class="item">
+								<strong>Tarif (Ariary)</strong>
+								<span>@Html.DisplayFor(x => x.redactTarif, new { @type = "number" })</span>
+							</div>
                         </label>
                         <label for="" class="col-50 pull-right">
-                            Thèmes
-                            @Html.DisplayFor(x => x.redactThemes)
+							<div class="item">
+								<strong>Thèmes</strong>
+								<span>@Html.DisplayFor(x => x.redactThemes)</span>
+							</div>
                         </label>
                         <label for="" class="col-50 pull-left">
-                            Niveau
-                            @Html.DisplayFor(x => x.redactNiveau)
-
+							<div class="item">
+								<strong>Niveau</strong>
+								<span>@Html.DisplayFor(x => x.redactNiveau)</span>
+							</div>
                         </label>
                         <label for="" class="col-50 pull-right">
-                            Référenceur
-                            @Html.DisplayFor(x => x.redactReferenceur)
+							<div class="item">
+								<strong>Référenceur</strong>
+								<span>@Html.DisplayFor(x => x.redactReferenceur)</span>
+							</div>
                         </label>
                         <label for="" class="col-50 pull-left">
-                            Mode de paiement
-                            @Html.DisplayFor(x => x.redactModePaiement)
-
+							<div class="item">
+								<strong>Mode de paiement</strong>
+								<span>@Html.DisplayFor(x => x.redactModePaiement)</span>
+							</div>
                         </label>
 
                     </section>
                 }
+				<div class="sep"></div>
                 <section class="clearfix submit-area" style=" margin: 70px auto 0;">
 
                     @Html.ActionLink("Edit", "EditUser", "Home", new { hash = Model.userId }, new { @class = "btn btn-success" })

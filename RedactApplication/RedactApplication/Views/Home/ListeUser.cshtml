@@ -30,6 +30,8 @@
 
 }
 
+@if (Session["name"] != null)
+{
 <main id="wrapper">
     <div id="single-container">
         <div class="onglets ease-in-out">
@@ -65,7 +67,7 @@
                     Sélection
                     <span onclick="CheckedClick()">Tous</span>
                     <span onclick="DecheckedClick()">Aucun</span>
-                    <button class="btn btn-small" onclick="DeleteAllUserSelected(@ViewBag.nbrow)">Supprimer la sélection</button>
+                    <button class="btn btn-small" onclick="DeleteAllUserSelected(@ViewBag.nbrow)"><i class="fa fa-trash"></i> Supprimer la sélection</button>
                 </div>
 
             </div>
@@ -145,10 +147,6 @@
                             </tr>
                             count++;
                         }
-                        if (ViewBag.listeUserVm.Count == 0)
-                        {
-                            <tr><td>Aucun enregistrement trouvé.</td></tr>
-                        }
                     }
                 </tbody>
             </table>
@@ -166,7 +164,9 @@
     </div>
 
 </main>
-
+}
+else
+{ Response.Redirect("~/Login/Accueil"); }
 <script>
     /*pour la suppression des utilisateurs séléctionnés*/
     var DeleteUserClick = function (user) {
