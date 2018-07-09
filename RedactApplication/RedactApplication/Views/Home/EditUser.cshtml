@@ -82,20 +82,21 @@
                     <input type="hidden" value="@Model.userId" name="idUser">
                     <div class="head">
                         <div class="flex-content flex-jcenter-acenter edit-avatar">
-                            <span>
+                             <span class="profil-thumb">
 
                                 @if (!string.IsNullOrEmpty(Model.logoUrl))
                                 {
-                                    <img src="@Model.logoUrl" alt="@Model.userNom" title="@Model.userNom" />
+                                    <img id="new-profil-preview" src="@Model.logoUrl" alt="@Model.userNom" title="@Model.userNom" />
                                 }
                                 else
-                                { <img src="~/images/avatar.png" alt="" srcset="" />}
+                                { <img id="new-profil-preview" src="~/images/avatar.png" alt="" srcset="" />}
                             </span>
                             <div class="flex-content flex-col change-avatar">
-                                Votre avatar
-                                @Html.TextBoxFor(m => m.logoUrl, new { type = "file", name = "file", id = "site-logo" })
-                                <div class="input-custom">
-                                    <label for="site-logo" class="label-file">Choisir</label><span class="file-name"></span>
+                                
+                                <span class="file-name">Votre avatar</span> 
+                                @Html.TextBoxFor(m => m.logoUrl, new { type = "file", name = "file", id = "user-profil", accept="image/*" }) 
+                                <div class="input-custom"> 
+                                    <label for="user-profil" class="label-file">Choisir</label>
                                 </div>
 
                             </div>
