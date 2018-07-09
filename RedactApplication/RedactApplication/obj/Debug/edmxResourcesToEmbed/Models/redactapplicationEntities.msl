@@ -4,6 +4,7 @@
     <EntitySetMapping Name="COMMANDEs">
       <EntityTypeMapping TypeName="redactapplicationModel.COMMANDE">
         <MappingFragment StoreEntitySet="COMMANDE">
+          <ScalarProperty Name="remarques" ColumnName="remarques" />
           <ScalarProperty Name="factureId" ColumnName="factureId" />
           <ScalarProperty Name="dateLivraisonReel" ColumnName="dateLivraisonReel" />
           <ScalarProperty Name="commandeREF" ColumnName="commandeREF" />
@@ -111,6 +112,7 @@
     <EntitySetMapping Name="TEMPLATEs">
       <EntityTypeMapping TypeName="redactapplicationModel.TEMPLATE">
         <MappingFragment StoreEntitySet="TEMPLATE">
+          <ScalarProperty Name="modeleId" ColumnName="modeleId" />
           <ScalarProperty Name="html" ColumnName="html" />
           <ScalarProperty Name="userId" ColumnName="userId" />
           <ScalarProperty Name="dateCreation" ColumnName="dateCreation" />
@@ -160,6 +162,43 @@
           <ScalarProperty Name="userPrenom" ColumnName="userPrenom" />
           <ScalarProperty Name="userNom" ColumnName="userNom" />
           <ScalarProperty Name="userId" ColumnName="userId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MODELEs">
+      <EntityTypeMapping TypeName="redactapplicationModel.MODELE">
+        <MappingFragment StoreEntitySet="MODELE">
+          <ScalarProperty Name="photoALaUneUrl" ColumnName="photoALaUneUrl" />
+          <ScalarProperty Name="menu4_paragraphe2_photoUrl" ColumnName="menu4_paragraphe2_photoUrl" />
+          <ScalarProperty Name="menu4_paragraphe1_photoUrl" ColumnName="menu4_paragraphe1_photoUrl" />
+          <ScalarProperty Name="menu4_contenu2" ColumnName="menu4_contenu2" />
+          <ScalarProperty Name="menu4_contenu1" ColumnName="menu4_contenu1" />
+          <ScalarProperty Name="menu4_paragraphe2_titre" ColumnName="menu4_paragraphe2_titre" />
+          <ScalarProperty Name="menu4_paragraphe1_titre" ColumnName="menu4_paragraphe1_titre" />
+          <ScalarProperty Name="menu3_paragraphe2_photoUrl" ColumnName="menu3_paragraphe2_photoUrl" />
+          <ScalarProperty Name="menu3_paragraphe1_photoUrl" ColumnName="menu3_paragraphe1_photoUrl" />
+          <ScalarProperty Name="menu3_contenu2" ColumnName="menu3_contenu2" />
+          <ScalarProperty Name="menu3_contenu1" ColumnName="menu3_contenu1" />
+          <ScalarProperty Name="menu3_paragraphe2_titre" ColumnName="menu3_paragraphe2_titre" />
+          <ScalarProperty Name="menu3_paragraphe1_titre" ColumnName="menu3_paragraphe1_titre" />
+          <ScalarProperty Name="menu2_paragraphe2_photoUrl" ColumnName="menu2_paragraphe2_photoUrl" />
+          <ScalarProperty Name="menu2_paragraphe1_photoUrl" ColumnName="menu2_paragraphe1_photoUrl" />
+          <ScalarProperty Name="menu2_contenu2" ColumnName="menu2_contenu2" />
+          <ScalarProperty Name="menu2_contenu1" ColumnName="menu2_contenu1" />
+          <ScalarProperty Name="menu2_paragraphe2_titre" ColumnName="menu2_paragraphe2_titre" />
+          <ScalarProperty Name="menu2_paragraphe1_titre" ColumnName="menu2_paragraphe1_titre" />
+          <ScalarProperty Name="menu1_paragraphe2_photoUrl" ColumnName="menu1_paragraphe2_photoUrl" />
+          <ScalarProperty Name="menu1_paragraphe1_photoUrl" ColumnName="menu1_paragraphe1_photoUrl" />
+          <ScalarProperty Name="menu1_contenu2" ColumnName="menu1_contenu2" />
+          <ScalarProperty Name="menu1_contenu1" ColumnName="menu1_contenu1" />
+          <ScalarProperty Name="menu1_paragraphe2_titre" ColumnName="menu1_paragraphe2_titre" />
+          <ScalarProperty Name="menu1_paragraphe1_titre" ColumnName="menu1_paragraphe1_titre" />
+          <ScalarProperty Name="menu4_titre" ColumnName="menu4_titre" />
+          <ScalarProperty Name="menu3_titre" ColumnName="menu3_titre" />
+          <ScalarProperty Name="menu2_titre" ColumnName="menu2_titre" />
+          <ScalarProperty Name="menu1_titre" ColumnName="menu1_titre" />
+          <ScalarProperty Name="logoUrl" ColumnName="logoUrl" />
+          <ScalarProperty Name="modeleId" ColumnName="modeleId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

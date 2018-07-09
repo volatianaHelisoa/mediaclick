@@ -100,17 +100,17 @@
         <div class="card back-office with-shadow">
             @if (ViewBag.ErrorMessage != null)
             {
-                <label class="error-msg ltl-consign">Please select at least one role.</label>
+                <label class="error-msg text-center">Please select at least one role.</label>
             }
 
             @if (ViewBag.ErrorUserCreation != null)
             {
-                <label class="error-msg ltl-consign">This email is already exist.</label>
+                <label class="error-msg text-center">This email is already exist.</label>
             }
 
             @if (ViewBag.ErrorUserValidation != null)
             {
-                <label class="error-msg ltl-consign">This email is not valid.</label>
+                <label class="error-msg text-center">This email is not valid.</label>
             }
 
             @using (Html.BeginForm("EnregistrerUtilisateur", "Home", FormMethod.Post, new { @class = "formfields", @id = "enregistrerUtilisateur", enctype = "multipart/form-data" }))
@@ -207,10 +207,7 @@
                                                                     new SelectListItem { Value = "Avancé" , Text = "Avancé" }
                                                                 })
                             </label>
-                            <label for="" class="col-50 pull-right">
-                                Référenceur
-                                @Html.TextBoxFor(x => x.redactReferenceur)
-                            </label>
+                            
                             <label for="" class="col-50 pull-left">
                                 Mode de paiement (*)
                                 @Html.DropDownListFor(x => x.redactModePaiement,

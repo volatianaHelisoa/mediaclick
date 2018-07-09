@@ -94,6 +94,11 @@
       <End Role="UTILISATEUR" EntitySet="UTILISATEURs" />
       <End Role="FACTURE" EntitySet="FACTUREs" />
     </AssociationSet>
+    <EntitySet Name="MODELEs" EntityType="redactapplicationModel.MODELE" />
+    <AssociationSet Name="FK_TEMPLATE_MODELE" Association="redactapplicationModel.FK_TEMPLATE_MODELE">
+      <End Role="MODELE" EntitySet="MODELEs" />
+      <End Role="TEMPLATE" EntitySet="TEMPLATEs" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="COMMANDE">
     <Key>
@@ -133,6 +138,7 @@
     <NavigationProperty Name="THEME" Relationship="redactapplicationModel.FK_COMMANDE_THEMES" FromRole="COMMANDE" ToRole="THEME" />
     <NavigationProperty Name="REFERENCEUR" Relationship="redactapplicationModel.FK_COMMANDE_UTILISATEUR" FromRole="COMMANDE" ToRole="UTILISATEUR" />
     <NavigationProperty Name="NOTIFICATIONs" Relationship="redactapplicationModel.FK_NOTIFICATION_COMMANDE" FromRole="COMMANDE" ToRole="NOTIFICATION" />
+    <Property Name="remarques" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="COMMANDE_TYPE">
     <Key>
@@ -232,6 +238,8 @@
     <NavigationProperty Name="PROJET" Relationship="redactapplicationModel.FK_TEMPLATE_PROJETS" FromRole="TEMPLATE" ToRole="PROJET" />
     <NavigationProperty Name="THEME" Relationship="redactapplicationModel.FK_TEMPLATE_THEMES" FromRole="TEMPLATE" ToRole="THEME" />
     <NavigationProperty Name="UTILISATEUR" Relationship="redactapplicationModel.FK_TEMPLATE_UTILISATEUR" FromRole="TEMPLATE" ToRole="UTILISATEUR" />
+    <Property Name="modeleId" Type="Guid" />
+    <NavigationProperty Name="MODELE" Relationship="redactapplicationModel.FK_TEMPLATE_MODELE" FromRole="TEMPLATE" ToRole="MODELE" />
   </EntityType>
   <EntityType Name="THEME">
     <Key>
@@ -521,6 +529,55 @@
       </Principal>
       <Dependent Role="FACTURE">
         <PropertyRef Name="createurId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="MODELE">
+    <Key>
+      <PropertyRef Name="modeleId" />
+    </Key>
+    <Property Name="modeleId" Type="Guid" Nullable="false" />
+    <Property Name="logoUrl" Type="String" MaxLength="1000" FixedLength="true" Unicode="true" />
+    <Property Name="menu1_titre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="menu2_titre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="menu3_titre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="menu4_titre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="menu1_paragraphe1_titre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="menu1_paragraphe2_titre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="menu1_contenu1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="menu1_contenu2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="menu1_paragraphe1_photoUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="menu1_paragraphe2_photoUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="menu2_paragraphe1_titre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="menu2_paragraphe2_titre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="menu2_contenu1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="menu2_contenu2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="menu2_paragraphe1_photoUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="menu2_paragraphe2_photoUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="menu3_paragraphe1_titre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="menu3_paragraphe2_titre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="menu3_contenu1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="menu3_contenu2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="menu3_paragraphe1_photoUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="menu3_paragraphe2_photoUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="menu4_paragraphe1_titre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="menu4_paragraphe2_titre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="menu4_contenu1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="menu4_contenu2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="menu4_paragraphe1_photoUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="menu4_paragraphe2_photoUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="photoALaUneUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TEMPLATEs" Relationship="redactapplicationModel.FK_TEMPLATE_MODELE" FromRole="MODELE" ToRole="TEMPLATE" />
+  </EntityType>
+  <Association Name="FK_TEMPLATE_MODELE">
+    <End Type="redactapplicationModel.MODELE" Role="MODELE" Multiplicity="0..1" />
+    <End Type="redactapplicationModel.TEMPLATE" Role="TEMPLATE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MODELE">
+        <PropertyRef Name="modeleId" />
+      </Principal>
+      <Dependent Role="TEMPLATE">
+        <PropertyRef Name="modeleId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

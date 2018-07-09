@@ -73,11 +73,9 @@ namespace RedactApplication.Controllers
                     ViewBag.listeCommandeVms = listeDataCmde.Where(x => x.commandeReferenceurId == _userId).ToList();
                    
                 }
-            }
-
-               
+            }               
                 return View();
-        }
+            }
 
             return View("ErrorException");
         }
@@ -784,7 +782,7 @@ namespace RedactApplication.Controllers
                                     .ToLower()));
                             mailBody.AppendFormat("<br />");
                             mailBody.AppendFormat(
-                                "<p>Vous avez une nouvelle commande à valider. Cliquez sur le lien suivant pour accepter ou refuser la commande.</p>");
+                                "<p>Vous venez de recevoir une de commande de "+newcommande.REFERENCEUR.userNom +" "+newcommande.REFERENCEUR.userPrenom + " à "+DateTime.Now+".Veuillez cliquer sur le lien pour plus de détails.Cliquez sur le lien suivant pour accepter ou refuser la commande.</p>");
                             mailBody.AppendFormat("<br />");
                             mailBody.AppendFormat(url + "/Commandes/CommandeWaitting?token=" + newcommande.commandeId);
                             mailBody.AppendFormat("<br />");

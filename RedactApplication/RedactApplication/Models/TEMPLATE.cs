@@ -23,9 +23,11 @@ namespace RedactApplication.Models
         public Nullable<System.DateTime> dateCreation { get; set; }
         public Nullable<System.Guid> userId { get; set; }
         public string html { get; set; }
+        public Nullable<System.Guid> modeleId { get; set; }
     
         public virtual PROJET PROJET { get; set; }
         public virtual THEME THEME { get; set; }
         public virtual UTILISATEUR UTILISATEUR { get; set; }
+        public virtual MODELE MODELE { get; set; }
     }
 }

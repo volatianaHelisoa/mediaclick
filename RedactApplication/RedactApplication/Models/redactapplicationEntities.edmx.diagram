@@ -38,6 +38,8 @@
         <AssociationConnector Association="redactapplicationModel.FK_UserRole_UTILISATEUR" />
         <AssociationConnector Association="redactapplicationModel.FK_FACTURE_UTILISATEUR" />
         <AssociationConnector Association="redactapplicationModel.FK_FACTURE_UTILISATEUR1" />
+        <EntityTypeShape EntityType="redactapplicationModel.MODELE" Width="1.5" PointX="8.375" PointY="0.75" />
+        <AssociationConnector Association="redactapplicationModel.FK_TEMPLATE_MODELE" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

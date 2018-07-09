@@ -751,7 +751,7 @@ namespace RedactApplication.Controllers
                     utilisateur.redactSkype = model.redactSkype;
                     utilisateur.redactModePaiement = model.redactModePaiement;
                     utilisateur.redactNiveau = model.redactNiveau;
-                    utilisateur.redactReferenceur = model.redactReferenceur;
+                  
                     utilisateur.redactThemes = model.redactThemes;
                     if(model.redactThemes != null)
                         SaveRedactThemes(model.redactThemes, utilisateur.userId);
@@ -1139,17 +1139,17 @@ namespace RedactApplication.Controllers
                         StringBuilder mailBody = new StringBuilder();
                         mailBody.AppendFormat("Dear " + CultureInfo.CurrentCulture.TextInfo.ToTitleCase(utilisateur.userNom.ToLower()));
                         mailBody.AppendFormat("<br />");
-                        mailBody.AppendFormat("<p>Your recently requested to reset your password for your " + CultureInfo.CurrentCulture.TextInfo.ToTitleCase(utilisateur.userNom.ToLower()) + " account. Click the link bellow to reset it.</p>");
+                        mailBody.AppendFormat("<p> Monsieur / Madame " + CultureInfo.CurrentCulture.TextInfo.ToTitleCase(utilisateur.userNom.ToLower()) + " votre compte a été crée .Veuillez réinitialiser votre mot de passe en cliquant sur lien suivant : </p>");
                         mailBody.AppendFormat("<br />");
                         mailBody.AppendFormat(url + "/Login/UpdatePassword?token=" + TemporaryIdUser);
                         mailBody.AppendFormat("<br />");
-                        mailBody.AppendFormat("<p>If you did not request a password reset, please ignore this email. </p>");
+                        mailBody.AppendFormat("<p>Si vous n'avez pas demandé la réinitialisation du mot de passe, ignorez cet e-mail.</p>");
                         mailBody.AppendFormat("<br />");
-                        mailBody.AppendFormat("Thanks.");
+                        mailBody.AppendFormat("Cordialement.");
                         mailBody.AppendFormat("<br />");
                         mailBody.AppendFormat("Mediaclick Company.");
 
-                        bool isSendMail = MailClient.SendResetPasswordMail(utilisateur.userMail, mailBody.ToString(), "Redact application - password recovery instructions.");
+                        bool isSendMail = MailClient.SendResetPasswordMail(utilisateur.userMail, mailBody.ToString(), "Redact application - modification mot de passe.");
                         if (isSendMail)
                         {
                             utilisateur.token = TemporaryIdUser;

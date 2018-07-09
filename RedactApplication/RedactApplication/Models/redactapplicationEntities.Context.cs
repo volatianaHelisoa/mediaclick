@@ -38,5 +38,6 @@ namespace RedactApplication.Models
         public virtual DbSet<THEME> THEMES { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
         public virtual DbSet<UTILISATEUR> UTILISATEURs { get; set; }
+        public virtual DbSet<MODELE> MODELEs { get; set; }
     }
 }
