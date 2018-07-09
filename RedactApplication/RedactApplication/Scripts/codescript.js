@@ -44,6 +44,21 @@ $(document).ready(function () {
         $(this).toggleClass("active");
         popup.fadeToggle();
     });
+	
+	var loadFile = function(event) { 
+    var reader = new FileReader(); 
+    reader.onload = function(){ 
+      var output = document.getElementById('new-profil-preview'); 
+      output.src = reader.result; 
+    }; 
+    reader.readAsDataURL(event.target.files[0]); 
+    }; 
+ 
+    $('input[type="file"]').change(function(e){ 
+    var fileName = e.target.files[0].name; 
+    loadFile(event); 
+    $('.file-name').text(fileName); 
+    });
 
 });
 
