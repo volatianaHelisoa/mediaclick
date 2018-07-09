@@ -137,6 +137,8 @@ namespace RedactApplication.Controllers
                     userVm.redactThemes = currentuser.redactThemes;
                     userVm.redactVolume = currentuser.redactVolume;
                     userVm.logoUrl = currentuser.logoUrl;
+                   
+                    userVm.ListTheme = val.GetListThemeItem();
                     Session["logoUrl"] = currentuser.logoUrl;
                     return View(userVm);
                 }
@@ -185,7 +187,7 @@ namespace RedactApplication.Controllers
 
                 UTILISATEUR utilisateur = db.UTILISATEURs.SingleOrDefault(x => x.userId == _userId);
                 UTILISATEURViewModel userVm = new UTILISATEURViewModel();
-
+                var val = new Utilisateurs();
                 if (utilisateur != null)
                 {
                     userVm.userNom = utilisateur.userNom;
@@ -199,12 +201,15 @@ namespace RedactApplication.Controllers
                     userVm.redactReferenceur = utilisateur.redactReferenceur;
                     userVm.redactThemes = utilisateur.redactThemes;
                     userVm.redactVolume = utilisateur.redactVolume;
+                    userVm.ListTheme = val.GetListThemeItem(utilisateur.userId);
                 }
 
                 return View("EditUserConfirmation", userVm);
             }
             return View();
         }
+
+      
 
         /// <summary>
         /// Retourne la vue de création d'Utilisateur.
@@ -228,6 +233,9 @@ namespace RedactApplication.Controllers
             {
                 editUserId = Guid.NewGuid();
             }
+            var val = new Utilisateurs();
+            UTILISATEURViewModel userVm = new UTILISATEURViewModel();
+            userVm.ListTheme = val.GetListThemeItem();
 
             if (_userId != Guid.Empty)
             {
@@ -235,9 +243,12 @@ namespace RedactApplication.Controllers
                 UTILISATEUR utilisateur = db.UTILISATEURs.SingleOrDefault(x => x.userId == _userId);
                 ViewBag.CurrentUser = utilisateur;
 
+
+                userVm.ListTheme = val.GetListThemeItem(editUserId).Count() > 1 ? val.GetListThemeItem(editUserId) : val.GetListThemeItem();
+
                 if (utilisateur != null)
                 {
-                    UTILISATEURViewModel userVm = new UTILISATEURViewModel();
+                  
                     userVm.userNom = utilisateur.userNom;
                     userVm.userPrenom = utilisateur.userPrenom;
                     userVm.userId = editUserId;
@@ -248,6 +259,7 @@ namespace RedactApplication.Controllers
                     userVm.redactReferenceur = utilisateur.redactReferenceur;
                     userVm.redactThemes = utilisateur.redactThemes;
                     userVm.redactVolume = utilisateur.redactVolume;
+                   
 
                     return View("GererUtilisateur", userVm);
                 }
@@ -332,10 +344,17 @@ namespace RedactApplication.Controllers
             Guid user = Guid.Parse(HttpContext.User.Identity.Name);
             ViewBag.userRoleEdit = (new Utilisateurs()).GetUtilisateurRoleToString(user);
 
+         
+
+            var val = new Utilisateurs();
             if (userId != Guid.Empty)
             {
                 redactapplicationEntities db = new Models.redactapplicationEntities();
                 UTILISATEUR utilisateur = db.UTILISATEURs.SingleOrDefault(x => x.userId == userId);
+
+
+
+
                 UTILISATEURViewModel userVm = new UTILISATEURViewModel();
                 if (utilisateur != null)
                 {
@@ -351,7 +370,9 @@ namespace RedactApplication.Controllers
                     userVm.redactThemes = utilisateur.redactThemes;
                     userVm.redactVolume = utilisateur.redactVolume;
                     userVm.redactTarif = utilisateur.redactTarif;
-                    userVm.logoUrl =  utilisateur.logoUrl; 
+                    userVm.logoUrl =  utilisateur.logoUrl;
+                  
+
                     if (Session["userEditModif"] != null)
                     {
                         UTILISATEURViewModel model = (UTILISATEURViewModel) Session["userEditModif"];
@@ -372,7 +393,7 @@ namespace RedactApplication.Controllers
 
                     userVm.userRole = (new Utilisateurs()).GetUtilisateurRoleToString(utilisateur.userId);
                     List<UserRole> listeUserRole = db.UserRoles.Where(x => x.idUser == utilisateur.userId).ToList();
-                    if (listeUserRole.Any())
+                     if (listeUserRole.Any())
                     {
                         switch (listeUserRole[0].idRole)
                         {
@@ -398,6 +419,11 @@ namespace RedactApplication.Controllers
 
                         ViewBag.listeUserRole = listeUserRole;
                     }
+                    userVm.ListTheme = val.GetListThemeItem();
+                    List<USER_THEME> listeUserThemes = db.USER_THEME.Where(x => x.userId == utilisateur.userId).ToList();
+                    if(listeUserThemes.Count() > 0)
+                        userVm.listThemeId = (Guid)listeUserThemes.FirstOrDefault().themeId;
+                  
                 }
 
                 return View(userVm);
@@ -671,6 +697,7 @@ namespace RedactApplication.Controllers
                     userVm.redactReferenceur = utilisateur.redactReferenceur;
                     userVm.redactThemes = utilisateur.redactThemes;
                     userVm.redactVolume = utilisateur.redactVolume;
+
 
                     ViewBag.userRole = db.GetUtilisateurRoleToString(userVm.userId);
                     return View("ListeUser", userVm);

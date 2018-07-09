@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace RedactApplication.Models
 {
@@ -30,6 +31,12 @@ namespace RedactApplication.Models
         public string userMotdepasseConfirme { get; set; }
         public bool saveOnComputer { get; set; }
 
-       
+        [Required]
+        [Display(Name = "SelectItemTheme")]
+        public Guid listThemeId { get; set; }
+        public IEnumerable<SelectListItem> ListTheme { get; set; }
+
+     
+
     }
 }

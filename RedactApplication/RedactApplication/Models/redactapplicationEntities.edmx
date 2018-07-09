@@ -162,6 +162,14 @@
           <Property Name="themeId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="theme_name" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="USER_THEME">
+          <Key>
+            <PropertyRef Name="userThemeId" />
+          </Key>
+          <Property Name="userThemeId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="userId" Type="uniqueidentifier" />
+          <Property Name="themeId" Type="uniqueidentifier" />
+        </EntityType>
         <EntityType Name="UserRole">
           <Key>
             <PropertyRef Name="idUserRole" />
@@ -424,6 +432,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_USER_THEME_THEMES">
+          <End Role="THEMES" Type="Self.THEMES" Multiplicity="0..1" />
+          <End Role="USER_THEME" Type="Self.USER_THEME" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THEMES">
+              <PropertyRef Name="themeId" />
+            </Principal>
+            <Dependent Role="USER_THEME">
+              <PropertyRef Name="themeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USER_THEME_UTILISATEUR">
+          <End Role="UTILISATEUR" Type="Self.UTILISATEUR" Multiplicity="0..1" />
+          <End Role="USER_THEME" Type="Self.USER_THEME" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UTILISATEUR">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="USER_THEME">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UserRole_ROLE">
           <End Role="ROLE" Type="Self.ROLE" Multiplicity="0..1" />
           <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
@@ -461,6 +493,7 @@
           <EntitySet Name="STATUT_COMMANDE" EntityType="Self.STATUT_COMMANDE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TEMPLATE" EntityType="Self.TEMPLATE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="THEMES" EntityType="Self.THEMES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USER_THEME" EntityType="Self.USER_THEME" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UTILISATEUR" EntityType="Self.UTILISATEUR" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_COMMANDE_COMMANDE_TYPE" Association="Self.FK_COMMANDE_COMMANDE_TYPE">
@@ -538,6 +571,14 @@
           <AssociationSet Name="FK_TEMPLATE_UTILISATEUR" Association="Self.FK_TEMPLATE_UTILISATEUR">
             <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
             <End Role="TEMPLATE" EntitySet="TEMPLATE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_THEME_THEMES" Association="Self.FK_USER_THEME_THEMES">
+            <End Role="THEMES" EntitySet="THEMES" />
+            <End Role="USER_THEME" EntitySet="USER_THEME" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_THEME_UTILISATEUR" Association="Self.FK_USER_THEME_UTILISATEUR">
+            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
+            <End Role="USER_THEME" EntitySet="USER_THEME" />
           </AssociationSet>
           <AssociationSet Name="FK_UserRole_ROLE" Association="Self.FK_UserRole_ROLE">
             <End Role="ROLE" EntitySet="ROLE" />
@@ -650,6 +691,15 @@
           <AssociationSet Name="FK_TEMPLATE_MODELE" Association="redactapplicationModel.FK_TEMPLATE_MODELE">
             <End Role="MODELE" EntitySet="MODELEs" />
             <End Role="TEMPLATE" EntitySet="TEMPLATEs" />
+          </AssociationSet>
+          <EntitySet Name="USER_THEME" EntityType="redactapplicationModel.USER_THEME" />
+          <AssociationSet Name="FK_USER_THEME_THEMES" Association="redactapplicationModel.FK_USER_THEME_THEMES">
+            <End Role="THEME" EntitySet="THEMES" />
+            <End Role="USER_THEME" EntitySet="USER_THEME" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_THEME_UTILISATEUR" Association="redactapplicationModel.FK_USER_THEME_UTILISATEUR">
+            <End Role="UTILISATEUR" EntitySet="UTILISATEURs" />
+            <End Role="USER_THEME" EntitySet="USER_THEME" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="COMMANDE">
@@ -802,6 +852,7 @@
           <NavigationProperty Name="COMMANDEs" Relationship="redactapplicationModel.FK_COMMANDE_THEMES" FromRole="THEME" ToRole="COMMANDE" />
           <NavigationProperty Name="REDACT_THEME" Relationship="redactapplicationModel.FK_REDACT_THEME_THEMES" FromRole="THEME" ToRole="REDACT_THEME" />
           <NavigationProperty Name="TEMPLATEs" Relationship="redactapplicationModel.FK_TEMPLATE_THEMES" FromRole="THEME" ToRole="TEMPLATE" />
+          <NavigationProperty Name="USER_THEME" Relationship="redactapplicationModel.FK_USER_THEME_THEMES" FromRole="THEME" ToRole="USER_THEME" />
         </EntityType>
         <EntityType Name="UserRole">
           <Key>
@@ -843,6 +894,7 @@
           <NavigationProperty Name="UserRoles" Relationship="redactapplicationModel.FK_UserRole_UTILISATEUR" FromRole="UTILISATEUR" ToRole="UserRole" />
           <NavigationProperty Name="FACTUREs" Relationship="redactapplicationModel.FK_FACTURE_UTILISATEUR" FromRole="UTILISATEUR" ToRole="FACTURE" />
           <NavigationProperty Name="FACTUREs1" Relationship="redactapplicationModel.FK_FACTURE_UTILISATEUR1" FromRole="UTILISATEUR" ToRole="FACTURE" />
+          <NavigationProperty Name="USER_THEME" Relationship="redactapplicationModel.FK_USER_THEME_UTILISATEUR" FromRole="UTILISATEUR" ToRole="USER_THEME" />
         </EntityType>
         <Association Name="FK_COMMANDE_COMMANDE_TYPE">
           <End Type="redactapplicationModel.COMMANDE_TYPE" Role="COMMANDE_TYPE" Multiplicity="0..1" />
@@ -1133,6 +1185,40 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="USER_THEME">
+          <Key>
+            <PropertyRef Name="userThemeId" />
+          </Key>
+          <Property Name="userThemeId" Type="Guid" Nullable="false" />
+          <Property Name="userId" Type="Guid" />
+          <Property Name="themeId" Type="Guid" />
+          <NavigationProperty Name="THEME" Relationship="redactapplicationModel.FK_USER_THEME_THEMES" FromRole="USER_THEME" ToRole="THEME" />
+          <NavigationProperty Name="UTILISATEUR" Relationship="redactapplicationModel.FK_USER_THEME_UTILISATEUR" FromRole="USER_THEME" ToRole="UTILISATEUR" />
+        </EntityType>
+        <Association Name="FK_USER_THEME_THEMES">
+          <End Type="redactapplicationModel.THEME" Role="THEME" Multiplicity="0..1" />
+          <End Type="redactapplicationModel.USER_THEME" Role="USER_THEME" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THEME">
+              <PropertyRef Name="themeId" />
+            </Principal>
+            <Dependent Role="USER_THEME">
+              <PropertyRef Name="themeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USER_THEME_UTILISATEUR">
+          <End Type="redactapplicationModel.UTILISATEUR" Role="UTILISATEUR" Multiplicity="0..1" />
+          <End Type="redactapplicationModel.USER_THEME" Role="USER_THEME" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UTILISATEUR">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="USER_THEME">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1337,6 +1423,15 @@
                 <ScalarProperty Name="menu1_titre" ColumnName="menu1_titre" />
                 <ScalarProperty Name="logoUrl" ColumnName="logoUrl" />
                 <ScalarProperty Name="modeleId" ColumnName="modeleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USER_THEME">
+            <EntityTypeMapping TypeName="redactapplicationModel.USER_THEME">
+              <MappingFragment StoreEntitySet="USER_THEME">
+                <ScalarProperty Name="themeId" ColumnName="themeId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="userThemeId" ColumnName="userThemeId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

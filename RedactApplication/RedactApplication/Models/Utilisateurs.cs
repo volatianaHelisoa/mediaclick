@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Web.Mvc;
 
 namespace RedactApplication.Models
 {
@@ -12,6 +12,7 @@ namespace RedactApplication.Models
             redactapplicationEntities db = new redactapplicationEntities();
             var req = db.UTILISATEURs.ToList();
             List<UTILISATEURViewModel> listeUser = new List<UTILISATEURViewModel>();
+            List<USER_THEME> themesId;
             foreach (var user in req)
             {
                 string stringRoleUser = this.GetUtilisateurRoleToString(user.userId);
@@ -27,12 +28,12 @@ namespace RedactApplication.Models
                         redactSkype =  user.redactSkype,
                         redactPhone = user.redactPhone,
                         redactNiveau = user.redactNiveau,
-                        redactModePaiement = user.redactModePaiement,
-                        redactThemes = user.redactThemes,
+                        redactModePaiement = user.redactModePaiement,                        
                         redactReferenceur = user.redactReferenceur,
                         redactVolume = user.redactVolume,
                         redactTarif = user.redactTarif,
-                        redactVolumeRestant = user.redactVolumeRestant
+                        redactVolumeRestant = user.redactVolumeRestant,
+                        ListTheme = GetListThemeItem(user.userId),
                     });
                 }
             }
@@ -115,9 +116,66 @@ namespace RedactApplication.Models
                 redactReferenceur = x.redactReferenceur,
                 redactVolume = x.redactVolume,
                 redactTarif = x.redactTarif,
-                redactVolumeRestant = x.redactVolumeRestant
+                redactVolumeRestant = x.redactVolumeRestant,
+                ListTheme = GetListThemeItem(x.userId)
             }).ToList();
             return listeUser?.OrderBy(x => x.userNom).ThenBy(x => x.userPrenom).ToList();
+        }
+
+     
+        public IEnumerable<SelectListItem> GetListThemeItem(Guid userGuid)
+        {
+            using (var context = new redactapplicationEntities())
+            {
+                List<USER_THEME> listUserTheme = context.USER_THEME.AsNoTracking()
+                   .Where(n => n.userId == userGuid).ToList();
+                List<THEME> themes = new List<THEME>();
+
+                foreach (var userTheme in listUserTheme)
+                {
+                    THEME theme =context.THEMES.Where(n => n.themeId == userTheme.themeId).FirstOrDefault();
+                    themes.Add(theme);
+                }
+
+                List<SelectListItem> listtheme = themes                  
+                    .OrderBy(n => n.theme_name)
+                    .Select(n =>
+                        new SelectListItem
+                        {
+                            Value = n.themeId.ToString(),
+                            Text = n.theme_name
+                        }).ToList();
+                var themeItem = new SelectListItem()
+                {
+                    Value = null,
+                    Text = "--- selectionner thématique ---"
+                };
+                listtheme.Insert(0, themeItem);
+                return new SelectList(listtheme, "Value", "Text");
+            }
+        }
+
+        public IEnumerable<SelectListItem> GetListThemeItem()
+        {
+            using (var context = new redactapplicationEntities())
+            {
+
+                List<SelectListItem> listtheme = context.THEMES.AsNoTracking()
+                    .OrderBy(n => n.theme_name)
+                    .Select(n =>
+                        new SelectListItem
+                        {
+                            Value = n.themeId.ToString(),
+                            Text = n.theme_name
+                        }).ToList();
+                var themeItem = new SelectListItem()
+                {
+                    Value = null,
+                    Text = "--- selectionner thématique ---"
+                };
+                listtheme.Insert(0, themeItem);
+                return new SelectList(listtheme, "Value", "Text");
+            }
         }
     }
 }

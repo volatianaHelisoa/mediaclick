@@ -99,6 +99,15 @@
       <End Role="MODELE" EntitySet="MODELEs" />
       <End Role="TEMPLATE" EntitySet="TEMPLATEs" />
     </AssociationSet>
+    <EntitySet Name="USER_THEME" EntityType="redactapplicationModel.USER_THEME" />
+    <AssociationSet Name="FK_USER_THEME_THEMES" Association="redactapplicationModel.FK_USER_THEME_THEMES">
+      <End Role="THEME" EntitySet="THEMES" />
+      <End Role="USER_THEME" EntitySet="USER_THEME" />
+    </AssociationSet>
+    <AssociationSet Name="FK_USER_THEME_UTILISATEUR" Association="redactapplicationModel.FK_USER_THEME_UTILISATEUR">
+      <End Role="UTILISATEUR" EntitySet="UTILISATEURs" />
+      <End Role="USER_THEME" EntitySet="USER_THEME" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="COMMANDE">
     <Key>
@@ -250,6 +259,7 @@
     <NavigationProperty Name="COMMANDEs" Relationship="redactapplicationModel.FK_COMMANDE_THEMES" FromRole="THEME" ToRole="COMMANDE" />
     <NavigationProperty Name="REDACT_THEME" Relationship="redactapplicationModel.FK_REDACT_THEME_THEMES" FromRole="THEME" ToRole="REDACT_THEME" />
     <NavigationProperty Name="TEMPLATEs" Relationship="redactapplicationModel.FK_TEMPLATE_THEMES" FromRole="THEME" ToRole="TEMPLATE" />
+    <NavigationProperty Name="USER_THEME" Relationship="redactapplicationModel.FK_USER_THEME_THEMES" FromRole="THEME" ToRole="USER_THEME" />
   </EntityType>
   <EntityType Name="UserRole">
     <Key>
@@ -291,6 +301,7 @@
     <NavigationProperty Name="UserRoles" Relationship="redactapplicationModel.FK_UserRole_UTILISATEUR" FromRole="UTILISATEUR" ToRole="UserRole" />
     <NavigationProperty Name="FACTUREs" Relationship="redactapplicationModel.FK_FACTURE_UTILISATEUR" FromRole="UTILISATEUR" ToRole="FACTURE" />
     <NavigationProperty Name="FACTUREs1" Relationship="redactapplicationModel.FK_FACTURE_UTILISATEUR1" FromRole="UTILISATEUR" ToRole="FACTURE" />
+    <NavigationProperty Name="USER_THEME" Relationship="redactapplicationModel.FK_USER_THEME_UTILISATEUR" FromRole="UTILISATEUR" ToRole="USER_THEME" />
   </EntityType>
   <Association Name="FK_COMMANDE_COMMANDE_TYPE">
     <End Type="redactapplicationModel.COMMANDE_TYPE" Role="COMMANDE_TYPE" Multiplicity="0..1" />
@@ -578,6 +589,40 @@
       </Principal>
       <Dependent Role="TEMPLATE">
         <PropertyRef Name="modeleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="USER_THEME">
+    <Key>
+      <PropertyRef Name="userThemeId" />
+    </Key>
+    <Property Name="userThemeId" Type="Guid" Nullable="false" />
+    <Property Name="userId" Type="Guid" />
+    <Property Name="themeId" Type="Guid" />
+    <NavigationProperty Name="THEME" Relationship="redactapplicationModel.FK_USER_THEME_THEMES" FromRole="USER_THEME" ToRole="THEME" />
+    <NavigationProperty Name="UTILISATEUR" Relationship="redactapplicationModel.FK_USER_THEME_UTILISATEUR" FromRole="USER_THEME" ToRole="UTILISATEUR" />
+  </EntityType>
+  <Association Name="FK_USER_THEME_THEMES">
+    <End Type="redactapplicationModel.THEME" Role="THEME" Multiplicity="0..1" />
+    <End Type="redactapplicationModel.USER_THEME" Role="USER_THEME" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="THEME">
+        <PropertyRef Name="themeId" />
+      </Principal>
+      <Dependent Role="USER_THEME">
+        <PropertyRef Name="themeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_USER_THEME_UTILISATEUR">
+    <End Type="redactapplicationModel.UTILISATEUR" Role="UTILISATEUR" Multiplicity="0..1" />
+    <End Type="redactapplicationModel.USER_THEME" Role="USER_THEME" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UTILISATEUR">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="USER_THEME">
+        <PropertyRef Name="userId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

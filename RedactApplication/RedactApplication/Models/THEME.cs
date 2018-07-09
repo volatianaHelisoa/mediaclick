@@ -20,6 +20,7 @@ namespace RedactApplication.Models
             this.COMMANDEs = new HashSet<COMMANDE>();
             this.REDACT_THEME = new HashSet<REDACT_THEME>();
             this.TEMPLATEs = new HashSet<TEMPLATE>();
+            this.USER_THEME = new HashSet<USER_THEME>();
         }
     
         public System.Guid themeId { get; set; }
@@ -31,5 +32,7 @@ namespace RedactApplication.Models
         public virtual ICollection<REDACT_THEME> REDACT_THEME { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TEMPLATE> TEMPLATEs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<USER_THEME> USER_THEME { get; set; }
     }
 }

@@ -118,7 +118,7 @@
                         </label>
                         <label for="" class="col-50 pull-right">
                             Skype
-                            @Html.TextBoxFor(x => x.redactSkype, new { @required = true })
+                            @Html.TextBoxFor(x => x.redactSkype)
                         </label>
                         <label for="" class="col-50 pull-left">
                             Téléphone
@@ -161,8 +161,8 @@
                                 @Html.TextBoxFor(x => x.redactTarif, new { @type = "number" })
                             </label>
                             <label for="" class="col-50 pull-right">
-                                Thèmes
-                                @Html.TextBoxFor(x => x.redactThemes)
+                                Thèmes                                
+                                @Html.DropDownListFor(x => Model.listThemeId, new SelectList(Model.ListTheme, "Value", "Text"), htmlAttributes: new { id = "SelectItemTheme" })
                             </label>
                             <label for="" class="col-50 pull-left">
                                 Niveau
@@ -174,10 +174,7 @@
                                                                     new SelectListItem { Value = "Avancé" , Text = "Avancé" }
                                                                 })
                             </label>
-                            <label for="" class="col-50 pull-right">
-                                Référenceur
-                                @Html.TextBoxFor(x => x.redactReferenceur)
-                            </label>
+                            
                             <label for="" class="col-50 pull-left">
                                 Mode de paiement
                                 @Html.DropDownListFor(x => x.redactModePaiement,

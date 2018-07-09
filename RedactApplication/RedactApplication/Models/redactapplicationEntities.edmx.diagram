@@ -40,6 +40,9 @@
         <AssociationConnector Association="redactapplicationModel.FK_FACTURE_UTILISATEUR1" />
         <EntityTypeShape EntityType="redactapplicationModel.MODELE" Width="1.5" PointX="8.375" PointY="0.75" />
         <AssociationConnector Association="redactapplicationModel.FK_TEMPLATE_MODELE" />
+        <EntityTypeShape EntityType="redactapplicationModel.USER_THEME" Width="1.5" PointX="6" PointY="3.375" />
+        <AssociationConnector Association="redactapplicationModel.FK_USER_THEME_THEMES" />
+        <AssociationConnector Association="redactapplicationModel.FK_USER_THEME_UTILISATEUR" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

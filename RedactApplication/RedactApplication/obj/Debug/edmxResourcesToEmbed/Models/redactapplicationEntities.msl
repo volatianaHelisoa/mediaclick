@@ -202,5 +202,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="USER_THEME">
+      <EntityTypeMapping TypeName="redactapplicationModel.USER_THEME">
+        <MappingFragment StoreEntitySet="USER_THEME">
+          <ScalarProperty Name="themeId" ColumnName="themeId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="userThemeId" ColumnName="userThemeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

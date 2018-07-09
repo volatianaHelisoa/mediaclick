@@ -157,6 +157,14 @@
     <Property Name="themeId" Type="uniqueidentifier" Nullable="false" />
     <Property Name="theme_name" Type="nvarchar(max)" />
   </EntityType>
+  <EntityType Name="USER_THEME">
+    <Key>
+      <PropertyRef Name="userThemeId" />
+    </Key>
+    <Property Name="userThemeId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="userId" Type="uniqueidentifier" />
+    <Property Name="themeId" Type="uniqueidentifier" />
+  </EntityType>
   <EntityType Name="UserRole">
     <Key>
       <PropertyRef Name="idUserRole" />
@@ -419,6 +427,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_USER_THEME_THEMES">
+    <End Role="THEMES" Type="Self.THEMES" Multiplicity="0..1" />
+    <End Role="USER_THEME" Type="Self.USER_THEME" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="THEMES">
+        <PropertyRef Name="themeId" />
+      </Principal>
+      <Dependent Role="USER_THEME">
+        <PropertyRef Name="themeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_USER_THEME_UTILISATEUR">
+    <End Role="UTILISATEUR" Type="Self.UTILISATEUR" Multiplicity="0..1" />
+    <End Role="USER_THEME" Type="Self.USER_THEME" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UTILISATEUR">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="USER_THEME">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_UserRole_ROLE">
     <End Role="ROLE" Type="Self.ROLE" Multiplicity="0..1" />
     <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
@@ -456,6 +488,7 @@
     <EntitySet Name="STATUT_COMMANDE" EntityType="Self.STATUT_COMMANDE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TEMPLATE" EntityType="Self.TEMPLATE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="THEMES" EntityType="Self.THEMES" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="USER_THEME" EntityType="Self.USER_THEME" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UTILISATEUR" EntityType="Self.UTILISATEUR" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_COMMANDE_COMMANDE_TYPE" Association="Self.FK_COMMANDE_COMMANDE_TYPE">
@@ -533,6 +566,14 @@
     <AssociationSet Name="FK_TEMPLATE_UTILISATEUR" Association="Self.FK_TEMPLATE_UTILISATEUR">
       <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
       <End Role="TEMPLATE" EntitySet="TEMPLATE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_USER_THEME_THEMES" Association="Self.FK_USER_THEME_THEMES">
+      <End Role="THEMES" EntitySet="THEMES" />
+      <End Role="USER_THEME" EntitySet="USER_THEME" />
+    </AssociationSet>
+    <AssociationSet Name="FK_USER_THEME_UTILISATEUR" Association="Self.FK_USER_THEME_UTILISATEUR">
+      <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
+      <End Role="USER_THEME" EntitySet="USER_THEME" />
     </AssociationSet>
     <AssociationSet Name="FK_UserRole_ROLE" Association="Self.FK_UserRole_ROLE">
       <End Role="ROLE" EntitySet="ROLE" />

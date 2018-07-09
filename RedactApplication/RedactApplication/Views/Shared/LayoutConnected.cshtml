@@ -46,14 +46,14 @@
                 <div class="profil-menu with-shadow">
                     <div class="flex-content flex-jsbet-acenter profil-setting">
                         <span>
-						@if (Session["logoUrl"] != null)
-                        {
-                            <img src="@Session["logoUrl"]" alt="@Session["name"]" title="@Session["name"]" class="user-photo"/>
-                        }
-                        else
-                        {
-							<img src="~/images/avatar.png" alt="" srcset="" class="user-photo"/>
-						}
+                            @if (Session["logoUrl"] != null)
+                            {
+                                <img src="@Session["logoUrl"]" alt="@Session["name"]" title="@Session["name"]" class="user-photo" />
+                            }
+                            else
+                            {
+                                <img src="~/images/avatar.png" alt="" srcset="" class="user-photo" />
+                            }
                         </span>
                         <div>
                             <span class="user-name">@Session["name"] @Session["surname"]</span>
@@ -76,6 +76,8 @@
     @RenderSection("scripts", required: false)
     @RenderSection("AddToHead", required: false)
     <script src="~/Scripts/GestionVue.js"></script>
+    @*<script src="~/Scripts/jquery-3.3.1.slim.min.js"></script>*@
+ 
     <script src="~/Scripts/jquery.signalR-2.2.3.min.js"></script>
     <script src="~/SignalR/hubs"></script>
     <script src="~/Scripts/codescriptnotification.js"></script>
