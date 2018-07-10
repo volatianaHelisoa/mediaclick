@@ -42,14 +42,14 @@
                     $('#notiContent').append($('<li>Aucune nouvelle notification.</li>'));
                 }
                 else {
-                    $('#notification-bell').append($('<span class="count-notif"></span>'));               
+                    $('#notification-bell').append($('<span class="count-notif">' + response.length +'</span>'));               
 
                     var tr_str = '';
                     $.each(response, function (index, value) {
                         var link = $(location).attr('host') + "/Commandes/DetailsCommande/" + value.commandeId + "?not=" + value.notificationId;
                         var dateStr = parseDate(value.datenotif);
                     
-                        tr_str += '<li> La commande  <a href="' + link + '" id="submit-link"> #' + value.commanderef + '</a> a été mis à jour par ' + value.fromUserName + ' le ' + dateStr + ' . </li>';
+                        tr_str += '<li class="recent"> La commande  <a href="' + link + '" id="submit-link"> #' + value.commanderef + '</a> a été mis à jour par ' + value.fromUserName + ' le ' + dateStr + ' . </li>';
                     });
                 
                     $('#notiContent').html(tr_str);
