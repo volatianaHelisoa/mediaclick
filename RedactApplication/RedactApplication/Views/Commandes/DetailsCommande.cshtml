@@ -37,6 +37,7 @@
 {
     <main id="wrapper">
         <div id="single-container">
+            <a class="back-link" href="@Url.Action("Retour", "ListCommandes", "Commandes")"><i class="fa fa-arrow-left"></i> Retour</a>
             <div class="onglets ease-in-out">
                 <ul>
                     @if (@Session["role"] != null && @Session["role"].ToString() != "2")
@@ -61,20 +62,43 @@
                                 <span>Livrable</span>
                             </div>
                             <div class="wrap">
-                                <span>
-                                    <strong>Titre : </strong>@Html.DisplayFor(model => model.balise_titre)
-                                </span>
-                                <div>
-                                    <strong>Contenu : </strong>
-                                    <div class="commande-contenu">
-                                        @Html.Raw(Model.contenu_livre)
+                                @if (Model.statut_cmde != "Livré")
+                                {
+                                    <div class="commande-not-delivered">
+                                        <span>Livraison prévu le 15/06/2018</span>
+                                        <div class="flex-content flex-jsbet-acenter option">
+                                            <a class="item">
+                                                <span class="icon btn-warm"><i class="fa fa-envelope fa-2x"></i></span>
+                                                Relancer par SMS
+                                            </a>
+                                            <a class="item">
+                                                <span class="icon btn-primary"><i class="fa fa-envelope-open fa-2x"></i></span>
+                                                Relancer par mail
+                                            </a>
+                                            <a class="item">
+                                                <span class="icon btn-warning"><i class="fa fa-undo fa-2x"></i></span>
+                                                Annulation
+                                            </a>
+                                        </div>
                                     </div>
+                                }
+                                else
+                                {
+                                    <span>
+                                        <strong>Titre : </strong>@Html.DisplayFor(model => model.balise_titre)
+                                    </span>
+                                    <div>
+                                        <strong>Contenu : </strong>
+                                        <div class="commande-contenu">
+                                            @Html.Raw(Model.contenu_livre)
+                                        </div>
 
-                                    <div class="contenu-footer flex-content flex-jsbet-acenter">
-                                        @*<span> @ViewBag.ContentLength  sur @Html.DisplayFor(model => model.nombre_mots) mot(s) utilisé(s)</span>*@
-                                        <button class="btn-copy" data-clipboard-action="copy" data-clipboard-target=".commande-contenu">Copier</button>
+                                        <div class="contenu-footer flex-content flex-jsbet-acenter">
+                                            @*<span> @ViewBag.ContentLength  sur @Html.DisplayFor(model => model.nombre_mots) mot(s) utilisé(s)</span>*@
+                                            <button class="btn-copy" data-clipboard-action="copy" data-clipboard-target=".commande-contenu">Copier</button>
+                                        </div>
                                     </div>
-                                </div>
+                                }
                             </div>
                         </section>
                         <section class="col-md-5 commande-resume">
@@ -100,36 +124,17 @@
                                 <span><strong>Mot clé secondaire :</strong>@Html.DisplayFor(model => model.mot_cle_secondaire)</span>
                                 <span><strong>Texte d'ancrage :</strong>@Html.DisplayFor(model => model.texte_ancrage)</span>
                                 <span>
-                                    <table>
-                                        <tr>
-                                            <td><strong>Consignes:</strong></td>
-                                            <td>
-                                                @Html.DisplayFor(model => model.consigne_references)
-
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(model => model.consigneType)
-
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(model => model.consigne_autres)
-
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </span>
-                                <span>
                                     <strong>Remarques :</strong> @Html.DisplayFor(model => model.remarques)
                                 </span>
                             </div>
 
                         </section>
-						<div class="sep"></div>
-                        <section class="clearfix submit-area">
+                        <div class="sep"></div>
+                        <section class="clearfix submit-area" id="toast">
 
                             @if (Model.statut_cmde == "Livré")
                             {
-                            
+
                                 @Html.ActionLink("Accepter", "ValidCommande", "Commandes", new { @hash = Model.commandeId }, new { @class = "btn btn-success small" })
 
                                 <button type="submit" class="btn btn-warm small" onclick="UpdateCommandeClick(' @Model.commandeId ')">A corriger</button>

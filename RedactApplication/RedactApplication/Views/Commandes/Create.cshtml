@@ -181,7 +181,7 @@
                         </span>
 
                     </section>
-                    <section class="clearfix submit-area">
+                    <section class="clearfix submit-area" id="toast">
                         <input type="submit" value="Enregistrer" class="btn btn-success" />
 
                         @Html.ActionLink("Annuler", "ListCommandes", "Commandes", new { @class = "btn btn-warning" })
@@ -193,29 +193,6 @@
 }
 else
 { Response.Redirect("~/Login/Accueil"); }
-
-<!--  Dialogue succès ajout user   -->
-<div id="addUserPopUp">
-
-</div>
-
-<!--  Dialogue error valid data   -->
-<div id="errorValidDataUserPopUp">
-
-</div>
-
-
-
-
-<!--  Dialogue succès ajout user   -->
-<div id="addUserPopUp">
-
-</div>
-
-<!--  Dialogue error valid data   -->
-<div id="errorValidDataUserPopUp">
-
-</div>
 
 
 
