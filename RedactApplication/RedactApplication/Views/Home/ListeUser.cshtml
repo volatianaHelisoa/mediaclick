@@ -135,13 +135,15 @@
                                     <td>Administrateur </td>
 
                                 }
-                                <td>
+                                <td class="col-option">
                                     <!--ViewBag.numpage/ViewBag.nbrow-->
-                                    <div class="option">
-                                        <a href="~/Home/EditUser/@item.userId" title="Edit user"><i class="fa fa-edit"></i></a>
-                                        <a href="~/Home/DetailsRedacteurs/@item.userId" title="Détails Redacteur"><i class="fa fa-eye"></i></a>
-                                        <a href="~/Home/sendMailRecovery/@item.userId" title="Send password recovery Instructions to the user"><i class="fa fa-lock"></i></a>
-                                        <a onclick="DeleteUserClick('@item.userId')" title="Delete user"><i class="fa fa-trash"></i></a>
+                                    <div class="item">
+                                        <div class="option">
+                                            <a href="~/Home/EditUser/@item.userId" title="Edit user"><i class="fa fa-edit"></i></a>
+                                            <a href="~/Home/DetailsRedacteurs/@item.userId" title="Détails Redacteur"><i class="fa fa-eye"></i></a>
+                                            <a href="~/Home/sendMailRecovery/@item.userId" title="Send password recovery Instructions to the user"><i class="fa fa-lock"></i></a>
+                                            <a onclick="DeleteUserClick('@item.userId')" title="Delete user"><i class="fa fa-trash"></i></a>
+                                        </div>
                                     </div>
                                 </td>
                             </tr>

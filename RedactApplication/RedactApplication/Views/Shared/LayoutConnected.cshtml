@@ -16,13 +16,15 @@
     <title>Media click App </title>
     @RenderSection("css", required: false)
 
+    @Scripts.Render("~/bundles/jquery")
+
 
 </head>
 <body>
     <header>
         <div id="top-bar" class="clearfix with-shadow">
             <div class="pull-left">
-                <a href="#" class="logo">
+                <a href="javascript:void(0)" class="logo">
                     <img src="~/images/logo_mc_large.png" alt="MediaClick" srcset="">
                 </a>
             </div>
@@ -32,7 +34,7 @@
                     @Html.Partial("~/Views/Shared/_MessagesList.cshtml")
                 </div>
 
-                <a href="#" class="profil">
+                <div href="javascript:void(0)" class="profil">
                     <span id="user-name">@Session["name"] @Session["surname"] </span>
                     <span id="user-avatar">
                         @if (Session["logoUrl"] != null)
@@ -42,7 +44,7 @@
                         else
                         { <img src="~/images/avatar.png" alt="" srcset="" />}
                     </span>
-                </a>
+                </div>
                 <div class="profil-menu with-shadow">
                     <div class="flex-content flex-jsbet-acenter profil-setting">
                         <span>
@@ -70,14 +72,12 @@
 
     @RenderBody()
     <footer></footer>
-
-    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
     @RenderSection("AddToHead", required: false)
+    <script src="~/Scripts/codescript.js"></script>
     <script src="~/Scripts/GestionVue.js"></script>
-    @*<script src="~/Scripts/jquery-3.3.1.slim.min.js"></script>*@
- 
+
     <script src="~/Scripts/jquery.signalR-2.2.3.min.js"></script>
     <script src="~/SignalR/hubs"></script>
     <script src="~/Scripts/codescriptnotification.js"></script>

@@ -68,7 +68,7 @@
                     </div>
 
                 </div>
-                <table id="myDataTable" class="trig_table table">
+                <table id="myDataTable" class="trig_table table facture-table">
                     <thead>
                         <tr>
                             <th>
@@ -103,10 +103,12 @@
                                         <td>Payé</td>
                                     }
 
-                                    <td>
-                                        <div class="option">
-                                            <a href="~/Facture/Details/@item.factureId" title="Détails"><i class="fa fa-eye"></i></a>
-                                            <a onclick="DeleteFactureClick('@item.factureId')" title="Supprimer Facture"><i class="fa fa-trash"></i></a>
+                                    <td class="col-option">
+                                        <div class="item">
+                                            <div class="option">
+                                                <a href="~/Facture/Details/@item.factureId" title="Détails"><i class="fa fa-eye"></i></a>
+                                                <a onclick="DeleteFactureClick('@item.factureId')" title="Supprimer Facture"><i class="fa fa-trash"></i></a>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
