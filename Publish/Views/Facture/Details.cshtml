@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <title>Facture rédaction</title>
     <link href="~/Content/css/facture.css" rel="stylesheet" />
-    
+
 </head>
 <body>
 
@@ -17,11 +17,11 @@
             <table>
                 <tbody>
                     <tr>
-                        <td style="display: table-caption;">
+                        <td style="display: inline-block; max-width: 300px;">
                             <div id="company" class="clearfix">
                                 <div class="id">
                                     <div id="logo">
-                                       Media click
+                                        Media click
                                     </div>
                                     <span>Explorer business Park - Bat A1 Ankorondrano - Tana 101</span>
                                     <span><strong>Tél:</strong> +261 34 53 003 64</span>
@@ -45,7 +45,7 @@
             </table>
         </header>
         <div id="content">
-            <table>
+            <table style="border: 1px solid #dadada;">
                 <thead>
                     <tr>
                         <th class="service">N° c/de</th>
@@ -66,16 +66,14 @@
                             <td class="total">@(item.nombre_mots * Convert.ToDouble(item.REDACTEUR.redactTarif))</td>
                         </tr>
                     }
-
-
-                    <tr>
+                    <tr class="totalLigne">
                         <td colspan="4"><strong>Total</strong></td>
                         <td class="grand total">@Model.montant Ar</td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <footer class="clearfix">
+        <footer class="clearfix table-foot">
             <div>
                 <span>Explorer business Park - Bat A1 Ankorondrano - Tana 101</span>
                 <span><strong>Tél:</strong> +261 34 53 003 64</span>
@@ -83,21 +81,23 @@
 
         </footer>
     </div>
+    <div id="toast" class="with-shadow">
+        <a class="fileDownloadPdf btn btn-primary" href=""><i class="fa fa-download"></i> Télécharger</a>
 
+        @Html.ActionLink("Retour", "ListFacture", new { controller = "Facture" }, new { @class = "btn btn-warning" })
+    </div>
 
-
-
-
-    <a class="fileDownloadPdf" href="">Télécharger</a>
-
-    @Scripts.Render("~/bundles/jquery")
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     <script type="text/javascript" src="~/Scripts/js/jquery.fileDownload.js"></script>
+
+    
+
+
 </body>
 </html>
 
-
-
 <script type="text/javascript">
+ 
     jQuery(document).ready(function () {
         var numFacture = $("#factureNumero").data("lastValue");
         console.log(numFacture);
@@ -122,8 +122,8 @@
             success: function (response) {
                 if (response.Valid) {
 
-                    var url = "http://"+$(location).attr('host') + "/Pdf/" + filename;
-                    
+                    var url = "http://" + $(location).attr('host') + "/Pdf/" + filename;
+
                     $(".fileDownloadPdf").attr("href", url);
                     console.log($(".fileDownloadPdf").prop('href'));
                     $(".fileDownloadPdf").trigger("click");
@@ -140,13 +140,13 @@
         });
 
         $(".fileDownloadPdf").on("click", function (e) {
-          
             $.fileDownload($(this).prop('href'), {
                 preparingMessageHtml: "We are preparing your report, please wait...",
                 failMessageHtml: "There was a problem generating your report, please try again."
             });
-            return false; 
-            
+            return false;
         });
     });
 </script>
+
+

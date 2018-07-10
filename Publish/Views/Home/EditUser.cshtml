@@ -13,11 +13,15 @@
 @section Scripts{
 
     <link rel="stylesheet" href="~/Content/css/elements/profil.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/css/bootstrap-multiselect.css" rel="stylesheet" />
+
     <script>
-          $("#checkReferenceur").prop('checked', false);
+    $("#checkReferenceur").prop('checked', false);
     $("#checkRedacteur").prop('checked', false);
     $("#checkManager").prop('checked', false);
-    @if (ViewBag.userRole == 1)
+
+        @if (ViewBag.userRole == 1)
     {
         @:jQuery("#checkReferenceur").prop('checked', true);
     }
@@ -30,8 +34,26 @@
     {
         @:jQuery("#checkManager").prop('checked', true);
     }
+
+    jQuery(document).ready(function () {         
+
+        $('#SelectItemTheme').multiselect({
+            includeSelectAllOption: true,
+            enableFiltering : true
+        });
+
+        var list = ["c435d8de-0cd4-49c9-b0a1-57220dbff08c", "5f93929a-350c-4d9d-a0cc-adba77d3af49"];
+        $("#SelectItemTheme option").each(function (index, item) {
+          
+            if (jQuery.inArray($(item).val(), list) != -1) {
+               
+                $(this).prop("class", "active");
+            }
+        })
+    });
+
     </script>
-  
+
 
 
 }
@@ -45,15 +67,18 @@
         </script>
     }
 }
-}
 
 <main id="wrapper">
     <div id="single-container">
         <div class="onglets ease-in-out">
             <ul>
-                <li><a href="~/Home/ListeUser">Utilisateurs</a></li>
-                <li><a href="~/Commandes/ListCommandes" class="active">Commandes</a></li>
-                <li><a href="~/Facture/ListFacture">Factures</a></li>
+                @if (@Session["role"] != null && @Session["role"].ToString() != "2")
+                {
+                    <li> @Html.ActionLink("Utilisateurs", "ListeUser", new { controller = "Home" }, new { @class = "active" }) </li>
+                }
+                <li>@Html.ActionLink("Commandes", "ListCommandes", new { controller = "Commandes" })</li>
+                <li>@Html.ActionLink("Factures", "ListFacture", new { controller = "Facture" })</li>
+                <li>@Html.ActionLink("Templates", "ListTemplate", new { controller = "Template" })</li>
             </ul>
         </div>
         <div class="card back-office with-shadow">
@@ -78,20 +103,21 @@
                     <input type="hidden" value="@Model.userId" name="idUser">
                     <div class="head">
                         <div class="flex-content flex-jcenter-acenter edit-avatar">
-                            <span>
+                            <span class="profil-thumb">
 
                                 @if (!string.IsNullOrEmpty(Model.logoUrl))
                                 {
-                                    <img src="@Model.logoUrl" alt="@Model.userNom" title="@Model.userNom" />
+                                    <img id="new-profil-preview" src="@Model.logoUrl" alt="@Model.userNom" title="@Model.userNom" />
                                 }
                                 else
-                                { <img src="~/images/avatar.png" alt="" srcset="" />}
+                                { <img id="new-profil-preview" src="~/images/avatar.png" alt="" srcset="" />}
                             </span>
                             <div class="flex-content flex-col change-avatar">
-                                Votre avatar
-                                @Html.TextBoxFor(m => m.logoUrl, new { type = "file", name = "file", id = "site-logo" })
+
+                                <span class="file-name">Votre avatar</span>
+                                @Html.TextBoxFor(m => m.logoUrl, new { type = "file", name = "file", id = "user-profil", accept = "image/*" })
                                 <div class="input-custom">
-                                    <label for="site-logo" class="label-file">Choisir</label><span class="file-name"></span>
+                                    <label for="user-profil" class="label-file">Choisir</label>
                                 </div>
 
                             </div>
@@ -104,7 +130,7 @@
                             Nom(*)
                             @Html.TextBoxFor(x => x.userNom, new { @required = true })
                         </label>
-                        <label for="" class="col-50 pull-left">
+                        <label for="" class="col-50 pull-right">
                             Prénom
                             @Html.TextBoxFor(x => x.userPrenom, new { @required = true })
                         </label>
@@ -114,7 +140,7 @@
                         </label>
                         <label for="" class="col-50 pull-right">
                             Skype
-                            @Html.TextBoxFor(x => x.redactSkype, new { @required = true })
+                            @Html.TextBoxFor(x => x.redactSkype)
                         </label>
                         <label for="" class="col-50 pull-left">
                             Téléphone
@@ -158,8 +184,15 @@
                             </label>
                             <label for="" class="col-50 pull-right">
                                 Thèmes
-                                @Html.TextBoxFor(x => x.redactThemes)
-                            </label>
+                                    @if (Model.listThemeId == null)
+                                    {
+                                        @Html.DropDownListFor(x => Model.listThemeId, new SelectList(Model.ListTheme, "Value", "Text"), htmlAttributes: new { id = "SelectItemTheme", multiple = "multiple" })
+                                    }
+                                    @if (Model.listThemeId != null)
+                                    {   
+                                        @Html.ListBoxFor(model => model.listThemeId, Model.themeList, htmlAttributes: new { id = "SelectItemTheme", multiple = "multiple" })
+                                    }
+                                </label>
                             <label for="" class="col-50 pull-left">
                                 Niveau
                                 @Html.DropDownListFor(x => x.redactNiveau,
@@ -170,10 +203,7 @@
                                                                     new SelectListItem { Value = "Avancé" , Text = "Avancé" }
                                                                 })
                             </label>
-                            <label for="" class="col-50 pull-right">
-                                Référenceur
-                                @Html.TextBoxFor(x => x.redactReferenceur)
-                            </label>
+
                             <label for="" class="col-50 pull-left">
                                 Mode de paiement
                                 @Html.DropDownListFor(x => x.redactModePaiement,
@@ -187,7 +217,7 @@
 
                         </section>
                     }
-                    <section class="clearfix submit-area" style=" margin: 70px auto 0;">
+                    <section class="clearfix submit-area" id="toast">
                         <input type="submit" value="Enregistrer" class="btn btn-success">
                         @Html.ActionLink("Annuler", "ListeUser", "Home", new { }, new { @class = "btn btn-warning" })
 

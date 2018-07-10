@@ -3,25 +3,30 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex,nofollow" />
     <link rel="stylesheet" href="~/Content/bootstrap.css">
 
     <!-- TOUJOURS APPELER -->
-    <link rel="stylesheet" href="~/Content/css/layout/layout.css">
+    <link href="~/Content/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="~/Content/css/base/reset.css">
     <link rel="stylesheet" href="~/Content/css/base/common.css">
     <link rel="stylesheet" href="~/Content/css/elements/forms.css">
+    <link rel="stylesheet" href="~/Content/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="~/Content/css/layout/layout.css">
 
     <title>Media click App </title>
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/codescript.js"></script>
 </head>
 <body>
     @RenderBody()
     <footer>
     
     </footer>
-    @Scripts.Render("~/bundles/jquery")
+
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 

@@ -1,0 +1,58 @@
+﻿   @model RedactApplication.Models.COMMANDEViewModel
+@{
+    ViewBag.Title = "Annuler Commande";
+    if (Model != null)
+    {
+        ViewBag.commandeId = Model.commandeId;
+    }
+   
+ }
+
+
+<main id="wrapper">
+    <div id="single-container">       
+        <div class="card back-office with-shadow">
+            <div class="head">
+                <h1>Commande n° @Model.commandeREF</h1>
+            </div>
+
+            <!-- Champs -->
+            <div class="container clearfix">
+                @using (Html.BeginForm("CancelCommande", "Commandes", FormMethod.Post, new { @hash = ViewBag.hashCmde }))
+                {
+                    <input type="hidden" name="idCommande" value="@Model.commandeId">
+
+                    <div class="row">
+                        <section class="col-md-7 commande-view">
+                            <div class="wrap">
+                                <span>
+                                    <strong>Site : </strong>@Html.DisplayFor(model => Model.projet)
+                                </span>
+                                <span>
+                                    <strong>Thème : </strong> @Html.DisplayFor(model => Model.thematique)
+                                </span>
+                                <span>
+                                    <strong>Type de Textes :</strong> @Html.DisplayFor(model => Model.commandeType)
+                                </span>
+                                <span>
+                                    <strong>Nombre de mots : </strong>  @Html.DisplayFor(model => Model.nombre_mots)
+                                </span>
+                               
+                                    <span>
+                                        <strong>Remarques : </strong>  @Html.TextAreaFor(model => Model.remarques)
+                                    </span>
+                                
+                            </div>
+                        </section>
+                        <section class="clearfix submit-area">
+                            <input type="submit" value="Envoyer" class="btn btn-primary" >
+                            @Html.ActionLink("Retour", "ListCommandes", "Commandes", new { @class = "btn btn-warning" })
+                        </section>
+
+                    </div>
+                }
+                </div>
+
+        </div>
+    </div>
+</main>

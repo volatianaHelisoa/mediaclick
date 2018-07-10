@@ -1,9 +1,14 @@
-﻿
+
 $(document).ready(function () {
     /* VARIABLES GLOBALES */
     var $win = $(window);
     var userProfil = $('.profil');
     var popup = userProfil.next('.profil-menu');
+
+    var notifsActionner = $('#notification-bell');
+    var notifsContent = $('#notification-bell').next('.notifs-content');
+
+    var mainWrapper = $('main#wrapper');
 
     $(window).scroll(function (e) {
         // Scroll events
@@ -17,30 +22,46 @@ $(document).ready(function () {
         var onglets = $('#single-container .onglets');
         if (winScroll > 10) {
             $(onglets).addClass('fixedOnglets');
+            $('a.back-link').show();
         } else {
             $(onglets).removeClass('fixedOnglets');
+            $('a.back-link').hide();
         }
     });
 
     $('body').on('keydown', function (e) {
         if (e.keyCode === 27) {
-            popup.slideUp();
-            popup.css('display', 'none');
+            popup.hide();
+            notifsContent.hide();
+            mainWrapper.removeClass('fade-bg');
         }
     });
 
-    $(function () {
-        $win.on("click", function (event) {
-            if (userProfil.has(event.target).length == 0 && !userProfil.is(event.target)) {
-                popup.slideUp();
-                popup.css('display', 'none');
-            } else {
-                popup.toggleClass('open').slideDown();
-            }
-        });
+    notifsActionner.click(function () {
+        $(this).toggleClass("active");
+        $(".notifs-content").toggle();
+        $(this).children('.count-notif').hide();
     });
 
-   
+    userProfil.click(function () {
+        $(this).toggleClass("active");
+        popup.toggle();
+    });
+
+    var loadFile = function (event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            var output = document.getElementById('new-profil-preview');
+            output.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    };
+
+    $('input[type="file"]').change(function (e) {
+        var fileName = e.target.files[0].name;
+        loadFile(event);
+        $('.file-name').text(fileName);
+    });
 
 });
 
@@ -56,7 +77,7 @@ function ClickAllUserInListUser() {
 }
 
 function CheckedClick() {
-    $('input[name="selectedUser"]').each(function () {        
+    $('input[name="selectedUser"]').each(function () {
         $(this).prop("checked", true);
     });
 }
@@ -79,7 +100,7 @@ function ClickAllCommandeInListCommande() {
 }
 
 function CheckedCmdeClick() {
- 
+
     $('input[name="selectedCmde"]').each(function () {
         $(this).prop("checked", true);
     });

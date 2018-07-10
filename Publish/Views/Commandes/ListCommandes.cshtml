@@ -8,9 +8,6 @@
 @section css
 {
     <link href="@Url.Content("~/Content/css/jquery-ui.css")" rel="stylesheet" />
-    <link href="@Url.Content("~/Content/css/jquery.dataTables.css")" rel="stylesheet" />
-    @*<link href="@Url.Content("~/Content/css/dataTables.css")" rel="stylesheet" />*@
-    <link href="~/Content/themes/smoothness/jquery-ui.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/Content/css/elements/commandes.css">
 }
 
@@ -36,10 +33,11 @@
                 <ul>
                     @if (@Session["role"] != null && @Session["role"].ToString() != "2")
                     {
-                        <li><a href="~/Home/ListeUser">Utilisateurs</a></li>
+                        <li> @Html.ActionLink("Utilisateurs", "ListeUser", new { controller = "Home" }) </li>
                     }
-                    <li><a href="~/Commandes/ListCommandes" class="active">Commandes</a></li>
-                    <li><a href="~/Facture/ListFacture">Factures</a></li>
+                    <li>@Html.ActionLink("Commandes", "ListCommandes", new { controller = "Commandes" }, new { @class = "active" })</li>
+                    <li>@Html.ActionLink("Factures", "ListFacture", new { controller = "Facture" })</li>
+                    <li>@Html.ActionLink("Templates", "ListTemplate", new { controller = "Template" })</li>
                 </ul>
             </div>
             <div class="head-list">
@@ -86,7 +84,7 @@
                         Sélection
                         <span onclick="CheckedCmdeClick()">Tous</span>
                         <span onclick="DecheckedCmdeClick()">Aucun</span>
-                        <button class="btn btn-small" onclick="DeleteAllCommandeSelected(@ViewBag.nbrow)">Supprimer la sélection</button>
+                        <button class="btn btn-small" onclick="DeleteAllCommandeSelected(@ViewBag.nbrow)"><i class="fa fa-trash"></i> Supprimer la sélection</button>
                     </div>
 
                 </div>
@@ -112,7 +110,7 @@
                     <tbody class="t1">
                         @if (ViewBag.listeCommandeVms != null)
                         {
-                            int count = 0;
+
                             foreach (var item in ViewBag.listeCommandeVms)
                             {
                                 <tr>
@@ -127,41 +125,47 @@
                                     <td>@item.commandeType</td>
 
                                     <td>@item.statut_cmde</td>
-                                    
-                                        @if (@item.etat_paiement == true)
-                                        {
-                                            <td> Payé</td>
-                                        }
-                                        else
-                                        {
-                                        <td>Non payé</td>
-                                        }
-                                   
-                                    <td>
-                                        <!--ViewBag.numpage/ViewBag.nbrow-->
-                                        <div class="option">
-                                            @if (@Session["role"] != null && @Session["role"].ToString() == "2")
-                                            {
-                                                <a href="~/Commandes/DetailsCommandeAValider/@item.commandeId" title="Détails Commande"><i class="fa fa-eye"></i></a>
-                                            }
-                                            else
-                                            {
-                                                <a href="~/Commandes/DetailsCommande/@item.commandeId" title="Détails Commande"><i class="fa fa-eye"></i></a>
-                                            }
 
-                                            @if (@item.statut_cmde == "En attente")
-                                            {
-                                                <a href="~/Commandes/Edit/@item.commandeId" title="Edit user"><i class="fa fa-edit"></i></a>
-                                            }
-                                            <a onclick="DeleteCommandeClick('@item.commandeId')" title="Delete commande"><i class="fa fa-trash"></i></a>
+                                    @if (@item.etat_paiement == true)
+                                    {
+                                        <td> Payé</td>
+                                    }
+                                    else
+                                    {
+                                        <td>Non payé</td>
+                                    }
+
+                                    <td class="col-option">
+                                        <!--ViewBag.numpage/ViewBag.nbrow-->
+                                        <div class="item">
+                                            <div class="option">
+                                                @if (@Session["role"] != null && @Session["role"].ToString() == "2")
+                                                {
+                                                    <a href="~/Commandes/DetailsCommandeAValider/@item.commandeId" title="Détails"><i class="fa fa-eye"></i></a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="~/Commandes/DetailsCommande/@item.commandeId" title="Détails"><i class="fa fa-eye"></i></a>
+                                                }
+
+                                                @if ((@item.statut_cmde == "En cours" || @item.statut_cmde == "A corriger") && @Session["role"] != null && @Session["role"].ToString() == "2")
+                                                {
+                                                    <a href="~/Commandes/Edit/@item.commandeId" title="Editer"><i class="fa fa-edit"></i></a>
+                                                }
+                                                @if (@Session["role"] != null && @Session["role"].ToString() != "2" && (@item.statut_cmde == "Validé" || @item.statut_cmde == "Refusé" || @item.statut_cmde == "Annulé"))
+                                                {
+                                                    <a onclick="DeleteCommandeClick('@item.commandeId')" title="Supprimer"><i class="fa fa-trash"></i></a>
+                                                }
+                                                @if (Session["role"] != null && Session["role"].ToString() != "2" && (@item.statut_cmde == "En cours" || @item.statut_cmde == "A corriger" || @item.statut_cmde == "En attente"))
+                                                {
+
+                                                    <a href="~/Commandes/CommandeCancel/@item.commandeId" title="Annuler"><i class="fa fa-undo"></i></a>
+                                                }
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
-                                count++;
-                            }
-                            if (ViewBag.listeCommandeVms.Count == 0)
-                            {
-                                <tr><td>No records found.</td></tr>
+
                             }
                         }
                     </tbody>
@@ -169,22 +173,21 @@
             </div>
         </div>
 
+        <div id="DeleteDatadialog" style="display: none" class="modal-popup">
+            @Html.Partial("~/Views/Commandes/ErrorNoSelection.cshtml")
+        </div>
+        <div id="SearchUserNoResultat" style="display: none" class="modal-popup">
+            @Html.Partial("~/Views/Shared/SearchNoResultat.cshtml")
+        </div>
+        <!--  Dialogue de confirmation suppression d'utilisateur  -->
+        <div id="deleteAllUserPoPup" style="display: none" class="modal-popup">
+            @Html.Partial("~/Views/Commandes/DeleteCommande.cshtml")
+        </div>
+        
     </main>
 }
 else
 { Response.Redirect("~/Login/Accueil"); }
-
-<div id="DeleteDatadialog" style="display: none" class="popup-notif">
-    @Html.Partial("~/Views/Commandes/ErrorNoSelection.cshtml")
-</div>
-<div id="SearchUserNoResultat" style="display: none" class="popup-notif">
-    @Html.Partial("~/Views/Shared/SearchNoResultat.cshtml")
-</div>
-<!--  Dialogue de confirmation suppression d'utilisateur  -->
-<div id="deleteAllUserPoPup" style="display: none" class="popup-notif">
-    @Html.Partial("~/Views/Commandes/DeleteCommande.cshtml")
-</div>
-
 <script>
     /*pour la suppression des utilisateurs séléctionnés*/
     var DeleteCommandeClick = function (user) {
@@ -245,6 +248,25 @@ else
         });
     }
 
+    var CancelCommandeClick = function (commande) {
+        //alert(user);
+        if (commande !== '') {
+
+            $.ajax({
+                type: 'POST',
+                url: '/Commandes/CommandeCancel',
+                data: { hash: commande },
+                error: function (ex) {
+                    alert('Error: ' + ex.statusText);
+                },
+                success: function () {
+                    $("#cancelCommandePoPup").modal();
+                },
+                async: true,
+                processData: true
+            });
+        }
+    }
 
 
 </script>

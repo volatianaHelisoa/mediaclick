@@ -154,7 +154,7 @@ body {
 
 
 /* POPUPS */
-#pop-up .pop-icon {
+.pop-up .pop-icon {
     width: 80px;
     height: 80px;
     border-radius: 50%;
@@ -169,7 +169,7 @@ body {
     background-position: center;
 }
 
-#pop-up .content-section p {
+.pop-up .content-section p {
     margin: 40px 0 60px;
 }
 
@@ -191,6 +191,28 @@ input::-webkit-inner-spin-button {
     top: 50%;
 }
 
+.modal-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 0 auto;
+    right: 0;
+    z-index: 2000;
+}
+
 .error-msg {
     color: #ff4026;
+}
+
+.sep {
+    display: block;
+    clear: both;
+    margin: 1em 0;
+    width: 100%;
+    height: 1px;
+}
+
+.icon-create-facture {
+    background: url(../../../images/icon-create-facture.png) no-repeat center;
+    background-size: 100%;
 }

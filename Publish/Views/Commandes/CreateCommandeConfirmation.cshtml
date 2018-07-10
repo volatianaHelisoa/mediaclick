@@ -1,7 +1,8 @@
 ﻿@{
     ViewBag.Title = "Confirmer création commande";
-   
+
 }
+
 
 
 <div class="flex-content flex-jcenter-acenter flex-col pop-up">
@@ -12,10 +13,10 @@
         <div class="content-section text-centered icon-bottom">
             <i class="pop-icon green-bg"></i>
             <p>La commande a bien été créee !</p>
-           
+
             @using (Html.BeginForm("ListCommandes", "Commandes", FormMethod.Post))
             {
-                <input type="submit" value="Ok" class="btn btn-primary">
+                <input type="submit" value="Ok" class="btn btn-primary" id="btnEnregistrerCmde">
 
                 @Html.ActionLink("Créer", "Create", "Commandes", new { }, new { @class = "btn btn-warning" })
             }

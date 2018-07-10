@@ -4,7 +4,6 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/LayoutConnected.cshtml";
 }
-}
 
 @section Scripts{
     <link rel="stylesheet" href="~/Content/css/elements/commandes.css">
@@ -18,9 +17,13 @@
             <div id="single-container">
                 <div class="onglets ease-in-out">
                     <ul>
-                        <li><a href="">Utilisateurs</a></li>
-                        <li><a href="" class="active">Commandes</a></li>
-                        <li><a href="">Dolor sit amet</a></li>
+                        @if (@Session["role"] != null && @Session["role"].ToString() != "2")
+                        {
+                            <li> @Html.ActionLink("Utilisateurs", "ListeUser", new { controller = "Home" }) </li>
+                        }
+                        <li>@Html.ActionLink("Commandes", "ListCommandes", new { controller = "Commandes" }, new { @class = "active" })</li>
+                        <li>@Html.ActionLink("Factures", "ListFacture", new { controller = "Facture" })</li>
+                        <li>@Html.ActionLink("Templates", "ListTemplate", new { controller = "Template" })</li>
                     </ul>
                 </div>
                 <div class="card back-office with-shadow">
@@ -64,25 +67,23 @@
                                         <tr>
                                             <td><strong>Consignes:</strong></td>
                                             <td>
-                                                @Html.DisplayFor(model => model.consigne_references)
-
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(model => model.consigneType)
-
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(model => model.consigne_autres)
-
+                                                <p>@Html.DisplayFor(model => model.consigne_references)</p>
+                                                <p>@Html.DisplayFor(model => model.consigneType)</p>
+                                                <p>@Html.DisplayFor(model => model.consigne_autres)</p>
                                             </td>
                                         </tr>
                                     </table>
                                 </div>
+                                @if (Model.remarques != null) { 
+                                    <div>
+                                        <span><strong>Remarques :</strong> @Html.DisplayFor(model => model.remarques)</span>
+                                    </div>
+                                }
                             </div>
                         </section>
                     </div>
 
-                    <div class="card-footer text-centered">
+                    <div class="card-footer text-centered" id="toast">
                         @if (Model.statut_cmde == "En attente")
                         {
                             <button type="submit" class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("AcceptCommande", "Commandes", new { hash = Model.commandeId }) + "' ");">Accepter</button>

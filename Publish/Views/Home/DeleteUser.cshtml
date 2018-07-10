@@ -1,12 +1,9 @@
 ﻿
 @{
     ViewBag.Title = "Supprimer l'utilisateur";
-    Layout = "~/Views/Shared/LayoutConnected.cshtml";
+
 }
-@section Scripts
-{
-    <script src="~/Scripts/GestionContact.js"></script>
-}
+
 <div class="flex-content flex-jcenter-acenter flex-col pop-up">
     <div class="popup-container with-shadow">
         <div class="head gradient-blue">
@@ -15,10 +12,11 @@
         <div class="content-section text-centered icon-bottom">
             <i class="pop-icon green-bg"></i>
             <p>Voulez-vous vraiment supprimer la sélection ?</p>
-          
-                <input type="submit" data-dismiss="modal" value="Supprimer" class="btn btn-primary"  onclick="@("window.location.href='" + @Url.Action("DeleteAllUserSelected", "Home") + "' ");" />
+            @using (Html.BeginForm("ListeUser", "Home", FormMethod.Post))
+            {
+                @Html.ActionLink("Supprimer", "DeleteAllUserSelected", new { controller = "Home" }, new { @class = "btn btn-primary" })          
                 <input type="submit" value="Annuler" class="btn btn-warning" onclick="DecheckedClick()">
-            
+            }
         </div>
     </div>
 
