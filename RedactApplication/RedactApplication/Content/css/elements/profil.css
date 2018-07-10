@@ -60,3 +60,9 @@
     height: 85px; 
     object-fit: cover; 
 } 
+.file-name {
+    max-width: 180px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+	text-transform: inherit;
+}

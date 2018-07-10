@@ -138,24 +138,29 @@ input[type="search"]::placeholder {
     min-width: 140px;
     cursor: pointer;
     -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-       -o-user-select: none;
-          user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
     transition: ease-in-out all 300ms;
     -webkit-transition: ease-in-out all 300ms;
     -moz-transition: ease-in-out all 300ms;
     -ms-transition: ease-in-out all 300ms;
+    display: inline-block;
+}
+
+.btn:hover {
+    opacity: .75;
 }
 .btn.disabled,
 .btn[disabled],
 fieldset[disabled] .btn {
-  pointer-events: none;
-  cursor: not-allowed;
-  opacity: 0.65;
-  filter: alpha(opacity=65);
-  -webkit-box-shadow: none;
-          box-shadow: none;
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: 0.65;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    box-shadow: none;
 }
 .btn-medium {
     padding: 12px 24px;
