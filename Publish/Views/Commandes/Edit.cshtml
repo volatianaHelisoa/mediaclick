@@ -98,10 +98,7 @@
                                 Autres
                                 @Html.TextBoxFor(x => x.consigne_autres, new { @name = "name" })
                             </label>
-                            <label for="" class="col-50 pull-left">
-                                Type de contenu
-                                @Html.DropDownListFor(x => Model.listContenuTypeId, new SelectList(Model.ListContenuType, "Value", "Text"), htmlAttributes: new { @id = "SelectItemContenuType" })
-                            </label>
+                            
                             <label for="" class="col-50 pull-right">
                                 Date de livraison
                                 @Html.TextBoxFor(x => x.date_livraison, "{0:dd/MM/yyyy}", new { type = "text" })
@@ -149,7 +146,7 @@
                     }
 
                     <section class="clearfix submit-area">
-                        <input type="submit" value="Enregistrer" class="btn btn-success" />
+                        <input type="submit" value="Envoyer" class="btn btn-success" />
                         @Html.ActionLink("Annuler", "ListCommandes", "Commandes", new { @class = "btn btn-warning" })
                     </section>
                 }

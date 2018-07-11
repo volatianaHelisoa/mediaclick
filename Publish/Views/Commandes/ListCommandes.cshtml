@@ -46,10 +46,24 @@
                     <div class="resume with-shadow">
                         <ul>
                             <li>Commande en cours : @ViewBag.commandesEnCours</li>
-                            <li>Commande en attente : @ViewBag.commandesEnAttente</li>
-                            <li>Commande à valider : @ViewBag.commandesAValider</li>
-                            <li>Commande en retard : @ViewBag.commandesEnRetard</li>
+                            <li>Commande en attente : @ViewBag.commandesEnAttente</li>                            
+                            <li>Livraison en retard : @ViewBag.commandesEnRetard</li>
                             <li>Commande livrée : @ViewBag.commandesLivrer</li>
+                            <li>Commande à facturer : @ViewBag.commandesFacturer</li>
+                        </ul>
+                    </div>
+                }
+                @if (@Session["role"] != null && @Session["role"].ToString() != "2")
+                {
+                    <div class="resume with-shadow">
+                        <ul>
+                            <li>Livraisons reçues : @ViewBag.commandesLivrer</li>
+                            <li>Livraison en retard : @ViewBag.commandesEnRetard</li>
+                            <li>Commande refuser par le redacteur : @ViewBag.commandesRefuser</li>
+                            <li>Commande en attente : @ViewBag.commandesEnAttente</li>
+                            <li>Redaction en cours : @ViewBag.commandesEnCours</li>
+                            <li>Commande annulée : @ViewBag.commandesAnnuler</li>
+                            
                             <li>Commande à facturer : @ViewBag.commandesFacturer</li>
                         </ul>
                     </div>
@@ -113,58 +127,59 @@
 
                             foreach (var item in ViewBag.listeCommandeVms)
                             {
-                                <tr>
-                                    <td><input type="checkbox" class="checkbox" name="selectedCmde" value="@item.commandeId" /></td>
-                                    <td>@item.commandeREF</td>
-                                    <td>@item.commandeDemandeur</td>
-                                    <td>@item.commandeRedacteur</td>
-                                    <td>@item.date_cmde</td>
-                                    <td>@item.date_livraison</td>
-                                    <td>@item.projet </td>
-                                    <td>@item.thematique</td>
-                                    <td>@item.commandeType</td>
+                        <tr>
+                            <td><input type="checkbox" class="checkbox" name="selectedCmde" value="@item.commandeId" /></td>
+                            <td>@item.commandeREF</td>
+                            <td>@item.commandeDemandeur</td>
+                            <td>@item.commandeRedacteur</td>
+                              <td>@item.date_cmde</td>
+                           
+                                <td>@item.date_livraison</td>
+                                <td>@item.projet </td>
+                                <td>@item.thematique</td>
+                                <td>@item.commandeType</td>
 
-                                    <td>@item.statut_cmde</td>
+                                <td>@item.statut_cmde</td>
 
-                                    @if (@item.etat_paiement == true)
-                                    {
-                                        <td> Payé</td>
-                                    }
-                                    else
-                                    {
-                                        <td>Non payé</td>
-                                    }
+                                @if (@item.etat_paiement == true)
+                                {
+                                    <td> Payé</td>
+                                }
+                                else
+                                {
+                                    <td>Non payé</td>
+                                }
 
-                                    <td class="col-option">
-                                        <!--ViewBag.numpage/ViewBag.nbrow-->
-                                        <div class="item">
-                                            <div class="option">
-                                                @if (@Session["role"] != null && @Session["role"].ToString() == "2")
-                                                {
-                                                    <a href="~/Commandes/DetailsCommandeAValider/@item.commandeId" title="Détails"><i class="fa fa-eye"></i></a>
-                                                }
-                                                else
-                                                {
-                                                    <a href="~/Commandes/DetailsCommande/@item.commandeId" title="Détails"><i class="fa fa-eye"></i></a>
-                                                }
+                                <td class="col-option">
+                                    <!--ViewBag.numpage/ViewBag.nbrow-->
+                                    <div class="item">
+                                        <div class="option">
+                                            @if (@Session["role"] != null && @Session["role"].ToString() == "2")
+                                            {
+                                                <a href="~/Commandes/DetailsCommandeAValider/@item.commandeId" title="Détails"><i class="fa fa-eye"></i></a>
+                                            }
+                                            else
+                                            {
+                                                <a href="~/Commandes/DetailsCommande/@item.commandeId" title="Détails"><i class="fa fa-eye"></i></a>
+                                            }
 
-                                                @if ((@item.statut_cmde == "En cours" || @item.statut_cmde == "A corriger") && @Session["role"] != null && @Session["role"].ToString() == "2")
-                                                {
-                                                    <a href="~/Commandes/Edit/@item.commandeId" title="Editer"><i class="fa fa-edit"></i></a>
-                                                }
-                                                @if (@Session["role"] != null && @Session["role"].ToString() != "2" && (@item.statut_cmde == "Validé" || @item.statut_cmde == "Refusé" || @item.statut_cmde == "Annulé"))
-                                                {
-                                                    <a onclick="DeleteCommandeClick('@item.commandeId')" title="Supprimer"><i class="fa fa-trash"></i></a>
-                                                }
-                                                @if (Session["role"] != null && Session["role"].ToString() != "2" && (@item.statut_cmde == "En cours" || @item.statut_cmde == "A corriger" || @item.statut_cmde == "En attente"))
-                                                {
+                                            @if ((@item.statut_cmde == "En cours" || @item.statut_cmde == "A corriger") && @Session["role"] != null && @Session["role"].ToString() == "2")
+                                            {
+                                                <a href="~/Commandes/Edit/@item.commandeId" title="Editer"><i class="fa fa-edit"></i></a>
+                                            }
+                                            @if (@Session["role"] != null && @Session["role"].ToString() != "2" && (@item.statut_cmde == "Validé" || @item.statut_cmde == "Refusé" || @item.statut_cmde == "Annulé"))
+                                            {
+                                                <a onclick="DeleteCommandeClick('@item.commandeId')" title="Supprimer"><i class="fa fa-trash"></i></a>
+                                            }
+                                            @if (Session["role"] != null && Session["role"].ToString() != "2" && (@item.statut_cmde == "En cours" || @item.statut_cmde == "A corriger" || @item.statut_cmde == "En attente"))
+                                            {
 
-                                                    <a href="~/Commandes/CommandeCancel/@item.commandeId" title="Annuler"><i class="fa fa-undo"></i></a>
-                                                }
-                                            </div>
+                                                <a href="~/Commandes/CommandeCancel/@item.commandeId" title="Annuler"><i class="fa fa-undo"></i></a>
+                                            }
                                         </div>
-                                    </td>
-                                </tr>
+                                    </div>
+                                </td>
+                            </tr>
 
                             }
                         }

@@ -101,7 +101,7 @@
                 <div class="head">
                     <i class="icon icon-create-command"></i>
                     <h1>Créer commande</h1>
-                    <p>Veuillez remplir les champs Requis et appuyez sur Enregistrer pour éditer une commande</p>
+                    <p>Veuillez remplir les champs Requis et appuyez sur Enregistrer pour créer une commande</p>
                     @if (Session["VolumeInfo"] != null)
                     {
                         <p class="error-msg text-centered">@Session["VolumeInfo"].ToString()</p>
@@ -165,10 +165,7 @@
                             Autres
                             @Html.TextAreaFor(x => x.consigne_autres, new { @required = true, @name = "name" })
                         </label>
-                        <label for="" class="col-50 pull-left">
-                            Type de contenu
-                            @Html.DropDownListFor(x => Model.listContenuTypeId, new SelectList(Model.ListContenuType, "Value", "Text"), htmlAttributes: new { @id = "SelectItemContenuType" })
-                        </label>
+                       
                         <label for="" class="col-50 pull-right">
                             Date de livraison
                             @Html.TextBoxFor(x => x.date_livraison, "{0:dd/MM/yyyy}", new { type = "text" })
@@ -182,7 +179,7 @@
 
                     </section>
                     <section class="clearfix submit-area" id="toast">
-                        <input type="submit" value="Enregistrer" class="btn btn-success" />
+                        <input type="submit" value="Envoyer" class="btn btn-success" />
 
                         @Html.ActionLink("Annuler", "ListCommandes", "Commandes", new { @class = "btn btn-warning" })
                     </section>

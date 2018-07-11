@@ -64,22 +64,25 @@
                             <div class="wrap">
                                 @if (Model.statut_cmde != "Livré")
                                 {
-                                    <div class="commande-not-delivered">
-                                        <span>Livraison prévu le 15/06/2018</span>
+                                <div class="commande-not-delivered">
+                                    <span>Livraison prévue le  @Model.date_livraison.Value.ToString("dd/MM/yyyy") </span>
+                                    @if (Model.statut_cmde != "Annulé" && Model.statut_cmde != "Refusé")
+                                    {
                                         <div class="flex-content flex-jsbet-acenter option">
-                                            <a class="item">
+                                            <a class="item" onclick="@("window.location.href='" + @Url.Action("RelanceSMS", "Commandes", new {hash = Model.commandeId}) + "' ");" >
                                                 <span class="icon btn-warm"><i class="fa fa-envelope fa-2x"></i></span>
                                                 Relancer par SMS
                                             </a>
-                                            <a class="item">
+                                            <a class="item" onclick="@("window.location.href='" + @Url.Action("RelanceMail", "Commandes", new {hash = Model.commandeId}) + "' ");" >
                                                 <span class="icon btn-primary"><i class="fa fa-envelope-open fa-2x"></i></span>
                                                 Relancer par mail
                                             </a>
-                                            <a class="item">
+                                            <a class="item" onclick="@("window.location.href='" + @Url.Action("CommandeCancel", "Commandes", new {hash = Model.commandeId}) + "' ");" >
                                                 <span class="icon btn-warning"><i class="fa fa-undo fa-2x"></i></span>
                                                 Annulation
                                             </a>
                                         </div>
+                                    }
                                     </div>
                                 }
                                 else
