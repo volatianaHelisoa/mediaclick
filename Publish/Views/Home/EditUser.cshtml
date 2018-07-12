@@ -179,7 +179,7 @@
                         </label>
                         <label for="" class="col-50 pull-left">
                             Téléphone
-                            @Html.TextBoxFor(x => x.redactPhone, new { @type = "tel", @required = true })
+                            @Html.TextBoxFor(x => x.redactPhone, new { @type = "tel" })
                         </label>
                     </section>
                     @if (@Session["role"] != null && @Session["role"].ToString() == "4")
