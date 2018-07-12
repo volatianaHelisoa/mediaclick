@@ -575,17 +575,17 @@ i.fa.fa-times-circle.cancelText {
     background: white;
 }
 
-    #myDataTable_length label {
-        margin: 0;
-    }
+#myDataTable_length label {
+    margin: 0;
+}
 
-    #myDataTable_length select {
-        width: auto;
-        display: inline-block;
-        margin: 0;
-        padding: 7px 43px 7px 15px;
-        background-size: 36px;
-    }
+#myDataTable_length select {
+    width: auto;
+    display: inline-block;
+    margin: 0;
+    padding: 7px 43px 7px 15px;
+    background-size: 36px;
+}
 
 #myDataTable th {
     font-weight: normal;
@@ -619,55 +619,60 @@ i.fa.fa-times-circle.cancelText {
     margin-top: 20px;
 }
 
-    #myDataTable_paginate .paginate_button {
-        cursor: pointer;
-        background: url(../../../images/table-navigation-arrow.svg) no-repeat;
-        width: 26px;
-        height: 26px;
-        filter: grayscale(1);
-        -webkit-filter: grayscale(1);
-        -moz-filter: grayscale(1);
-        -ms-filter: grayscale(1);
-        font-size: 0;
-        border: none;
-        background-size: 200%;
-        display: inline-block;
-        vertical-align: middle;
-        margin: 0 20px;
-    }
+#myDataTable_paginate .paginate_button:hover {
+    filter: grayscale(0);
+    -webkit-filter: grayscale(0);
+    -moz-filter: grayscale(0);
+    -ms-filter: grayscale(0);
+}
 
-        #myDataTable_paginate .paginate_button:hover {
-            filter: grayscale(0);
-            -webkit-filter: grayscale(0);
-            -moz-filter: grayscale(0);
-            -ms-filter: grayscale(0);
-        }
+#myDataTable_paginate .paginate_button {
+    color:#646464 !important;
+}
 
-        #myDataTable_paginate .paginate_button.next {
-            background-position: right center;
-        }
+#myDataTable_paginate .paginate_button.next,
+#myDataTable_paginate .paginate_button.previous {
+    cursor: pointer;
+    background: url(../../../images/table-navigation-arrow.svg) no-repeat;
+    width: 26px;
+    height: 26px;
+    filter: grayscale(1);
+    -webkit-filter: grayscale(1);
+    -moz-filter: grayscale(1);
+    -ms-filter: grayscale(1);
+    font-size: 0;
+    border: none;
+    background-size: 200%;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 20px;
+}
 
-        #myDataTable_paginate .paginate_button.previous {
-            background-position: left center;
-        }
+#myDataTable_paginate .paginate_button.next {
+    background-position: right center;
+}
 
-        #myDataTable_paginate .paginate_button.current {
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            line-height: 29px;
-            padding: 0;
-            border: 1px solid #26b5ff;
-            color: #26b5ff !important;
-            background: white;
-            display: inline-block;
-            margin: 0 10px;
-            font-size: inherit;
-            filter: inherit;
-            -webkit-filter: inherit;
-            -moz-filter: inherit;
-            -ms-filter: inherit;
-        }
+#myDataTable_paginate .paginate_button.previous {
+    background-position: left center;
+}
+
+#myDataTable_paginate .paginate_button.current {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    line-height: 29px;
+    padding: 0;
+    border: 1px solid #26b5ff;
+    color: #26b5ff !important;
+    background: white;
+    display: inline-block;
+    margin: 0 10px;
+    font-size: inherit;
+    filter: inherit;
+    -webkit-filter: inherit;
+    -moz-filter: inherit;
+    -ms-filter: inherit;
+}
 
 #myDataTable_filter {
     display: none;
