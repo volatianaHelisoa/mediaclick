@@ -125,14 +125,14 @@
 
                     <div class="head">
                         <div class="flex-content flex-jcenter-acenter edit-avatar">
-                            <span>
-                                <img src="~/images/avatar.png" alt="" srcset="" />
+                            <span class="profil-thumb">
+                                <img id="new-profil-preview" src="~/images/avatar.png" alt="" srcset="" />
                             </span>
                             <div class="flex-content flex-col change-avatar">
-                                Votre avatar
-                                @Html.TextBoxFor(m => m.logoUrl, new { type = "file", name = "file", id = "site-logo" })
+                                <span class="file-name">Votre avatar</span>
+                                @Html.TextBoxFor(m => m.logoUrl, new { type = "file", name = "file", id = "user-profil" })
                                 <div class="input-custom">
-                                    <label for="site-logo" class="label-file">Choisir</label><span class="file-name"></span>
+                                    <label for="user-profil" class="label-file">Choisir</label>
                                 </div>
                             </div>
                         </div>
@@ -144,7 +144,7 @@
                             Nom (*)
                             @Html.TextBoxFor(x => x.userNom, new { @required = true })
                         </label>
-                        <label for="" class="col-50 pull-left">
+                        <label for="" class="col-50 pull-right">
                             Prénom (*)
                             @Html.TextBoxFor(x => x.userPrenom, new { @required = true })
                         </label>
@@ -168,42 +168,33 @@
                         <label for="" class="col-100">
 
                             <label for="" class="col-100">
-
                                 <input type="checkbox" name="selectedRole" value="1" id="checkReferenceur" style="display: inline-block; width: auto; vertical-align: middle; margin: 10px 0;" /> Referenceur
                             </label>
 
                             <label for="" class="col-100">
-
                                 <input type="checkbox" name="selectedRole" value="2" id="checkRedacteur" style="display: inline-block; width: auto; vertical-align: middle; margin: 10px 0;" /> Redacteur
                             </label>
 
-
-
                             <label for="" class="col-100">
-
                                 <input type="checkbox" name="selectedRole" value="3" id="checkManager" style="display: inline-block; width: auto; vertical-align: middle; margin: 10px 0;" />  Manager
                             </label>
 
                         </label>
+
+                        <span class="sep"></span>
 
                     </section>
                     <section class="clearfix" id="CheckEditRedacteur">
                         <div class="section-title">
                             <span>Redacteur informations</span>
                         </div>
-                        <label for="" class="col-50 pull-right">
-                            Volume / Jour (*)
-                            @Html.TextBoxFor(x => x.redactVolume, new { @type = "number" })
-                        </label>
                         <label for="" class="col-50 pull-left">
                             Tarif (Ariary) (*)
                             @Html.TextBoxFor(x => x.redactTarif, new { @type = "number" })
                         </label>
                         <label for="" class="col-50 pull-right">
-                            Thèmes
-
-
-                            @Html.DropDownListFor(x => Model.listThemeId, new SelectList(Model.ListTheme, "Value", "Text"), htmlAttributes: new { id = "SelectItemTheme" , multiple = "multiple", name = "selectedTheme" })
+                            Volume / Jour (*)
+                            @Html.TextBoxFor(x => x.redactVolume, new { @type = "number" })
                         </label>
                         <label for="" class="col-50 pull-left">
                             Niveau
@@ -215,8 +206,15 @@
                                                                 new SelectListItem { Value = "Avancé" , Text = "Avancé" }
                                                             })
                         </label>
+                        <label for="" class="col-50 pull-right">
+                            Thèmes
+                            <div class="clearfix dropdown-area">
+                                @Html.DropDownListFor(x => Model.listThemeId, new SelectList(Model.ListTheme, "Value", "Text"), htmlAttributes: new { id = "SelectItemTheme", multiple = "multiple", name = "selectedTheme" })
+                            </div>
+                        </label>
 
-                        <label for="" class="col-50 pull-left">
+
+                        <label for="" class="col-50 pull-left clearfix">
                             Mode de paiement (*)
                             @Html.DropDownListFor(x => x.redactModePaiement,
                                                              new List<SelectListItem> {
@@ -229,7 +227,7 @@
 
                     </section>
 
-                    <section class="clearfix submit-area" style=" margin: 70px auto 0;">
+                    <section class="clearfix submit-area" id="toast">
                         <input type="submit" value="Enregistrer" class="btn btn-success">
                         @Html.ActionLink("Annuler", "ListeUser", "Home", new { }, new { @class = "btn btn-warning" })
 

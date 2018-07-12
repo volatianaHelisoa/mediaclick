@@ -37,7 +37,7 @@
             success: function(response) {
                 console.log(response.d);
                 $('#notiContent').empty();
-                if (response.length == 0) {
+                if (response.length === 0) {
                     
                     $('#notiContent').append($('<li>Aucune nouvelle notification.</li>'));
                 }
@@ -49,7 +49,7 @@
                         var link = $(location).attr('host') + "/Commandes/DetailsCommande/" + value.commandeId + "?not=" + value.notificationId;
                         var dateStr = parseDate(value.datenotif);
                     
-                        tr_str += '<li class="recent">  <a href="' + link + '" id="submit-link">La commande  #' + value.commanderef + ' a été mis à jour par ' + value.fromUserName + ' le ' + dateStr + ' .</a>  </li>';
+                        tr_str += '<li class="recent"><a href="' + link + '" id="submit-link"> La commande #' + value.commanderef + ' a été mise à jour par ' + value.fromUserName + ' le ' + dateStr + ' .</a></li>';
                     });
                 
                     $('#notiContent').html(tr_str);

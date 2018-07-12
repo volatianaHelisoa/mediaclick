@@ -28,6 +28,7 @@ main#wrapper {
 .popup-container h1 {
     text-transform: uppercase;
     font-size: 25px;
+    margin-bottom: 15px;
 }
 
 .login-form,
@@ -128,32 +129,34 @@ a.watermark-mc {
     background: white;
 }
 
-    #top-bar.fixedNav {
-        position: fixed !important;
-        top: 0;
-        left: 0;
-        width: 100%;
-    }
+#top-bar.fixedNav {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 20;
+}
 
-    #top-bar .logo {
-        max-width: 110px;
-        display: block;
-    }
+#top-bar .logo {
+    max-width: 110px;
+    display: block;
+}
 
-        #top-bar .logo > img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
+#top-bar .logo > img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
 
-    #top-bar .profil {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-left: 25px;
-        color: #646464;
-        position: relative;
-    }
+#top-bar .profil {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 25px;
+    color: #646464;
+    position: relative;
+    cursor: pointer;
+}
 
 @media (min-width:1201px) {
     #top-bar .profil:hover {
@@ -235,7 +238,7 @@ a.watermark-mc {
     top: 71px;
     text-align: center;
     padding: 5px 0;
- 
+    z-index: 10;
     width: 100%;
     margin: 0 auto;
     transition: all ease-in-out linear 300ms;
@@ -387,26 +390,30 @@ a.watermark-mc {
     display: none;
 }
 
-    .notifs-content ul {
-        padding: 0;
-        margin: 0;
-    }
+.notifs-content ul {
+    padding: 0;
+    margin: 0;
+}
 
-    .notifs-content li {
-        list-style: none;
-        padding: 10px 20px;
-        font-family: 'RL', Arial, Helvetica, sans-serif;
-        font-size: 13px;
-    }
+.notifs-content li {
+    list-style: none;
+    padding: 10px 20px;
+    font-family: 'RL', Arial, Helvetica, sans-serif;
+    font-size: 13px;
+}
 
-        .notifs-content li.recent {
-            background: #f1faff;
-            margin-bottom: 1px
-        }
+.notifs-content li.recent {
+    background: #f1faff;
+    margin-bottom: 1px;
 
-    .notifs-content .time {
-        font-size: 10px;
-    }
+}
+.notifs-content li a {
+    display: block;
+}
+
+.notifs-content .time {
+    font-size: 10px;
+}
 /* PROFIL POPUP */
 .profil-menu {
     display: none;

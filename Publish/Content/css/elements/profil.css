@@ -65,4 +65,5 @@
     text-overflow: ellipsis;
     overflow: hidden;
 	text-transform: inherit;
+	white-space: nowrap;
 }

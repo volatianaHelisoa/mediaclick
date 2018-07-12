@@ -20,7 +20,7 @@ $(document).ready(function () {
             $(topBar).removeClass('fixedNav');
         }
         var onglets = $('#single-container .onglets');
-        if (winScroll > 10) {
+        if (winScroll > 50) {
             $(onglets).addClass('fixedOnglets');
             $('a.back-link').show();
         } else {
@@ -37,15 +37,17 @@ $(document).ready(function () {
         }
     });
 
-    notifsActionner.click(function () {
+    notifsActionner.click(function (e) {
         $(this).toggleClass("active");
-        $(".notifs-content").toggle();
+        $(".notifs-content").slideToggle();
         $(this).children('.count-notif').hide();
+        e.stopPropagation();
     });
 
-    userProfil.click(function () {
+    userProfil.click(function (e) {
         $(this).toggleClass("active");
-        popup.toggle();
+        popup.slideToggle();
+        e.stopPropagation();
     });
 
     var loadFile = function (event) {
