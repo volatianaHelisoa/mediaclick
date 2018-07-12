@@ -585,6 +585,7 @@ i.fa.fa-times-circle.cancelText {
 
 #myDataTable_length label {
     margin: 0;
+    font-weight: normal;
 }
 
 #myDataTable_length select {
