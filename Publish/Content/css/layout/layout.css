@@ -499,6 +499,7 @@ i.fa.fa-times-circle.cancelText {
     border-bottom: 1px solid #ebebeb;
     padding: 5px 0;
     margin-bottom: 20px;
+    min-height : 45px;
 }
 
 .card .filters span {

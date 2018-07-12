@@ -61,18 +61,19 @@
 
                 </div>
             </div>
-            @if (@Session["role"] != null && @Session["role"].ToString() == "4")
-            { 
-                <div class="filters flex-content flex-jsbet-acenter">
-                <div class="flex-content flex-jsbet-acenter">
-                    Sélection
-                    <span onclick="CheckedClick()">Tous</span>
-                    <span onclick="DecheckedClick()">Aucun</span>
-                    <button class="btn btn-small" onclick="DeleteAllUserSelected(@ViewBag.nbrow)"><i class="fa fa-trash"></i> Supprimer la sélection</button>
+           
+            <div class="filters flex-content flex-jsbet-acenter">
+                @if (@Session["role"] != null && @Session["role"].ToString() == "4")
+                {
+                    <div class="flex-content flex-jsbet-acenter">
+                        Sélection
+                        <span onclick="CheckedClick()">Tous</span>
+                        <span onclick="DecheckedClick()">Aucun</span>
+                        <button class="btn btn-small" onclick="DeleteAllUserSelected(@ViewBag.nbrow)"><i class="fa fa-trash"></i> Supprimer la sélection</button>
+                    </div>
+                }
                 </div>
-
-                </div>
-            }
+           
            
             <table id="myDataTable">
                 <thead>

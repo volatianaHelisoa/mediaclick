@@ -59,8 +59,9 @@
                         </span>
                         <div>
                             <span class="user-name">@Session["name"] @Session["surname"]</span>
-                            <a href="#" class="user-mail link">@Session["mail"]</a>
-                            <button class="btn btn-success btn-small" onclick="@("window.location.href='" + @Url.Action("Edit", "Home") + "'");">Modifier</button>
+                            <a href="~/Home/DetailsRedacteurs/@Session["UserId"]" class="user-mail link">@Session["mail"]</a>
+                            <a href="~/Home/EditUser/@Session["UserId"]" class="btn btn-success btn-small" title="Modifier">Modifier</a>
+                          
                         </div>
                     </div>
                     <button class="logout" onclick="@("window.location.href='" + @Url.Action("LogoutPage", "Login") + "'");">Deconnexion</button>

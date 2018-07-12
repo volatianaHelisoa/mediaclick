@@ -147,85 +147,89 @@
                             @Html.TextBoxFor(x => x.redactPhone, new { @type = "tel", @required = true })
                         </label>
                     </section>
-                    <section class="clearfix">
-                        <div class="section-title">
-                            <span>Role</span>
-                        </div>
-                        <label for="" class="col-100">
-                            <label for="" class="col-100">
-                                <input type="checkbox" name="selectedRole" value="1" id="checkReferenceur" style="display: inline-block; width: auto; vertical-align: middle; margin: 10px 0;" /> Referenceur
-                            </label>
-
-                            <label for="" class="col-100">
-
-                                <input type="checkbox" name="selectedRole" value="2" id="checkRedacteur" style="display: inline-block; width: auto; vertical-align: middle; margin: 10px 0;" /> Redacteur
-                            </label>
-                            <label for="" class="col-100">
-
-                                <input type="checkbox" name="selectedRole" value="3" id="checkManager" style="display: inline-block; width: auto; vertical-align: middle; margin: 10px 0;" />  Manager
-                            </label>
-
-                        </label>
-                        <span class="sep"></span>
-                    </section>
-                    @if (ViewBag.userRole == 2) //if redacteur user
+                    @if (@Session["role"] != null && @Session["role"].ToString() == "4")
                     {
-                    <section class="clearfix" id="CheckEditRedacteur">
-                        <div class="section-title">
-                            <span>Redacteur informations</span>
-                        </div>
-                        <label for="" class="col-50 pull-right">
-                            Volume / Jour
-                            @Html.TextBoxFor(x => x.redactVolume, new { @type = "number" })
-                        </label>
-                        <label for="" class="col-50 pull-left">
-                            Tarif (Ariary)
-                            @Html.TextBoxFor(x => x.redactTarif, new { @type = "number" })
-                        </label>
-                        <label for="" class="col-50 pull-left">
-                            Niveau
-                            @Html.DropDownListFor(x => x.redactNiveau,
-                                                            new List<SelectListItem> {
-                                                                new SelectListItem { Value = " " , Text = "Selectionner niveau" },
-                                                                new SelectListItem { Value = "Bas" , Text = "Bas" },
-                                                                new SelectListItem { Value = "Moyen" , Text = "Moyen" },
-                                                                new SelectListItem { Value = "Avancé" , Text = "Avancé" }
-                                                            })
-                        </label>
+                        {
+                            <section class="clearfix">
+                                <div class="section-title">
+                                    <span>Role</span>
+                                </div>
+                                <label for="" class="col-100">
+                                    <label for="" class="col-100">
+                                        <input type="checkbox" name="selectedRole" value="1" id="checkReferenceur" style="display: inline-block; width: auto; vertical-align: middle; margin: 10px 0;" /> Referenceur
+                                    </label>
 
-                        <label for="" class="col-50 pull-right">
-                            Thèmes
-                            <div class="clearfix dropdown-area">
-                                @if (Model.listThemeId == null)
-                                {
-                                    @Html.DropDownListFor(x => Model.listThemeId, new SelectList(Model.ListTheme, "Value", "Text"), htmlAttributes: new { id = "SelectItemTheme", multiple = "multiple" })
-                                }
-                                @if (Model.listThemeId != null)
-                                {
-                                    @Html.ListBoxFor(model => model.listThemeId, Model.themeList, htmlAttributes: new { id = "SelectItemTheme", multiple = "multiple" })
-                                }
-                            </div>
-                        </label>
+                                    <label for="" class="col-100">
 
-                        <label for="" class="col-50 pull-left clearfix">
-                            Mode de paiement
-                            @Html.DropDownListFor(x => x.redactModePaiement,
-                                                             new List<SelectListItem> {
-                                                                 new SelectListItem { Value = " " , Text = "Selectionner mode de paiement" },
-                                                                 new SelectListItem { Value = "Chèque" , Text = "Chèque" },
-                                                                 new SelectListItem { Value = "E-money" , Text = "E-money" },
-                                                                 new SelectListItem { Value = "Virement bacaire" , Text = "Virement bacaire" }
-                                                             })
-                        </label>
+                                        <input type="checkbox" name="selectedRole" value="2" id="checkRedacteur" style="display: inline-block; width: auto; vertical-align: middle; margin: 10px 0;" /> Redacteur
+                                    </label>
+                                    <label for="" class="col-100">
 
-                    </section>
-                    }
-                    <section class="clearfix submit-area" id="toast">
-                        <input type="submit" value="Enregistrer" class="btn btn-success">
-                        @Html.ActionLink("Annuler", "ListeUser", "Home", new { }, new { @class = "btn btn-warning" })
+                                        <input type="checkbox" name="selectedRole" value="3" id="checkManager" style="display: inline-block; width: auto; vertical-align: middle; margin: 10px 0;" />  Manager
+                                    </label>
 
-                    </section>
-                </fieldset>
+                                </label>
+                                <span class="sep"></span>
+                            </section>
+                        }
+                        @if (ViewBag.userRole == 2) //if redacteur user
+                        {
+                            <section class="clearfix" id="CheckEditRedacteur">
+                                <div class="section-title">
+                                    <span>Redacteur informations</span>
+                                </div>
+                                <label for="" class="col-50 pull-right">
+                                    Volume / Jour
+                                    @Html.TextBoxFor(x => x.redactVolume, new { @type = "number" })
+                                </label>
+                                <label for="" class="col-50 pull-left">
+                                    Tarif (Ariary)
+                                    @Html.TextBoxFor(x => x.redactTarif, new { @type = "number" })
+                                </label>
+                                <label for="" class="col-50 pull-left">
+                                    Niveau
+                                    @Html.DropDownListFor(x => x.redactNiveau,
+                                                                    new List<SelectListItem> {
+                                                                        new SelectListItem { Value = " " , Text = "Selectionner niveau" },
+                                                                        new SelectListItem { Value = "Bas" , Text = "Bas" },
+                                                                        new SelectListItem { Value = "Moyen" , Text = "Moyen" },
+                                                                        new SelectListItem { Value = "Avancé" , Text = "Avancé" }
+                                                                    })
+                                </label>
+
+                                <label for="" class="col-50 pull-right">
+                                    Thèmes
+                                    <div class="clearfix dropdown-area">
+                                        @if (Model.listThemeId == null)
+                                        {
+                                            @Html.DropDownListFor(x => Model.listThemeId, new SelectList(Model.ListTheme, "Value", "Text"), htmlAttributes: new { id = "SelectItemTheme", multiple = "multiple" })
+                                        }
+                                        @if (Model.listThemeId != null)
+                                        {
+                                            @Html.ListBoxFor(model => model.listThemeId, Model.themeList, htmlAttributes: new { id = "SelectItemTheme", multiple = "multiple" })
+                                        }
+                                    </div>
+                                </label>
+
+                                <label for="" class="col-50 pull-left clearfix">
+                                    Mode de paiement
+                                    @Html.DropDownListFor(x => x.redactModePaiement,
+                                                                     new List<SelectListItem> {
+                                                                         new SelectListItem { Value = " " , Text = "Selectionner mode de paiement" },
+                                                                         new SelectListItem { Value = "Chèque" , Text = "Chèque" },
+                                                                         new SelectListItem { Value = "E-money" , Text = "E-money" },
+                                                                         new SelectListItem { Value = "Virement bacaire" , Text = "Virement bacaire" }
+                                                                     })
+                                </label>
+
+                            </section>
+                        }
+                        <section class="clearfix submit-area" id="toast">
+                            <input type="submit" value="Enregistrer" class="btn btn-success">
+                            @Html.ActionLink("Annuler", "ListeUser", "Home", new { }, new { @class = "btn btn-warning" })
+
+                        </section>
+                    </fieldset>
             }
         </div>
     </div>
