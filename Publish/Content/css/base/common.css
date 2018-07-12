@@ -304,3 +304,22 @@ ul.multiselect-container .multiselect-clear-filter {
     min-width: inherit;
     padding: 12px 12px;
 }
+
+.commande-review {
+    max-width: 500px;
+    display: block;
+    margin: 10px auto 30px;
+    background-color: #f9f9f9;
+    padding: 20px;
+}
+
+.commande-review span {
+    display: block;
+    width: 100%;
+    padding: 10px 0;
+    border-bottom: 1px solid #ebebeb;
+}
+
+.commande-review span:last-of-type {
+    border: none
+}
