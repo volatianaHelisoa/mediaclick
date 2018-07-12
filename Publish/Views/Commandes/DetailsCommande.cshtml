@@ -84,7 +84,7 @@
                                         </div>
                                     }
 
-                                    else if (Model.statut_cmde != "Livré")
+                                    else if (Model.statut_cmde != "Livré" || Model.statut_cmde != "Validé")
                                     {                                        
                                             <span>Livraison prévue le  @Model.date_livraison.Value.ToString("dd/MM/yyyy") a été annulée ou refusée.</span>
                                      }
