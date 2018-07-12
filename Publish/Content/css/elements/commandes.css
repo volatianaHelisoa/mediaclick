@@ -29,12 +29,6 @@
     padding: 0 20px;
     margin-left: -2px;
 }
-.head-list .resume li a {
-    color: #868686;
-}
-.head-list .resume li a:hover {
-    cursor: pointer;
-}
 
 .head-list .resume li:last-of-type {
     border-right: none;
@@ -107,7 +101,7 @@
 .commande-resume td p {
     margin: 0 0 10px;
 }
-/* Commande non livrï¿½ */
+/* Commande non livré */
 .commande-view .commande-not-delivered > span {
     font-size: 20px;
     text-align: center;
