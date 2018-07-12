@@ -35,7 +35,8 @@
                     if (ViewBag.ErrorMessage != null)
                     {
                         <p class="error-msg text-centered">
-                        Le nombre de mots maximal est atteint, veuillez revoir votre contenu.</p>
+                            Le nombre de mots maximal est atteint, veuillez revoir votre contenu.
+                        </p>
                     }
                     if (Session["VolumeInfo"] != null)
                     {
@@ -98,7 +99,7 @@
                                 Autres
                                 @Html.TextBoxFor(x => x.consigne_autres, new { @name = "name" })
                             </label>
-                            
+
                             <label for="" class="col-50 pull-right">
                                 Date de livraison
                                 @Html.TextBoxFor(x => x.date_livraison, "{0:dd/MM/yyyy}", new { type = "text" })
@@ -155,7 +156,7 @@
     </main>
 }
 else
-{ Response.Redirect("~/Login/Accueil");}
+{ Response.Redirect("~/Login/Accueil"); }
 <!--  Dialogue succès ajout user   -->
 <div id="addUserPopUp">
 
@@ -168,6 +169,8 @@ else
 @section Scripts
 {
     <link rel="stylesheet" href="~/Content/css/bootstrap-datepicker3.css" />
+    <link rel="stylesheet" href="~/Content/css/elements/commandes.css" />
+
     <script type="text/javascript" src="~/Scripts/js/bootstrap-datepicker.min.js"></script>
     <script type="text/javascript" src="~/Scripts/scriptredacteur.js"></script>
 
@@ -194,8 +197,9 @@ else
             tinymce.init({
                 selector: 'textarea',
                 height: 500,
-                width: 500,
+                width: '100%',
                 menubar: false,
+                language: 'fr',
                 plugins: [
                     'advlist autolink lists link image charmap anchor textcolor',
                     'searchreplace visualblocks code fullscreen',

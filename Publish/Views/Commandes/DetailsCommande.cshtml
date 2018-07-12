@@ -91,7 +91,7 @@
 
                                     </div>
                                 }
-                                else
+                                @if (Model.statut_cmde == "Livré")
                                 {
                                     <span>
                                         <strong>Titre : </strong>@Html.DisplayFor(model => model.balise_titre)
@@ -103,7 +103,7 @@
                                         </div>
 
                                         <div class="contenu-footer flex-content flex-jsbet-acenter">
-                                            @*<span> @ViewBag.ContentLength  sur @Html.DisplayFor(model => model.nombre_mots) mot(s) utilisé(s)</span>*@
+                                            <span> @ViewBag.ContentLength  sur @Html.DisplayFor(model => model.nombre_mots) mot(s) utilisé(s)</span>                                           
                                             <button class="btn-copy" data-clipboard-action="copy" data-clipboard-target=".commande-contenu">Copier</button>
                                         </div>
                                     </div>
