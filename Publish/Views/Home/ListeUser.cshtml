@@ -29,7 +29,8 @@
 
 }
 
-@if (Session["name"] != null)
+@if (Session["name"] != null && @Session["role"] != null && @Session["role"].ToString() != "2")
+                    
 {
 <main id="wrapper">
     <div id="single-container">

@@ -215,7 +215,7 @@
                             </div>
                             <label for="" class="col-100">
                                 <label for="" class="col-100">
-                                    <input type="checkbox" name="selectedRole" value="1" id="checkReferenceur" style="display: inline-block; width: auto; vertical-align: middle; margin: 10px 0;"  disabled /> Referenceur
+                                    <input type="checkbox" name="selectedRole" value="1" id="checkReferenceur" style="display: inline-block; width: auto; vertical-align: middle; margin: 10px 0;" disabled /> Referenceur
                                 </label>
 
                                 <label for="" class="col-100">
@@ -231,7 +231,7 @@
                             <span class="sep"></span>
                         </section>
                     }
-                    @if (ViewBag.userRole == 2) //if redacteur user
+                    @if (ViewBag.userRole != 2) //if redacteur user
                     {
                         <section class="clearfix" id="CheckEditRedacteur">
                             <div class="section-title">
@@ -283,11 +283,62 @@
 
                         </section>
                     }
-                    <section class="clearfix submit-area" id="toast">
-                        <input type="submit" value="Enregistrer" class="btn btn-success">
-                        @Html.ActionLink("Annuler", "ListeUser", "Home", new { }, new { @class = "btn btn-warning" })
 
-                    </section>
+                    @if (ViewBag.userRole == 2) //if redacteur user
+                    {
+                        <section class="clearfix user-info" id="CheckEditRedacteur">
+                            <div class="section-title">
+                                <span>Redacteur informations</span>
+                            </div>
+                            <label for="" class="col-50 pull-right">
+                                <div class="item">
+                                    <strong>Volume / Jour</strong>
+                                    <span>@Html.DisplayFor(x => x.redactVolume, new { @type = "number" })</span>
+                                </div>
+                            </label>
+                            <label for="" class="col-50 pull-left">
+                                <div class="item">
+                                    <strong>Tarif (Ariary)</strong>
+                                    <span>@Html.DisplayFor(x => x.redactTarif, new { @type = "number" })</span>
+                                </div>
+                            </label>
+                            <label for="" class="col-50 pull-right">
+                                <div class="item">
+                                    <strong>Thèmes</strong>
+                                    <span>@Html.DisplayFor(x => x.redactThemes)</span>
+                                </div>
+                            </label>
+                            <label for="" class="col-50 pull-left">
+                                <div class="item">
+                                    <strong>Niveau</strong>
+                                    <span>@Html.DisplayFor(x => x.redactNiveau)</span>
+                                </div>
+                            </label>
+
+                            <label for="" class="col-50 pull-left">
+                                <div class="item">
+                                    <strong>Mode de paiement</strong>
+                                    <span>@Html.DisplayFor(x => x.redactModePaiement)</span>
+                                </div>
+                            </label>
+                        </section>
+                    }
+                    @if (@Session["role"] != null && @Session["role"].ToString() != "2")
+                    {
+                        <section class="clearfix submit-area" id="toast">
+                            <input type="submit" value="Enregistrer" class="btn btn-success">
+                            @Html.ActionLink("Annuler", "ListeUser", "Home", new { }, new { @class = "btn btn-warning" })
+
+                        </section>
+                    }
+                    else
+                    {
+                        <section class="clearfix submit-area" id="toast">
+                            <input type="submit" value="Enregistrer" class="btn btn-success">
+                            @Html.ActionLink("Annuler", "DetailsRedacteurs", "Home", new { hash = Model.userId }, new { @class = "btn btn-warning" })
+
+                        </section>
+                    }
                 </fieldset>
             }
         </div>

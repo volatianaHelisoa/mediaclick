@@ -67,18 +67,16 @@
                 <input type="hidden" value="@Model.userId" name="idUser">
                 <div class="head">
                     <div class="flex-content flex-jcenter-acenter edit-avatar">
-                        <span>
+                        <span class="profil-thumb">
 
                             @if (!string.IsNullOrEmpty(Model.logoUrl))
                             {
-                                <img src="@Model.logoUrl" alt="@Model.userNom" title="@Model.userNom" />
+                                <img id="new-profil-preview" src="@Model.logoUrl" alt="@Model.userNom" title="@Model.userNom" />
                             }
                             else
-                            { <img src="~/images/avatar.png" alt="" srcset="" />}
+                            { <img id="new-profil-preview" src="~/images/avatar.png" alt="" srcset="" />}
                         </span>
-                        <div class="flex-content flex-col change-avatar">
-                            @Html.DisplayFor(m => m.logoUrl, new { type = "file", name = "file", id = "site-logo" })
-                        </div>
+                        
                     </div>
                 </div>
 
@@ -180,7 +178,7 @@
                 <section class="clearfix submit-area">
 
                     @Html.ActionLink("Edit", "EditUser", "Home", new { hash = Model.userId }, new { @class = "btn btn-success" })
-                    @Html.ActionLink("Annuler", "ListeUser", "Home", new { }, new { @class = "btn btn-warning" })
+                    @Html.ActionLink("Annuler", "ListCommandes", "Commandes", new { }, new { @class = "btn btn-warning" })
 
                 </section>
 

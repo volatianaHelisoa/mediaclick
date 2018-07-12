@@ -45,8 +45,8 @@
                 {
                     <div class="resume with-shadow">
                         <ul>
-                            <li>Commande en cours : @ViewBag.commandesEnCours</li>
-                            <li>Commande en attente : @ViewBag.commandesEnAttente</li>                            
+                            <li><a onclick="@(" window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "ListCommandes" }) + "' ");">Commande en cours : @ViewBag.commandesEnCours</a></li>
+                            <li><a onclick="@(" window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "ListCommandes" }) + "' ");">Commande en attente : @ViewBag.commandesEnAttente</a></li>                            
                             <li>Livraison en retard : @ViewBag.commandesEnRetard</li>
                             <li>Commande livrée : @ViewBag.commandesLivrer</li>
                             <li>Commande à facturer : @ViewBag.commandesFacturer</li>
@@ -86,7 +86,7 @@
 
                     </div>
                     <div class="submit-area">
-                        <input type="button" value="Commande à valider" class="btn btn-warm btn-medium" onclick="@(" window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "ListCommandeAValider" }) + "' ");">
+                       
                         @if (@Session["role"] != null && @Session["role"].ToString() != "2")
                         {
                             <input type="button" value="Créer commande" class="btn btn-success btn-medium" onclick="@(" window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "Create" }) + "' ");">
@@ -94,32 +94,37 @@
                     </div>
                 </div>
                 <div class="filters flex-content flex-jsbet-acenter">
-                    <div class="flex-content flex-jsbet-acenter">
-                        Sélection
-                        <span onclick="CheckedCmdeClick()">Tous</span>
-                        <span onclick="DecheckedCmdeClick()">Aucun</span>
-                        <button class="btn btn-small" onclick="DeleteAllCommandeSelected(@ViewBag.nbrow)"><i class="fa fa-trash"></i> Supprimer la sélection</button>
+                    @if (@Session["role"] != null && @Session["role"].ToString() != "2")
+                    {
+                        <div class="flex-content flex-jsbet-acenter">
+                            Sélection
+                            <span onclick="CheckedCmdeClick()">Tous</span>
+                            <span onclick="DecheckedCmdeClick()">Aucun</span>
+                            <button class="btn btn-small" onclick="DeleteAllCommandeSelected(@ViewBag.nbrow)"><i class="fa fa-trash"></i> Supprimer la sélection</button>
+                        </div>
+                    }
                     </div>
-
-                </div>
                 <table id="myDataTable">
                     <thead>
                         <tr>
-                            <th>
-                                <input type="checkbox" class="checkbox" onclick="ClickAllCommandeInListCommande()" id="checkAllCmde" />
-                            </th>
-                            <th>#</th>
-                            <th>Demandeur</th>
-                            <th>Redacteur</th>
-                            <th>Date de la commande</th>
-                            <th>Date de la livraison</th>
-                            <th>Projet</th>
-                            <th>Thématique</th>
-                            <th>Type de textes</th>
-                            <th>Etat commande </th>
-                            <th>Notification paiement</th>
-                            <th class="option">Action</th>
-                        </tr>
+                            @if (@Session["role"] != null && @Session["role"].ToString() != "2")
+                            {
+                                <th>
+                                    <input type="checkbox" class="checkbox" onclick="ClickAllCommandeInListCommande()" id="checkAllCmde" />
+                                </th>
+                            }
+                                <th>#</th>
+                                <th>Demandeur</th>
+                                <th>Redacteur</th>
+                                <th>Date de la commande</th>
+                                <th>Date de la livraison</th>
+                                <th>Projet</th>
+                                <th>Thématique</th>
+                                <th>Type de textes</th>
+                                <th>Etat commande </th>
+                                <th>Notification paiement</th>
+                                <th class="option">Action</th>
+                            </tr>
                     </thead>
                     <tbody class="t1">
                         @if (ViewBag.listeCommandeVms != null)
@@ -128,12 +133,15 @@
                             foreach (var item in ViewBag.listeCommandeVms)
                             {
                         <tr>
-                            <td><input type="checkbox" class="checkbox" name="selectedCmde" value="@item.commandeId" /></td>
-                            <td>@item.commandeREF</td>
-                            <td>@item.commandeDemandeur</td>
-                            <td>@item.commandeRedacteur</td>
-                              <td>@item.date_cmde</td>
-                           
+                            @if (@Session["role"] != null && @Session["role"].ToString() != "2")
+                            {
+                                <td><input type="checkbox" class="checkbox" name="selectedCmde" value="@item.commandeId" /></td>
+                            }
+                                <td>@item.commandeREF</td>
+                                <td>@item.commandeDemandeur</td>
+                                <td>@item.commandeRedacteur</td>
+                                <td>@item.date_cmde</td>
+
                                 <td>@item.date_livraison</td>
                                 <td>@item.projet </td>
                                 <td>@item.thematique</td>
