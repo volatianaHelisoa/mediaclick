@@ -147,9 +147,9 @@
                             @Html.TextBoxFor(x => x.redactPhone, new { @type = "tel", @required = true })
                         </label>
                     </section>
-                    @if (@Session["role"] != null && @Session["role"].ToString() == "4")
-                    {
+                        @if (@Session["role"] != null && @Session["role"].ToString() == "4")
                         {
+                        
                             <section class="clearfix">
                                 <div class="section-title">
                                     <span>Role</span>
