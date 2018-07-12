@@ -283,7 +283,8 @@ a.watermark-mc {
 }
 
 .onglets.fixedOnglets a:hover {
-    background-color: none;
+    background: transparent;
+    color: #26b5ff;
 }
 
 .onglets.fixedOnglets a.active {
