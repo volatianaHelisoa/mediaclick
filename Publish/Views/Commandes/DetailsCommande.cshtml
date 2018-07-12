@@ -61,27 +61,27 @@
                                 <span>Livrable</span>
                             </div>
                             <div class="wrap">
-                                @if (Model.statut_cmde != "Livré")
+                                @if (@Session["role"] != null && @Session["role"].ToString() != "2")
                                 {
-                                <div class="commande-not-delivered">
-                                    <span>Livraison prévue le  @Model.date_livraison.Value.ToString("dd/MM/yyyy") </span>
-                                    @if (Model.statut_cmde != "Annulé" && Model.statut_cmde != "Refusé")
-                                    {
-                                        <div class="flex-content flex-jsbet-acenter option">
-                                            <a class="item" onclick="@("window.location.href='" + @Url.Action("RelanceSMS", "Commandes", new {hash = Model.commandeId}) + "' ");" >
-                                                <span class="icon btn-warm"><i class="fa fa-paper-plane fa-2x"></i></span>
-                                                Relancer par SMS
-                                            </a>
-                                            <a class="item" onclick="@("window.location.href='" + @Url.Action("RelanceMail", "Commandes", new {hash = Model.commandeId}) + "' ");" >
-                                                <span class="icon btn-primary"><i class="fa fa-envelope-open fa-2x"></i></span>
-                                                Relancer par mail
-                                            </a>
-                                            <a class="item" onclick="@("window.location.href='" + @Url.Action("CommandeCancel", "Commandes", new {hash = Model.commandeId}) + "' ");" >
-                                                <span class="icon btn-warning"><i class="fa fa-undo fa-2x"></i></span>
-                                                Annulation
-                                            </a>
-                                        </div>
-                                    }
+                                    <div class="commande-not-delivered">
+                                        <span>Livraison prévue le  @Model.date_livraison.Value.ToString("dd/MM/yyyy") </span>
+                                        @if (Model.statut_cmde != "Annulé" || Model.statut_cmde != "Refusé" || Model.statut_cmde != "Livré")
+                                        {
+                                            <div class="flex-content flex-jsbet-acenter option">
+                                                <a class="item" onclick="@("window.location.href='" + @Url.Action("RelanceSMS", "Commandes", new {hash = Model.commandeId}) + "' ");">
+                                                    <span class="icon btn-warm"><i class="fa fa-paper-plane fa-2x"></i></span>
+                                                    Relancer par SMS
+                                                </a>
+                                                <a class="item" onclick="@("window.location.href='" + @Url.Action("RelanceMail", "Commandes", new {hash = Model.commandeId}) + "' ");">
+                                                    <span class="icon btn-primary"><i class="fa fa-envelope-open fa-2x"></i></span>
+                                                    Relancer par mail
+                                                </a>
+                                                <a class="item" onclick="@("window.location.href='" + @Url.Action("CommandeCancel", "Commandes", new {hash = Model.commandeId}) + "' ");">
+                                                    <span class="icon btn-warning"><i class="fa fa-undo fa-2x"></i></span>
+                                                    Annulation
+                                                </a>
+                                            </div>
+                                        }
                                     </div>
                                 }
                                 else
