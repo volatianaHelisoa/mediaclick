@@ -233,32 +233,6 @@ a.watermark-mc {
     border-top: 1px solid #ebebeb;
 }
 
-.onglets.fixedOnglets {
-    position: sticky;
-    top: 71px;
-    text-align: center;
-    padding: 5px 0;
-    z-index: 10;
-    width: 100%;
-    margin: 0 auto;
-    transition: all ease-in-out linear 300ms;
-    -webkit-transition: all ease-in-out linear 300ms;
-    -ms-transition: all ease-in-out linear 300ms;
-    -moz-transition: all ease-in-out linear 300ms;
-    background-color: #12306e;
-}
-
-.onglets.fixedOnglets a {
-    color: white;
-    background: transparent;
-    font-size: 14px;
-}
-
-.onglets.fixedOnglets a.active {
-    background: transparent;
-    color: #26b5ff;
-}
-
 .onglets ul {
     margin: 0;
     padding: 0;
@@ -288,6 +262,34 @@ a.watermark-mc {
     padding: 12px 30px
 }
 
+.onglets.fixedOnglets {
+    position: sticky;
+    top: 8px;
+    text-align: center;
+    padding: 5px 0;
+    z-index: 20;
+    max-width: 55%;
+    margin: 0 auto;
+    transition: all ease-in-out linear 300ms;
+    -webkit-transition: all ease-in-out linear 300ms;
+    -ms-transition: all ease-in-out linear 300ms;
+    -moz-transition: all ease-in-out linear 300ms;
+}
+
+.onglets.fixedOnglets a {
+    background: transparent;
+    font-size: 14px;
+    color:#646464;
+}
+
+.onglets.fixedOnglets a:hover {
+    background-color: none;
+}
+
+.onglets.fixedOnglets a.active {
+    background: transparent;
+    color: #26b5ff;
+}
 .back-office .head {
     border-bottom: 1px solid #ebebeb;
     text-align: center;

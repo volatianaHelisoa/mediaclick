@@ -139,13 +139,12 @@
                             </label>
                             <label for="" class="col-100">
                                 Contenu
-                                @Html.TextAreaFor(m => m.contenu_livre, new { rows = "20", style = "resize:none;", @class = "textarea-editor", maxlength = @Html.DisplayNameFor(m => m.nombre_mots) })
+                                @Html.TextAreaFor(m => m.contenu_livre, new { rows = "20", style = "resize:none;", @class = "textarea-editor command-edition", maxlength = @Html.DisplayNameFor(m => m.nombre_mots) })
                             </label>
-                            <span class="left_char">0 sur <div id="data-limit-input">@Html.DisplayFor(model => model.nombre_mots)</div> caractère(s) utilisé(s)</span>
                         </section>
                     }
 
-                    <section class="clearfix submit-area">
+                    <section class="clearfix submit-area" id="toast">
                         <input type="submit" value="Envoyer" class="btn btn-success" />
                         @Html.ActionLink("Annuler", "ListCommandes", "Commandes", new { @class = "btn btn-warning" })
                     </section>
@@ -221,10 +220,10 @@ else
                         // Displays count
                         $(".left_char").html(charLength + " sur " + charLimit + " caractère(s) utilisé(s)");
                         // Alert when max is reached
-                        if (charLength > charLimit) {
+                        /* if (charLength > charLimit) {
                             $(".left_char").html("<strong>Le nombre de caractères maximum de " +
                                 charLimit +
-                                " atteint.</strong>");
+                                " atteint.</strong>"); */
                         }
                     });
                     ed.on('change', function (e) {
