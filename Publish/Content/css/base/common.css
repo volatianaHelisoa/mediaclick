@@ -304,3 +304,11 @@ ul.multiselect-container .multiselect-clear-filter {
     min-width: inherit;
     padding: 12px 12px;
 }
+
+.disabled {
+    opacity: 0.6;
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+}

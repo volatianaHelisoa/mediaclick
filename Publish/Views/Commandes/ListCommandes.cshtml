@@ -57,12 +57,12 @@
                 {
                     <div class="resume with-shadow">
                         <ul>
-                            <li>Livraisons reçues : @ViewBag.commandesLivrer</li>
-                            <li>Livraison en retard : @ViewBag.commandesEnRetard</li>
-                            <li>Commande refuser par le redacteur : @ViewBag.commandesRefuser</li>
-                            <li>Commande en attente : @ViewBag.commandesEnAttente</li>
-                            <li>Redaction en cours : @ViewBag.commandesEnCours</li>
-                            <li>Commande annulée : @ViewBag.commandesAnnuler</li>
+                            <li><a onclick="@(" window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "ListCommandes" }) + "' ");"></a>Livraisons reçues : <strong>@ViewBag.commandesLivrer</strong></li>
+                            <li><a onclick="@(" window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "ListCommandes" }) + "' ");"></a>Livraison en retard : <strong>@ViewBag.commandesEnRetard</strong></li>
+                            <li><a onclick="@(" window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "ListCommandes" }) + "' ");"></a>Commande refuser par le redacteur : <strong>@ViewBag.commandesRefuser</strong></li>
+                            <li><a onclick="@(" window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "ListCommandes" }) + "' ");"></a>Commande en attente : <strong>@ViewBag.commandesEnAttente</strong></li>
+                            <li><a onclick="@(" window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "ListCommandes" }) + "' ");"></a>Redaction en cours : <strong>@ViewBag.commandesEnCours</strong></li>
+                            <li><a onclick="@(" window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "ListCommandes" }) + "' ");">Commande annulée : <strong>@ViewBag.commandesAnnuler</strong></a></li>
                             
                             <li>Commande à facturer : @ViewBag.commandesFacturer</li>
                         </ul>
