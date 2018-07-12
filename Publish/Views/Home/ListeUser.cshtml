@@ -121,7 +121,7 @@
                             <td>@item.redactThemes</td>
                             <td>@item.redactNiveau</td>
 
-                            @if (item.redactVolumeRestant != null && Convert.ToInt32(item.redactVolumeRestant) < Convert.ToInt32(item.redactVolume))
+                            @if (item.redactVolumeRestant != null && Convert.ToInt32(item.redactVolumeRestant) < 0)
                             {
                                 <td>Non</td>
                             }
