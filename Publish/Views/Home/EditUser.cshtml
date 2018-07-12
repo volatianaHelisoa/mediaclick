@@ -231,7 +231,7 @@
                             <span class="sep"></span>
                         </section>
                     }
-                    @if (ViewBag.userRole != 2) //if redacteur user
+                    @if (@Session["role"] != null && @Session["role"].ToString() != "2")
                     {
                         <section class="clearfix" id="CheckEditRedacteur">
                             <div class="section-title">
@@ -284,7 +284,7 @@
                         </section>
                     }
 
-                    @if (ViewBag.userRole == 2) //if redacteur user
+                    @if (@Session["role"] != null && @Session["role"].ToString() == "2")
                     {
                         <section class="clearfix user-info" id="CheckEditRedacteur">
                             <div class="section-title">
