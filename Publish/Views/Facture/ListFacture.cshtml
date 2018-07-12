@@ -53,11 +53,14 @@
                             </div>
                         }
                     </div>
-                    <div class="submit-area">
+                    @if (@Session["role"] != null && @Session["role"].ToString() != "2")
+                    {
+                        <div class="submit-area">
 
-                        <input type="submit" value="Créer une facture" class="btn btn-success btn-medium" onclick="@("window.location.href='" + @Url.RouteUrl("Home", new { controller = "Facture", action = "Create" }) + "'");">
+                            <input type="submit" value="Créer une facture" class="btn btn-success btn-medium" onclick="@("window.location.href='" + @Url.RouteUrl("Home", new { controller = "Facture", action = "Create" }) + "'");">
+                        </div>
+                    }
                     </div>
-                </div>
                 <div class="filters flex-content flex-jsbet-acenter">
                     <div class="flex-content flex-jsbet-acenter">
                         Sélection
