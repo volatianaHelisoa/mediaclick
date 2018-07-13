@@ -105,14 +105,14 @@
                         <tr>
                             <td class="commande-ref">@item.commandeREF</td>
                             <td class="balise-titre">@item.balise_titre</td>
-                            <td class="nb-mot">@string.Format("{0:N}",item.nombre_mots.ToString())</td>
-                            <td class="tarif-mot">@string.Format("{0:N}",item.REDACTEUR.redactTarif)</td>
+                            <td class="nb-mot">@String.Format("{0:N0}",item.nombre_mots.ToString())</td>
+                            <td class="tarif-mot">@String.Format("{0:N0}",item.REDACTEUR.redactTarif)</td>
                             <td class="total">@(item.nombre_mots * Convert.ToDouble(item.REDACTEUR.redactTarif))</td>
                         </tr>
                     }
                     <tr>
                         <td ><strong>Total</strong></td>
-                        <td colspan="4" class="grand total">@Model.montant Ar</td>
+                        <td colspan="4" class="grand total"><div style="text-align:right">@Model.montant Ar</div></td>
                     </tr>
                 </tbody>
             </table>
@@ -143,7 +143,7 @@
         </div>
     </div>
     <div id="toast" class="with-shadow">
-        <a class="fileDownloadPdf btn btn-primary" href=""><i class="fa fa-download"></i> Télécharger</a>
+        <a class="fileDownloadPdf btn btn-primary" href="" target="_blank"><i class="fa fa-download"></i> Télécharger</a>
 
         @Html.ActionLink("Retour", "ListFacture", new { controller = "Facture" }, new { @class = "btn btn-warning" })
     </div>
