@@ -27,8 +27,6 @@
         /* ----------------------------- */
         table { width: 100%; border-collapse: collapse; border-spacing: 0; margin-bottom: 20px; }
         thead { background-color: #24acf2; font-size: 16px; color: white; }
-        table tr:nth-child(2n+1) td { background-color: #F5F5F5;}
-        table tr:last-of-type td { background-color: none;}
         table th,
         table td { text-align: center;}
         table th {padding: 20px;color: #fff;white-space: nowrap;font-weight: normal;}
@@ -161,6 +159,10 @@
 <script type="text/javascript">
  
     jQuery(document).ready(function () {
+        var trOdd = $("#facture-content tbody tr:odd");
+        trOdd.css("background-color", "#F5F5F5");
+        console.log(trOdd.length);
+
         var numFacture = $("#factureNumero").data("lastValue");
         console.log(numFacture);
         var d = new Date();
