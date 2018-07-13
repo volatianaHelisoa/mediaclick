@@ -84,14 +84,14 @@
                                         </div>
                                     }
 
-                                    else if (Model.statut_cmde != "Livré" || Model.statut_cmde != "Validé")
+                                    else if (Model.statut_cmde == "Annulé" || Model.statut_cmde == "Refusé")
                                     {                                        
                                             <span>Livraison prévue le  @Model.date_livraison.Value.ToString("dd/MM/yyyy") a été annulée ou refusée.</span>
                                      }
 
                                     </div>
                                 }
-                                @if (Model.statut_cmde == "Livré")
+                                @if (Model.statut_cmde == "Livré" || Model.statut_cmde == "Validé" || Model.statut_cmde == "Refusé")
                                 {
                                     <span>
                                         <strong>Titre : </strong>@Html.DisplayFor(model => model.balise_titre)
