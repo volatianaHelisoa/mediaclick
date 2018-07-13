@@ -111,8 +111,11 @@
                                         <div class="item">
                                             <div class="option">
                                                 <a href="~/Facture/Details/@item.factureId" title="Détails"><i class="fa fa-eye"></i></a>
-                                                <a onclick="DeleteFactureClick('@item.factureId')" title="Supprimer Facture"><i class="fa fa-trash"></i></a>
-                                            </div>
+                                                @if (@Session["role"] != null && @Session["role"].ToString() != "2")
+                                                {
+                                                    <a onclick="DeleteFactureClick('@item.factureId')" title="Supprimer Facture"><i class="fa fa-trash"></i></a>
+                                                }
+                                                </div>
                                         </div>
                                     </td>
                                 </tr>
