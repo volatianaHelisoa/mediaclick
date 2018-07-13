@@ -88,7 +88,7 @@
     </div>
 
     <script type="text/javascript" src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="~/Scripts/js/jquery.fileDownload.js"></script>
+
 
     
 
@@ -126,7 +126,7 @@
 
                     $(".fileDownloadPdf").attr("href", url);
                     console.log($(".fileDownloadPdf").prop('href'));
-                    $(".fileDownloadPdf").trigger("click");
+                    //$(".fileDownloadPdf").trigger("click");
                 }
 
                 else {
@@ -140,11 +140,11 @@
         });
 
         $(".fileDownloadPdf").on("click", function (e) {
-            $.fileDownload($(this).prop('href'), {
-                preparingMessageHtml: "We are preparing your report, please wait...",
-                failMessageHtml: "There was a problem generating your report, please try again."
-            });
-            return false;
+            //$.fileDownload($(this).prop('href'), {
+            //    preparingMessageHtml: "We are preparing your report, please wait...",
+            //    failMessageHtml: "There was a problem generating your report, please try again."
+            //});
+            //return false;
         });
     });
 </script>
