@@ -81,7 +81,7 @@
                                     <div style="text-align: right; padding-bottom:10px">Redacteur,</div>
                                     <div style="text-align: right; padding-bottom:10px">Tél: @Model.REDACTEUR.redactPhone</div>
                                 </div>
-                                <div class="date" style="padding: 10px 20px; text-align: right">@Model.dateEmission.ToString("dd MMMM yyyy")</div>
+                                <div class="date" style="padding: 10px 20px; text-align: right">@Model.dateEmission.ToString("dd/MM/yyyy")</div>
                             </div>
                         </td>
                     </tr>
@@ -111,8 +111,8 @@
                         </tr>
                     }
                     <tr>
-                        <td colspan="4"><strong>Total</strong></td>
-                        <td class="grand total">@Model.montant Ar</td>
+                        <td ><strong>Total</strong></td>
+                        <td colspan="4" class="grand total">@Model.montant Ar</td>
                     </tr>
                 </tbody>
             </table>
