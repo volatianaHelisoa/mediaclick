@@ -106,6 +106,10 @@
                     {
                         <p class="error-msg text-centered">@Session["VolumeInfo"].ToString()</p>
                     }
+                    @if (ViewBag.ErrorRedacteur != null)
+                    {
+                        <p class="error-msg text-centered">Veuillez selectionner un rédacteur.</p>
+                    }
                 </div>
 
                 @using (Html.BeginForm("CreateCommande", "Commandes", FormMethod.Post, new { role = "form", @id = "createcommande" }))
@@ -115,19 +119,20 @@
                     <section class="clearfix">
                         <label for="" class="col-50 pull-left">
                             Projet
-                            @Html.DropDownListFor(x => Model.listprojetId, new SelectList(Model.ListProjet, "Value", "Text"), htmlAttributes: new { @id = "SelectItemProjet" })
+                            @Html.DropDownListFor(x => Model.listprojetId, new SelectList(Model.ListProjet, "Value", "Text"), htmlAttributes: new { @id = "SelectItemProjet", @required = true })
                         </label>
                         <label for="" class="col-50 pull-right">
                             Thématique
-                            @Html.DropDownListFor(x => Model.listThemeId, new SelectList(Model.ListTheme, "Value", "Text"), htmlAttributes: new { id = "SelectItemTheme" })
+                            @Html.DropDownListFor(x => Model.listThemeId, new SelectList(Model.ListTheme, "Value", "Text"), htmlAttributes: new { id = "SelectItemTheme", @required = true })
                         </label>
                         <label for="" class="col-50 pull-left">
                             Rédacteur
-                            @Html.DropDownListFor(x => Model.listRedacteurId, new SelectList(Model.ListRedacteur, "Value", "Text"), htmlAttributes: new { id = "SelectItemRedacteur" })
+
+                            @Html.DropDownListFor(x => Model.listRedacteurId, new SelectList(Model.ListRedacteur, "Value", "Text"), htmlAttributes: new { id = "SelectItemRedacteur", @required = true })
                         </label>
                         <label for="" class="col-50 pull-right">
                             Type de texte
-                            @Html.DropDownListFor(x => Model.listCommandeTypeId, new SelectList(Model.ListCommandeType, "Value", "Text"), htmlAttributes: new { @id = "SelectItemCommandeType" })
+                            @Html.DropDownListFor(x => Model.listCommandeTypeId, new SelectList(Model.ListCommandeType, "Value", "Text"), htmlAttributes: new { @id = "SelectItemCommandeType", @required = true })
                         </label>
                     </section>
                     <section class="clearfix">
@@ -168,7 +173,7 @@
                        
                         <label for="" class="col-50 pull-right">
                             Date de livraison
-                            @Html.TextBoxFor(x => x.date_livraison, "{0:dd/MM/yyyy}", new { type = "text" })
+                            @Html.TextBoxFor(x => x.date_livraison, "{0:dd/MM/yyyy}", new { type = "text", @required = true })
                             @Html.ValidationMessageFor(m => m.date_livraison)
                         </label>
                         <span class="pull-left" style="margin-bottom: 20px;">

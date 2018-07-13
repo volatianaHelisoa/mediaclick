@@ -124,14 +124,10 @@
 
             @if (ViewBag.ErrorUserCreation != null)
             {
-                <label class="error-msg ltl-consign">This email is already exist.</label>
+                <label class="error-msg ltl-consign text-centered">Cet adresse éléctronique existe déjà.</label>
             }
 
-            @if (ViewBag.ErrorUserValidation != null)
-            {
-                <label class="error-msg ltl-consign">This email is not valid.</label>
-            }
-
+          
             @using (Html.BeginForm("ModifierUtilisateur", "Home", FormMethod.Post, new { @class = "formfields", enctype = "multipart/form-data" }))
             {
                 <fieldset>
@@ -172,6 +168,11 @@
                         <label for="" class="col-50 pull-left">
                             E-mail(*)
                             @Html.TextBoxFor(x => x.userMail, new { @required = true, @type = "email" })
+                            @if (ViewBag.ErrorUserValidation != null)
+                            {
+                                <label class="error-msg ltl-consign input-error">Adresse mail invalide.</label>
+                            }
+
                         </label>
                         <label for="" class="col-50 pull-right">
                             Skype
@@ -179,7 +180,12 @@
                         </label>
                         <label for="" class="col-50 pull-left">
                             Téléphone
-                            @Html.TextBoxFor(x => x.redactPhone, new { @type = "tel" })
+                            @Html.TextBoxFor(x => x.redactPhone, new { @placeholder = "+261 33 11 100 11" })
+                            @if (ViewBag.ErrorPhoneValidation != null)
+                            {
+                                <label class="error-msg ltl-consign input-error">Téléphone invalide.</label>
+                            }
+
                         </label>
                     </section>
                     @if (@Session["role"] != null && @Session["role"].ToString() == "4")

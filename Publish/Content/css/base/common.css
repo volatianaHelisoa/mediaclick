@@ -323,3 +323,8 @@ ul.multiselect-container .multiselect-clear-filter {
 .commande-review span:last-of-type {
     border: none
 }
+
+.input-error {
+    margin-top: -25px;
+    display: block;
+}
