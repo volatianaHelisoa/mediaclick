@@ -18,12 +18,12 @@
         #company .id { background-color: #f3f3f3; padding: 30px; color: #09296a; text-align: left; }
         #company .id > span:last-of-type { margin-top: 10px; display: block; }
         #company .facture-numero { text-align: center; font-size: 20px; color: #092c6c; text-transform: uppercase; font-weight: bold; padding: 20px 0;}
-        #company .facture-numero span { border: 1px solid #000; color: #3f3f3f; font-size: 14px; padding: 10px 20px; display: inline-block; margin-left: 20px; }
+        #company .facture-numero span {color: #3f3f3f; font-size: 14px; padding: 10px 20px; display: inline-block; margin-left: 20px; }
 
-        #project .client-info { border-top: 1px solid #ebebeb; padding: 10px 20px; margin-top: 110px; }
-        #project h3 { color: #0d0d0d; font-weight: bold; font-size: 16px; margin-bottom: 10px;}
+        #project .client-info { border-width: 1px 0 0 0; border-style: solid; border-color:#ebebeb; padding: 10px 20px; }
+        #project h3 { color: #0d0d0d; font-weight: bold; font-size: 16px; margin: 0}
         #project span { display: block; margin-bottom: 5px;}
-        #project .date { border-top: 1px solid #ebebeb; border-bottom: 1px solid #ebebeb; display: block; margin: 0; padding: 10px 20px;}
+        #project .date { border-width: 1px 0 1px 0; border-style: solid; border-color: #ebebeb; display: block; margin: 0; padding: 10px 20px; }
         /* ----------------------------- */
         table { width: 100%; border-collapse: collapse; border-spacing: 0; margin-bottom: 20px; }
         thead { background-color: #24acf2; font-size: 16px; color: white; }
@@ -60,7 +60,7 @@
             <table>
                 <tbody>
                     <tr>
-                        <td style="display: table-caption;">
+                        <td style="display: table-caption;width: 300px;">
                             <div id="company" class="clearfix">
                                 <div class="id">
                                     <div id="logo">
@@ -76,11 +76,12 @@
                         <td colspan="1">
                             <div id="project">
                                 <div class="client-info">
-                                    <h3>Facturer à</h3>
-                                    <span><strong>Mr</strong> @Model.REDACTEUR.userNom @Model.REDACTEUR.userPrenom,</span>
-                                    <span>Redacteur,</span><span>Tél: @Model.REDACTEUR.redactPhone</span>
+                                    <h3 style="text-align: right; padding-bottom:10px">Facturer à</h3>
+                                    <div style="text-align: right; padding-bottom:10px"><strong> @Model.REDACTEUR.userNom @Model.REDACTEUR.userPrenom,</strong></div>
+                                    <div style="text-align: right; padding-bottom:10px">Redacteur,</div>
+                                    <div style="text-align: right; padding-bottom:10px">Tél: @Model.REDACTEUR.redactPhone</div>
                                 </div>
-                                <span class="date">@Model.dateEmission.ToString("dd/MMMM/yyyy")</span>
+                                <div class="date" style="padding: 10px 20px; text-align: right">@Model.dateEmission.ToString("dd MMMM yyyy")</div>
                             </div>
                         </td>
                     </tr>
@@ -104,8 +105,8 @@
                         <tr>
                             <td class="commande-ref">@item.commandeREF</td>
                             <td class="balise-titre">@item.balise_titre</td>
-                            <td class="nb-mot">@item.nombre_mots</td>
-                            <td class="tarif-mot">@item.REDACTEUR.redactTarif</td>
+                            <td class="nb-mot">@string.Format("{0:N}",item.nombre_mots.ToString())</td>
+                            <td class="tarif-mot">@string.Format("{0:N}",item.REDACTEUR.redactTarif)</td>
                             <td class="total">@(item.nombre_mots * Convert.ToDouble(item.REDACTEUR.redactTarif))</td>
                         </tr>
                     }
@@ -115,30 +116,30 @@
                     </tr>
                 </tbody>
             </table>
-            <table style="margin-bottom: 0" align="center">
-          <tr
-            style="
-            font-size: 12px;
-            background: none;
-            padding: 0;
-            "
-          >
-            <td style="text-align: center; padding: 0">
-              <span>Explorer business Park - Bat A1 Ankorondrano - Tana 101</span>
-            </td>
-          </tr> 
+            <table style="margin-bottom: 0; margin-top: 100px" align="center">
+              <tr
+                style="
+                font-size: 12px;
+                background: none;
+                padding: 0;
+                "
+              >
+                <td style="text-align: center; padding: 0">
+                  <span>Explorer business Park - Bat A1 Ankorondrano - Tana 101</span>
+                </td>
+              </tr> 
 
-          <tr
-            style="
-            font-size: 12px;
-            background: none;
-            padding: 0;
-            ">
-            <td style="text-align: center; padding: 0">
-              <span><strong>Tél:</strong> +261 34 53 003 64</span>                
-            </td>
-          </tr>
-        </table>
+              <tr
+                style="
+                font-size: 12px;
+                background: none;
+                padding: 0;
+                ">
+                <td style="text-align: center; padding: 0">
+                  <span><strong>Tél:</strong> +261 34 53 003 64</span>                
+                </td>
+              </tr>
+            </table>
         </div>
     </div>
     <div id="toast" class="with-shadow">

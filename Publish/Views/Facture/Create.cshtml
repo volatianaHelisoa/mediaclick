@@ -94,7 +94,7 @@
             @using (Html.BeginForm("CreateFacture", "Facture", FormMethod.Post, new { @class = "form-horizontal", role = "form", @id = "createfacture" }))
             {
                 @Html.AntiForgeryToken()
-                @if (ViewBag.ErrorMessage != null)
+                if (ViewBag.ErrorMessage != null)
                 {
                     <section class="clearfix">
                         <label class="error-msg text-centered">Aucune commande liée à ce redacteur pour cette période.</label>
