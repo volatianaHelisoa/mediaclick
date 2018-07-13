@@ -62,14 +62,16 @@
                     }
                     </div>
                 <div class="filters flex-content flex-jsbet-acenter">
-                    <div class="flex-content flex-jsbet-acenter">
-                        Sélection
-                        <span onclick="CheckedFactureClick()">Tous</span>
-                        <span onclick="DecheckedFactureClick()">Aucun</span>
-                        <button class="btn btn-small" onclick="DeleteAllFactureSelected(@ViewBag.nbrow)"><i class="fa fa-trash"></i> Supprimer la sélection</button>
+                    @if (@Session["role"] != null && @Session["role"].ToString() == "4")
+                    {
+                        <div class="flex-content flex-jsbet-acenter">
+                            Sélection
+                            <span onclick="CheckedFactureClick()">Tous</span>
+                            <span onclick="DecheckedFactureClick()">Aucun</span>
+                            <button class="btn btn-small" onclick="DeleteAllFactureSelected(@ViewBag.nbrow)"><i class="fa fa-trash"></i> Supprimer la sélection</button>
+                        </div>
+                    }
                     </div>
-
-                </div>
                 <table id="myDataTable" class="trig_table table facture-table">
                     <thead>
                         <tr>
