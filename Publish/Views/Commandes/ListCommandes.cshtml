@@ -37,7 +37,10 @@
                     }
                     <li>@Html.ActionLink("Commandes", "ListCommandes", new { controller = "Commandes" }, new { @class = "active" })</li>
                     <li>@Html.ActionLink("Factures", "ListFacture", new { controller = "Facture" })</li>
-                    <li>@Html.ActionLink("Templates", "ListTemplate", new { controller = "Template" })</li>
+                    @if (@Session["role"] != null && @Session["role"].ToString() != "2")
+                    {
+                        <li>@Html.ActionLink("Templates", "ListTemplate", new { controller = "Template" })</li>
+                    }
                 </ul>
             </div>
             <div class="head-list">
