@@ -5,9 +5,8 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="6dd7474700274a3088dbc0ac9123a609" Name="Diagram1" ZoomLevel="75">
-        <EntityTypeShape EntityType="redactapplicationModel.COMMANDE" Width="1.5" PointX="5.25" PointY="20.75" />
+        <EntityTypeShape EntityType="redactapplicationModel.COMMANDE" Width="3" PointX="5.25" PointY="20.75" />
         <EntityTypeShape EntityType="redactapplicationModel.COMMANDE_TYPE" Width="1.5" PointX="3" PointY="23.75" />
-        <EntityTypeShape EntityType="redactapplicationModel.CONTENU_TYPE" Width="1.5" PointX="3" PointY="21.5" />
         <EntityTypeShape EntityType="redactapplicationModel.FACTURE" Width="1.5" PointX="3" PointY="32.875" />
         <EntityTypeShape EntityType="redactapplicationModel.MODELE" Width="1.5" PointX="3.75" PointY="0.75" />
         <EntityTypeShape EntityType="redactapplicationModel.NOTIFICATION" Width="1.5" PointX="7.5" PointY="19.375" />
@@ -20,7 +19,6 @@
         <EntityTypeShape EntityType="redactapplicationModel.UserRole" Width="1.5" PointX="3" PointY="15.125" />
         <EntityTypeShape EntityType="redactapplicationModel.UTILISATEUR" Width="1.5" PointX="0.75" PointY="13" />
         <AssociationConnector Association="redactapplicationModel.FK_COMMANDE_COMMANDE_TYPE" />
-        <AssociationConnector Association="redactapplicationModel.FK_COMMANDE_CONTENU_TYPE" />
         <AssociationConnector Association="redactapplicationModel.FK_COMMANDE_FACTURE" />
         <AssociationConnector Association="redactapplicationModel.FK_COMMANDE_PROJETS" />
         <AssociationConnector Association="redactapplicationModel.FK_COMMANDE_REDACTEUR" />
@@ -43,6 +41,8 @@
         <EntityTypeShape EntityType="redactapplicationModel.REDACT_THEME" Width="1.5" PointX="6" PointY="10.625" />
         <AssociationConnector Association="redactapplicationModel.FK_REDACT_THEME_THEMES" />
         <AssociationConnector Association="redactapplicationModel.FK_REDACT_THEME_UTILISATEUR" />
+        <EntityTypeShape EntityType="redactapplicationModel.TAG" Width="1.5" PointX="0.75" PointY="0.875" />
+        <AssociationConnector Association="redactapplicationModel.FK_COMMANDE_TAGS" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

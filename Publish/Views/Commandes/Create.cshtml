@@ -116,25 +116,29 @@
                 {
                     @Html.AntiForgeryToken()
                     <!-- Champs -->
-                    <section class="clearfix">
-                        <label for="" class="col-50 pull-left">
-                            Projet
-                            @Html.DropDownListFor(x => Model.listprojetId, new SelectList(Model.ListProjet, "Value", "Text"), htmlAttributes: new { @id = "SelectItemProjet", @required = true })
-                        </label>
-                        <label for="" class="col-50 pull-right">
-                            Thématique
-                            @Html.DropDownListFor(x => Model.listThemeId, new SelectList(Model.ListTheme, "Value", "Text"), htmlAttributes: new { id = "SelectItemTheme", @required = true })
-                        </label>
-                        <label for="" class="col-50 pull-left">
-                            Rédacteur
+                <section class="clearfix">
+                    <label for="" class="col-50 pull-left">
+                        Projet
+                        @Html.DropDownListFor(x => Model.listprojetId, new SelectList(Model.ListProjet, "Value", "Text"), htmlAttributes: new { @id = "SelectItemProjet", @required = true })
+                    </label>
+                    <label for="" class="col-50 pull-right">
+                        Thématique
+                        @Html.DropDownListFor(x => Model.listThemeId, new SelectList(Model.ListTheme, "Value", "Text"), htmlAttributes: new { id = "SelectItemTheme", @required = true })
+                    </label>
+                    <label for="" class="col-50 pull-left">
+                        Rédacteur
 
-                            @Html.DropDownListFor(x => Model.listRedacteurId, new SelectList(Model.ListRedacteur, "Value", "Text"), htmlAttributes: new { id = "SelectItemRedacteur", @required = true })
-                        </label>
-                        <label for="" class="col-50 pull-right">
-                            Type de texte
-                            @Html.DropDownListFor(x => Model.listCommandeTypeId, new SelectList(Model.ListCommandeType, "Value", "Text"), htmlAttributes: new { @id = "SelectItemCommandeType", @required = true })
-                        </label>
-                    </section>
+                        @Html.DropDownListFor(x => Model.listRedacteurId, new SelectList(Model.ListRedacteur, "Value", "Text"), htmlAttributes: new { id = "SelectItemRedacteur", @required = true })
+                    </label>
+                    <label for="" class="col-50 pull-right">
+                        Type de texte
+                        @Html.DropDownListFor(x => Model.listCommandeTypeId, new SelectList(Model.ListCommandeType, "Value", "Text"), htmlAttributes: new { @id = "SelectItemCommandeType", @required = true })
+                    </label>
+                    <label for="" class="col-50 pull-right">
+                        Tag
+                        @Html.DropDownListFor(x => Model.listTagId, new SelectList(Model.ListTag, "Value", "Text"), htmlAttributes: new { @id = "SelectItemTag", @required = true })
+                    </label>
+                </section>
                     <section class="clearfix">
                         <div class="section-title">
                             <span>Mots clés</span>
