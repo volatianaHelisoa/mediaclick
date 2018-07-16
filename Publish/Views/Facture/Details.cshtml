@@ -144,7 +144,7 @@
     </div>
     <div id="toast" class="with-shadow">
         <a class="fileDownloadPdf btn btn-primary" href="" target="_blank"><i class="fa fa-download"></i> Télécharger</a>
-
+        <input hidden id="redactName" data-last-value="@Model.REDACTEUR.userNom" />
         @Html.ActionLink("Retour", "ListFacture", new { controller = "Facture" }, new { @class = "btn btn-warning" })
     </div>
 
@@ -165,7 +165,8 @@
         console.log(trOdd.length);
 
         var numFacture = $("#factureNumero").data("lastValue");
-        console.log(numFacture);
+        var redactName = $("#redactName").data("lastValue");
+        console.log(redactName.toLowerCase());
         var d = new Date();
 
         var month = d.getMonth() + 1;
@@ -187,7 +188,7 @@
             success: function (response) {
                 if (response.Valid) {
 
-                    var url = "http://" + $(location).attr('host') + "/Pdf/" + filename;
+                    var url = "http://" + $(location).attr('host') + "/Pdf/" + redactName.toLowerCase()+"/" + filename;
 
                     $(".fileDownloadPdf").attr("href", url);
                     console.log($(".fileDownloadPdf").prop('href'));
