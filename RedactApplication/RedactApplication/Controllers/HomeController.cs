@@ -14,6 +14,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using RedactApplication.Models;
 using Microsoft.Security.Application;
+using System.Collections;
 
 namespace RedactApplication.Controllers
 {
@@ -145,7 +146,10 @@ namespace RedactApplication.Controllers
 
                 
             }
-            return View();
+            return RedirectToRoute("Home", new RouteValueDictionary {
+                    { "controller", "Login" },
+                    { "action", "Accueil" }
+                });
         }
 
         /// <summary>
@@ -292,23 +296,39 @@ namespace RedactApplication.Controllers
             return View(currentUser);
         }
 
-        private void SaveRedactThemes(string themes,Guid redactGuid)
+        private void SaveRedactThemes(Guid[] themes,Guid redactGuid, List<REDACT_THEME> listeUserThemes = null)
         {
             var listids = new List<Guid>();
-            var listThemes = themes.Split(',');
-            if(listThemes.ToList().Count > 1)
+            var val = new Utilisateurs();
+            if (themes.ToList().Count > 0)
             {
                 redactapplicationEntities db = new Models.redactapplicationEntities();
-                foreach (var theme in listThemes)
+                if (listeUserThemes != null)
                 {
-                    var _theme = db.THEMES.SingleOrDefault(x => x.theme_name.Contains(theme));
+                    foreach (var redactTheme in listeUserThemes)
+                    {
+                        redactTheme.themeId = null;
+                        redactTheme.redactId = null;
+                        db.SaveChanges();
+                      
+                    }
+                    
+                }
+            
+        
+                foreach (var theme in themes)
+                {
+                    var _theme = db.THEMES.Find(theme);
                     if (_theme != null)
                     {
-                        REDACT_THEME redactTheme = new REDACT_THEME { themeId = _theme.themeId, userId = redactGuid };
-                        db.REDACT_THEME.Add(redactTheme);
-
+                        
+                        REDACT_THEME redactTheme = new REDACT_THEME {redactThemeId = Guid.NewGuid() , themeId = _theme.themeId, redactId = redactGuid };                       
+                        db.REDACT_THEME.Add(redactTheme);                       
                     }
                 }
+               
+              db.SaveChanges();
+
             }
             
         }
@@ -336,25 +356,24 @@ namespace RedactApplication.Controllers
                 case "ErrorUserMailValidation":
                     ViewBag.ErrorUserValidation = "mail is not valid";
                     break;
+                case "ErrorPhoneValidation":
+                    ViewBag.ErrorPhoneValidation = "phone is not valid";
+                    break;
             }
 
             Guid userId = (Guid)hash;
             ViewBag.currentid = hash;
 
             Guid user = Guid.Parse(HttpContext.User.Identity.Name);
-            ViewBag.userRoleEdit = (new Utilisateurs()).GetUtilisateurRoleToString(user);
-
-         
+            ViewBag.userRoleEdit = (new Utilisateurs()).GetUtilisateurRoleToString(user);                   
 
             var val = new Utilisateurs();
+
             if (userId != Guid.Empty)
             {
                 redactapplicationEntities db = new Models.redactapplicationEntities();
                 UTILISATEUR utilisateur = db.UTILISATEURs.SingleOrDefault(x => x.userId == userId);
-
-
-
-
+                
                 UTILISATEURViewModel userVm = new UTILISATEURViewModel();
                 if (utilisateur != null)
                 {
@@ -367,7 +386,7 @@ namespace RedactApplication.Controllers
                     userVm.redactNiveau = utilisateur.redactNiveau;
                     userVm.redactPhone = utilisateur.redactPhone;
                     userVm.redactReferenceur = utilisateur.redactReferenceur;
-                    userVm.redactThemes = utilisateur.redactThemes;
+                    userVm.redactThemes = val.RedactThemes(utilisateur.userId);
                     userVm.redactVolume = utilisateur.redactVolume;
                     userVm.redactTarif = utilisateur.redactTarif;
                     userVm.logoUrl =  utilisateur.logoUrl;
@@ -420,9 +439,17 @@ namespace RedactApplication.Controllers
                         ViewBag.listeUserRole = listeUserRole;
                     }
                     userVm.ListTheme = val.GetListThemeItem();
-                    List<USER_THEME> listeUserThemes = db.USER_THEME.Where(x => x.userId == utilisateur.userId).ToList();
-                    if(listeUserThemes.Count() > 0)
-                        userVm.listThemeId = (Guid)listeUserThemes.FirstOrDefault().themeId;
+                    List<REDACT_THEME> listeUserThemes = db.REDACT_THEME.Where(x => x.redactId == utilisateur.userId).ToList();
+                 
+                    if (listeUserThemes.Count() > 0)
+                    {
+                        var listeThemes = db.REDACT_THEME.Where(x => x.redactId == utilisateur.userId).Select(x => x.themeId).ToList();
+                        userVm.listThemeId = listeThemes;
+
+                        var themes = val.GetListThemeItem(utilisateur.userId);
+                        userVm.themeId = listeThemes.ToArray();
+                        userVm.themeList = new MultiSelectList(themes, "Value", "Text", listeThemes);
+                    }
                   
                 }
 
@@ -462,7 +489,7 @@ namespace RedactApplication.Controllers
 
             Guid user = Guid.Parse(HttpContext.User.Identity.Name);
             ViewBag.userRoleEdit = (new Utilisateurs()).GetUtilisateurRoleToString(user);
-
+            var val = new Utilisateurs();
             if (userId != Guid.Empty)
             {
                 redactapplicationEntities db = new Models.redactapplicationEntities();
@@ -479,9 +506,17 @@ namespace RedactApplication.Controllers
                     userVm.redactNiveau = utilisateur.redactNiveau;
                     userVm.redactPhone = utilisateur.redactPhone;
                     userVm.redactReferenceur = utilisateur.redactReferenceur;
-                    userVm.redactThemes = utilisateur.redactThemes;
+                    var themes = "";
+                    var listThemes = val.GetThemes(utilisateur.userId);
+                    if (listThemes.Count > 0)
+                    {
+                         themes = String.Join(", ", listThemes.ToArray());
+
+                    }
+                    userVm.redactThemes = themes;
                     userVm.redactVolume = utilisateur.redactVolume;
                     userVm.redactTarif = utilisateur.redactTarif;
+                    userVm.logoUrl = utilisateur.logoUrl;
 
                     if (Session["userEditModif"] != null)
                     {
@@ -497,6 +532,7 @@ namespace RedactApplication.Controllers
                         userVm.redactThemes = model.redactThemes;
                         userVm.redactVolume = model.redactVolume;
                         userVm.redactTarif = model.redactTarif;
+                        userVm.logoUrl = model.logoUrl;
                         Session["userEditModif"] = null;
                     }
 
@@ -713,22 +749,31 @@ namespace RedactApplication.Controllers
         /// Ajoute un nouvel Utilisateur dans la base de données.
         /// </summary>
         /// <param name="model">information Utilisateur</param>
-        /// <param name="selectedDiv">liste des divisions de l'utilisateur à créer</param>
+       
         /// <param name="selectedRole">liste des roles de l'utilisateur à créer</param>
         /// <returns>View</returns>
         [Authorize]
         [ValidateInput(false)]
         [HttpPost]
-        public ActionResult EnregistrerUtilisateur(UTILISATEURViewModel model, int[] selectedDiv, string[] selectedRole, HttpPostedFileBase logoUrl)
+        public ActionResult EnregistrerUtilisateur(UTILISATEURViewModel model, Guid[] listThemeId, string[] selectedRole, HttpPostedFileBase logoUrl)
         {
+
             model.userNom = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.userNom));
             model.userPrenom = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.userPrenom));
             model.userMail = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.userMail));
 
+            var val = new Utilisateurs();
+            UTILISATEURViewModel userVm = new UTILISATEURViewModel();
+            userVm.ListTheme = val.GetListThemeItem();
+           
+
             if (string.IsNullOrEmpty(model.userNom) || string.IsNullOrEmpty(model.userPrenom) || string.IsNullOrEmpty(model.userMail))
             {
                 ViewBag.succes = 3;
-                return View("GererUtilisateur");
+               
+                model.ListTheme = val.GetListThemeItem();
+                Session["userEditModif"] = model;
+                return View("GererUtilisateur", model);
             }            
 
             Guid user = Guid.Parse(HttpContext.User.Identity.Name);
@@ -753,17 +798,31 @@ namespace RedactApplication.Controllers
             bool isRoleValid = true;
             if (selectedRole == null) isRoleValid = false;
             else if (selectedRole.Length == 0) isRoleValid = false;
-            if (!isRoleValid)
+            if (!isRoleValid && ViewBag.userRole !="2")
             {
                 ViewBag.ErrorMessage = "role is null";
-                return View("GererUtilisateur");
+                model.ListTheme = val.GetListThemeItem();
+                Session["userEditModif"] = model;
+
+                return View("GererUtilisateur", model);
             }
             if (Regex.IsMatch(model.userMail, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase) == false)
             {             
-                ViewBag.ErrorUserValidation = "This email is not valid.";
-                return View("GererUtilisateur");
-            }            
-            
+                ViewBag.ErrorUserValidation = "E-mail non valide.";
+                model.ListTheme = val.GetListThemeItem();
+                Session["userEditModif"] = model;
+
+                return View("GererUtilisateur", model);
+            }
+            if (Regex.IsMatch(model.redactPhone, @"^\d{3}\d{2}\d{3}\d{2}$", RegexOptions.IgnoreCase) == false)
+            {
+                ViewBag.ErrorPhoneValidation = "Numéro non valide.";
+                model.ListTheme = val.GetListThemeItem();
+                Session["userEditModif"] = model;
+
+                return View("GererUtilisateur", model);
+            }
+
             try
             {
                 UTILISATEUR utilisateur = new UTILISATEUR();
@@ -779,19 +838,18 @@ namespace RedactApplication.Controllers
                     utilisateur.redactModePaiement = model.redactModePaiement;
                     utilisateur.redactNiveau = model.redactNiveau;
                   
-                    utilisateur.redactThemes = model.redactThemes;
-                    if(model.redactThemes != null)
-                        SaveRedactThemes(model.redactThemes, utilisateur.userId);
-                    utilisateur.redactVolume = model.redactVolume;
-                    utilisateur.redactTarif = model.redactTarif;
+                    utilisateur.redactThemes = new Utilisateurs().RedactThemes(utilisateur.userId);
+
+                    utilisateur.redactVolume = string.IsNullOrEmpty(model.redactTarif) ? utilisateur.redactVolume : model.redactVolume; 
+                    utilisateur.redactTarif = string.IsNullOrEmpty(model.redactTarif) ? utilisateur.redactTarif : model.redactTarif ;
 
                     utilisateur.redactPhone = model.redactPhone;
                     
-
-                    utilisateur.userId = Guid.NewGuid();
+                    var newId = Guid.NewGuid();
+                    utilisateur.userId = newId;
                     db.UTILISATEURs.Add(utilisateur);
-
                   
+
                     UserRole userRole = new UserRole();
                     userRole.idRole = int.Parse(selectedRole[0]);
                     userRole.idUser = utilisateur.userId;
@@ -800,14 +858,18 @@ namespace RedactApplication.Controllers
                     
                     db.SaveChanges();
 
+                    if (listThemeId != null)
+                        SaveRedactThemes(listThemeId, newId);
+
                     return RedirectToRoute("Home", new RouteValueDictionary {
                         { "controller", "Home" },
                         { "action", "sendMailRecovery" },
-                        { "hash", utilisateur.userId }
+                        { "hash",newId }
                     });
                 }
                 else
                 {
+                   
                     ViewBag.ErrorUserCreation = true;
                     return View("GererUtilisateur");
                 }
@@ -816,7 +878,7 @@ namespace RedactApplication.Controllers
             {
                 Debug.WriteLine(ex);
                 ViewBag.ErrorMessage = "role null";
-                return View("GererUtilisateur");
+                return View("ErrorException");
             }
         }
 
@@ -831,20 +893,37 @@ namespace RedactApplication.Controllers
         [Authorize]
         [ValidateInput(false)]
         [HttpPost]
-        public ActionResult ModifierUtilisateur(UTILISATEURViewModel model, int[] selectedDiv, string[] selectedRole, Guid idUser, HttpPostedFileBase logoUrl)
+        public ActionResult ModifierUtilisateur(UTILISATEURViewModel model, Guid[] listThemeId, string[] selectedRole, Guid idUser, HttpPostedFileBase logoUrl)
         {
-            model.userNom = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.userNom));
-            model.userPrenom = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.userPrenom));
-            model.userMail = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.userMail));
+            _userId = idUser;
+            Guid userID = Guid.Parse(HttpContext.User.Identity.Name);
+            var currentrole = (new Utilisateurs()).GetUtilisateurRoleToString(userID);
+            ViewBag.userRole = currentrole;
+            if(currentrole != "2")
+            {
+                model.userNom = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.userNom));
+                model.userPrenom = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.userPrenom));
+                model.userMail = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.userMail));
 
-            model.redactSkype = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.redactSkype));
-            model.redactModePaiement = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.redactModePaiement));
-            model.redactNiveau = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.redactNiveau));
-            model.redactPhone = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.redactPhone));
-            model.redactReferenceur = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.redactReferenceur));
-            model.redactThemes = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.redactThemes));
-            model.redactVolume = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.redactVolume));
-            model.redactTarif = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.redactTarif));
+                model.redactSkype = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.redactSkype));
+                model.redactModePaiement = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.redactModePaiement));
+                model.redactNiveau = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.redactNiveau));
+                model.redactPhone = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.redactPhone));
+                model.redactReferenceur = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.redactReferenceur));
+                model.redactThemes = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.redactThemes));
+                model.redactVolume = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.redactVolume));
+                model.redactTarif = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.redactTarif));
+
+            }
+            else
+            {
+                model.userNom = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.userNom));
+                model.userPrenom = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.userPrenom));
+                model.userMail = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.userMail));
+                model.redactSkype = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.redactSkype));
+                model.redactPhone = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.redactPhone));
+            }
+           
 
 
             string path = Server.MapPath("~/images/Logo/");
@@ -875,16 +954,14 @@ namespace RedactApplication.Controllers
                 ViewBag.numpage = StatePageSingleton.getInstance().Numpage;
                 ViewBag.nbrow = StatePageSingleton.getInstance().Nbrow;
             }
-            _userId = idUser;
+           
 
-            Guid userID = Guid.Parse(HttpContext.User.Identity.Name);
-            ViewBag.userRole = (new Utilisateurs()).GetUtilisateurRoleToString(userID);
-
+            
             redactapplicationEntities db = new Models.redactapplicationEntities();
             //Recuperation de l'utilisateur
             UTILISATEUR user = db.UTILISATEURs.SingleOrDefault(x => x.userId == idUser);
 
-            if (selectedRole == null)
+            if (selectedRole == null && currentrole != "2" && currentrole != "4")                
             {
                 Session["userEditModif"] = model;
                 return RedirectToAction("EditUser", new { hash = idUser, error = "ErrorRole" });
@@ -893,6 +970,12 @@ namespace RedactApplication.Controllers
             {
                 Session["userEditModif"] = model;
                 return RedirectToAction("EditUser", new { hash = idUser, error = "ErrorUserMailValidation" });
+            }
+            if (Regex.IsMatch(model.redactPhone, @"^\d{3}\d{2}\d{3}\d{2}$", RegexOptions.IgnoreCase) == false)
+            {
+                Session["userEditModif"] = model;
+                ViewBag.ErrorPhoneValidation = "Numéro non valide.";
+                return RedirectToAction("EditUser", new { hash = idUser, error = "ErrorPhoneValidation" });
             }
             //Verify the user email
             bool userMailValid = true;
@@ -906,156 +989,20 @@ namespace RedactApplication.Controllers
                 try
                 {
                     // mise à jour user -> Role
-                    List<UserRole> listeUserRole = db.UserRoles.Where(x => x.idUser == user.userId).ToList();
-                    for (int i = 0; i < listeUserRole.Count; i++)
+                    if (selectedRole != null && currentrole != "2")
                     {
-                        db.UserRoles.Remove(listeUserRole[i]);
-                    }
-                  
-                    UserRole userRole = new UserRole();
-                    userRole.idRole = int.Parse(selectedRole[0]);
-                    userRole.idUser = user.userId;
-                    db.UserRoles.Add(userRole);
-                   
-                   
-                    // mise à jour de user
-                    user.userNom = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(model.userNom.ToLower());
-                    user.userPrenom = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(model.userPrenom.ToLower());
-                    user.userMail = model.userMail;
+                        List<UserRole> listeUserRole = db.UserRoles.Where(x => x.idUser == user.userId).ToList();
+                        for (int i = 0; i < listeUserRole.Count; i++)
+                        {
+                            db.UserRoles.Remove(listeUserRole[i]);
+                        }
 
-                    user.redactSkype = model.redactSkype;
-                    user.redactModePaiement = model.redactModePaiement;
-                    user.redactNiveau = model.redactNiveau;
-                    user.redactPhone = model.redactPhone;
-                    user.redactReferenceur = model.redactReferenceur;
-                    user.redactThemes = model.redactThemes;
-                    SaveRedactThemes(model.redactThemes, user.userId);
-                    user.redactVolume = model.redactVolume;
-                    user.redactTarif = model.redactTarif;
-                    user.logoUrl = model.logoUrl;
-                    db.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex);
-                    Session["userEditModif"] = model;
-                    return RedirectToAction("EditUser", new { hash = idUser, error = "ErrorMessage" });
-                }
-            }
-            else
-            {
-                Session["userEditModif"] = model;
-                return RedirectToAction("EditUser", new { hash = idUser, error = "ErrorMail" });
-            }
-            return View("EditUserConfirmation");
-        }
-
-
-        /// <summary>
-        /// Enregistre les modifications d'un Utilisateur dans la base de données.
-        /// </summary>
-        /// <param name="model">information Utilisateur</param>
-        /// <param name="selectedDiv">liste des divisions de l'utilisateur à créer</param>
-        /// <param name="selectedRole">liste des roles de l'utilisateur à créer</param>
-        /// <param name="idUser">id de l'Utilisateur</param>
-        /// <returns>View</returns>
-        [Authorize]
-        [ValidateInput(false)]
-        public ActionResult ModifierRedacteur(UTILISATEURViewModel model, int[] selectedDiv, string[] selectedRole, Guid idUser)
-        {
-            model.userNom = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.userNom));
-            model.userPrenom = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.userPrenom));
-            model.userMail = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.userMail));
-
-            model.redactSkype = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.redactSkype));
-            model.redactModePaiement = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.redactModePaiement));
-            model.redactNiveau = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.redactNiveau));
-            model.redactPhone = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.redactPhone));
-            model.redactReferenceur = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.redactReferenceur));
-            model.redactThemes = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.redactThemes));
-            model.redactVolume = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.redactVolume));
-
-            if (string.IsNullOrEmpty(model.userNom) || string.IsNullOrEmpty(model.userPrenom) || string.IsNullOrEmpty(model.userMail))
-            {
-                return View("ErrorEditUser");
-            }
-            if (StatePageSingleton.nullInstance())
-            {
-                StatePageSingleton.getInstance(1, 10);
-                ViewBag.numpage = 1;
-                ViewBag.nbrow = 10;
-            }
-            else
-            {
-                ViewBag.numpage = StatePageSingleton.getInstance().Numpage;
-                ViewBag.nbrow = StatePageSingleton.getInstance().Nbrow;
-            }
-            _userId = idUser;
-
-            Guid userID = Guid.Parse(HttpContext.User.Identity.Name);
-            ViewBag.userRole = (new Utilisateurs()).GetUtilisateurRoleToString(userID);
-
-            redactapplicationEntities db = new Models.redactapplicationEntities();
-            //Recuperation de l'utilisateur
-            UTILISATEUR user = db.UTILISATEURs.SingleOrDefault(x => x.userId == idUser);
-
-            if (selectedRole == null)
-            {
-                Session["userEditModif"] = model;
-                return RedirectToAction("EditUser", new { hash = idUser, error = "ErrorRole" });
-            }
-            if (Regex.IsMatch(model.userMail, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase) == false)
-            {
-                Session["userEditModif"] = model;
-                return RedirectToAction("EditUser", new { hash = idUser, error = "ErrorUserMailValidation" });
-            }
-            //Verify the user email
-            bool userMailValid = true;
-            UTILISATEUR userByMail = db.UTILISATEURs.SingleOrDefault(x => x.userMail == model.userMail);
-            if (userByMail != null)
-            {
-                if (userByMail.userId != user.userId) userMailValid = false;
-            }
-            if (userMailValid)
-            {
-                try
-                {
-                    // mise à jour user -> Role
-                    List<UserRole> listeUserRole = db.UserRoles.Where(x => x.idUser == user.userId).ToList();
-                    for (int i = 0; i < listeUserRole.Count; i++)
-                    {
-                        db.UserRoles.Remove(listeUserRole[i]);
-                    }
-                    if (selectedRole.Count() == 1)
-                    {
                         UserRole userRole = new UserRole();
                         userRole.idRole = int.Parse(selectedRole[0]);
                         userRole.idUser = user.userId;
                         db.UserRoles.Add(userRole);
                     }
-                    else
-                    {
-                        bool test = false;
-                        foreach (var val in selectedRole)
-                        {
-                            if (val.Contains("1") || val.Contains("2"))
-                            {
-                                test = true;
-                            }
-                            else
-                            {
-                                test = false;
-                            }
-                        }
-                        if (test == true)
-                        {
-                            UserRole userRole = new UserRole();
-                            userRole.idRole = 4;
-                            if (user != null) userRole.idUser = user.userId;
-                            db.UserRoles.Add(userRole);
-                        }
-                    }
-
+                   
                     // mise à jour de user
                     user.userNom = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(model.userNom.ToLower());
                     user.userPrenom = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(model.userPrenom.ToLower());
@@ -1066,10 +1013,28 @@ namespace RedactApplication.Controllers
                     user.redactNiveau = model.redactNiveau;
                     user.redactPhone = model.redactPhone;
                     user.redactReferenceur = model.redactReferenceur;
-                    user.redactThemes = model.redactThemes;
-                    user.redactVolume = model.redactVolume;
-                    user.redactTarif = model.redactTarif;
+                    if (listThemeId != null)
+                    {
+                        List<REDACT_THEME> listeUserThemes = db.REDACT_THEME.Where(x => x.redactId == user.userId).ToList();
+                                                   
+                            SaveRedactThemes(listThemeId, user.userId, listeUserThemes);
+                    }
+                    if (currentrole != "2")
+                    {
+                        user.redactVolume = model.redactVolume;
+                        user.redactTarif = model.redactTarif;
+                    }
+
+                    if (!string.IsNullOrEmpty(model.logoUrl))
+                    {
+                        user.logoUrl = model.logoUrl;
+                      
+                    } 
+
                     db.SaveChanges();
+                    _userId = Guid.Parse(HttpContext.User.Identity.Name);
+                   if(user.userId == _userId)
+                     UpdateInfoProfilSession(user.userNom, user.userPrenom, user.userMail, user.UserRoles.FirstOrDefault(x => x.idUser == user.userId).idRole.ToString(), user.logoUrl);
                 }
                 catch (Exception ex)
                 {
@@ -1083,10 +1048,30 @@ namespace RedactApplication.Controllers
                 Session["userEditModif"] = model;
                 return RedirectToAction("EditUser", new { hash = idUser, error = "ErrorMail" });
             }
+            ViewBag.hashUser = user.userId;
             return View("EditUserConfirmation");
         }
 
 
+        private void UpdateInfoProfilSession(string nom, string prenom,string mail,string role, string logourl)
+        {
+            if(!string.IsNullOrEmpty(nom))
+                Session["name"] = nom;
+
+            if (!string.IsNullOrEmpty(prenom))
+                Session["surname"] = prenom;
+
+           
+            if (!string.IsNullOrEmpty(mail))
+                Session["mail"] = mail;
+
+            if (!string.IsNullOrEmpty(role))
+                Session["role"] = role;
+
+            if (!string.IsNullOrEmpty(logourl))
+                Session["logoUrl"] = logourl;
+
+        }
 
 
         /// <summary>

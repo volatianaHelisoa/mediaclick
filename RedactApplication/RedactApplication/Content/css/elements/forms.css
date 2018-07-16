@@ -197,6 +197,18 @@ fieldset[disabled] .btn {
     background-color: #ff8400;
 }
 
-a.btn:hover {
+a.btn {
+    text-decoration: none;
+}
+
+a.btn:hover,
+.btn a:hover {
     color: white;
+}
+
+#reset-password input[type="password"] {
+	display: block;
+	margin: 0 auto 20px;
+	max-width: inherit;
+	width: 100%;
 }

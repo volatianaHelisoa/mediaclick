@@ -101,6 +101,7 @@ namespace RedactApplication.Models
         public List<UTILISATEURViewModel> SearchUtilisateur(string userFullName)
         {
             var temp = (new SearchData()).UserSearch(userFullName);
+           
             List<UTILISATEURViewModel> listeUser = temp?.Select(x => new UTILISATEURViewModel
             {
                 userId = x.userId,
@@ -112,8 +113,7 @@ namespace RedactApplication.Models
                 redactPhone = x.redactPhone,
                 redactNiveau = x.redactNiveau,
                 redactModePaiement = x.redactModePaiement,
-                redactThemes = x.redactThemes,
-                redactReferenceur = x.redactReferenceur,
+                redactThemes = RedactThemes(x.userId),                redactReferenceur = x.redactReferenceur,
                 redactVolume = x.redactVolume,
                 redactTarif = x.redactTarif,
                 redactVolumeRestant = x.redactVolumeRestant,
@@ -122,35 +122,71 @@ namespace RedactApplication.Models
             return listeUser?.OrderBy(x => x.userNom).ThenBy(x => x.userPrenom).ToList();
         }
 
-     
+
+
+     public void DeleteThemesRedact(REDACT_THEME redactTheme)
+        {
+            using (var context =   new redactapplicationEntities())
+            {
+               
+                if (redactTheme != null)
+                {
+                    //context.Entry(redactTheme).State = System.Data.Entity.EntityState.Deleted;
+                    context.REDACT_THEME.Remove(redactTheme);
+                   
+                    context.SaveChanges();
+                }
+            }
+        }
+
+        public List<string> GetThemes(Guid redactGuid)
+        {
+            redactapplicationEntities db = new Models.redactapplicationEntities();
+            var themes = from c in db.THEMES
+                             from p in db.REDACT_THEME
+                             where p.themeId == c.themeId && p.redactId == redactGuid
+                             select c.theme_name;
+            return themes.ToList();
+        }
+
+        public string RedactThemes(Guid redactGuid)
+        {
+            redactapplicationEntities db = new Models.redactapplicationEntities();
+            var themes = from c in db.THEMES
+                         from p in db.REDACT_THEME
+                         where p.themeId == c.themeId && p.redactId == redactGuid
+                         select c.theme_name;
+
+            string themeredact = string.Join(",", themes.ToArray());
+            return themeredact;
+        }
+
         public IEnumerable<SelectListItem> GetListThemeItem(Guid userGuid)
         {
             using (var context = new redactapplicationEntities())
             {
-                List<USER_THEME> listUserTheme = context.USER_THEME.AsNoTracking()
-                   .Where(n => n.userId == userGuid).ToList();
-                List<THEME> themes = new List<THEME>();
+                var listUserTheme = context.REDACT_THEME.AsNoTracking()
+                   .Where(n => n.redactId == userGuid).Select(r=>r.themeId).ToList();
+              
 
-                foreach (var userTheme in listUserTheme)
-                {
-                    THEME theme =context.THEMES.Where(n => n.themeId == userTheme.themeId).FirstOrDefault();
-                    themes.Add(theme);
-                }
+               
+                var selected = new[] { listUserTheme };
 
-                List<SelectListItem> listtheme = themes                  
+                List<SelectListItem> listtheme = context.THEMES.AsNoTracking()
                     .OrderBy(n => n.theme_name)
                     .Select(n =>
                         new SelectListItem
                         {
                             Value = n.themeId.ToString(),
-                            Text = n.theme_name
+                            Text = n.theme_name,                            
+                            
                         }).ToList();
-                var themeItem = new SelectListItem()
-                {
-                    Value = null,
-                    Text = "--- selectionner thématique ---"
-                };
-                listtheme.Insert(0, themeItem);
+                //var themeItem = new SelectListItem()
+                //{
+                //    Value = null,
+                //    Text = "--- selectionner thématique ---"
+                //};
+                //listtheme.Insert(0, themeItem);
                 return new SelectList(listtheme, "Value", "Text");
             }
         }
@@ -168,12 +204,12 @@ namespace RedactApplication.Models
                             Value = n.themeId.ToString(),
                             Text = n.theme_name
                         }).ToList();
-                var themeItem = new SelectListItem()
-                {
-                    Value = null,
-                    Text = "--- selectionner thématique ---"
-                };
-                listtheme.Insert(0, themeItem);
+                //var themeItem = new SelectListItem()
+                //{
+                //    Value = null,
+                //    Text = "--- selectionner thématique ---"
+                //};
+                //listtheme.Insert(0, themeItem);
                 return new SelectList(listtheme, "Value", "Text");
             }
         }

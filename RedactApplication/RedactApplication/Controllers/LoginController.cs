@@ -42,12 +42,13 @@ namespace RedactApplication.Controllers
                 if (utilisateur != null)
                 {
                     FormsAuthentication.SetAuthCookie(utilisateur.userId.ToString(), model.saveOnComputer);/*CREATION COOKIES*/
-                    Session["mail"] = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(utilisateur.userMail);
+                    Session["mail"] = utilisateur.userMail;
                     //Session["pass"] = pwdCrypte;
                     Session["logoUrl"] = utilisateur.logoUrl;
                     Session["name"] = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(utilisateur.userNom);
                     Session["surname"] = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(utilisateur.userPrenom);
                     Session["role"] = (new Utilisateurs()).GetUtilisateurRoleToString(utilisateur.userId);
+                    Session["UserId"] = utilisateur.userId;
                     if (model.saveOnComputer)
                     {
                         HttpCookie trigerAuths = new HttpCookie("trigerAuths");

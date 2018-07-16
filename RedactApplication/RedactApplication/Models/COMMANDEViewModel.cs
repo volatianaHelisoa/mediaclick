@@ -23,7 +23,7 @@ namespace RedactApplication.Models
         public string mot_cle_secondaire { get; set; }
         public string texte_ancrage { get; set; }
         public string consigne_references { get; set; }
-        public Nullable<System.Guid> consigne_type_contenuId { get; set; }
+        public Nullable<System.Guid> tagId { get; set; }
         public string consigne_autres { get; set; }
         public string balise_titre { get; set; }
 
@@ -50,6 +50,7 @@ namespace RedactApplication.Models
         public string projet { get; set; }
         public string thematique { get; set; }
         public string statut_cmde { get; set; }
+        public string tag { get; set; }
 
         public virtual UTILISATEUR REDACTEUR { get; set; }
 
@@ -69,15 +70,18 @@ namespace RedactApplication.Models
         public Guid listRedacteurId { get; set; }
         public IEnumerable<SelectListItem> ListRedacteur { get; set; }
 
+        public JsonResult JsonRedacteur { get; set; }
+        
+
         [Required]
         [Display(Name = "SelectItemCommandeType")]
         public Guid listCommandeTypeId { get; set; }
         public IEnumerable<SelectListItem> ListCommandeType { get; set; }
 
         [Required]
-        [Display(Name = "SelectItemContenuType")]
-        public Guid listContenuTypeId { get; set; }
-        public IEnumerable<SelectListItem> ListContenuType { get; set; }
+        [Display(Name = "SelectItemTag")]
+        public Guid listTagId { get; set; }
+        public IEnumerable<SelectListItem> ListTag { get; set; }
 
         [Required]
         [Display(Name = "SelectItemStatut")]

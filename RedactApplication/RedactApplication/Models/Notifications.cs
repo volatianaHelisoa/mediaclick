@@ -53,13 +53,13 @@ namespace RedactApplication.Models
         }
 
 
-        public IEnumerable<NOTIFICATIONViewModel> GetAllMessages()
+        public IEnumerable<NOTIFICATIONViewModel> GetAllMessages(Guid? redactId)
         {
             var messages = new List<NOTIFICATIONViewModel>();
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
             {
                 connection.Open();
-                using (var command = new SqlCommand(@"SELECT * FROM [dbo].[NOTIFICATION]", connection))
+                using (var command = new SqlCommand(@"SELECT * FROM [dbo].[NOTIFICATION] where toId ='"+redactId+"' and statut = 1", connection))
                 {
                     command.Notification = null;
 
@@ -88,6 +88,7 @@ namespace RedactApplication.Models
                                 fromId = (Guid) reader["fromId"],
                                 fromUserName = fromUser.userNom,
                                 toId = (Guid) reader["toId"],
+                                message = reader["message"].ToString(),
 
                                 datenotif = Convert.ToDateTime(reader["datenotif"])
                             });
@@ -96,7 +97,7 @@ namespace RedactApplication.Models
                 }
             }
 
-            return messages.OrderByDescending(x=>x.datenotif).Take(6);
+            return messages.OrderBy(x=>x.datenotif).Take(6);
         }
 
         private void dependency_OnChange(object sender, SqlNotificationEventArgs e)

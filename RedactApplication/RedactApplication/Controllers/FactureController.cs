@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -51,19 +52,25 @@ namespace RedactApplication.Controllers
             var factureVm = new Factures().GetDetailsFacture(hash);
             Session["factureNum"] = factureVm.factureNumero;
             Session["logo"] = Server.MapPath("~/images/logo_mc_large.png");
-            
+            Session["redact"] = factureVm.REDACTEUR.userNom.Trim().ToLower();
             return View(factureVm);
         }
 
-
-        // GET: Facture/Create
-        public ActionResult Create()
+        private FACTUREViewModel SetFactureViewModel()
         {
             Factures val = new Factures();
             FACTUREViewModel factureVm = new FACTUREViewModel();
             factureVm.dateDebut = DateTime.Now.AddMonths(-1).AddDays(1);
             factureVm.dateFin = DateTime.Now;
-            factureVm.ListRedacteur = val.GetListRedacteurItem(); 
+            factureVm.ListRedacteur = val.GetListRedacteurItem();
+            return factureVm;
+        }
+
+        // GET: Facture/Create
+        public ActionResult Create()
+        {
+            
+            FACTUREViewModel factureVm = SetFactureViewModel();
             return View(factureVm);
         }
         public byte[] GetPDF(string pHTML)
@@ -137,10 +144,17 @@ namespace RedactApplication.Controllers
             try
             {
                 var numFacture = Session["factureNum"].ToString();
+                var redactFolder = Session["redact"].ToString();
                 var bytes = BindPdf(htmlContent);
                 string filename = "Facture-" + numFacture + "-" + DateTime.Now.Month + ".pdf";
-                var filePath = Server.MapPath("~/Pdf/" + filename);
-                System.IO.File.WriteAllBytes(filePath, bytes);
+                var filePath = Server.MapPath("~/Pdf/" + redactFolder + "/");
+
+                
+                if (!Directory.Exists(filePath))
+                {
+                    Directory.CreateDirectory(filePath);
+                }
+                System.IO.File.WriteAllBytes(filePath + filename, bytes);
                
                 return Json(new
                 {
@@ -206,27 +220,39 @@ namespace RedactApplication.Controllers
                 var commandesFacturer = db.COMMANDEs.Where(x => x.date_livraison >= model.dateDebut &&
                                                                  x.date_livraison <= model.dateFin && (x.STATUT_COMMANDE != null &&
                                                                  x.STATUT_COMMANDE.statut_cmde.Contains("Validé"))).ToList();
-                
-                var redacteur = db.UTILISATEURs.SingleOrDefault(x => x.userId == model.listRedacteurId);
-                var volume = commandesFacturer.Sum(x => x.nombre_mots);
-                double montant = Convert.ToDouble(volume.ToString())  * (Convert.ToDouble(redacteur.redactTarif));
-                newFacture.montant = montant.ToString("0.0");
-                newFacture.etat = false;
-                newFacture.redacteurId = model.listRedacteurId;
-                newFacture.createurId = _userId;
-                newFacture.factureId = Guid.NewGuid();
-                int maxRef = (db.FACTUREs.ToList().Count != 0) ? db.FACTUREs.Max(u => u.factureNumero): 0;
-                newFacture.factureNumero = maxRef + 1;
-                db.FACTUREs.Add(newFacture);
-
-                foreach (var commande in commandesFacturer)
+                if (commandesFacturer.Count() > 0)
                 {
-                    commande.factureId = newFacture.factureId;
-                }
+                    var redacteur = db.UTILISATEURs.SingleOrDefault(x => x.userId == model.listRedacteurId);
+                    var volume = commandesFacturer.Sum(x => x.nombre_mots);
+                    double montant = Convert.ToDouble(volume.ToString()) * (Convert.ToDouble(redacteur.redactTarif));
+                    newFacture.montant = String.Format("{0:N0}", montant);
+                    newFacture.etat = false;
+                    newFacture.redacteurId = model.listRedacteurId;
+                    newFacture.createurId = _userId;
+                    newFacture.factureId = Guid.NewGuid();
+                    int maxRef = (db.FACTUREs.ToList().Count != 0) ? db.FACTUREs.Max(u => u.factureNumero) : 0;
+                    newFacture.factureNumero = maxRef + 1;
+                    db.FACTUREs.Add(newFacture);
 
-                int res = db.SaveChanges();
-                if (res > 0)
-                    return RedirectToAction("ListFacture");               
+                    foreach (var commande in commandesFacturer)
+                    {
+                        commande.factureId = newFacture.factureId;
+                        commande.REDACTEUR.redactTarif = String.Format("{0:N0}", commande.REDACTEUR.redactTarif);
+                       
+                    }
+
+                    int res = db.SaveChanges();
+                    if (res > 0)
+                        return RedirectToAction("ListFacture");
+                }
+                else
+                {
+                    ViewBag.ErrorMessage = true;
+                    FACTUREViewModel factureVm = SetFactureViewModel();
+                    return View("Create",factureVm);
+                }
+                    
+                           
                    
             }
 

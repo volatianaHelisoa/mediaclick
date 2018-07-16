@@ -19,7 +19,6 @@
     <script src="@Url.Content("~/Scripts/jquery-ui-1.12.1.js")"></script>
     <script src="@Url.Content("~/Scripts/jquery.dataTables.js")"></script>
     <script src="@Url.Content("~/Scripts/dataTables.js")"></script>
-    <script src="@Url.Content("~/Scripts/codescript.js")"></script>
     <script>
         $("ul.LinkSearchClear").css("display", "none");
     </script>
@@ -54,20 +53,25 @@
                             </div>
                         }
                     </div>
-                    <div class="submit-area">
+                    @if (@Session["role"] != null && @Session["role"].ToString() != "2")
+                    {
+                        <div class="submit-area">
 
-                        <input type="submit" value="Créer une facture" class="btn btn-success btn-medium" onclick="@("window.location.href='" + @Url.RouteUrl("Home", new { controller = "Facture", action = "Create" }) + "'");">
+                            <input type="submit" value="Créer une facture" class="btn btn-success btn-medium" onclick="@("window.location.href='" + @Url.RouteUrl("Home", new { controller = "Facture", action = "Create" }) + "'");">
+                        </div>
+                    }
                     </div>
-                </div>
                 <div class="filters flex-content flex-jsbet-acenter">
-                    <div class="flex-content flex-jsbet-acenter">
-                        Sélection
-                        <span onclick="CheckedFactureClick()">Tous</span>
-                        <span onclick="DecheckedFactureClick()">Aucun</span>
-                        <button class="btn btn-small" onclick="DeleteAllFactureSelected(@ViewBag.nbrow)"><i class="fa fa-trash"></i> Supprimer la sélection</button>
+                    @if (@Session["role"] != null && @Session["role"].ToString() == "4")
+                    {
+                        <div class="flex-content flex-jsbet-acenter">
+                            Sélection
+                            <span onclick="CheckedFactureClick()">Tous</span>
+                            <span onclick="DecheckedFactureClick()">Aucun</span>
+                            <button class="btn btn-small" onclick="DeleteAllFactureSelected(@ViewBag.nbrow)"><i class="fa fa-trash"></i> Supprimer la sélection</button>
+                        </div>
+                    }
                     </div>
-
-                </div>
                 <table id="myDataTable" class="trig_table table facture-table">
                     <thead>
                         <tr>
@@ -107,8 +111,11 @@
                                         <div class="item">
                                             <div class="option">
                                                 <a href="~/Facture/Details/@item.factureId" title="Détails"><i class="fa fa-eye"></i></a>
-                                                <a onclick="DeleteFactureClick('@item.factureId')" title="Supprimer Facture"><i class="fa fa-trash"></i></a>
-                                            </div>
+                                                @if (@Session["role"] != null && @Session["role"].ToString() != "2")
+                                                {
+                                                    <a onclick="DeleteFactureClick('@item.factureId')" title="Supprimer Facture"><i class="fa fa-trash"></i></a>
+                                                }
+                                                </div>
                                         </div>
                                     </td>
                                 </tr>

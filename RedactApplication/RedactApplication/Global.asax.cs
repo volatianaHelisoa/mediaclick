@@ -140,15 +140,15 @@ namespace RedactApplication
                                 {
                                     access = LoadAccess(0);
                                 }
-                                if (id == 4)
-                                {
-                                    access = LoadAccess(2);
-                                    List<string> temp = LoadAccess(1);
-                                    foreach (var val in temp)
-                                    {
-                                        access.Add(val);
-                                    }
-                                }
+                                //if (id == 4)
+                                //{
+                                //    access = LoadAccess(2);
+                                //    List<string> temp = LoadAccess(1);
+                                //    foreach (var val in temp)
+                                //    {
+                                //        access.Add(val);
+                                //    }
+                                //}
                             }
 
                             if (access != null)

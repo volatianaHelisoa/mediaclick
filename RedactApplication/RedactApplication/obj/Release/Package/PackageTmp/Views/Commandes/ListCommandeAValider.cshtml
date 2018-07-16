@@ -8,9 +8,6 @@
 @section css
 {
     <link href="@Url.Content("~/Content/css/jquery-ui.css")" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
-    @*<link href="@Url.Content("~/Content/css/dataTables.css")" rel="stylesheet" />*@
-    <link href="~/Content/themes/smoothness/jquery-ui.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/Content/css/elements/commandes.css">
 }
 
@@ -23,8 +20,6 @@
     <script>
         $("ul.LinkSearchClear").css("display", "none");
     </script>
-
-
 }
 
 @if (Session["name"] != null)
@@ -36,10 +31,11 @@
                 <ul>
                     @if (@Session["role"] != null && @Session["role"].ToString() != "2")
                     {
-                        <li><a href="~/Home/ListeUser">Utilisateurs</a></li>
+                        <li> @Html.ActionLink("Utilisateurs", "ListeUser", new { controller = "Home" }) </li>
                     }
-                    <li><a href="~/Commandes/ListCommandes" class="active">Commandes</a></li>
-                    <li><a href="~/Facture/ListFacture">Factures</a></li>
+                    <li>@Html.ActionLink("Commandes", "ListCommandes", new { controller = "Commandes" }, new { @class = "active" })</li>
+                    <li>@Html.ActionLink("Factures", "ListFacture", new { controller = "Facture" })</li>
+                    <li>@Html.ActionLink("Templates", "ListTemplate", new { controller = "Template" })</li>
                 </ul>
             </div>
             <div class="head-list">
@@ -47,11 +43,11 @@
                 {
                     <div class="resume with-shadow">
                         <ul>
-                            <li>Commande en cours : @ViewBag.commandesEnCours</li>
-                            <li>Commande en attente : @ViewBag.commandesEnAttente</li>
-                            <li>Commande en retard : @ViewBag.commandesEnRetard</li>
-                            <li>Commande livrée : @ViewBag.commandesLivrer</li>
-                            <li>Commande à facturer : @ViewBag.commandesFacturer</li>
+                            <li><a onclick="@(" window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "ListCommandes" }) + "' ");">Commande en cours : <strong>@ViewBag.commandesEnCours</strong></a></li>
+                            <li><a onclick="@(" window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "ListCommandes" }) + "' ");">Commande en attente : <strong>@ViewBag.commandesEnAttente</strong></a></li>
+                            <li><a onclick="@(" window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "ListCommandes" }) + "' ");">Commande en retard : <strong>@ViewBag.commandesEnRetard</strong></a></li>
+                            <li><a onclick="@(" window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "ListCommandes" }) + "' ");">Commande livrée : <strong>@ViewBag.commandesLivrer</strong></a></li>
+                            <li><a onclick="@(" window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "ListCommandes" }) + "' ");">Commande à facturer : <strong>@ViewBag.commandesFacturer</strong></a></li>
                         </ul>
                     </div>
                 }
@@ -85,11 +81,11 @@
                         Sélection
                         <span onclick="CheckedCmdeClick()">Tous</span>
                         <span onclick="DecheckedCmdeClick()">Aucun</span>
-                        <button class="btn btn-small" onclick="DeleteAllCommandeSelected(@ViewBag.nbrow)">Supprimer la sélection</button>
+                        <button class="btn btn-small" onclick="DeleteAllCommandeSelected(@ViewBag.nbrow)"><i class="fa fa-trash"></i> Supprimer la sélection</button>
                     </div>
 
                 </div>
-                <table id="myDataTableListCommande">
+                <table id="myDataTable">
                     <thead>
                         <tr>
                             <th>
@@ -136,20 +132,16 @@
                                         <td>Non payé</td>
                                     }
 
-                                    <td>
+                                    <td class="col-option">
                                         <!--ViewBag.numpage/ViewBag.nbrow-->
-                                        <div class="option">
-                                           
-                                                <a href="~/Commandes/DetailsCommandeAValider/@item.commandeId" title="Détails Commande"><i class="fa fa-eye"></i></a>
-                                           
-                                        </div>
+                                         <div class="item">
+                                            <div class="option">                                           
+                                                <a href="~/Commandes/DetailsCommandeAValider/@item.commandeId" title="Détails Commande"><i class="fa fa-eye"></i></a
+                                            </div>
+                                         </div>
                                     </td>
                                 </tr>
                                 
-                            }
-                            if (ViewBag.listeCommandeVms.Count == 0)
-                            {
-                                <tr><td>No records found.</td></tr>
                             }
                         }
                     </tbody>

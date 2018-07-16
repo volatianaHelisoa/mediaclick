@@ -13,6 +13,7 @@ namespace RedactApplication.Models
         public Nullable<System.Guid> fromId { get; set; }
         public Nullable<System.Guid> toId { get; set; }
         public Nullable<System.DateTime> datenotif { get; set; }
+        public string message { get; set; }
 
         public int commanderef { get; set; }
         public string fromUserName { get; set; }

@@ -81,13 +81,14 @@
 .commande-view .contenu-footer span {
     margin: 0
 }
-.commande-view .contenu-footer #copy {
+.commande-view .contenu-footer button.btn-copy {
     padding: 7px 20px;
     font-size: 16px;
     color: white;
     background-color: #26b5ff;
     margin-right: -1px;
     text-transform: uppercase;
+	border:none;
 }
 
 .commande-resume .wrap span strong {
@@ -95,6 +96,54 @@
 }
 .commande-resume td {
     vertical-align: top;
+    min-width: 100px;
+}
+.commande-resume td p {
+    margin: 0 0 10px;
+}
+/* Commande non livr� */
+.commande-view .commande-not-delivered > span {
+    font-size: 20px;
+    text-align: center;
+    padding: 50px 0 70px;
+    margin: 0;
+    color: #525252;
+    font-family: 'RL';
 }
 
+.commande-not-delivered .item {
+    flex: 1;
+    text-align: center;
+    cursor: pointer
+}
+
+.commande-not-delivered .item > span {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    padding: 0;
+    color: white;
+    text-align: center;
+    line-height: 80px;
+    margin: 0 auto 10px;
+    display: block;
+}
+
+.commande-review {
+    max-width: 500px;
+    display: block;
+    margin: 10px auto 30px;
+    background-color: #f9f9f9;
+    padding: 20px;
+}
+
+.commande-review span {
+    display: block;
+    width: 100%;
+    padding: 10px 0;
+    border-bottom: 1px solid #ebebeb;
+}
+
+.commande-review span:last-of-type {
+    border: none
 }

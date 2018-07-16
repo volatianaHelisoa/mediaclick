@@ -32,7 +32,7 @@ namespace RedactApplication.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<COMMANDE> COMMANDEs { get; set; }
-        public virtual UTILISATEUR REDACTEUR { get; set; }
         public virtual UTILISATEUR UTILISATEUR { get; set; }
+        public virtual UTILISATEUR UTILISATEUR1 { get; set; }
     }
 }

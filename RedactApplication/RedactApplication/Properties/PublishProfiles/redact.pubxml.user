@@ -22,67 +22,67 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>05/24/2018 14:22:11</publishTime>
     </File>
     <File Include="bin/fr/EntityFramework.resources.dll">
-      <publishTime>10/23/2017 13:15:30</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="bin/fr/EntityFramework.SqlServer.resources.dll">
-      <publishTime>10/23/2017 13:15:30</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="bin/fr/Microsoft.AspNet.Identity.Core.resources.dll">
-      <publishTime>04/03/2015 17:09:42</publishTime>
+      <publishTime>03/04/2015 17:09:42</publishTime>
     </File>
     <File Include="bin/fr/Microsoft.AspNet.Identity.EntityFramework.resources.dll">
-      <publishTime>04/03/2015 17:09:42</publishTime>
+      <publishTime>03/04/2015 17:09:42</publishTime>
     </File>
     <File Include="bin/fr/Microsoft.AspNet.Identity.Owin.resources.dll">
-      <publishTime>04/03/2015 17:09:42</publishTime>
+      <publishTime>03/04/2015 17:09:42</publishTime>
     </File>
     <File Include="bin/fr/Microsoft.AspNet.SignalR.Core.resources.dll">
-      <publishTime>03/06/2018 04:33:20</publishTime>
+      <publishTime>06/03/2018 04:33:20</publishTime>
     </File>
     <File Include="bin/fr/Microsoft.AspNet.SignalR.SystemWeb.resources.dll">
-      <publishTime>03/06/2018 04:33:26</publishTime>
+      <publishTime>06/03/2018 04:33:26</publishTime>
     </File>
     <File Include="bin/fr/Microsoft.Owin.Host.SystemWeb.resources.dll">
-      <publishTime>02/13/2015 13:24:16</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="bin/fr/Microsoft.Owin.resources.dll">
-      <publishTime>02/13/2015 13:24:18</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="bin/fr/Microsoft.Owin.Security.Facebook.resources.dll">
-      <publishTime>02/13/2015 13:24:18</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="bin/fr/Microsoft.Owin.Security.Google.resources.dll">
-      <publishTime>02/13/2015 13:24:18</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="bin/fr/Microsoft.Owin.Security.MicrosoftAccount.resources.dll">
-      <publishTime>02/13/2015 13:24:20</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="bin/fr/Microsoft.Owin.Security.resources.dll">
-      <publishTime>02/13/2015 13:24:20</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="bin/fr/Microsoft.Owin.Security.Twitter.resources.dll">
-      <publishTime>02/13/2015 13:24:20</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="bin/fr/System.Web.Helpers.resources.dll">
-      <publishTime>01/28/2015 04:04:36</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="bin/fr/System.Web.Mvc.resources.dll">
-      <publishTime>01/28/2015 04:02:26</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="bin/fr/System.Web.Optimization.resources.dll">
-      <publishTime>02/11/2014 15:28:42</publishTime>
+      <publishTime>11/02/2014 15:28:42</publishTime>
     </File>
     <File Include="bin/fr/System.Web.Razor.resources.dll">
-      <publishTime>01/28/2015 04:02:36</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="bin/fr/System.Web.WebPages.Deployment.resources.dll">
-      <publishTime>01/28/2015 04:04:36</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="bin/fr/System.Web.WebPages.Razor.resources.dll">
-      <publishTime>01/28/2015 04:04:36</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="bin/fr/System.Web.WebPages.resources.dll">
-      <publishTime>01/28/2015 04:04:36</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="bin/HtmlSanitizationLibrary.dll">
       <publishTime>05/24/2018 16:51:45</publishTime>
@@ -154,13 +154,13 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>05/24/2018 14:11:13</publishTime>
     </File>
     <File Include="bin/RedactApplication.dll">
-      <publishTime>07/04/2018 12:54:12</publishTime>
+      <publishTime>07/16/2018 14:13:42</publishTime>
     </File>
     <File Include="bin/RedactApplication.dll.config">
-      <publishTime>06/28/2018 14:07:01</publishTime>
+      <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="bin/RedactApplication.pdb">
-      <publishTime>07/04/2018 12:54:12</publishTime>
+      <publishTime>07/16/2018 14:13:42</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>05/24/2018 14:11:16</publishTime>
@@ -235,13 +235,13 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>05/24/2018 14:11:07</publishTime>
     </File>
     <File Include="Content/bootstrap.css">
-      <publishTime>07/04/2018 12:53:54</publishTime>
+      <publishTime>07/13/2018 14:54:59</publishTime>
     </File>
     <File Include="Content/bootstrap.min.css">
       <publishTime>09/13/2017 18:15:06</publishTime>
     </File>
     <File Include="Content/css/base/common.css">
-      <publishTime>07/02/2018 15:06:05</publishTime>
+      <publishTime>07/13/2018 14:54:59</publishTime>
     </File>
     <File Include="Content/css/base/reset.css">
       <publishTime>06/21/2018 10:45:24</publishTime>
@@ -253,31 +253,31 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>06/29/2018 17:22:30</publishTime>
     </File>
     <File Include="Content/css/elements/commandes.css">
-      <publishTime>07/02/2018 17:50:57</publishTime>
+      <publishTime>07/13/2018 14:54:59</publishTime>
     </File>
     <File Include="Content/css/elements/forms.css">
-      <publishTime>07/04/2018 12:53:54</publishTime>
+      <publishTime>07/13/2018 14:54:59</publishTime>
     </File>
     <File Include="Content/css/elements/login.css">
       <publishTime>06/29/2018 15:47:34</publishTime>
     </File>
     <File Include="Content/css/elements/profil.css">
-      <publishTime>06/29/2018 14:44:47</publishTime>
+      <publishTime>07/13/2018 14:54:59</publishTime>
     </File>
     <File Include="Content/css/elements/sites-creation.css">
       <publishTime>06/27/2018 14:19:50</publishTime>
     </File>
     <File Include="Content/css/facture.css">
-      <publishTime>07/04/2018 13:40:04</publishTime>
+      <publishTime>07/13/2018 14:54:59</publishTime>
     </File>
     <File Include="Content/css/font/summernote.eot">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/font/summernote.ttf">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/font/summernote.woff">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/jquery-ui.css">
       <publishTime>09/16/2017 00:46:18</publishTime>
@@ -286,265 +286,265 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>09/22/2017 23:54:16</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-ar-AR.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-ar-AR.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-bg-BG.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-bg-BG.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-ca-ES.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-ca-ES.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-cs-CZ.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-cs-CZ.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-da-DK.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-da-DK.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-de-DE.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-de-DE.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-el-GR.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-el-GR.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-es-ES.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-es-ES.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-es-EU.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-es-EU.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-fa-IR.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-fa-IR.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-fi-FI.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-fi-FI.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-fr-FR.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-fr-FR.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-gl-ES.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-gl-ES.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-he-IL.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-he-IL.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-hr-HR.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-hr-HR.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-hu-HU.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-hu-HU.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-id-ID.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-id-ID.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-it-IT.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-it-IT.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-ja-JP.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-ja-JP.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-ko-KR.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-ko-KR.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-lt-LT.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-lt-LT.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-lt-LV.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-lt-LV.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-mn-MN.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-mn-MN.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-nb-NO.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-nb-NO.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-nl-NL.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-nl-NL.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-pl-PL.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-pl-PL.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-pt-BR.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-pt-BR.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-pt-PT.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-pt-PT.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-ro-RO.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-ro-RO.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-ru-RU.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-ru-RU.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-sk-SK.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-sk-SK.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-sl-SI.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-sl-SI.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-sr-RS-Latin.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-sr-RS-Latin.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-sr-RS.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-sr-RS.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-sv-SE.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-sv-SE.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-ta-IN.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-ta-IN.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-th-TH.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-th-TH.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-tr-TR.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-tr-TR.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-uk-UA.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-uk-UA.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-vi-VN.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-vi-VN.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-zh-CN.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-zh-CN.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-zh-TW.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/lang/summernote-zh-TW.min.js">
-      <publishTime>05/14/2018 23:25:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/layout/layout.css">
-      <publishTime>07/04/2018 13:54:35</publishTime>
+      <publishTime>07/13/2018 14:54:59</publishTime>
     </File>
     <File Include="Content/css/libs/bootstrap-grid.css">
       <publishTime>06/27/2018 10:45:26</publishTime>
     </File>
     <File Include="Content/css/libs/codepen.min.css">
-      <publishTime>06/28/2018 12:28:14</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/css/summernote.css">
       <publishTime>06/19/2018 12:56:50</publishTime>
@@ -813,11 +813,41 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
     <File Include="images/success-picto.svg">
       <publishTime>06/21/2018 17:19:00</publishTime>
     </File>
+    <File Include="images/table-navigation-arrow.svg">
+      <publishTime>07/09/2018 09:30:03</publishTime>
+    </File>
+    <File Include="images/theme1_thumb.jpg">
+      <publishTime>07/13/2018 14:54:59</publishTime>
+    </File>
+    <File Include="images/theme2_thumb.jpg">
+      <publishTime>07/13/2018 14:54:59</publishTime>
+    </File>
+    <File Include="images/theme3_thumb.jpg">
+      <publishTime>07/13/2018 14:54:59</publishTime>
+    </File>
+    <File Include="images/theme4_thumb.jpg">
+      <publishTime>07/13/2018 14:54:59</publishTime>
+    </File>
+    <File Include="images/Themes/financement sante.jpg">
+      <publishTime>07/13/2018 14:54:59</publishTime>
+    </File>
+    <File Include="images/Themes/pret epargne logement.jpg">
+      <publishTime>07/13/2018 14:54:59</publishTime>
+    </File>
     <File Include="Models/redactapplicationEntities.edmx.diagram">
-      <publishTime>06/27/2018 16:06:58</publishTime>
+      <publishTime>07/16/2018 13:10:41</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>06/27/2018 14:30:15</publishTime>
+    </File>
+    <File Include="Pdf/Facture-1-6.pdf">
+      <publishTime>06/29/2018 14:37:51</publishTime>
+    </File>
+    <File Include="Pdf/Facture-1-7.pdf">
+      <publishTime>07/13/2018 17:03:48</publishTime>
+    </File>
+    <File Include="Pdf/Facture-3-7.pdf">
+      <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>09/13/2017 17:24:54</publishTime>
@@ -826,10 +856,10 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>09/13/2017 17:24:48</publishTime>
     </File>
     <File Include="Scripts/codescript.js">
-      <publishTime>07/01/2018 17:55:47</publishTime>
+      <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Scripts/codescriptnotification.js">
-      <publishTime>06/19/2018 16:40:02</publishTime>
+      <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Scripts/dataTables.js">
       <publishTime>07/02/2018 17:53:58</publishTime>
@@ -838,25 +868,55 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>09/13/2017 18:13:00</publishTime>
     </File>
     <File Include="Scripts/jquery-1.12.4.js">
-      <publishTime>06/04/2018 16:48:32</publishTime>
+      <publishTime>04/06/2018 16:48:32</publishTime>
     </File>
     <File Include="Scripts/jquery-1.12.4.min.js">
-      <publishTime>06/04/2018 16:48:32</publishTime>
+      <publishTime>04/06/2018 16:48:32</publishTime>
     </File>
     <File Include="Scripts/jquery-1.12.4.min.map">
-      <publishTime>06/04/2018 16:48:32</publishTime>
+      <publishTime>04/06/2018 16:48:32</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.1.1.intellisense.js">
+      <publishTime>09/13/2017 17:24:54</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.1.1.js">
+      <publishTime>09/13/2017 17:24:48</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.1.1.min.js">
+      <publishTime>09/13/2017 17:24:54</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.1.1.min.map">
+      <publishTime>07/13/2018 14:54:59</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.1.1.slim.js">
+      <publishTime>09/13/2017 17:24:48</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.1.1.slim.min.js">
+      <publishTime>09/13/2017 17:24:48</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.1.1.slim.min.map">
+      <publishTime>07/13/2018 14:54:59</publishTime>
     </File>
     <File Include="Scripts/jquery-ui-1.12.1.js">
       <publishTime>06/04/2018 16:48:59</publishTime>
     </File>
+    <File Include="Scripts/jquery-ui-1.12.1.min.js">
+      <publishTime>09/13/2017 17:24:54</publishTime>
+    </File>
     <File Include="Scripts/jquery.dataTables.js">
       <publishTime>09/16/2017 00:05:08</publishTime>
+    </File>
+    <File Include="Scripts/jquery.min.js">
+      <publishTime>07/13/2018 14:54:59</publishTime>
     </File>
     <File Include="Scripts/jquery.signalR-2.2.3.js">
       <publishTime>06/15/2018 14:10:28</publishTime>
     </File>
     <File Include="Scripts/jquery.signalR-2.2.3.min.js">
       <publishTime>06/15/2018 14:10:27</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate-vsdoc.js">
+      <publishTime>09/13/2017 17:24:54</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.js">
       <publishTime>09/13/2017 18:12:06</publishTime>
@@ -885,6 +945,9 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
     <File Include="Scripts/modernizr-2.6.2.js">
       <publishTime>09/13/2017 17:24:54</publishTime>
     </File>
+    <File Include="Scripts/redac-script.js">
+      <publishTime>07/13/2018 14:54:59</publishTime>
+    </File>
     <File Include="Scripts/respond.js">
       <publishTime>09/13/2017 18:14:26</publishTime>
     </File>
@@ -902,6 +965,24 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
     </File>
     <File Include="Scripts/_references.js">
       <publishTime>06/28/2018 12:25:31</publishTime>
+    </File>
+    <File Include="Themes/Home4/css/bases.css">
+      <publishTime>07/13/2018 14:54:59</publishTime>
+    </File>
+    <File Include="Themes/Home4/css/templates-style.css">
+      <publishTime>07/13/2018 14:54:59</publishTime>
+    </File>
+    <File Include="Themes/Home4/img/banner-landscape.jpg">
+      <publishTime>07/13/2018 14:54:59</publishTime>
+    </File>
+    <File Include="Themes/Home4/img/pattern-body.jpg">
+      <publishTime>07/13/2018 14:54:59</publishTime>
+    </File>
+    <File Include="Themes/Home4/img/photo.jpg">
+      <publishTime>07/13/2018 14:54:59</publishTime>
+    </File>
+    <File Include="Themes/Home4/img/t4-logo.png">
+      <publishTime>07/13/2018 14:54:59</publishTime>
     </File>
     <File Include="Views/Account/ConfirmEmail.cshtml">
       <publishTime>05/24/2018 14:11:09</publishTime>
@@ -939,23 +1020,32 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
     <File Include="Views/Account/_ExternalLoginsListPartial.cshtml">
       <publishTime>05/24/2018 14:11:09</publishTime>
     </File>
+    <File Include="Views/Commandes/CommandeCancel.cshtml">
+      <publishTime>07/13/2018 14:55:00</publishTime>
+    </File>
     <File Include="Views/Commandes/CommandeConfirmationVolume.cshtml">
-      <publishTime>07/02/2018 14:27:49</publishTime>
+      <publishTime>07/06/2018 09:17:08</publishTime>
+    </File>
+    <File Include="Views/Commandes/CommandeRefuser.cshtml">
+      <publishTime>07/13/2018 14:55:00</publishTime>
+    </File>
+    <File Include="Views/Commandes/CommandeUpdateNote.cshtml">
+      <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Views/Commandes/CommandeWaitting.cshtml">
-      <publishTime>07/02/2018 10:13:46</publishTime>
+      <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Views/Commandes/Create.cshtml">
-      <publishTime>07/02/2018 15:10:24</publishTime>
+      <publishTime>07/16/2018 13:23:42</publishTime>
     </File>
     <File Include="Views/Commandes/CreateCommandeConfirmation.cshtml">
-      <publishTime>07/02/2018 14:27:17</publishTime>
+      <publishTime>07/13/2018 14:54:59</publishTime>
     </File>
     <File Include="Views/Commandes/Delete.cshtml">
-      <publishTime>05/29/2018 13:48:49</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Views/Commandes/DeleteCommande.cshtml">
-      <publishTime>07/02/2018 09:51:55</publishTime>
+      <publishTime>07/13/2018 14:54:59</publishTime>
     </File>
     <File Include="Views/Commandes/DeletedAllCommandeWaitting.cshtml">
       <publishTime>07/02/2018 10:21:12</publishTime>
@@ -967,19 +1057,19 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>07/02/2018 10:24:58</publishTime>
     </File>
     <File Include="Views/Commandes/DetailsCommande.cshtml">
-      <publishTime>07/02/2018 16:19:28</publishTime>
+      <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Views/Commandes/DetailsCommandeAValider.cshtml">
-      <publishTime>07/02/2018 16:30:42</publishTime>
+      <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Views/Commandes/DeteleAllCommandeConfirmation.cshtml">
       <publishTime>07/02/2018 10:26:12</publishTime>
     </File>
     <File Include="Views/Commandes/Edit.cshtml">
-      <publishTime>07/02/2018 15:07:00</publishTime>
+      <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Views/Commandes/EditCommandeConfirmation.cshtml">
-      <publishTime>07/02/2018 10:48:31</publishTime>
+      <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Views/Commandes/ErrorNoSelection.cshtml">
       <publishTime>07/01/2018 18:25:52</publishTime>
@@ -988,19 +1078,22 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>07/02/2018 10:32:32</publishTime>
     </File>
     <File Include="Views/Commandes/Index.cshtml">
-      <publishTime>05/29/2018 14:04:27</publishTime>
+      <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Views/Commandes/ListCommandeAValider.cshtml">
-      <publishTime>07/02/2018 16:36:00</publishTime>
+      <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Views/Commandes/ListCommandes.cshtml">
-      <publishTime>07/02/2018 17:51:43</publishTime>
+      <publishTime>07/16/2018 13:58:40</publishTime>
+    </File>
+    <File Include="Views/Commandes/RelanceCommandeConfirmation.cshtml">
+      <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Views/Facture/Create.cshtml">
-      <publishTime>07/03/2018 16:52:54</publishTime>
+      <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Views/Facture/DeletedAllFactureConfirmation.cshtml">
-      <publishTime>07/03/2018 11:52:36</publishTime>
+      <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Views/Facture/DeletedFactureConfirmation.cshtml">
       <publishTime>07/03/2018 11:53:38</publishTime>
@@ -1009,79 +1102,79 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>07/03/2018 17:08:09</publishTime>
     </File>
     <File Include="Views/Facture/Details.cshtml">
-      <publishTime>07/04/2018 13:43:11</publishTime>
+      <publishTime>07/16/2018 08:40:52</publishTime>
     </File>
     <File Include="Views/Facture/ErrorNoSelection.cshtml">
       <publishTime>07/03/2018 17:07:01</publishTime>
     </File>
     <File Include="Views/Facture/ListFacture.cshtml">
-      <publishTime>07/03/2018 16:59:18</publishTime>
+      <publishTime>07/13/2018 17:10:51</publishTime>
     </File>
     <File Include="Views/Home/About.cshtml">
-      <publishTime>09/13/2017 18:14:28</publishTime>
+      <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Views/Home/Contact.cshtml">
-      <publishTime>09/13/2017 18:14:28</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Views/Home/CreatedUserConfirmation.cshtml">
-      <publishTime>07/03/2018 13:11:36</publishTime>
+      <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Views/Home/DeletedAllUserConfirmation.cshtml">
-      <publishTime>07/03/2018 13:14:12</publishTime>
+      <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Views/Home/DeletedAllUserWaitting.cshtml">
       <publishTime>07/03/2018 17:08:42</publishTime>
     </File>
     <File Include="Views/Home/DeletedUserConfirmation.cshtml">
-      <publishTime>07/03/2018 13:15:36</publishTime>
+      <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Views/Home/DeletedUserWaitting.cshtml">
       <publishTime>07/03/2018 17:08:42</publishTime>
     </File>
     <File Include="Views/Home/DeleteUser.cshtml">
-      <publishTime>07/03/2018 13:13:14</publishTime>
+      <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Views/Home/DetailsRedacteurs.cshtml">
-      <publishTime>06/29/2018 16:49:05</publishTime>
+      <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Views/Home/EditUser.cshtml">
-      <publishTime>06/29/2018 16:37:45</publishTime>
+      <publishTime>07/16/2018 10:10:18</publishTime>
     </File>
     <File Include="Views/Home/EditUserConfirmation.cshtml">
-      <publishTime>07/03/2018 13:16:02</publishTime>
+      <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Views/Home/ErrorEditUser.cshtml">
-      <publishTime>07/03/2018 15:25:58</publishTime>
+      <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Views/Home/ErrorNoSelection.cshtml">
-      <publishTime>07/03/2018 17:07:21</publishTime>
+      <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Views/Home/ErrorUser.cshtml">
-      <publishTime>07/03/2018 13:16:22</publishTime>
+      <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Views/Home/GererUtilisateur.cshtml">
-      <publishTime>07/03/2018 13:41:03</publishTime>
+      <publishTime>07/16/2018 09:56:41</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
       <publishTime>05/25/2018 16:43:19</publishTime>
     </File>
     <File Include="Views/Home/ListeUser.cshtml">
-      <publishTime>07/03/2018 17:38:42</publishTime>
+      <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Views/Home/sendMailRecovery.cshtml">
-      <publishTime>07/03/2018 14:19:50</publishTime>
+      <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Views/Home/ViewRedacteur.cshtml">
-      <publishTime>05/28/2018 11:06:19</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Views/Login/Accueil.cshtml">
-      <publishTime>07/04/2018 13:36:06</publishTime>
+      <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Views/Login/AccueilUser.cshtml">
-      <publishTime>07/04/2018 13:36:13</publishTime>
+      <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Views/Login/ErrrorForgotPassword.cshtml">
-      <publishTime>07/03/2018 15:25:14</publishTime>
+      <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Views/Login/ExpiredLink.cshtml">
       <publishTime>07/03/2018 15:25:14</publishTime>
@@ -1093,7 +1186,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>07/03/2018 15:25:14</publishTime>
     </File>
     <File Include="Views/Login/UpdatePassword.cshtml">
-      <publishTime>07/02/2018 10:27:32</publishTime>
+      <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Views/Login/UpdatePasswordSuccess.cshtml">
       <publishTime>07/03/2018 15:25:13</publishTime>
@@ -1120,22 +1213,22 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>05/24/2018 14:11:09</publishTime>
     </File>
     <File Include="Views/Shared/ErrorConfiguration.cshtml">
-      <publishTime>07/02/2018 14:22:29</publishTime>
+      <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Views/Shared/ErrorException.cshtml">
-      <publishTime>07/02/2018 14:22:10</publishTime>
+      <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Views/Shared/ErrorInvalidAccountOrPassword.cshtml">
-      <publishTime>07/02/2018 11:07:20</publishTime>
+      <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Views/Shared/ErrorUserNotExist.cshtml">
-      <publishTime>07/02/2018 10:57:02</publishTime>
+      <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Views/Shared/LayoutConnected.cshtml">
-      <publishTime>07/04/2018 12:54:01</publishTime>
+      <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Views/Shared/LayoutFullPage.cshtml">
-      <publishTime>07/04/2018 12:53:54</publishTime>
+      <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Views/Shared/Lockout.cshtml">
       <publishTime>05/24/2018 14:11:10</publishTime>
@@ -1150,25 +1243,43 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>07/01/2018 18:33:31</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>07/04/2018 12:53:54</publishTime>
+      <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>05/24/2018 14:11:10</publishTime>
     </File>
     <File Include="Views/Shared/_MessagesList.cshtml">
-      <publishTime>06/19/2018 13:33:34</publishTime>
+      <publishTime>07/13/2018 14:55:00</publishTime>
+    </File>
+    <File Include="Views/Template/CreateTemplate.cshtml">
+      <publishTime>07/13/2018 14:55:00</publishTime>
+    </File>
+    <File Include="Views/Template/Home1.cshtml">
+      <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Views/Template/ListTemplate.cshtml">
-      <publishTime>07/03/2018 14:38:11</publishTime>
+      <publishTime>07/13/2018 14:55:00</publishTime>
+    </File>
+    <File Include="Views/Template/Theme1.cshtml">
+      <publishTime>07/13/2018 14:55:00</publishTime>
+    </File>
+    <File Include="Views/Template/Theme2.cshtml">
+      <publishTime>07/13/2018 14:55:00</publishTime>
+    </File>
+    <File Include="Views/Template/Theme3.cshtml">
+      <publishTime>07/13/2018 14:55:00</publishTime>
+    </File>
+    <File Include="Views/Template/Theme4.cshtml">
+      <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>05/24/2018 14:10:57</publishTime>
     </File>
     <File Include="Views/_ViewStart.cshtml">
-      <publishTime>05/24/2018 14:10:57</publishTime>
+      <publishTime>07/10/2018 16:29:50</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/03/2018 13:52:56</publishTime>
+      <publishTime>07/13/2018 16:11:29</publishTime>
     </File>
   </ItemGroup>
 </Project>

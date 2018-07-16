@@ -88,19 +88,27 @@
         <div id="single-container">
             <div class="onglets">
                 <ul>
-                    <li><a href="">Utilisateurs</a></li>
-                    <li><a href="" class="active">Commandes</a></li>
-                    <li><a href="">Dolor sit amet</a></li>
+                    @if (@Session["role"] != null && @Session["role"].ToString() != "2")
+                    {
+                        <li> @Html.ActionLink("Utilisateurs", "ListeUser", new { controller = "Home" }) </li>
+                    }
+                    <li>@Html.ActionLink("Commandes", "ListCommandes", new { controller = "Commandes" }, new { @class = "active" })</li>
+                    <li>@Html.ActionLink("Factures", "ListFacture", new { controller = "Facture" })</li>
+                    <li>@Html.ActionLink("Templates", "ListTemplate", new { controller = "Template" })</li>
                 </ul>
             </div>
             <div class="card back-office with-shadow">
                 <div class="head">
                     <i class="icon icon-create-command"></i>
                     <h1>Créer commande</h1>
-                    <p>Veuillez remplir les champs Requis et appuyez sur Enregistrer pour éditer une commande</p>
+                    <p>Veuillez remplir les champs Requis et appuyez sur Enregistrer pour créer une commande</p>
                     @if (Session["VolumeInfo"] != null)
                     {
                         <p class="error-msg text-centered">@Session["VolumeInfo"].ToString()</p>
+                    }
+                    @if (ViewBag.ErrorRedacteur != null)
+                    {
+                        <p class="error-msg text-centered">Veuillez selectionner un rédacteur.</p>
                     }
                 </div>
 
@@ -108,24 +116,29 @@
                 {
                     @Html.AntiForgeryToken()
                     <!-- Champs -->
-                    <section class="clearfix">
-                        <label for="" class="col-50 pull-left">
-                            Projet
-                            @Html.DropDownListFor(x => Model.listprojetId, new SelectList(Model.ListProjet, "Value", "Text"), htmlAttributes: new { @id = "SelectItemProjet" })
-                        </label>
-                        <label for="" class="col-50 pull-right">
-                            Thématique
-                            @Html.DropDownListFor(x => Model.listThemeId, new SelectList(Model.ListTheme, "Value", "Text"), htmlAttributes: new { id = "SelectItemTheme" })
-                        </label>
-                        <label for="" class="col-50 pull-left">
-                            Rédacteur
-                            @Html.DropDownListFor(x => Model.listRedacteurId, new SelectList(Model.ListRedacteur, "Value", "Text"), htmlAttributes: new { id = "SelectItemRedacteur" })
-                        </label>
-                        <label for="" class="col-50 pull-right">
-                            Type de texte
-                            @Html.DropDownListFor(x => Model.listCommandeTypeId, new SelectList(Model.ListCommandeType, "Value", "Text"), htmlAttributes: new { @id = "SelectItemCommandeType" })
-                        </label>
-                    </section>
+                <section class="clearfix">
+                    <label for="" class="col-50 pull-left">
+                        Projet
+                        @Html.DropDownListFor(x => Model.listprojetId, new SelectList(Model.ListProjet, "Value", "Text"), htmlAttributes: new { @id = "SelectItemProjet", @required = true })
+                    </label>
+                    <label for="" class="col-50 pull-right">
+                        Thématique
+                        @Html.DropDownListFor(x => Model.listThemeId, new SelectList(Model.ListTheme, "Value", "Text"), htmlAttributes: new { id = "SelectItemTheme", @required = true })
+                    </label>
+                    <label for="" class="col-50 pull-left">
+                        Rédacteur
+
+                        @Html.DropDownListFor(x => Model.listRedacteurId, new SelectList(Model.ListRedacteur, "Value", "Text"), htmlAttributes: new { id = "SelectItemRedacteur", @required = true })
+                    </label>
+                    <label for="" class="col-50 pull-right">
+                        Type de texte
+                        @Html.DropDownListFor(x => Model.listCommandeTypeId, new SelectList(Model.ListCommandeType, "Value", "Text"), htmlAttributes: new { @id = "SelectItemCommandeType", @required = true })
+                    </label>
+                    <label for="" class="col-50 pull-right">
+                        Tag
+                        @Html.DropDownListFor(x => Model.listTagId, new SelectList(Model.ListTag, "Value", "Text"), htmlAttributes: new { @id = "SelectItemTag", @required = true })
+                    </label>
+                </section>
                     <section class="clearfix">
                         <div class="section-title">
                             <span>Mots clés</span>
@@ -161,13 +174,10 @@
                             Autres
                             @Html.TextAreaFor(x => x.consigne_autres, new { @required = true, @name = "name" })
                         </label>
-                        <label for="" class="col-50 pull-left">
-                            Type de contenu
-                            @Html.DropDownListFor(x => Model.listContenuTypeId, new SelectList(Model.ListContenuType, "Value", "Text"), htmlAttributes: new { @id = "SelectItemContenuType" })
-                        </label>
+                       
                         <label for="" class="col-50 pull-right">
                             Date de livraison
-                            @Html.TextBoxFor(x => x.date_livraison, "{0:dd/MM/yyyy}", new { type = "text" })
+                            @Html.TextBoxFor(x => x.date_livraison, "{0:dd/MM/yyyy}", new { type = "text", @required = true })
                             @Html.ValidationMessageFor(m => m.date_livraison)
                         </label>
                         <span class="pull-left" style="margin-bottom: 20px;">
@@ -177,8 +187,8 @@
                         </span>
 
                     </section>
-                    <section class="clearfix submit-area">
-                        <input type="submit" value="Enregistrer" class="btn btn-success" />
+                    <section class="clearfix submit-area" id="toast">
+                        <input type="submit" value="Envoyer" class="btn btn-success" />
 
                         @Html.ActionLink("Annuler", "ListCommandes", "Commandes", new { @class = "btn btn-warning" })
                     </section>
@@ -190,27 +200,5 @@
 else
 { Response.Redirect("~/Login/Accueil"); }
 
-<!--  Dialogue succès ajout user   -->
-<div id="addUserPopUp">
 
-</div>
-
-<!--  Dialogue error valid data   -->
-<div id="errorValidDataUserPopUp">
-
-</div>
-
-
-
-
-
-<!--  Dialogue succès ajout user   -->
-<div id="addUserPopUp">
-
-</div>
-
-<!--  Dialogue error valid data   -->
-<div id="errorValidDataUserPopUp">
-
-</div>
 

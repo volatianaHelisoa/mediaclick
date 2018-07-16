@@ -94,6 +94,10 @@ body {
 .green-bg {
    background-color: #16c43b;
 }
+
+.red-bg {
+    background-color: #ff4026
+}
 .green-text {
     color: #16c43b;
 }
@@ -215,4 +219,112 @@ input::-webkit-inner-spin-button {
 .icon-create-facture {
     background: url(../../../images/icon-create-facture.png) no-repeat center;
     background-size: 100%;
+}
+
+#reset-password p {
+    margin: 0 0 20px;
+    text-align: left;
+}
+
+.policies {
+    margin: 0 0 30px;
+    padding: 0;
+    text-align: left;
+}
+
+.policies li {
+    list-style: none;
+}
+
+.policies strong {
+    color: #5c5c5c;
+    margin-bottom: 10px;
+    display: block;
+}
+
+#invalid-pass span {
+    display: block;
+    color: #5c5c5c;
+    padding: 10px 0;
+    border-bottom: 1px solid #dcdcdc;
+    text-align: left;
+    word-break: keep-all;
+}
+
+#invalid-pass button {
+    margin-top: 20px;
+    display: inline-block;
+}
+
+/* Multiselect dropdown design */
+
+.dropdown-area {
+    margin-top: 10px;
+}
+
+.multiselect {
+    background: #eaeaea;
+}
+
+ul.multiselect-container {
+    min-width: 370px;
+    text-align: left;
+}
+
+ul.multiselect-container label.checkbox {
+	padding: 10px 20px;
+}
+
+ul.multiselect-container > li > a:hover, ul.multiselect-container > li > a:focus {
+    color: #ffffff;
+    text-decoration: none;
+    background-color: #26b5ff;
+}
+
+ul.multiselect-container input[type="checkbox"] {
+    display: inline-block;
+    width: inherit;
+    vertical-align: middle;
+    margin: 4px 10px 0 0;
+    float: none;
+    line-height: inherit;
+}
+
+.multiselect-selected-text {
+	text-transform: initial;
+}
+
+ul.multiselect-container .multiselect-search {
+    margin: 0 !important;
+    padding: 12px 10px;
+    height: inherit;
+}
+
+ul.multiselect-container .multiselect-clear-filter {
+    min-width: inherit;
+    padding: 12px 12px;
+}
+
+.commande-review {
+    max-width: 500px;
+    display: block;
+    margin: 10px auto 30px;
+    background-color: #f9f9f9;
+    padding: 20px;
+}
+
+.commande-review span {
+    display: block;
+    width: 100%;
+    padding: 10px 0;
+    border-bottom: 1px solid #ebebeb;
+}
+
+.commande-review span:last-of-type {
+    border: none
+}
+
+.input-error {
+    margin-top: -25px;
+    display: block;
 }

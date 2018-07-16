@@ -37,7 +37,6 @@
 {
     <main id="wrapper">
         <div id="single-container">
-            <a class="back-link" href="@Url.Action("Retour", "ListCommandes", "Commandes")"><i class="fa fa-arrow-left"></i> Retour</a>
             <div class="onglets ease-in-out">
                 <ul>
                     @if (@Session["role"] != null && @Session["role"].ToString() != "2")
@@ -62,27 +61,37 @@
                                 <span>Livrable</span>
                             </div>
                             <div class="wrap">
-                                @if (Model.statut_cmde != "Livré")
+                                @if (@Session["role"] != null && @Session["role"].ToString() != "2")
                                 {
-                                    <div class="commande-not-delivered">
-                                        <span>Livraison prévu le 15/06/2018</span>
+                                <div class="commande-not-delivered">
+
+                                    @if (Model.statut_cmde == "En cours" || Model.statut_cmde == "En attente")
+                                    {
+                                        <span>Livraison prévue le  @Model.date_livraison.Value.ToString("dd/MM/yyyy") </span>
                                         <div class="flex-content flex-jsbet-acenter option">
-                                            <a class="item">
-                                                <span class="icon btn-warm"><i class="fa fa-envelope fa-2x"></i></span>
+                                            <a class="item" onclick="@("window.location.href='" + @Url.Action("RelanceSMS", "Commandes", new {hash = Model.commandeId}) + "' ");">
+                                                <span class="icon btn-warm"><i class="fa fa-paper-plane fa-2x"></i></span>
                                                 Relancer par SMS
                                             </a>
-                                            <a class="item">
+                                            <a class="item" onclick="@("window.location.href='" + @Url.Action("RelanceMail", "Commandes", new {hash = Model.commandeId}) + "' ");">
                                                 <span class="icon btn-primary"><i class="fa fa-envelope-open fa-2x"></i></span>
                                                 Relancer par mail
                                             </a>
-                                            <a class="item">
+                                            <a class="item" onclick="@("window.location.href='" + @Url.Action("CommandeCancel", "Commandes", new {hash = Model.commandeId}) + "' ");">
                                                 <span class="icon btn-warning"><i class="fa fa-undo fa-2x"></i></span>
                                                 Annulation
                                             </a>
                                         </div>
+                                    }
+
+                                    else if (Model.statut_cmde == "Annulé" || Model.statut_cmde == "Refusé")
+                                    {                                        
+                                            <span>Livraison prévue le  @Model.date_livraison.Value.ToString("dd/MM/yyyy") a été annulée ou refusée.</span>
+                                     }
+
                                     </div>
                                 }
-                                else
+                                @if (Model.statut_cmde == "Livré" || Model.statut_cmde == "Validé" || Model.statut_cmde == "Refusé")
                                 {
                                     <span>
                                         <strong>Titre : </strong>@Html.DisplayFor(model => model.balise_titre)
@@ -94,7 +103,7 @@
                                         </div>
 
                                         <div class="contenu-footer flex-content flex-jsbet-acenter">
-                                            @*<span> @ViewBag.ContentLength  sur @Html.DisplayFor(model => model.nombre_mots) mot(s) utilisé(s)</span>*@
+                                            <span> @ViewBag.ContentLength  sur @Html.DisplayFor(model => model.nombre_mots) mot(s) utilisé(s)</span>                                           
                                             <button class="btn-copy" data-clipboard-action="copy" data-clipboard-target=".commande-contenu">Copier</button>
                                         </div>
                                     </div>
@@ -123,16 +132,20 @@
                                 <span><strong>Mot clé principal :</strong> @Html.DisplayFor(model => model.mot_cle_pricipal)</span>
                                 <span><strong>Mot clé secondaire :</strong>@Html.DisplayFor(model => model.mot_cle_secondaire)</span>
                                 <span><strong>Texte d'ancrage :</strong>@Html.DisplayFor(model => model.texte_ancrage)</span>
-                                <span>
-                                    <strong>Remarques :</strong> @Html.DisplayFor(model => model.remarques)
-                                </span>
-                            </div>
+
+                                @if (Model.remarques != null)
+                                {
+                                    <span>
+                                        <strong>Remarques :</strong> @Html.DisplayFor(model => model.remarques)
+                                    </span>
+                                }
+                                </div>
 
                         </section>
                         <div class="sep"></div>
                         <section class="clearfix submit-area" id="toast">
 
-                            @if (Model.statut_cmde == "Livré")
+                            @if (Model.statut_cmde == "Livré" &&  Model.statut_cmde != "Annulé")
                             {
 
                                 @Html.ActionLink("Accepter", "ValidCommande", "Commandes", new { @hash = Model.commandeId }, new { @class = "btn btn-success small" })
@@ -143,7 +156,7 @@
 
                                 @Html.ActionLink("Retour", "ListCommandes", "Commandes", new { }, new { @class = "btn btn-primary small" })
                             }
-                            else if (Model.statut_cmde != "Livré")
+                            else if (Model.statut_cmde != "Livré" )
                             {
                                 @Html.ActionLink("Retour", "ListCommandes", "Commandes", new { }, new { @class = "btn btn-primary" })
                             }

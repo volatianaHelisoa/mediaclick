@@ -15,8 +15,8 @@ namespace RedactApplication.Models
     public partial class REDACT_THEME
     {
         public System.Guid redactThemeId { get; set; }
-        public System.Guid userId { get; set; }
-        public System.Guid themeId { get; set; }
+        public Nullable<System.Guid> themeId { get; set; }
+        public Nullable<System.Guid> redactId { get; set; }
     
         public virtual THEME THEME { get; set; }
         public virtual UTILISATEUR UTILISATEUR { get; set; }

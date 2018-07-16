@@ -22,6 +22,8 @@ namespace RedactApplication.Models
         public string redactReferenceur { get; set; }
         public string redactThemes { get; set; }
         public string redactNiveau { get; set; }
+
+      
         public string redactPhone { get; set; }
         public string redactTarif { get; set; }
         public string redactVolumeRestant { get; set; }
@@ -33,10 +35,11 @@ namespace RedactApplication.Models
 
         [Required]
         [Display(Name = "SelectItemTheme")]
-        public Guid listThemeId { get; set; }
+        //public Guid listThemeId { get; set; }
         public IEnumerable<SelectListItem> ListTheme { get; set; }
+        public List<Guid?> listThemeId { get; set; }
 
-     
-
+        public Guid?[] themeId { get; set; }
+        public MultiSelectList themeList { get; set; }
     }
 }

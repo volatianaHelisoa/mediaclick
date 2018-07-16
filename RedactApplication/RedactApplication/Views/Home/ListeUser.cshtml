@@ -22,7 +22,6 @@
     <script src="@Url.Content("~/Scripts/jquery.dataTables.js")"></script>
     <link href="@Url.Content("~/Content/css/jquery.dataTables.css")" rel="stylesheet" />
     <script src="@Url.Content("~/Scripts/dataTables.js")"></script>
-    <script src="@Url.Content("~/Scripts/codescript.js")"></script>
  
     <script>
         $("ul.LinkSearchClear").css("display", "none");
@@ -30,7 +29,8 @@
 
 }
 
-@if (Session["name"] != null)
+@if (Session["name"] != null && @Session["role"] != null && @Session["role"].ToString() != "2")
+                    
 {
 <main id="wrapper">
     <div id="single-container">
@@ -62,21 +62,30 @@
 
                 </div>
             </div>
+           
             <div class="filters flex-content flex-jsbet-acenter">
-                <div class="flex-content flex-jsbet-acenter">
-                    Sélection
-                    <span onclick="CheckedClick()">Tous</span>
-                    <span onclick="DecheckedClick()">Aucun</span>
-                    <button class="btn btn-small" onclick="DeleteAllUserSelected(@ViewBag.nbrow)"><i class="fa fa-trash"></i> Supprimer la sélection</button>
+                @if (@Session["role"] != null && @Session["role"].ToString() == "4")
+                {
+                    <div class="flex-content flex-jsbet-acenter">
+                        Sélection
+                        <span onclick="CheckedClick()">Tous</span>
+                        <span onclick="DecheckedClick()">Aucun</span>
+                        <button class="btn btn-small" onclick="DeleteAllUserSelected(@ViewBag.nbrow)"><i class="fa fa-trash"></i> Supprimer la sélection</button>
+                    </div>
+                }
                 </div>
-
-            </div>
+           
+           
             <table id="myDataTable">
                 <thead>
                     <tr>
-                        <th>
-                            <input type="checkbox" class="checkbox" onclick="ClickAllUserInListUser()" id="checkAllUser" />
-                        </th>
+                        @if (@Session["role"] != null && @Session["role"].ToString() == "4")
+                        {
+                            <th>
+                                <input type="checkbox" class="checkbox" onclick="ClickAllUserInListUser()" id="checkAllUser" />
+                            </th>
+                        }
+
                         <th>#</th>
                         <th>Nom</th>
                         <th>Prénom</th>
@@ -97,56 +106,62 @@
                         int count = 0;
                         foreach (var item in ViewBag.listeUserVm)
                         {
-                            <tr>
-                                <td><input type="checkbox" class="checkbox" name="selectedUser" value="@item.userId" /></td>
-                                <td>@(count + 1)</td>
-                                <td>@item.userNom</td>
-                                <td>@item.userPrenom</td>
-                                <td>@item.userMail</td>
-                                <td>@item.redactSkype</td>
-                                <td>@item.redactVolume</td>
-                                <td>@item.redactTarif</td>
-                                <td>@item.redactThemes</td>
-                                <td>@item.redactNiveau</td>
+                    <tr>
+                        @if (@Session["role"] != null && @Session["role"].ToString() == "4")
+                        {
+                            <td><input type="checkbox" class="checkbox" name="selectedUser" value="@item.userId" /></td>
+                        }
+                            <td>@(count + 1)</td>
+                            <td>@item.userNom</td>
+                            <td>@item.userPrenom</td>
+                            <td>@item.userMail</td>
+                            <td>@item.redactSkype</td>
+                            <td>@item.redactVolume</td>
+                            <td>@item.redactTarif</td>
+                            <td>@item.redactThemes</td>
+                            <td>@item.redactNiveau</td>
 
-                                @if (item.redactVolumeRestant != null && Convert.ToInt32(item.redactVolumeRestant) < Convert.ToInt32(item.redactVolume))
-                                {
-                                    <td>Non</td>
-                                }
-                                else
-                                {
-                                    <td>Oui</td>
-                                }
-                                
-                                @if (@item.userRole == "1")
-                                {
-                                    <td>Referenceur </td>
-                                }
-                                @if (@item.userRole == "2")
-                                {
-                                    <td>Redacteur </td>
-                                }
-                                @if (@item.userRole == "3")
-                                {
-                                    <td> Manager </td>
-                                }
-                                @if (@item.userRole == "4")
-                                {
-                                    <td>Administrateur </td>
+                            @if (item.redactVolumeRestant != null && Convert.ToInt32(item.redactVolumeRestant) < 0)
+                            {
+                                <td>Non</td>
+                            }
+                            else
+                            {
+                                <td>Oui</td>
+                            }
 
-                                }
-                                <td class="col-option">
-                                    <!--ViewBag.numpage/ViewBag.nbrow-->
-                                    <div class="item">
-                                        <div class="option">
-                                            <a href="~/Home/EditUser/@item.userId" title="Edit user"><i class="fa fa-edit"></i></a>
-                                            <a href="~/Home/DetailsRedacteurs/@item.userId" title="Détails Redacteur"><i class="fa fa-eye"></i></a>
-                                            <a href="~/Home/sendMailRecovery/@item.userId" title="Send password recovery Instructions to the user"><i class="fa fa-lock"></i></a>
-                                            <a onclick="DeleteUserClick('@item.userId')" title="Delete user"><i class="fa fa-trash"></i></a>
-                                        </div>
+                            @if (@item.userRole == "1")
+                            {
+                                <td>Referenceur </td>
+                            }
+                            @if (@item.userRole == "2")
+                            {
+                                <td>Redacteur </td>
+                            }
+                            @if (@item.userRole == "3")
+                            {
+                                <td> Manager </td>
+                            }
+                            @if (@item.userRole == "4")
+                            {
+                                <td>Administrateur </td>
+
+                            }
+                            <td class="col-option">
+                                <!--ViewBag.numpage/ViewBag.nbrow-->
+                                <div class="item">
+                                    <div class="option">
+                                        <a href="~/Home/EditUser/@item.userId" title="Editer"><i class="fa fa-edit"></i></a>
+                                        <a href="~/Home/DetailsRedacteurs/@item.userId" title="Voir détails"><i class="fa fa-eye"></i></a>
+                                        <a href="~/Home/sendMailRecovery/@item.userId" title="Réinitialiser mot de passe"><i class="fa fa-lock"></i></a>
+                                        @if (@Session["role"] != null && @Session["role"].ToString() == "4")
+                                        {
+                                            <a onclick="DeleteUserClick('@item.userId')" title="Supprimer"><i class="fa fa-trash"></i></a>
+                                        }
                                     </div>
-                                </td>
-                            </tr>
+                                </div>
+                            </td>
+                        </tr>
                             count++;
                         }
                     }

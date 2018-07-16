@@ -25,9 +25,9 @@ namespace RedactApplication.Models
         public string html { get; set; }
         public Nullable<System.Guid> modeleId { get; set; }
     
+        public virtual MODELE MODELE { get; set; }
         public virtual PROJET PROJET { get; set; }
         public virtual THEME THEME { get; set; }
         public virtual UTILISATEUR UTILISATEUR { get; set; }
-        public virtual MODELE MODELE { get; set; }
     }
 }

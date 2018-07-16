@@ -10,10 +10,8 @@
 
 @section css
 {
-    <link href="@Url.Content("~/Content/css/jquery-ui.css")" rel="stylesheet" />
-    <link rel="stylesheet" href="~/Content/css/elements/commandes.css">
-    <link href="@Url.Content("~/Content/css/dataTables.css")" rel="stylesheet" />
     <link href="~/Content/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/css/elements/commandes.css">
 }
 
 @section Scripts
@@ -21,103 +19,114 @@
     <script src="@Url.Content("~/Scripts/jquery-ui-1.12.1.js")"></script>
     <script src="@Url.Content("~/Scripts/jquery.dataTables.js")"></script>
     <script src="@Url.Content("~/Scripts/dataTables.js")"></script>
-    <script src="@Url.Content("~/Scripts/codescript.js")"></script>
     <script>
         $("ul.LinkSearchClear").css("display", "none");
     </script>
 
 }
+@if (Session["name"] != null)
+{
+    <main id="wrapper">
+        <div id="single-container">
+            <div class="onglets ease-in-out">
+                <ul>
 
-<main id="wrapper">
-    <div id="single-container">
-        <div class="onglets ease-in-out">
-            <ul>
-                <li><a href="~/Home/ListeUser">Utilisateurs</a></li>
-                <li><a href="~/Commandes/ListCommandes">Commandes</a></li>
-                <li><a href="~/Facture/ListFacture" class="active">Factures</a></li>
-                <li><a href="~/Template/ListTemplate">Templates</a></li>
-            </ul>
-        </div>
-
-        <div class="card back-office with-shadow">
-            <div class="action-bar flex-content flex-jsbet-acenter">
-                <div class="left search-bloc">
-                    @using (Html.BeginForm("FactureSearch", "Facture", FormMethod.Post, new { @class = "facture-srch" }))
+                    @if (@Session["role"] != null && @Session["role"].ToString() != "2")
                     {
-                        <div class="usr-srch--input-wrapper">
-                            @Html.AntiForgeryToken()
-                            <i class="fa fa-times-circle cancelText"></i>
-                            <input class="usr-srch--input" type="search" placeholder="Rechercher" name="searchValue" id="ValFactureSearch" title="Search...">
+                        <li> @Html.ActionLink("Utilisateurs", "ListeUser", new { controller = "Home" }) </li>
+                    }
+                    <li>@Html.ActionLink("Commandes", "ListCommandes", new { controller = "Commandes" })</li>
+                    <li>@Html.ActionLink("Factures", "ListFacture", new { controller = "Facture" }, new { @class = "active" })</li>
+                    <li>@Html.ActionLink("Templates", "ListTemplate", new { controller = "Template" })</li>
+                </ul>
+            </div>
+
+            <div class="card back-office with-shadow">
+                <div class="action-bar flex-content flex-jsbet-acenter">
+                    <div class="left search-bloc">
+                        @using (Html.BeginForm("FactureSearch", "Facture", FormMethod.Post, new { @class = "facture-srch" }))
+                        {
+                            <div class="usr-srch--input-wrapper">
+                                @Html.AntiForgeryToken()
+                                <i class="fa fa-times-circle cancelText"></i>
+                                <input class="usr-srch--input" type="search" placeholder="Rechercher" name="searchValue" id="ValFactureSearch" title="Search...">
+                            </div>
+                        }
+                    </div>
+                    @if (@Session["role"] != null && @Session["role"].ToString() != "2")
+                    {
+                        <div class="submit-area">
+
+                            <input type="submit" value="Créer une facture" class="btn btn-success btn-medium" onclick="@("window.location.href='" + @Url.RouteUrl("Home", new { controller = "Facture", action = "Create" }) + "'");">
                         </div>
                     }
-                </div>
-                <div class="submit-area">
-
-                    <input type="submit" value="Créer une facture" class="btn btn-success btn-medium" onclick="@("window.location.href='" + @Url.RouteUrl("Home", new { controller = "Facture", action = "Create" }) + "'");">
-                </div>
-            </div>
-            <div class="filters flex-content flex-jsbet-acenter">
-                <div class="flex-content flex-jsbet-acenter">
-                    Sélection
-                    <span onclick="CheckedFactureClick()">Tous</span>
-                    <span onclick="DecheckedFactureClick()">Aucun</span>
-                    <button class="btn btn-small" onclick="DeleteAllFactureSelected(@ViewBag.nbrow)">Supprimer la sélection</button>
-                </div>
-
-            </div>
-            <table id="myDataTable" class="trig_table table">
-                <thead>
-                    <tr>
-                        <th>
-                            <input type="checkbox" class="checkbox" onclick="ClickAllFactureInListFacture()" id="checkAllFacture" />
-                        </th>
-                        <th>N° facture </th>
-                        <th>Date d’émission</th>
-                        <th>Période concerné</th>
-                        <th>Montant facture</th>
-                        <th>Etat</th>
-                        <th class="option">Action</th>
-                    </tr>
-                </thead>
-                <tbody class="t1">
-                    @if (ViewBag.listeFactureVm != null)
+                    </div>
+                <div class="filters flex-content flex-jsbet-acenter">
+                    @if (@Session["role"] != null && @Session["role"].ToString() == "4")
                     {
-
-                        foreach (var item in ViewBag.listeFactureVm)
-                        {
-                    <tr>
-                        <td><input type="checkbox" class="checkbox" name="selectedFacture" value="@item.factureId" /></td>
-                        <td>@item.factureNumero</td>
-                        <td>@item.dateEmission</td>
-                        <td>@item.periode</td>
-                        <td>@item.montant</td>
-                        @if (@item.etat == false)
-                        {
-                            <td>Non payé</td>
-                        }
-                        else if (@item.etat == true)
-                        {
-                            <td>Payé</td>
-                        }
-                        
-                        <td>
-                            <div class="option">
-                                <a href="~/Facture/Details/@item.factureId" title="Détails"><i class="fa fa-eye"></i></a>
-                                <a onclick="DeleteFactureClick('@item.factureId')" title="Supprimer Facture"><i class="fa fa-trash"></i></a>
-                            </div>
-                        </td>
-                    </tr>
-
-                        }
-                        if (ViewBag.listeFactureVm.Count == 0)
-                        {
-                            <tr><td>No records found.</td></tr>
-                        }
+                        <div class="flex-content flex-jsbet-acenter">
+                            Sélection
+                            <span onclick="CheckedFactureClick()">Tous</span>
+                            <span onclick="DecheckedFactureClick()">Aucun</span>
+                            <button class="btn btn-small" onclick="DeleteAllFactureSelected(@ViewBag.nbrow)"><i class="fa fa-trash"></i> Supprimer la sélection</button>
+                        </div>
                     }
-                </tbody>
-            </table>
-        </div>
-    </div>
+                    </div>
+                <table id="myDataTable" class="trig_table table facture-table">
+                    <thead>
+                        <tr>
+                            <th>
+                                <input type="checkbox" class="checkbox" onclick="ClickAllFactureInListFacture()" id="checkAllFacture" />
+                            </th>
+                            <th>N° facture </th>
+                            <th>Date d’émission</th>
+                            <th>Période concerné</th>
+                            <th>Montant facture</th>
+                            <th>Etat</th>
+                            <th class="option">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="t1">
+                        @if (ViewBag.listeFactureVm != null)
+                        {
+
+                            foreach (var item in ViewBag.listeFactureVm)
+                            {
+                                <tr>
+                                    <td><input type="checkbox" class="checkbox" name="selectedFacture" value="@item.factureId" /></td>
+                                    <td>@item.factureNumero</td>
+                                    <td>@item.dateEmission</td>
+                                    <td>@item.periode</td>
+                                    <td>@item.montant</td>
+                                    @if (@item.etat == false)
+                                    {
+                                        <td>Non payé</td>
+                                    }
+                                    else if (@item.etat == true)
+                                    {
+                                        <td>Payé</td>
+                                    }
+
+                                    <td class="col-option">
+                                        <div class="item">
+                                            <div class="option">
+                                                <a href="~/Facture/Details/@item.factureId" title="Détails"><i class="fa fa-eye"></i></a>
+                                                @if (@Session["role"] != null && @Session["role"].ToString() != "2")
+                                                {
+                                                    <a onclick="DeleteFactureClick('@item.factureId')" title="Supprimer Facture"><i class="fa fa-trash"></i></a>
+                                                }
+                                                </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>        
+
     <div id="DeleteDatadialog" style="display: none" class="modal-popup">
         @Html.Partial("~/Views/Facture/ErrorNoSelection.cshtml")
     </div>
@@ -128,8 +137,12 @@
     <div id="deleteAllFacturePoPup" style="display: none" class="modal-popup">
         @Html.Partial("~/Views/Facture/DeleteFacture.cshtml")
     </div>
-</main>
 
+    </main>
+
+}
+else
+{ Response.Redirect("~/Login/Accueil"); }
 <script>
     /*pour la suppression des utilisateurs séléctionnés*/
     var DeleteFactureClick = function (facture) {

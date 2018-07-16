@@ -5,7 +5,7 @@
 @section Scripts
 {
     <link rel="stylesheet" href="~/Content/css/elements/login.css">
-
+    <link rel="stylesheet" href="~/Content/css/layout/layout.css">
 }
 <main>
     <div class="login-container flex-content flex-jcenter-acenter flex-col">
@@ -17,15 +17,15 @@
             <div class="content-section">
                 <div class="compte-info">
                     <span class="avatar">
-                        <img src= "@Model.logoUrl">
+                        <img src="@Model.logoUrl">
                     </span>
-                   @Model.userNom
+                    @Model.userNom
                 </div>
 
                 @using (Html.BeginForm("AuthentificationUser", "Login", FormMethod.Post, new { @class = "formfields" }))
                 {
                     <label for="Mypassword" class="pass-input">
-                           @Html.PasswordFor(x => x.userMotdepasse, new { @placeholder = "Mot de passe", @required = true, @type = "password" })
+                        @Html.PasswordFor(x => x.userMotdepasse, new { @placeholder = "Mot de passe", @required = true, @type = "password" })
                     </label>
                     <div class="flex-content flex-jcenter-acenter save-content">
                         <span class="SavePass">
@@ -34,13 +34,13 @@
                         </span>
                         <a href="" class="link forgotPass">Mot de passe oublié ?</a>
                     </div>
-                    
+
                     @Html.ActionLink("Mot de passe oublié ?", "ForgotPassword", "Login", new { @class = "btn btn-primary" })
                 }
             </div>
         </div>
         <a href="#" class="watermark-mc">
-            <img src="images/powered-by.jpg" alt="" srcset="">
+            <img src="~/images/powered-by.jpg" alt="" srcset="">
         </a>
     </div>
 </main>

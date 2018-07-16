@@ -35,7 +35,8 @@
                     if (ViewBag.ErrorMessage != null)
                     {
                         <p class="error-msg text-centered">
-                        Le nombre de mots maximal est atteint, veuillez revoir votre contenu.</p>
+                            Le nombre de mots maximal est atteint, veuillez revoir votre contenu.
+                        </p>
                     }
                     if (Session["VolumeInfo"] != null)
                     {
@@ -98,10 +99,7 @@
                                 Autres
                                 @Html.TextBoxFor(x => x.consigne_autres, new { @name = "name" })
                             </label>
-                            <label for="" class="col-50 pull-left">
-                                Type de contenu
-                                @Html.DropDownListFor(x => Model.listContenuTypeId, new SelectList(Model.ListContenuType, "Value", "Text"), htmlAttributes: new { @id = "SelectItemContenuType" })
-                            </label>
+
                             <label for="" class="col-50 pull-right">
                                 Date de livraison
                                 @Html.TextBoxFor(x => x.date_livraison, "{0:dd/MM/yyyy}", new { type = "text" })
@@ -142,14 +140,13 @@
                             </label>
                             <label for="" class="col-100">
                                 Contenu
-                                @Html.TextAreaFor(m => m.contenu_livre, new { rows = "20", style = "resize:none;", @class = "textarea-editor", maxlength = @Html.DisplayNameFor(m => m.nombre_mots) })
+                                @Html.TextAreaFor(m => m.contenu_livre, new { rows = "20", style = "resize:none;", @class = "textarea-editor command-edition", maxlength = @Html.DisplayNameFor(m => m.nombre_mots) })
                             </label>
-                            <span class="left_char">0 sur <div id="data-limit-input">@Html.DisplayFor(model => model.nombre_mots)</div> caractère(s) utilisé(s)</span>
                         </section>
                     }
 
-                    <section class="clearfix submit-area">
-                        <input type="submit" value="Enregistrer" class="btn btn-success" />
+                    <section class="clearfix submit-area" id="toast">
+                        <input type="submit" value="Envoyer" class="btn btn-success" />
                         @Html.ActionLink("Annuler", "ListCommandes", "Commandes", new { @class = "btn btn-warning" })
                     </section>
                 }
@@ -159,7 +156,7 @@
     </main>
 }
 else
-{ Response.Redirect("~/Login/Accueil");}
+{ Response.Redirect("~/Login/Accueil"); }
 <!--  Dialogue succès ajout user   -->
 <div id="addUserPopUp">
 
@@ -172,6 +169,8 @@ else
 @section Scripts
 {
     <link rel="stylesheet" href="~/Content/css/bootstrap-datepicker3.css" />
+    <link rel="stylesheet" href="~/Content/css/elements/commandes.css" />
+
     <script type="text/javascript" src="~/Scripts/js/bootstrap-datepicker.min.js"></script>
     <script type="text/javascript" src="~/Scripts/scriptredacteur.js"></script>
 
@@ -198,12 +197,13 @@ else
             tinymce.init({
                 selector: 'textarea',
                 height: 500,
-                width: 500,
-                menubar: true,
+                width: '100%',
+                menubar: false,
+               
                 plugins: [
-                    'advlist autolink lists link image charmap print preview anchor textcolor',
+                    'advlist autolink lists link image charmap anchor textcolor',
                     'searchreplace visualblocks code fullscreen',
-                    'insertdatetime media table contextmenu paste code help wordcount'
+                    'insertdatetime media table contextmenu paste code  wordcount'
                 ],
                 toolbar: 'insert | undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
                 content_css: [
@@ -224,11 +224,11 @@ else
                         // Displays count
                         $(".left_char").html(charLength + " sur " + charLimit + " caractère(s) utilisé(s)");
                         // Alert when max is reached
-                        if (charLength > charLimit) {
+                        /* if (charLength > charLimit) {
                             $(".left_char").html("<strong>Le nombre de caractères maximum de " +
                                 charLimit +
                                 " atteint.</strong>");
-                        }
+                        } */
                     });
                     ed.on('change', function (e) {
                         tinyMceChange(ed);

@@ -32,7 +32,6 @@ namespace RedactApplication.Models
         public string mot_cle_secondaire { get; set; }
         public string texte_ancrage { get; set; }
         public string consigne_references { get; set; }
-        public Nullable<System.Guid> consigne_type_contenuId { get; set; }
         public string consigne_autres { get; set; }
         public string balise_titre { get; set; }
         public string contenu_livre { get; set; }
@@ -46,9 +45,9 @@ namespace RedactApplication.Models
         public Nullable<System.DateTime> dateLivraisonReel { get; set; }
         public Nullable<System.Guid> factureId { get; set; }
         public string remarques { get; set; }
+        public Nullable<System.Guid> tagId { get; set; }
     
         public virtual COMMANDE_TYPE COMMANDE_TYPE { get; set; }
-        public virtual CONTENU_TYPE CONTENU_TYPE { get; set; }
         public virtual FACTURE FACTURE { get; set; }
         public virtual PROJET PROJET { get; set; }
         public virtual UTILISATEUR REDACTEUR { get; set; }
@@ -57,5 +56,6 @@ namespace RedactApplication.Models
         public virtual UTILISATEUR REFERENCEUR { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NOTIFICATION> NOTIFICATIONs { get; set; }
+        public virtual TAG TAG { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace RedactApplication.Models
             {
                 var referenceur = this.GetUtilisateurReferenceur(commande.commandeReferenceurId);
                 var cmdeType = this.GetCommandeType(commande.commandeTypeId);
-                var consigneType = this.GetCommandeContenuType(commande.consigne_type_contenuId);
+                var tags = this.GetCommandeTag(commande.tagId);
                 var redacteur = this.GetUtilisateurReferenceur(commande.commandeRedacteurId);
                 string priorite = commande.ordrePriorite == "0" ? "Moyen" : "Haut";
                 var projet = GetProjet(commande.commandeProjetId);
@@ -26,35 +26,36 @@ namespace RedactApplication.Models
 
 
                 listeCmde.Add(new COMMANDEViewModel()
-                    {
-                        commandeId = commande.commandeId,
-                        commandeDemandeur = referenceur.userNom,
-                        commandeReferenceurId = referenceur.userId,
-                        commandeRedacteur = redacteur.userNom,
-                        commandeRedacteurId = redacteur.userId,
-                        date_cmde = commande.date_cmde,
-                        date_livraison = commande.date_livraison,
-                        commandeType = cmdeType.Type,
-                        nombre_mots = commande.nombre_mots,
-                        mot_cle_pricipal = commande.mot_cle_pricipal,
-                        mot_cle_secondaire = commande.mot_cle_secondaire,
-                        consigne_references = commande.consigne_references,
-                        consigneType = consigneType.Type,
-                        consigne_autres = commande.consigne_autres,
-                        etat_paiement = commande.etat_paiement,
-                        commandeREF = commande.commandeREF,
-                        ordrePriorite = priorite,
-                        balise_titre = commande.balise_titre,
-                        contenu_livre = commande.contenu_livre,
-                        projet = projet.projet_name,
-                        thematique = theme.theme_name,
-                        statut_cmde = (statut != null)?statut.statut_cmde:"",
-                        commandeThemeId = commande.commandeThemeId,
-                        commandeStatutId = commande.commandeStatutId,
-                        commandeTypeId = commande.commandeTypeId,
-                        consigne_type_contenuId = commande.consigne_type_contenuId,
-                        dateLivraisonReel = commande.dateLivraisonReel,
-                        remarques = commande.remarques
+                {
+                    commandeId = commande.commandeId,
+                    commandeDemandeur = referenceur.userNom,
+                    commandeReferenceurId = referenceur.userId,
+                    commandeRedacteur = redacteur.userNom,
+                    commandeRedacteurId = redacteur.userId,
+                    date_cmde = commande.date_cmde,
+                    date_livraison = commande.date_livraison,
+                    commandeType = cmdeType.Type,
+                    nombre_mots = commande.nombre_mots,
+                    mot_cle_pricipal = commande.mot_cle_pricipal,
+                    mot_cle_secondaire = commande.mot_cle_secondaire,
+                    consigne_references = commande.consigne_references,
+                    texte_ancrage = commande.texte_ancrage,
+                    consigne_autres = commande.consigne_autres,
+                    etat_paiement = commande.etat_paiement,
+                    commandeREF = commande.commandeREF,
+                    ordrePriorite = priorite,
+                    balise_titre = commande.balise_titre,
+                    contenu_livre = commande.contenu_livre,
+                    projet = projet.projet_name,
+                    thematique = theme.theme_name,
+                    tag = (tags != null) ? tags.type : "",
+                    statut_cmde = (statut != null) ? statut.statut_cmde : "",
+                    commandeThemeId = commande.commandeThemeId,
+                    commandeStatutId = commande.commandeStatutId,
+                    commandeTypeId = commande.commandeTypeId,
+
+                    dateLivraisonReel = commande.dateLivraisonReel,
+                    remarques = commande.remarques
 
                 });
                 
@@ -62,6 +63,19 @@ namespace RedactApplication.Models
             return listeCmde.OrderBy(x => x.date_cmde).ThenBy(x => x.date_livraison).ToList();
            
         }
+
+
+
+        public List<string> GetThemes(Guid? redactGuid)
+        {
+            redactapplicationEntities db = new Models.redactapplicationEntities();
+            var themes = from c in db.THEMES
+                         from p in db.REDACT_THEME
+                         where p.themeId == c.themeId && p.redactId == redactGuid
+                         select c.theme_name;
+            return themes.ToList();
+        }
+
 
         public List<COMMANDEViewModel> GetListCommande(int? numpage, int? nbrow)
         {
@@ -99,15 +113,16 @@ namespace RedactApplication.Models
             var commande = db.COMMANDEs.Find(commandeId);
 
 
-            var referenceur = this.GetUtilisateurReferenceur(commande.commandeReferenceurId);
+            var referenceur = commande.commandeReferenceurId != null ?this.GetUtilisateurReferenceur(commande.commandeReferenceurId):null;
             var cmdeType = this.GetCommandeType(commande.commandeTypeId);
-            var consigneType = this.GetCommandeContenuType(commande.consigne_type_contenuId);
+            //var consigneType = this.GetCommandeContenuType(commande.consigne_type_contenuId);
             var redacteur = this.GetUtilisateurReferenceur(commande.commandeRedacteurId);
             string priorite = commande.ordrePriorite == "0" ? "Moyen" : "Haut";
             var projet = GetProjet(commande.commandeProjetId);
             var theme = GetTheme(commande.commandeThemeId);
             var statut = (!string.IsNullOrEmpty(commande.commandeStatutId.ToString()))?GetStatutCommande(commande.commandeStatutId):GetStatutCommande(new Guid());
-            string statutcmde = (statut != null) ? statut.statut_cmde : "A valider";
+            string statutcmde = (statut != null) ? statut.statut_cmde : "En attente";
+            var tags = this.GetCommandeTag(commande.tagId);
             var commandeVm = new COMMANDEViewModel();
 
                 commandeVm.commandeId = commande.commandeId;
@@ -122,7 +137,7 @@ namespace RedactApplication.Models
                 commandeVm.mot_cle_pricipal = commande.mot_cle_pricipal;
                 commandeVm.mot_cle_secondaire = commande.mot_cle_secondaire;
                 commandeVm.consigne_references = commande.consigne_references;
-                commandeVm.consigneType = consigneType.Type;
+                commandeVm.texte_ancrage = commande.texte_ancrage;
                 commandeVm.consigne_autres = commande.consigne_autres;
                 commandeVm.etat_paiement = commande.etat_paiement;
                 commandeVm.commandeREF = commande.commandeREF;    
@@ -134,10 +149,10 @@ namespace RedactApplication.Models
                 commandeVm.thematique = theme.theme_name;
                 commandeVm.commandeThemeId = theme.themeId;
                 commandeVm.statut_cmde = statutcmde;
-
+            commandeVm.tag = (tags != null) ? tags.type : "";
                 commandeVm.commandeStatutId = commande.commandeStatutId;
                 commandeVm.commandeTypeId = commande.commandeTypeId;
-                commandeVm.consigne_type_contenuId = commande.consigne_type_contenuId;
+            
             commandeVm.dateLivraisonReel = commande.dateLivraisonReel;
             commandeVm.remarques = commande.remarques;
 
@@ -159,11 +174,19 @@ namespace RedactApplication.Models
             return themes;
         }
 
+       
         public List<UTILISATEUR> GetRedateurOrderByTheme(string theme)
         {
             redactapplicationEntities db = new Models.redactapplicationEntities();
             var themesids = GetRelatedTheme(theme);
-            var redactids =  db.REDACT_THEME.Where(r => themesids.Contains(r.themeId)).Select(t => t.userId).ToList();
+            var redactids = new List<Guid?>();
+            foreach (var themeId in themesids)
+            {
+                var redactTheme = db.REDACT_THEME.FirstOrDefault(t => t.themeId == themeId);
+                if (redactTheme != null)
+                    redactids.Add(redactTheme.redactId);
+            }
+           
            
            // var redacteurs = db.UTILISATEURs.Where(u => redactids.Contains(u.userId)).OrderByDescending(n=>n.redactNiveau).ToList();
 
@@ -187,12 +210,12 @@ namespace RedactApplication.Models
             return commandeType;
         }
 
-        public CONTENU_TYPE GetCommandeContenuType(Guid? id)
+        public TAG GetCommandeTag(Guid? id)
         {
             redactapplicationEntities db = new Models.redactapplicationEntities();
-            CONTENU_TYPE contenuType = db.CONTENU_TYPE.SingleOrDefault(x => x.contenuTypeId == id);
+            TAG tag = db.TAGS.SingleOrDefault(x => x.tagId == id);
             
-            return contenuType;
+            return tag;
         }
 
         public PROJET GetProjet(Guid? id)
@@ -252,7 +275,12 @@ namespace RedactApplication.Models
         {
             using (var context = new redactapplicationEntities())
             {
-                List<SelectListItem> listredacteur = context.UTILISATEURs.AsNoTracking()
+                var redacteurs = from c in context.UTILISATEURs
+                                 from p in context.UserRoles
+                                 where p.idUser == c.userId && p.idRole == 2
+                                 select c;
+
+                List<SelectListItem> listredacteur = redacteurs
                     .OrderBy(n => n.userNom)
                     .Select(n =>
                         new SelectListItem
@@ -313,25 +341,25 @@ namespace RedactApplication.Models
                 return new SelectList(listcmdetype, "Value", "Text");
             }
         }
-        public IEnumerable<SelectListItem> GetListContenuTypeItem()
+        public IEnumerable<SelectListItem> GetListTagItem()
         {
             using (var context = new redactapplicationEntities())
             {
-                List<SelectListItem> listcontenutype = context.CONTENU_TYPE.AsNoTracking()
-                    .OrderBy(n => n.Type)
+                List<SelectListItem> listTag= context.TAGS.AsNoTracking()
+                    .OrderBy(n => n.type)
                     .Select(n =>
                         new SelectListItem
                         {
-                            Value = n.contenuTypeId.ToString(),
-                            Text = n.Type
+                            Value = n.tagId.ToString(),
+                            Text = n.type
                         }).ToList();
                 var typeItem = new SelectListItem()
                 {
                     Value = null,
                     Text = "--- selectionner type de contenu ---"
                 };
-                listcontenutype.Insert(0, typeItem);
-                return new SelectList(listcontenutype, "Value", "Text");
+                listTag.Insert(0, typeItem);
+                return new SelectList(listTag, "Value", "Text");
             }
         }
 
@@ -386,7 +414,7 @@ namespace RedactApplication.Models
                 mot_cle_pricipal = x.mot_cle_pricipal,
                 mot_cle_secondaire = x.mot_cle_secondaire,
                 consigne_references = x.consigne_references,
-                consigneType = GetCommandeContenuType(x.consigne_type_contenuId).Type,
+                consigneType = GetCommandeTag(x.tagId).type,
                 consigne_autres = x.consigne_autres,
                 etat_paiement = x.etat_paiement,
                 commandeRedacteur = GetUtilisateurReferenceur(x.commandeRedacteurId).userNom,

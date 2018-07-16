@@ -43,11 +43,11 @@
                 {
                     <div class="resume with-shadow">
                         <ul>
-                            <li>Commande en cours : @ViewBag.commandesEnCours</li>
-                            <li>Commande en attente : @ViewBag.commandesEnAttente</li>
-                            <li>Commande en retard : @ViewBag.commandesEnRetard</li>
-                            <li>Commande livrée : @ViewBag.commandesLivrer</li>
-                            <li>Commande à facturer : @ViewBag.commandesFacturer</li>
+                            <li><a onclick="@(" window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "ListCommandes" }) + "' ");">Commande en cours : <strong>@ViewBag.commandesEnCours</strong></a></li>
+                            <li><a onclick="@(" window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "ListCommandes" }) + "' ");">Commande en attente : <strong>@ViewBag.commandesEnAttente</strong></a></li>
+                            <li><a onclick="@(" window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "ListCommandes" }) + "' ");">Commande en retard : <strong>@ViewBag.commandesEnRetard</strong></a></li>
+                            <li><a onclick="@(" window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "ListCommandes" }) + "' ");">Commande livrée : <strong>@ViewBag.commandesLivrer</strong></a></li>
+                            <li><a onclick="@(" window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "ListCommandes" }) + "' ");">Commande à facturer : <strong>@ViewBag.commandesFacturer</strong></a></li>
                         </ul>
                     </div>
                 }

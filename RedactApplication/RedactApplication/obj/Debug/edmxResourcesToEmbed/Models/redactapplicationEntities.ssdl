@@ -16,7 +16,6 @@
     <Property Name="mot_cle_secondaire" Type="nvarchar(max)" />
     <Property Name="texte_ancrage" Type="nvarchar(max)" />
     <Property Name="consigne_references" Type="nvarchar(max)" />
-    <Property Name="consigne_type_contenuId" Type="uniqueidentifier" />
     <Property Name="consigne_autres" Type="nvarchar(max)" />
     <Property Name="balise_titre" Type="nvarchar" MaxLength="250" />
     <Property Name="contenu_livre" Type="nvarchar(max)" />
@@ -30,19 +29,13 @@
     <Property Name="dateLivraisonReel" Type="datetime" />
     <Property Name="factureId" Type="uniqueidentifier" />
     <Property Name="remarques" Type="nvarchar(max)" />
+    <Property Name="tagId" Type="uniqueidentifier" />
   </EntityType>
   <EntityType Name="COMMANDE_TYPE">
     <Key>
       <PropertyRef Name="commandeTypeId" />
     </Key>
     <Property Name="commandeTypeId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Type" Type="nvarchar(max)" />
-  </EntityType>
-  <EntityType Name="CONTENU_TYPE">
-    <Key>
-      <PropertyRef Name="contenuTypeId" />
-    </Key>
-    <Property Name="contenuTypeId" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Type" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="FACTURE">
@@ -105,6 +98,7 @@
     <Property Name="fromId" Type="uniqueidentifier" />
     <Property Name="toId" Type="uniqueidentifier" />
     <Property Name="datenotif" Type="date" />
+    <Property Name="message" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="PROJETS">
     <Key>
@@ -118,8 +112,8 @@
       <PropertyRef Name="redactThemeId" />
     </Key>
     <Property Name="redactThemeId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="userId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="themeId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="themeId" Type="uniqueidentifier" />
+    <Property Name="redactId" Type="uniqueidentifier" />
   </EntityType>
   <EntityType Name="ROLE">
     <Key>
@@ -134,6 +128,13 @@
     </Key>
     <Property Name="statutCommandeId" Type="uniqueidentifier" Nullable="false" />
     <Property Name="statut_cmde" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="TAGS">
+    <Key>
+      <PropertyRef Name="tagId" />
+    </Key>
+    <Property Name="tagId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="type" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="TEMPLATE">
     <Key>
@@ -207,18 +208,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_COMMANDE_CONTENU_TYPE">
-    <End Role="CONTENU_TYPE" Type="Self.CONTENU_TYPE" Multiplicity="0..1" />
-    <End Role="COMMANDE" Type="Self.COMMANDE" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="CONTENU_TYPE">
-        <PropertyRef Name="contenuTypeId" />
-      </Principal>
-      <Dependent Role="COMMANDE">
-        <PropertyRef Name="consigne_type_contenuId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_COMMANDE_FACTURE">
     <End Role="FACTURE" Type="Self.FACTURE" Multiplicity="0..1" />
     <End Role="COMMANDE" Type="Self.COMMANDE" Multiplicity="*" />
@@ -266,6 +255,18 @@
       </Principal>
       <Dependent Role="COMMANDE">
         <PropertyRef Name="commandeStatutId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_COMMANDE_TAGS">
+    <End Role="TAGS" Type="Self.TAGS" Multiplicity="0..1" />
+    <End Role="COMMANDE" Type="Self.COMMANDE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TAGS">
+        <PropertyRef Name="tagId" />
+      </Principal>
+      <Dependent Role="COMMANDE">
+        <PropertyRef Name="tagId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -356,7 +357,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_REDACT_THEME_THEMES">
-    <End Role="THEMES" Type="Self.THEMES" Multiplicity="1" />
+    <End Role="THEMES" Type="Self.THEMES" Multiplicity="0..1" />
     <End Role="REDACT_THEME" Type="Self.REDACT_THEME" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="THEMES">
@@ -368,14 +369,14 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_REDACT_THEME_UTILISATEUR">
-    <End Role="UTILISATEUR" Type="Self.UTILISATEUR" Multiplicity="1" />
+    <End Role="UTILISATEUR" Type="Self.UTILISATEUR" Multiplicity="0..1" />
     <End Role="REDACT_THEME" Type="Self.REDACT_THEME" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="UTILISATEUR">
         <PropertyRef Name="userId" />
       </Principal>
       <Dependent Role="REDACT_THEME">
-        <PropertyRef Name="userId" />
+        <PropertyRef Name="redactId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -478,7 +479,6 @@
   <EntityContainer Name="redactapplicationModelStoreContainer">
     <EntitySet Name="COMMANDE" EntityType="Self.COMMANDE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="COMMANDE_TYPE" EntityType="Self.COMMANDE_TYPE" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="CONTENU_TYPE" EntityType="Self.CONTENU_TYPE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FACTURE" EntityType="Self.FACTURE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MODELE" EntityType="Self.MODELE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NOTIFICATION" EntityType="Self.NOTIFICATION" Schema="dbo" store:Type="Tables" />
@@ -486,6 +486,7 @@
     <EntitySet Name="REDACT_THEME" EntityType="Self.REDACT_THEME" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ROLE" EntityType="Self.ROLE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="STATUT_COMMANDE" EntityType="Self.STATUT_COMMANDE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TAGS" EntityType="Self.TAGS" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TEMPLATE" EntityType="Self.TEMPLATE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="THEMES" EntityType="Self.THEMES" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="USER_THEME" EntityType="Self.USER_THEME" Schema="dbo" store:Type="Tables" />
@@ -493,10 +494,6 @@
     <EntitySet Name="UTILISATEUR" EntityType="Self.UTILISATEUR" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_COMMANDE_COMMANDE_TYPE" Association="Self.FK_COMMANDE_COMMANDE_TYPE">
       <End Role="COMMANDE_TYPE" EntitySet="COMMANDE_TYPE" />
-      <End Role="COMMANDE" EntitySet="COMMANDE" />
-    </AssociationSet>
-    <AssociationSet Name="FK_COMMANDE_CONTENU_TYPE" Association="Self.FK_COMMANDE_CONTENU_TYPE">
-      <End Role="CONTENU_TYPE" EntitySet="CONTENU_TYPE" />
       <End Role="COMMANDE" EntitySet="COMMANDE" />
     </AssociationSet>
     <AssociationSet Name="FK_COMMANDE_FACTURE" Association="Self.FK_COMMANDE_FACTURE">
@@ -513,6 +510,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_COMMANDE_STATUT_COMMANDE" Association="Self.FK_COMMANDE_STATUT_COMMANDE">
       <End Role="STATUT_COMMANDE" EntitySet="STATUT_COMMANDE" />
+      <End Role="COMMANDE" EntitySet="COMMANDE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_COMMANDE_TAGS" Association="Self.FK_COMMANDE_TAGS">
+      <End Role="TAGS" EntitySet="TAGS" />
       <End Role="COMMANDE" EntitySet="COMMANDE" />
     </AssociationSet>
     <AssociationSet Name="FK_COMMANDE_THEMES" Association="Self.FK_COMMANDE_THEMES">
