@@ -1,25 +1,26 @@
 ﻿@model RedactApplication.Models.MODELEViewModel
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- Styles -->
-    <link rel="stylesheet" href="css/templates-style.css">
+    <link rel="stylesheet" href="~/Themes/Home4/css/templates-style.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
-    <link rel="stylesheet" href="css/bases.css">
+    <link rel="stylesheet" href="~/Themes/Home4/css/bases.css">
     <title>Document</title>
 </head>
 <body class="template t-4">
+
     <div class="wrapper">
         <!-- Bloc header -->
         <header>
             <div id="topbar" class="centered">
                 <a href="javacsript:void(0)" class="t-logo">
                     <img src="@Model.logoUrl.Trim()" alt="" srcset="">
-                    <span class="site-url">Finance.com</span>
+                    <span class="site-url">@Model.site_url</span>
                 </a>
             </div>
         </header>
@@ -27,41 +28,41 @@
         <!-- Bloc de contenu -->
         <main>
             <div id="banner">
-                <img src="img/banner-landscape.jpg" alt="" srcset="">
+                <img src="@Model.photoALaUneUrl" alt="" srcset="">
             </div>
 
             <div id="contenu">
                 <div class="container">
                     <section id="photo-l-texte" class="row">
                         <div class="col-50 photo">
-                            <img src="img/photo.jpg" alt="" srcset="">
+                            <img src="@Model.menu1_paragraphe1_photoUrl" alt="" srcset="">
                         </div>
                         <div class="col-50 texte">
                             <h1>
-                                Ut non tellus posuere, mattis mi eu, feugiat velit.
-                                Nulla semper viverra nunc, non laoreet eros .
+                                @Model.menu1_paragraphe1_titre
                             </h1>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus semper massa tortor. In malesuada rhoncus felis eu blandit. Mauris facilisis augue diam, eu viverra diam hendrerit a. Praesent semper magna ipsum, non tristique neque feugiat sit amet. Praesent cursus iaculis tortor, eu suscipit nisi consequat ut. Praesent tincidunt ante libero, id semper sapien sagittis eleifend. Vestibulum a orci vel justo pharetra auctor ac non diam. Nulla facilisi.</p>
-                            <p>Cras convallis pretium dui. Praesent laoreet rutrum nibh ut tincidunt. Mauris ac arcu in eros suscipit porta sed at diam. Maecenas diam ante, placerat non augue eu, aliquam volutpat magna. Sed vehicula felis sit amet enim accumsan, pellentesque laoreet nisi dignissim. In felis ante, convallis in dapibus et, ornare in odio. Donec non odio in augue porta pharetra. Nullam urna justo.</p>
+                            <p> @Model.menu1_contenu1</p>
                         </div>
                     </section>
 
                     <section id="full-text" class="grey-bg">
-                        <h2>Ut non tellus posuere, mattis mi eu, feugiat velit. ulla semper viverra nunc, non laoreet eros .</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus semper massa tortor. In malesuada rhoncus felis eu blandit. Mauris facilisis augue diam, eu viverra diam hendrerit a. Praesent semper magna ipsum, non tristique neque feugiat sit amet. Praesent cursus iaculis tortor, eu suscipit nisi consequat ut. Praesent tincidunt ante libero, id semper sapien sagittis eleifend. Vestibulum a orci vel justo pharetra auctor ac non diam. Nulla facilisi.</p>
-                        <p>Cras convallis pretium dui. Praesent laoreet rutrum nibh ut tincidunt. Mauris ac arcu in eros suscipit porta sed at diam. Maecenas diam ante, placerat non augue eu, aliquam volutpat magna. Sed vehicula felis sit amet enim accumsan, pellentesque laoreet nisi dignissim. In felis ante, convallis in dapibus et, ornare in odio. Donec non odio in augue porta pharetra. Nullam urna justo, varius in sagittis sit amet, pulvinar sed quam. Curabitur auctor nunc sed iaculis facilisis.</p>
-                        <h3>In fermentum risus at arcu ultrices, quis facilisis velit mattis</h3>
-                        <p>Cras convallis pretium dui. Praesent laoreet rutrum nibh ut tincidunt. Mauris ac arcu in eros suscipit porta sed at diam. Maecenas diam ante, placerat non augue eu, aliquam volutpat magna. Sed vehicula felis sit amet enim accumsan, pellentesque laoreet nisi dignissim. In felis ante, convallis in dapibus et, ornare in odio. Donec non odio in augue porta pharetra. Nullam urna justo, varius in sagittis sit amet, pulvinar sed quam. Curabitur auctor nunc sed iaculis facilisis.</p>
-                        <p>Ut non tellus posuere, mattis mi eu, feugiat velit. Nulla semper viverra nunc, non laoreet eros tristique ut. Pellentesque varius mi non convallis vestibulum. Proin tincidunt rhoncus accumsan. Cras accumsan, leo eu efficitur laoreet, sapien purus vestibulum leo, nec tincidunt ex augue sed nibh. Sed lectus dolor, pretium non viverra vel, semper ut urna.</p>
+                        <h2> @Model.menu1_paragraphe2_titre</h2>
+                        <p> @Model.menu1_contenu2</p>
                     </section>
                 </div>
             </div>
         </main>
         <footer id="f4-footer">
             <nav class="footer-nav">
-                <span>Copyright 2018 - finance.com	<em class="sep">|</em> 	<a href="#">Mentions légales</a></span>
+                <span>Copyright 2018 - @Model.site_url	<em class="sep">|</em> 	<a href="#">Mentions légales</a></span>
             </nav>
         </footer>
     </div>
+
+    <div id="toast" class="with-shadow">
+    
+        <a href="~/Template/CreateTemplate/@Model.modeleId" class="btn btn-primary" title="Détails">Télécharger</a>
+    </div>
+
 </body>
 </html>
