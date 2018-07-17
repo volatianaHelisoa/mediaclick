@@ -14,9 +14,9 @@
             var clipboard = new ClipboardJS('.btn-copy', {
                 text: function () {
                     var htmlBlock = document.querySelector('.commande-contenu');
-
-
-                    var res = htmlBlock.innerHTML;
+                    var balise_titre = $("#balise_titre").text();
+                   
+                    var res = "<h1>" + balise_titre + "</h1>" + htmlBlock.innerHTML;
                     var contenu = res.replace(/(style="([^"]*)")/g, "");
                     return contenu;
                 }
@@ -93,22 +93,24 @@
                                 }
                                 @if (Model.statut_cmde == "Livré" || Model.statut_cmde == "Validé" || Model.statut_cmde == "Refusé")
                                 {
-                                    <span>
-                                        <strong>Titre : </strong>@Html.DisplayFor(model => model.balise_titre)
-                                    </span>
-                                    <div>
-                                        <strong>Contenu : </strong>
-                                        <div class="commande-contenu">
-                                            @Html.Raw(Model.contenu_livre)
-                                        </div>
-
-                                        <div class="contenu-footer flex-content flex-jsbet-acenter">
-                                            <span> @ViewBag.ContentLength  sur @Html.DisplayFor(model => model.nombre_mots) mot(s) utilisé(s)</span>                                           
-                                            <button class="btn-copy" data-clipboard-action="copy" data-clipboard-target=".commande-contenu">Copier</button>
-                                        </div>
+                                <span>
+                                    <strong>Titre : </strong> <span id="balise_titre">
+                                                        @Html.DisplayFor(model => model.balise_titre)
+                                                    </span>
+                                </span>
+                                <div>
+                                    <strong>Contenu : </strong>
+                                    <div class="commande-contenu">
+                                        @Html.Raw(Model.contenu_livre)
                                     </div>
+
+                                    <div class="contenu-footer flex-content flex-jsbet-acenter">
+                                        <span> @ViewBag.ContentLength  sur @Html.DisplayFor(model => model.nombre_mots) mot(s) utilisé(s)</span>
+                                        <button class="btn-copy" data-clipboard-action="copy" data-clipboard-target=".commande-contenu">Copier</button>
+                                    </div>
+                                </div>
                                 }
-                            </div>
+</div>
                         </section>
                         <section class="col-md-5 commande-resume">
                             <div class="section-title">
@@ -117,7 +119,7 @@
                             <div class="wrap with-shadow">
                                 <span><strong>Demandeur :</strong>@Html.DisplayFor(model => model.commandeDemandeur)</span>
                                 <span><strong>Redacteur  :</strong>@Html.DisplayFor(model => model.commandeRedacteur)</span>
-                                <span><strong>Date de Commande :</strong></span>
+                                <span><strong>Date de Commande :</strong>@Html.DisplayFor(model => model.date_cmde)</span>
                                 <span>
                                     <strong>Date de livraison :</strong> @Html.DisplayFor(model => model.date_livraison)
                                     @if (Model.dateLivraisonReel > Model.date_livraison)

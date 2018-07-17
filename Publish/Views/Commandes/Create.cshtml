@@ -55,6 +55,7 @@
             date_input.datepicker(options);
 
 
+            $("#SelectItemRedacteur").prop('disabled', 'disabled');
             $("#SelectItemTheme").change(function () {
 
                 var dID = $(this).val();
@@ -62,6 +63,7 @@
                 $.getJSON("../Commandes/LoadRedacteurByTheme", { theme: dID },
                     function (data) {
                         var select = $("#SelectItemRedacteur");
+                        $("#SelectItemRedacteur").prop('disabled', false);
                         select.empty();
                         select.append($('<option/>', {
                             value: 0,
@@ -75,6 +77,78 @@
                         });
                     });
             });
+ 
+             $("#tag").autocomplete({              
+
+                source: function (request, response) {
+                    $.ajax({
+                      
+                        type: 'GET',
+                        url: '/Commandes/AutocompleteTagSuggestions',
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+
+                        data: {                           
+                            term: request.term
+                        },
+                        success: function (data) {
+                            console.log(data);
+                            response($.map(data, function (val, item) {
+                                
+                                return {                                  
+                                    value: val.Text,
+                                    text: val.Value
+                                }
+                            }))
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    })
+                },
+                select: function (event, ui) {
+                    $("#tag").val(ui.item.text);
+                    console.log($("#tag").val(ui.item.text));
+                 },
+                 minLength: 1
+            });
+
+            $("#site").autocomplete({
+
+                source: function (request, response) {
+                    $.ajax({
+
+                        type: 'GET',
+                        url: '/Commandes/AutocompleteSiteSuggestions',
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+
+                        data: {
+                            term: request.term
+                        },
+                        success: function (data) {
+                            console.log(data);
+                            response($.map(data, function (val, item) {
+
+                                return {
+                                    value: val.Text,
+                                    text: val.Value
+                                }
+                            }))
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    })
+                },
+                select: function (event, ui) {
+                    $("#site").val(ui.item.text);
+                 
+                },
+                minLength: 1
+            });
+
+
         });
 
 
@@ -127,7 +201,6 @@
                     </label>
                     <label for="" class="col-50 pull-left">
                         Rédacteur
-
                         @Html.DropDownListFor(x => Model.listRedacteurId, new SelectList(Model.ListRedacteur, "Value", "Text"), htmlAttributes: new { id = "SelectItemRedacteur", @required = true })
                     </label>
                     <label for="" class="col-50 pull-right">
@@ -135,8 +208,12 @@
                         @Html.DropDownListFor(x => Model.listCommandeTypeId, new SelectList(Model.ListCommandeType, "Value", "Text"), htmlAttributes: new { @id = "SelectItemCommandeType", @required = true })
                     </label>
                     <label for="" class="col-50 pull-right">
+                        Site
+                        @Html.EditorFor(model => model.site, new { htmlAttributes = new {  } })
+                    </label>
+                    <label for="" class="col-50 pull-right">
                         Tag
-                        @Html.DropDownListFor(x => Model.listTagId, new SelectList(Model.ListTag, "Value", "Text"), htmlAttributes: new { @id = "SelectItemTag", @required = true })
+                        @Html.EditorFor(model => model.tag, new { htmlAttributes = new {  } })
                     </label>
                 </section>
                     <section class="clearfix">

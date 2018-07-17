@@ -122,11 +122,12 @@
                             <th>Date de la commande</th>
                             <th>Date de la livraison</th>
                             <th>Projet</th>
+                            <th>Site</th>
                             <th>Thématique</th>
                             <th>Type de textes</th>
                             <th>Tags</th>
-                            <th>Etat commande </th>
-                            <th>Notification paiement</th>
+                            <th>Etat </th>
+                            <th>Paiement</th>
                             <th class="option">Action</th>
                         </tr>
                     </thead>
@@ -144,10 +145,11 @@
                             <td>@item.commandeREF</td>
                             <td>@item.commandeDemandeur</td>
                             <td>@item.commandeRedacteur</td>
-                            <td>@item.date_cmde</td>
+                            <td>@item.date_cmde.ToShortDateString()</td>
 
-                            <td>@item.date_livraison</td>
+                            <td>@item.date_livraison.ToShortDateString()</td>
                             <td>@item.projet </td>
+                            <td>@item.site</td>
                             <td>@item.thematique</td>
                             <td>@item.commandeType</td>
                             <td>@item.tag</td>
