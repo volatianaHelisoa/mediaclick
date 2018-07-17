@@ -42,8 +42,14 @@
 
                             $("#checkManager").prop('checked', false);
                             $("#checkReferenceur").prop('checked', false);
+
+                            $("#redactVolume").prop('required', 'required');
+                            $("#redactTarif").prop('required', 'required');
                             jQuery("#CheckEditRedacteur").show();
+
                         } else {
+                            $("#redactVolume").prop('required', '');
+                            $("#redactTarif").prop('required', '');
                             jQuery("#CheckEditRedacteur").hide();
                         }
                         break;

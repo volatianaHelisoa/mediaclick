@@ -207,14 +207,15 @@
                         Type de texte
                         @Html.DropDownListFor(x => Model.listCommandeTypeId, new SelectList(Model.ListCommandeType, "Value", "Text"), htmlAttributes: new { @id = "SelectItemCommandeType", @required = true })
                     </label>
+                    <label for="" class="col-50 pull-left">
+                        Tag
+                        @Html.EditorFor(model => model.tag, new { htmlAttributes = new { } })
+                    </label>
                     <label for="" class="col-50 pull-right">
                         Site
-                        @Html.EditorFor(model => model.site, new { htmlAttributes = new {  } })
+                        @Html.EditorFor(model => model.site, new { htmlAttributes = new { } })
                     </label>
-                    <label for="" class="col-50 pull-right">
-                        Tag
-                        @Html.EditorFor(model => model.tag, new { htmlAttributes = new {  } })
-                    </label>
+
                 </section>
                     <section class="clearfix">
                         <div class="section-title">
