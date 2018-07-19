@@ -45,3 +45,114 @@
         background-color: #26b5ff
     }
 }
+.theme-customization {
+    max-width: 1024px !important;
+}
+.theme-customization .site-identity {
+    display: flex;
+}
+.theme-customization .section-title {
+    margin: 20px 0 30px;
+    padding: 0;
+}
+
+.theme-select a.selected > span {
+    background-color: #26b5ff
+}
+
+.theme-customization .logo-area { 
+    padding: 24px;
+    text-align: center;
+    background-color: #12306e;
+    color: white;
+}
+
+.logo-area .input-custom {
+    justify-content: center;
+}
+
+.logo-area input[type="url"] {
+    margin: 10px 0 0;
+
+}
+
+.theme-customization .logo-area .thumbnail {
+    display: block;
+    width: 100px;
+    min-height: 80px;
+    margin: 0 auto;
+}
+
+.theme-customization .logo-area .thumbnail > img {
+    width: 100%;
+    display: block;
+}
+
+.theme-customization .thumbnail-photo {
+    width: 100%;
+    display: block;
+    height: 300px;
+    background-color: #f7f7f7;
+    padding: 30px;
+    margin-bottom: 18px;
+}
+
+.theme-customization .thumbnail-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 10px solid white;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    -moz-box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    -ms-box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+}
+
+.theme-customization label > strong {
+    display: block;
+    margin: 10px 0 0;
+    font-weight: normal;
+    text-transform: uppercase;
+    font-size: 20px;
+}
+/* PHOTOS FIELDS */
+.theme-customization .photo-field .input-custom {
+    margin: 0;
+    padding: 10px 15px;
+    background: #12306e;
+    color: white;
+    justify-content: space-between;
+}
+.theme-customization .photo-field .input-custom dd {
+    margin: 0;
+}
+
+.theme-customization .banner-area {
+    position: relative;
+    height: 100%;
+}
+
+.theme-customization .action {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+    top: 50%;
+    color: #c0cdda;
+    font-size: 20px;
+    margin-top: -35px;
+}
+
+.theme-customization .banner-area .input-custom {
+    display: block;
+}
+
+.theme-customization .banner-area .thumbnail-photo {
+    height: 100%;
+}

@@ -59,7 +59,8 @@
     padding: 20px;
     border: 1px solid #dadada;
     margin-top: 10px;
-    min-height: 339px;
+    height: 340px;
+    overflow-y: hidden;
 }
 
 .commande-resume .wrap  {
