@@ -59,7 +59,7 @@ $(document).ready(function () {
         reader.readAsDataURL(event.target.files[0]);
     };
 
-    $('input[type="file"]').change(function (e) {
+    $('input[type="file"].fileTriger').change(function (e) {
         var fileName = e.target.files[0].name;
         loadFile(event);
         $('.file-name').text(fileName);

@@ -23,7 +23,7 @@ namespace RedactApplication.Models
                 var projet = GetProjet(commande.commandeProjetId);
                 var theme = GetTheme(commande.commandeThemeId);
                 var statut =  GetStatutCommande(commande.commandeStatutId);
-
+                var site = this.GetCommandeSite(commande.siteId);
 
                 listeCmde.Add(new COMMANDEViewModel()
                 {
@@ -49,6 +49,7 @@ namespace RedactApplication.Models
                     projet = projet.projet_name,
                     thematique = theme.theme_name,
                     tag = (tags != null) ? tags.type : "",
+                    site = (site != null) ? site.site_name : "",
                     statut_cmde = (statut != null) ? statut.statut_cmde : "",
                     commandeThemeId = commande.commandeThemeId,
                     commandeStatutId = commande.commandeStatutId,
@@ -60,7 +61,7 @@ namespace RedactApplication.Models
                 });
                 
             }
-            return listeCmde.OrderBy(x => x.date_cmde).ThenBy(x => x.date_livraison).ToList();
+            return listeCmde.OrderBy(x => x.date_livraison).ToList();
            
         }
 
@@ -113,46 +114,49 @@ namespace RedactApplication.Models
             var commande = db.COMMANDEs.Find(commandeId);
 
 
-            var referenceur = commande.commandeReferenceurId != null ?this.GetUtilisateurReferenceur(commande.commandeReferenceurId):null;
+            var referenceur = commande.commandeReferenceurId != null ? this.GetUtilisateurReferenceur(commande.commandeReferenceurId) : null;
             var cmdeType = this.GetCommandeType(commande.commandeTypeId);
             //var consigneType = this.GetCommandeContenuType(commande.consigne_type_contenuId);
             var redacteur = this.GetUtilisateurReferenceur(commande.commandeRedacteurId);
             string priorite = commande.ordrePriorite == "0" ? "Moyen" : "Haut";
             var projet = GetProjet(commande.commandeProjetId);
             var theme = GetTheme(commande.commandeThemeId);
-            var statut = (!string.IsNullOrEmpty(commande.commandeStatutId.ToString()))?GetStatutCommande(commande.commandeStatutId):GetStatutCommande(new Guid());
+            var statut = (!string.IsNullOrEmpty(commande.commandeStatutId.ToString())) ? GetStatutCommande(commande.commandeStatutId) : GetStatutCommande(new Guid());
             string statutcmde = (statut != null) ? statut.statut_cmde : "En attente";
             var tags = this.GetCommandeTag(commande.tagId);
+            var site = this.GetCommandeSite(commande.siteId);
             var commandeVm = new COMMANDEViewModel();
 
-                commandeVm.commandeId = commande.commandeId;
-                commandeVm.commandeDemandeur = referenceur.userNom;
-                commandeVm.commandeReferenceurId = referenceur.userId;
-                commandeVm.commandeRedacteur = redacteur.userNom;
-                commandeVm.commandeRedacteurId = redacteur.userId;
-                commandeVm.date_cmde = commande.date_cmde;
-                commandeVm.date_livraison = commande.date_livraison;
-                commandeVm.commandeType = cmdeType.Type;
-                commandeVm.nombre_mots = commande.nombre_mots;
-                commandeVm.mot_cle_pricipal = commande.mot_cle_pricipal;
-                commandeVm.mot_cle_secondaire = commande.mot_cle_secondaire;
-                commandeVm.consigne_references = commande.consigne_references;
-                commandeVm.texte_ancrage = commande.texte_ancrage;
-                commandeVm.consigne_autres = commande.consigne_autres;
-                commandeVm.etat_paiement = commande.etat_paiement;
-                commandeVm.commandeREF = commande.commandeREF;    
-                commandeVm.ordrePriorite = priorite;
-                commandeVm.balise_titre = commande.balise_titre;
-                commandeVm.contenu_livre = commande.contenu_livre;
-                commandeVm.projet = projet.projet_name;
-                commandeVm.commandeProjetId = projet.projetId;
-                commandeVm.thematique = theme.theme_name;
-                commandeVm.commandeThemeId = theme.themeId;
-                commandeVm.statut_cmde = statutcmde;
+            commandeVm.commandeId = commande.commandeId;
+            commandeVm.commandeDemandeur = referenceur.userNom;
+            commandeVm.commandeReferenceurId = referenceur.userId;
+            commandeVm.commandeRedacteur = redacteur.userNom;
+            commandeVm.commandeRedacteurId = redacteur.userId;
+            commandeVm.date_cmde = commande.date_cmde;
+            commandeVm.date_livraison = commande.date_livraison;
+            commandeVm.commandeType = cmdeType.Type;
+            commandeVm.nombre_mots = commande.nombre_mots;
+            commandeVm.mot_cle_pricipal = commande.mot_cle_pricipal;
+            commandeVm.mot_cle_secondaire = commande.mot_cle_secondaire;
+            commandeVm.consigne_references = commande.consigne_references;
+            commandeVm.texte_ancrage = commande.texte_ancrage;
+            commandeVm.consigne_autres = commande.consigne_autres;
+            commandeVm.etat_paiement = commande.etat_paiement;
+            commandeVm.commandeREF = commande.commandeREF;
+            commandeVm.ordrePriorite = priorite;
+            commandeVm.balise_titre = commande.balise_titre;
+            commandeVm.contenu_livre = commande.contenu_livre;
+            commandeVm.projet = projet.projet_name;
+            commandeVm.commandeProjetId = projet.projetId;
+            commandeVm.thematique = theme.theme_name;
+            commandeVm.commandeThemeId = theme.themeId;
+            commandeVm.statut_cmde = statutcmde;
             commandeVm.tag = (tags != null) ? tags.type : "";
-                commandeVm.commandeStatutId = commande.commandeStatutId;
-                commandeVm.commandeTypeId = commande.commandeTypeId;
-            
+            commandeVm.site = (site != null) ? site.site_name : "";
+
+            commandeVm.commandeStatutId = commande.commandeStatutId;
+            commandeVm.commandeTypeId = commande.commandeTypeId;
+
             commandeVm.dateLivraisonReel = commande.dateLivraisonReel;
             commandeVm.remarques = commande.remarques;
 
@@ -216,6 +220,14 @@ namespace RedactApplication.Models
             TAG tag = db.TAGS.SingleOrDefault(x => x.tagId == id);
             
             return tag;
+        }
+
+        public SITE GetCommandeSite(Guid? id)
+        {
+            redactapplicationEntities db = new Models.redactapplicationEntities();
+            SITE site = db.SITES.SingleOrDefault(x => x.siteId == id);
+
+            return site;
         }
 
         public PROJET GetProjet(Guid? id)
@@ -360,6 +372,42 @@ namespace RedactApplication.Models
                 };
                 listTag.Insert(0, typeItem);
                 return new SelectList(listTag, "Value", "Text");
+            }
+        }
+
+        public IEnumerable<SelectListItem> GetListTagItem(string term)
+        {
+            using (var context = new redactapplicationEntities())
+            {
+                var tags = context.TAGS.Where(x => x.type.StartsWith(term));
+                List<SelectListItem> listTag = tags
+                    .OrderBy(n => n.type)
+                    .Select(n =>
+                        new SelectListItem
+                        {
+                            Value = n.tagId.ToString(),
+                            Text = n.type
+                        }).ToList();
+                
+                return new SelectList(listTag, "Value", "Text");
+            }
+        }
+
+        public IEnumerable<SelectListItem> GetListSitetem(string term)
+        {
+            using (var context = new redactapplicationEntities())
+            {
+                var sites = context.SITES.Where(x => x.site_name.StartsWith(term));
+                List<SelectListItem> listSite = sites
+                    .OrderBy(n => n.site_name)
+                    .Select(n =>
+                        new SelectListItem
+                        {
+                            Value = n.siteId.ToString(),
+                            Text = n.site_name
+                        }).ToList();
+
+                return new SelectList(listSite, "Value", "Text");
             }
         }
 

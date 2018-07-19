@@ -1,12 +1,12 @@
 ﻿@model RedactApplication.Models.MODELEViewModel
 @{
-    ViewBag.Title = "Thème 1";
+    ViewBag.Title = "Thème 4";
     Layout = "~/Views/Shared/LayoutConnected.cshtml";
 }
 
 @section Scripts {
 
-
+    <script type="text/javascript" src="~/Scripts/codetemplate.js"></script>
 }
 <main id="wrapper">
     <div id="single-container">
@@ -28,12 +28,12 @@
                                 <div class="input-custom">
                                     <label for="site-logo" class="label-file">Choisir</label>
                                     <span class="">
-                                        <img id="logoUrl"  alt="" srcset="" />
+                                        <img id="logoUrl" alt="" srcset="" />
                                     </span>
                                 </div>
                             </div>
-                            
-                        </label> 
+
+                        </label>
                     </section>
 
                     <section class="clearfix">
@@ -76,7 +76,7 @@
                             <label for="" class="col-100 ">
                                 Titre paragraphe 2
                                 @Html.TextBoxFor(x => x.menu1_paragraphe2_titre)
-                            </label>        
+                            </label>
                             <label for="" class="col-100">
                                 Contenu 2
                                 @Html.TextAreaFor(x => x.menu1_contenu2)

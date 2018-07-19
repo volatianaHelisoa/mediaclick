@@ -17,6 +17,7 @@
     @RenderSection("css", required: false)
 
     @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
 
 
 </head>
@@ -61,7 +62,7 @@
                             <span class="user-name">@Session["name"] @Session["surname"]</span>
                             <a href="~/Home/DetailsRedacteurs/@Session["UserId"]" class="user-mail link">@Session["mail"]</a>
                             <a href="~/Home/EditUser/@Session["UserId"]" class="btn btn-success btn-small" title="Modifier">Modifier</a>
-                          
+
                         </div>
                     </div>
                     <button class="logout" onclick="@("window.location.href='" + @Url.Action("LogoutPage", "Login") + "'");">Deconnexion</button>
@@ -76,12 +77,16 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
     @RenderSection("AddToHead", required: false)
+  
     <script src="~/Scripts/codescript.js"></script>
     <script src="~/Scripts/GestionVue.js"></script>
 
     <script src="~/Scripts/jquery.signalR-2.2.3.min.js"></script>
     <script src="~/SignalR/hubs"></script>
     <script src="~/Scripts/codescriptnotification.js"></script>
+
+
+
 
 </body>
 

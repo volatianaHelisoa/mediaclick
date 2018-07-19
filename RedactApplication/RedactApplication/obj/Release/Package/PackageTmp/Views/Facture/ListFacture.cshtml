@@ -37,8 +37,11 @@
                     }
                     <li>@Html.ActionLink("Commandes", "ListCommandes", new { controller = "Commandes" })</li>
                     <li>@Html.ActionLink("Factures", "ListFacture", new { controller = "Facture" }, new { @class = "active" })</li>
-                    <li>@Html.ActionLink("Templates", "ListTemplate", new { controller = "Template" })</li>
-                </ul>
+                    @if (@Session["role"] != null && @Session["role"].ToString() != "2")
+                    {
+                        <li>@Html.ActionLink("Templates", "ListTemplate", new { controller = "Template" })</li>
+                    }
+                    </ul>
             </div>
 
             <div class="card back-office with-shadow">

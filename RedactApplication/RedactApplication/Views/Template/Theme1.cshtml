@@ -5,40 +5,44 @@
 }
 
 @section Scripts {
-   <script>
-       jQuery(document).ready(function () {
-           jQuery("#menu1").hide();
-           jQuery("#menu2").hide();
-           jQuery("#menu3").hide();
-           jQuery("#menu4").hide();
+<script>
+    jQuery(document).ready(function () {
+        jQuery("#menu1").hide();
+        jQuery("#menu2").hide();
+        jQuery("#menu3").hide();
+        jQuery("#menu4").hide();
 
-          
 
-           $('#nb-menu').change(function () {
-               jQuery("#menu1").hide();
-               jQuery("#menu2").hide();
-               jQuery("#menu3").hide();
-               jQuery("#menu4").hide();
 
-               if ($('#nb-menu option:selected').val() == 0) {
-                   return;
+        $('#nb-menu').change(function () {
+            jQuery("#menu1").hide();
+            jQuery("#menu2").hide();
+            jQuery("#menu3").hide();
+            jQuery("#menu4").hide();
+
+            if ($('#nb-menu option:selected').val() == 0) {
+                return;
+            }
+            else {
+                var nbmenu = $('#nb-menu option:selected').val();
+
+                console.log(nbmenu);
+                var i = 1;
+                while (i <= nbmenu) {
+                    jQuery("#menu" + i).show();
+                    i++;
                 }
-                else {
-                   var nbmenu = $('#nb-menu option:selected').val();
+            }
+        });
 
-                   console.log(nbmenu);
-                   var i = 1;
-                   while (i <= nbmenu) {
-                       jQuery("#menu" + i).show();
-                       i++;
-                   }
-                }
-            });
 
-          
-       }); 
-      
-    </script>
+    });
+</script>
+
+    <script type="text/javascript" src="~/Scripts/codetemplate.js"></script>
+
+
+
    
 }
 <main id="wrapper">
@@ -57,9 +61,9 @@
                      
                         <div class="flex-content flex-col change-avatar">
                             Votre logo
-                            @Html.TextBoxFor(m => m.logoUrl, new { type = "file", name = "file", id = "site-logo" })
+                            @Html.TextBoxFor(m => m.logoUrl, new { type = "file", name = "file", id = "logoUrl" })
                             <div class="input-custom">
-                                <label for="site-logo" class="label-file">Choisir</label><span class="file-name"></span>
+                                <label for="logoUrl" class="label-file">Choisir</label><span class="thumbnail"></span>
                             </div>
                         </div>
 
@@ -67,7 +71,7 @@
                     </label>
                     <label for="" class="col-50 pull-left">
                         Nombre de menu
-                        <select id="nb-menu">
+                        <select id="nb-menu" name="nbmenu" >
                             <option value="0">Selectionner le nombre de menu</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -92,9 +96,9 @@
                         </label>
                         <label for="" class="col-50 pull-left">
                             Photo 1
-                            @Html.TextBoxFor(x => x.menu1_paragraphe1_photoUrl, new { type = "file", name = "files", id = "site-photo1" })
+                            @Html.TextBoxFor(x => x.menu1_paragraphe1_photoUrl, new { type = "file", name = "files", id = "menu1_paragraphe1_photoUrl" })
                             <div class="input-custom">
-                                <label for="site-photo1" class="label-file">Choisir</label><span class="file-name"></span>
+                                <label for="site-photo1" class="label-file">Choisir</label><span class="thumbnail-photo"></span>
                             </div>
                             
                         </label>
@@ -109,7 +113,7 @@
                         </label>
                         <label for="" class="col-50 pull-left">
                             Photo 2
-                            @Html.TextBoxFor(x => x.menu1_paragraphe2_photoUrl, new { type = "file", name = "files", id = "site-photo2" })
+                            @Html.TextBoxFor(x => x.menu1_paragraphe2_photoUrl, new { type = "file", name = "files", id = "menu1_paragraphe2_photoUrl" })
                             <div class="input-custom">
                                 <label for="site-photo2" class="label-file">Choisir</label><span class="file-name"></span>
                             </div>

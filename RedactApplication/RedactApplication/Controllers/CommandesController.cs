@@ -227,37 +227,37 @@ namespace RedactApplication.Controllers
 
                 ViewBag.commandesEnCours = commandesEnCours;
 
-                var commandesEnAttente = db.COMMANDEs.Where(x => x.date_cmde >= startOfMonth &&
+                var commandesEnAttente = commandes.Where(x => x.date_cmde >= startOfMonth &&
                                              x.date_cmde <= lastDay &&
                                                                  (x.STATUT_COMMANDE != null && x.STATUT_COMMANDE.statut_cmde.Contains("En attente"))).Distinct().ToList().Count;
                 ViewBag.commandesEnAttente = commandesEnAttente;
 
-                var commandesRefuser = db.COMMANDEs.Count(x => x.date_cmde >= startOfMonth &&
+                var commandesRefuser = commandes.Count(x => x.date_cmde >= startOfMonth &&
                                                                  x.date_cmde <= lastDay && (x.STATUT_COMMANDE != null &&
                                                                   x.STATUT_COMMANDE.statut_cmde.Contains("Refusé"))); 
 
                 ViewBag.commandesRefuser = commandesRefuser;
 
 
-                var commandesAnnuler = db.COMMANDEs.Count(x => x.date_cmde >= startOfMonth &&
+                var commandesAnnuler = commandes.Count(x => x.date_cmde >= startOfMonth &&
                                                                 x.date_cmde <= lastDay && (x.STATUT_COMMANDE != null &&
                                                                  x.STATUT_COMMANDE.statut_cmde.Contains("Annulé")));
 
                 ViewBag.commandesAnnuler = commandesAnnuler;
 
 
-                var commandesEnRetard = db.COMMANDEs.Count(x => x.date_cmde >= startOfMonth &&
+                var commandesEnRetard = commandes.Count(x => x.date_cmde >= startOfMonth &&
                                                                 x.date_cmde <= lastDay &&
                                                                 x.date_livraison <= now &&
                                                                 (x.STATUT_COMMANDE != null &&
                                                                  x.STATUT_COMMANDE.statut_cmde.Contains("En cours")));
                 ViewBag.commandesEnRetard = commandesEnRetard;
-                var commandesFacturer = db.COMMANDEs.Count(x => x.date_cmde >= startOfMonth &&
+                var commandesFacturer = commandes.Count(x => x.date_cmde >= startOfMonth &&
                                                                   x.date_cmde <= lastDay && (x.STATUT_COMMANDE != null &&
                                                                   x.STATUT_COMMANDE.statut_cmde.Contains("Validé")));
                 ViewBag.commandesFacturer = commandesFacturer;
 
-                var commandesLivrer = db.COMMANDEs.Count(x => x.date_cmde >= startOfMonth &&
+                var commandesLivrer = commandes.Count(x => x.date_cmde >= startOfMonth &&
                                                                 x.date_cmde <= lastDay && (x.STATUT_COMMANDE != null &&
                                                                                            x.STATUT_COMMANDE.statut_cmde.Contains("Livré")));
                 ViewBag.commandesLivrer = commandesLivrer;
@@ -526,6 +526,22 @@ namespace RedactApplication.Controllers
             return Json(redactList, JsonRequestBehavior.AllowGet);
         }
 
+        [Authorize]
+        [HttpGet]
+        public JsonResult AutocompleteTagSuggestions(string term)
+        {
+            var suggestions = new Commandes().GetListTagItem(term);
+            return Json(suggestions, JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public JsonResult AutocompleteSiteSuggestions(string term)
+        {
+            var suggestions = new Commandes().GetListSitetem(term);
+            return Json(suggestions, JsonRequestBehavior.AllowGet);
+        }
+
         private COMMANDEViewModel SetCommandeViewModelDetails(COMMANDE commande)
         {
             Commandes val = new Commandes();
@@ -536,7 +552,7 @@ namespace RedactApplication.Controllers
                 commandeVm.ListTheme = val.GetListThemeItem();
                 commandeVm.ListRedacteur = val.GetListRedacteurItem();
                 commandeVm.ListCommandeType = val.GetListCommandeTypeItem();
-                //commandeVm.ListContenuType = val.GetListContenuTypeItem();
+                commandeVm.ListTag = val.GetListTagItem();
                 commandeVm.ListStatut = val.GetListStatutItem();
                 string theme = "";
                 if (commande.commandeProjetId != null)
@@ -554,14 +570,15 @@ namespace RedactApplication.Controllers
                 if (commande.commandeRedacteurId != null)
                     commandeVm.listRedacteurId = (Guid)commande.commandeRedacteurId;
 
-                //if (commande.consigne_type_contenuId != null)
-                //    commandeVm.listContenuTypeId = (Guid)commande.consigne_type_contenuId;
+                if (commande.tagId != null)
+                    commandeVm.tag = commande.TAG.type;
+
                 if (commande.commandeStatutId != null)
                     commandeVm.listStatutId = (Guid)commande.commandeStatutId;
 
                 string referenceur = val.GetUtilisateurReferenceur(commande.commandeReferenceurId).userNom;
                     string cmdeType = val.GetCommandeType(commande.commandeTypeId).Type;
-                    //string consigneType = val.GetCommandeContenuType(commande.consigne_type_contenuId).Type;
+                   
                     string redacteur = (commande.commandeRedacteurId != Guid.Empty) ? val.GetUtilisateurReferenceur(commande.commandeRedacteurId).userNom:"";
                     string priorite = commande.ordrePriorite == "0" ? "Moyen" : "Haut";
                     string projet = val.GetProjet(commande.commandeProjetId).projet_name;
@@ -578,7 +595,7 @@ namespace RedactApplication.Controllers
                     commandeVm.mot_cle_secondaire = commande.mot_cle_secondaire;
                     commandeVm.consigne_references = commande.consigne_references;
                     commandeVm.texte_ancrage = commande.texte_ancrage;
-                //commandeVm.consigneType = consigneType;
+              
                 commandeVm.consigne_autres = commande.consigne_autres;
                     commandeVm.etat_paiement = commande.etat_paiement;
                     commandeVm.commandeRedacteur = redacteur;
@@ -594,13 +611,24 @@ namespace RedactApplication.Controllers
 
                 if (commandeVm.contenu_livre != null) ViewBag.ComptMetaContenu = commandeVm.contenu_livre.Length;
                 string contenu = (!string.IsNullOrEmpty( commande.contenu_livre))? Regex.Replace(commande.contenu_livre, "<.*?>", string.Empty):string.Empty;
-                if (contenu.Split(' ').ToList().Count > 0)
-                    ViewBag.ContentLength = contenu.Split(' ').ToList().Count;
+
+                if (CountWords(contenu) > 0)
+                    ViewBag.ContentLength = CountWords(contenu);
                 return commandeVm;
             }
 
             return null;
         }
+
+        /// <summary>
+        /// Count words with Regex.
+        /// </summary>
+        private int CountWords(string s)
+        {
+            MatchCollection collection = Regex.Matches(s, @"[\S]+");
+            return collection.Count;
+        }
+
 
         //private COMMANDEViewModel SetCommandeDetails(Guid? commandeId)
         //{
@@ -722,9 +750,9 @@ namespace RedactApplication.Controllers
             var selectedThemeId = model.listThemeId;
             var selectedRedacteurId = model.listRedacteurId;
             var selectedCommandeTypeId = model.listCommandeTypeId;
-            var selectedTagId = model.listTagId;
+            var selectedTag = model.tag;
             var selectedReferenceurId = Guid.Parse(HttpContext.User.Identity.Name);
-          
+            var selectedSite = model.site;
 
             model.mot_cle_secondaire =
                 StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.mot_cle_secondaire));
@@ -770,7 +798,32 @@ namespace RedactApplication.Controllers
                     StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.texte_ancrage));
                 newcommande.nombre_mots = model.nombre_mots;
                 newcommande.consigne_references = model.consigne_references;
-                newcommande.tagId = model.listTagId;
+                if (!string.IsNullOrEmpty(selectedTag))
+                {
+                    TAG currentTag = db.TAGS.SingleOrDefault(x => x.type.Contains(selectedTag.TrimEnd()));
+                    if (currentTag == null)
+                    {
+                        currentTag = new TAG { tagId = Guid.NewGuid(), type = selectedTag };
+                        db.TAGS.Add(currentTag);
+                        db.SaveChanges();
+                    }
+                    newcommande.tagId = currentTag.tagId;
+                    newcommande.TAG = currentTag;
+                }
+
+                if (!string.IsNullOrEmpty(selectedSite))
+                {
+                    SITE currentSite = db.SITES.SingleOrDefault(x => x.site_name.Contains(selectedSite.TrimEnd()));
+                    if (currentSite == null)
+                    {
+                        currentSite = new SITE { siteId = Guid.NewGuid(), site_name = selectedSite };
+                        db.SITES.Add(currentSite);
+                        db.SaveChanges();
+                    }
+                    newcommande.siteId = currentSite.siteId;
+                    newcommande.SITE = currentSite;
+                }
+
                 newcommande.consigne_autres = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.consigne_autres));
               
                 newcommande.date_livraison = model.date_livraison;
@@ -1457,9 +1510,10 @@ namespace RedactApplication.Controllers
                     var selectedThemeId = model.listThemeId;
                     var selectedRedacteurId = model.listRedacteurId;
                     var selectedCommandeTypeId = model.listCommandeTypeId;
-                    var selectedTagId = model.listTagId;
+                    var selectedTag = model.tag;
                     var selectedReferenceurId = Guid.Parse(HttpContext.User.Identity.Name);
-
+                    var selectedSite = model.site;
+                    
                     var selectedStatut = model.listStatutId;
 
                     model.mot_cle_secondaire =
@@ -1488,8 +1542,34 @@ namespace RedactApplication.Controllers
 
                     commande.COMMANDE_TYPE = db.COMMANDE_TYPE.Find(selectedCommandeTypeId);
                     commande.commandeTypeId = selectedCommandeTypeId;
-                    commande.TAG = db.TAGS.Find(selectedTagId);
-                    commande.tagId = selectedTagId;
+
+                    if (!string.IsNullOrEmpty(selectedTag))
+                    {
+                        TAG currentTag = db.TAGS.SingleOrDefault(x => x.type.Contains(selectedTag.TrimEnd()));
+                        if (currentTag == null)
+                        {
+                            currentTag = new TAG { tagId = Guid.NewGuid(), type = selectedTag };
+                            db.TAGS.Add(currentTag);
+                            db.SaveChanges();
+                        }
+                        commande.tagId = currentTag.tagId;
+                        commande.TAG = currentTag;
+                    }
+
+                    if (!string.IsNullOrEmpty(selectedSite))
+                    {
+                        SITE currentSite = db.SITES.SingleOrDefault(x => x.site_name.Contains(selectedSite.TrimEnd()));
+                        if (currentSite == null)
+                        {
+                            currentSite = new SITE { siteId = Guid.NewGuid(), site_name = selectedSite };
+                            db.SITES.Add(currentSite);
+                            db.SaveChanges();
+                        }
+                        commande.siteId = currentSite.siteId;
+                        commande.SITE = currentSite;
+                    }
+
+
 
                     commande.commandeStatutId = selectedStatut;
                     commande.mot_cle_pricipal =
@@ -1588,7 +1668,8 @@ namespace RedactApplication.Controllers
                                 if (isSendMail)
                                 {
                                     string notif = "Vous avez une commande à corriger de " + commande.REFERENCEUR.userNom + " " + commande.REFERENCEUR.userPrenom + " le " + DateTime.Now + ".Veuillez regarder les détails de la commande.";
-
+                                    if (Session["role"] != null && Session["role"].ToString() == "2")
+                                         notif = "La commande "+commande.commandeREF + " a été livrée  par " + commande.REDACTEUR.userNom +"le " + DateTime.Now.ToShortDateString() ;
 
                                     if (SendNotification(commande,fromId,toId, notif) > 0)
                                         return View("EditCommandeConfirmation");

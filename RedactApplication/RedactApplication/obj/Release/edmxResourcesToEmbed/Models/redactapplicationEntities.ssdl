@@ -30,6 +30,7 @@
     <Property Name="factureId" Type="uniqueidentifier" />
     <Property Name="remarques" Type="nvarchar(max)" />
     <Property Name="tagId" Type="uniqueidentifier" />
+    <Property Name="siteId" Type="uniqueidentifier" />
   </EntityType>
   <EntityType Name="COMMANDE_TYPE">
     <Key>
@@ -87,6 +88,7 @@
     <Property Name="menu4_paragraphe1_photoUrl" Type="nvarchar(max)" />
     <Property Name="menu4_paragraphe2_photoUrl" Type="nvarchar(max)" />
     <Property Name="photoALaUneUrl" Type="nvarchar(max)" />
+    <Property Name="site_url" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="NOTIFICATION">
     <Key>
@@ -121,6 +123,13 @@
     </Key>
     <Property Name="roleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="roleNom" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="SITES">
+    <Key>
+      <PropertyRef Name="siteId" />
+    </Key>
+    <Property Name="siteId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="site_name" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="STATUT_COMMANDE">
     <Key>
@@ -243,6 +252,18 @@
       </Principal>
       <Dependent Role="COMMANDE">
         <PropertyRef Name="commandeRedacteurId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_COMMANDE_SITES">
+    <End Role="SITES" Type="Self.SITES" Multiplicity="0..1" />
+    <End Role="COMMANDE" Type="Self.COMMANDE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SITES">
+        <PropertyRef Name="siteId" />
+      </Principal>
+      <Dependent Role="COMMANDE">
+        <PropertyRef Name="siteId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -485,6 +506,7 @@
     <EntitySet Name="PROJETS" EntityType="Self.PROJETS" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="REDACT_THEME" EntityType="Self.REDACT_THEME" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ROLE" EntityType="Self.ROLE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SITES" EntityType="Self.SITES" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="STATUT_COMMANDE" EntityType="Self.STATUT_COMMANDE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TAGS" EntityType="Self.TAGS" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TEMPLATE" EntityType="Self.TEMPLATE" Schema="dbo" store:Type="Tables" />
@@ -506,6 +528,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_COMMANDE_REDACTEUR" Association="Self.FK_COMMANDE_REDACTEUR">
       <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
+      <End Role="COMMANDE" EntitySet="COMMANDE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_COMMANDE_SITES" Association="Self.FK_COMMANDE_SITES">
+      <End Role="SITES" EntitySet="SITES" />
       <End Role="COMMANDE" EntitySet="COMMANDE" />
     </AssociationSet>
     <AssociationSet Name="FK_COMMANDE_STATUT_COMMANDE" Association="Self.FK_COMMANDE_STATUT_COMMANDE">

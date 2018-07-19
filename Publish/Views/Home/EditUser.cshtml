@@ -149,7 +149,7 @@
                             <div class="flex-content flex-col change-avatar">
 
                                 <span class="file-name">Votre avatar</span>
-                                @Html.TextBoxFor(m => m.logoUrl, new { type = "file", name = "file", id = "user-profil", accept = "image/*" })
+                                @Html.TextBoxFor(m => m.logoUrl, new { type = "file", @class = "fileTriger", name = "file", id = "user-profil", accept = "image/*" })
                                 <div class="input-custom">
                                     <label for="user-profil" class="label-file">Choisir</label>
                                 </div>

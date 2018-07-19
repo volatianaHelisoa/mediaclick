@@ -44,9 +44,9 @@ namespace RedactApplication
             );
 
             routes.MapRoute(
-                name: "ContactChange",
-                url: "{controller}/ListeContact/{action}/{data}",
-                defaults: new { controller = "Contact", action = "ListeContact", data = UrlParameter.Optional }
+                name: "SelectItemTag",
+                url: "{controller}/{action}/{term}",
+                defaults: new { controller = "Commandes", action = "AutocompleteTagSuggestions", term = UrlParameter.Optional }
             );
 
            

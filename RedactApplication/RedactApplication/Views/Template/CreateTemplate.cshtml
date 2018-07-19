@@ -10,10 +10,7 @@
                 <i class="icon icon-create-command"></i>
                 <h1>Créer modèle</h1>
                 <p>Veuillez remplir les champs Requis et appuyez sur Enregistrer pour éditer un modèle</p>
-                @if (Session["VolumeInfo"] != null)
-                {
-                    <p class="error-msg text-centered">@Session["VolumeInfo"].ToString()</p>
-                }
+               
             </div>
 
             @using (Html.BeginForm("SaveTemplate", "Template", FormMethod.Post, new { role = "form", @id = "createtemplate" }))
@@ -23,23 +20,23 @@
                 <section class="clearfix">
                     <label for="" class="col-50 pull-left">
                         Projet
-                        @Html.DropDownListFor(x => Model.projetId, new SelectList(Model.ListProjet, "Value", "Text"), htmlAttributes: new { @id = "SelectItemProjet" })
+                        @Html.DropDownListFor(x => Model.listprojetId, new SelectList(Model.ListProjet, "Value", "Text"), htmlAttributes: new { @id = "SelectItemProjet", @required = true })
                     </label>
                     <label for="" class="col-50 pull-right">
                         Thématique
-                        @Html.DropDownListFor(x => Model.themeId, new SelectList(Model.ListTheme, "Value", "Text"), htmlAttributes: new { id = "SelectItemTheme" })
+                        @Html.DropDownListFor(x => Model.listThemeId, new SelectList(Model.ListTheme, "Value", "Text"), htmlAttributes: new { id = "SelectItemTheme", @required = true })
                     </label>                  
                     
                 </section>
                     <section class="clearfix">                       
 
                         <label for="" class="col-100">
-                            Url
+                            FTP Hote
                             @Html.TextBoxFor(x => x.url, new { @required = true, @name = "name" })                            
                         </label>
                         <label for="" class="col-50 pull-left">                            
                             Utilisateur
-                            @Html.TextBoxFor(x => x.ftpUser, new {  @name = "name" })
+                            @Html.TextBoxFor(x => x.ftpUser, new {  @name = "name", @required = true })
                         </label>
                         <label for="" class="col-50 pull-right">
                             Mot de passe

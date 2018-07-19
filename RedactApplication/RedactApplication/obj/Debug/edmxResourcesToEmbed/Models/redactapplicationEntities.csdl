@@ -108,6 +108,11 @@
       <End Role="TAG" EntitySet="TAGS" />
       <End Role="COMMANDE" EntitySet="COMMANDEs" />
     </AssociationSet>
+    <EntitySet Name="SITES" EntityType="redactapplicationModel.SITE" />
+    <AssociationSet Name="FK_COMMANDE_SITES" Association="redactapplicationModel.FK_COMMANDE_SITES">
+      <End Role="SITE" EntitySet="SITES" />
+      <End Role="COMMANDE" EntitySet="COMMANDEs" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="COMMANDE">
     <Key>
@@ -148,6 +153,8 @@
     <NavigationProperty Name="NOTIFICATIONs" Relationship="redactapplicationModel.FK_NOTIFICATION_COMMANDE" FromRole="COMMANDE" ToRole="NOTIFICATION" />
     <Property Name="tagId" Type="Guid" />
     <NavigationProperty Name="TAG" Relationship="redactapplicationModel.FK_COMMANDE_TAGS" FromRole="COMMANDE" ToRole="TAG" />
+    <Property Name="siteId" Type="Guid" />
+    <NavigationProperty Name="SITE" Relationship="redactapplicationModel.FK_COMMANDE_SITES" FromRole="COMMANDE" ToRole="SITE" />
   </EntityType>
   <EntityType Name="COMMANDE_TYPE">
     <Key>
@@ -210,6 +217,7 @@
     <Property Name="menu4_paragraphe2_photoUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="photoALaUneUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="TEMPLATEs" Relationship="redactapplicationModel.FK_TEMPLATE_MODELE" FromRole="MODELE" ToRole="TEMPLATE" />
+    <Property Name="site_url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="NOTIFICATION">
     <Key>
@@ -628,6 +636,26 @@
       </Principal>
       <Dependent Role="COMMANDE">
         <PropertyRef Name="tagId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="SITE">
+    <Key>
+      <PropertyRef Name="siteId" />
+    </Key>
+    <Property Name="siteId" Type="Guid" Nullable="false" />
+    <Property Name="site_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="COMMANDEs" Relationship="redactapplicationModel.FK_COMMANDE_SITES" FromRole="SITE" ToRole="COMMANDE" />
+  </EntityType>
+  <Association Name="FK_COMMANDE_SITES">
+    <End Type="redactapplicationModel.SITE" Role="SITE" Multiplicity="0..1" />
+    <End Type="redactapplicationModel.COMMANDE" Role="COMMANDE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SITE">
+        <PropertyRef Name="siteId" />
+      </Principal>
+      <Dependent Role="COMMANDE">
+        <PropertyRef Name="siteId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

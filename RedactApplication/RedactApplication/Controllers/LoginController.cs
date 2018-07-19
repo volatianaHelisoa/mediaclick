@@ -13,6 +13,8 @@ using System.Text;
 using System.Diagnostics;
 using System.ComponentModel;
 using RedactApplication.Models;
+using System.Threading;
+using System.IO;
 
 namespace RedactApplication.Controllers
 {
@@ -24,6 +26,8 @@ namespace RedactApplication.Controllers
         {
             try
             {
+               
+
                 string pwdCrypte = model.userMotdepasse.Trim();
                 redactapplicationEntities db = new Models.redactapplicationEntities();
                 UTILISATEUR utilisateur = null;
@@ -56,7 +60,7 @@ namespace RedactApplication.Controllers
                         trigerAuths.Values["password"] = Encryptor.Decrypt(utilisateur.userMotdepasse);
                         trigerAuths.Expires = DateTime.Now.AddDays(Convert.ToInt32(ConfigurationManager.AppSettings["cookiesValidity"]));
                         Response.Cookies.Add(trigerAuths);
-                       
+
                     }
                 }
                 else
@@ -67,14 +71,14 @@ namespace RedactApplication.Controllers
                 {
                     if (data.Count == 1)
                     {
-                       
-                        if (data[0] == 2 )
+
+                        if (data[0] == 2)
                         {
                             return RedirectToRoute("Home", new RouteValueDictionary {
                                 { "controller", "Commandes" },
                                 { "action", "ListCommandes" }
                             });
-                        }                       
+                        }
 
                         if (data[0] == 3 || data[0] == 4 || data[0] == 5 || data[0] == 1)
                         {
@@ -84,7 +88,7 @@ namespace RedactApplication.Controllers
                                     { "numpage",1 },
                                     { "nbrow", 10 }
                                 });
-                            
+
                         }
                     }
                 }

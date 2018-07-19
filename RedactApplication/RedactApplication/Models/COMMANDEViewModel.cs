@@ -24,6 +24,7 @@ namespace RedactApplication.Models
         public string texte_ancrage { get; set; }
         public string consigne_references { get; set; }
         public Nullable<System.Guid> tagId { get; set; }
+        public Nullable<System.Guid> siteId { get; set; }
         public string consigne_autres { get; set; }
         public string balise_titre { get; set; }
 
@@ -51,6 +52,7 @@ namespace RedactApplication.Models
         public string thematique { get; set; }
         public string statut_cmde { get; set; }
         public string tag { get; set; }
+        public string site { get; set; }
 
         public virtual UTILISATEUR REDACTEUR { get; set; }
 

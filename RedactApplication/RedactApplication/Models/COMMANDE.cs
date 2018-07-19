@@ -46,6 +46,7 @@ namespace RedactApplication.Models
         public Nullable<System.Guid> factureId { get; set; }
         public string remarques { get; set; }
         public Nullable<System.Guid> tagId { get; set; }
+        public Nullable<System.Guid> siteId { get; set; }
     
         public virtual COMMANDE_TYPE COMMANDE_TYPE { get; set; }
         public virtual FACTURE FACTURE { get; set; }
@@ -57,5 +58,6 @@ namespace RedactApplication.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NOTIFICATION> NOTIFICATIONs { get; set; }
         public virtual TAG TAG { get; set; }
+        public virtual SITE SITE { get; set; }
     }
 }

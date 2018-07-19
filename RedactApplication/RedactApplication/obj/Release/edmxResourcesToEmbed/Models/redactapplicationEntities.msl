@@ -4,6 +4,7 @@
     <EntitySetMapping Name="COMMANDEs">
       <EntityTypeMapping TypeName="redactapplicationModel.COMMANDE">
         <MappingFragment StoreEntitySet="COMMANDE">
+          <ScalarProperty Name="siteId" ColumnName="siteId" />
           <ScalarProperty Name="tagId" ColumnName="tagId" />
           <ScalarProperty Name="remarques" ColumnName="remarques" />
           <ScalarProperty Name="factureId" ColumnName="factureId" />
@@ -59,6 +60,7 @@
     <EntitySetMapping Name="MODELEs">
       <EntityTypeMapping TypeName="redactapplicationModel.MODELE">
         <MappingFragment StoreEntitySet="MODELE">
+          <ScalarProperty Name="site_url" ColumnName="site_url" />
           <ScalarProperty Name="photoALaUneUrl" ColumnName="photoALaUneUrl" />
           <ScalarProperty Name="menu4_paragraphe2_photoUrl" ColumnName="menu4_paragraphe2_photoUrl" />
           <ScalarProperty Name="menu4_paragraphe1_photoUrl" ColumnName="menu4_paragraphe1_photoUrl" />
@@ -209,6 +211,14 @@
         <MappingFragment StoreEntitySet="TAGS">
           <ScalarProperty Name="type" ColumnName="type" />
           <ScalarProperty Name="tagId" ColumnName="tagId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SITES">
+      <EntityTypeMapping TypeName="redactapplicationModel.SITE">
+        <MappingFragment StoreEntitySet="SITES">
+          <ScalarProperty Name="site_name" ColumnName="site_name" />
+          <ScalarProperty Name="siteId" ColumnName="siteId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -51,6 +51,7 @@ namespace RedactApplication.Models
         public string menu4_paragraphe1_photoUrl { get; set; }
         public string menu4_paragraphe2_photoUrl { get; set; }
         public string photoALaUneUrl { get; set; }
+        public string site_url { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TEMPLATE> TEMPLATEs { get; set; }

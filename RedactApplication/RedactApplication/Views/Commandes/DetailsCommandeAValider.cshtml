@@ -42,7 +42,7 @@
                                 <div>
                                     <span><strong>Demandeur :</strong>@Html.DisplayFor(model => model.commandeDemandeur)</span>
                                     <span><strong>Redacteur  :</strong>@Html.DisplayFor(model => model.commandeRedacteur)</span>
-                                    <span><strong>Date de Commande :</strong></span>
+                                    <span><strong>Date de Commande :</strong>@Html.DisplayFor(model => model.date_cmde)</span>
                                     <span>
                                         <strong>Date de livraison :</strong> @Html.DisplayFor(model => model.date_livraison)
                                         @if (Model.dateLivraisonReel > Model.date_livraison)

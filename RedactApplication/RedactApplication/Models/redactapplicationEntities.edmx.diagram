@@ -43,6 +43,8 @@
         <AssociationConnector Association="redactapplicationModel.FK_REDACT_THEME_UTILISATEUR" />
         <EntityTypeShape EntityType="redactapplicationModel.TAG" Width="1.5" PointX="0.75" PointY="0.875" />
         <AssociationConnector Association="redactapplicationModel.FK_COMMANDE_TAGS" />
+        <EntityTypeShape EntityType="redactapplicationModel.SITE" Width="1.5" PointX="0.75" PointY="3.875" />
+        <AssociationConnector Association="redactapplicationModel.FK_COMMANDE_SITES" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
