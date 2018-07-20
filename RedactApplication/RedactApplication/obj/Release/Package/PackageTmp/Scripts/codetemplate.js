@@ -53,5 +53,21 @@ var showThumbPhotos = (function (e) {
 $('input[type=file]#logoUrl').bind("change", showThumb);
 $('input[type=file]#menu1_paragraphe1_photoUrl').bind("change", showThumbPhotos);
 $('input[type=file]#menu1_paragraphe2_photoUrl').bind("change", showThumbPhotos);
-$('input[type=file]#photo-a-la-une').bind("change", showThumbPhotos);
+$('input[type=file]#photoALaUneUrl').bind("change", showThumbPhotos);
+$('input[type=file]#menu2_paragraphe1_photoUrl').bind("change", showThumbPhotos);
+$('input[type=file]#menu2_paragraphe2_photoUrl').bind("change", showThumbPhotos);
+$('input[type=file]#menu3_paragraphe1_photoUrl').bind("change", showThumbPhotos);
+$('input[type=file]#menu3_paragraphe2_photoUrl').bind("change", showThumbPhotos);
+$('input[type=file]#menu4_paragraphe1_photoUrl').bind("change", showThumbPhotos);
 $('input[type=file]#menu4_paragraphe2_photoUrl').bind("change", showThumbPhotos);
+
+
+
+
+
+
+
+
+
+
+

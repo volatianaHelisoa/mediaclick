@@ -11,7 +11,7 @@
     background: white;
 }
 
-.t-1 .wrapper{
+.theme .wrapper{
     max-width: 1170px;
     display: block;
     margin: 0 auto;
@@ -28,6 +28,10 @@
 .t-logo .site-url {
     display: inline-block;
     vertical-align: middle;
+}
+
+.t-logo img {
+    max-width: 120px;
 }
 
 .t-logo .site-url {
@@ -58,18 +62,18 @@ nav.menu .current a {
 }
 
 /* TEMPLATE 1 */
-.t-1 header{
+.theme header{
     border-bottom: 1px solid #ebebeb;
     border-top: 3px solid #07b6ff;
 }
 
-.t-1 #bloc1 {
+.theme #bloc1 {
     display: flex;
     padding: 40px 0 20px;
 }
 
-.t-1 h1,
-.t-1 h2 {
+.theme h1,
+.theme h2 {
     font-size: 25px;
     font-weight: normal;
     color: #07b6ff;
@@ -78,58 +82,58 @@ nav.menu .current a {
     margin: 0 0 14px;
 }
 
-.t-1 h3 {
+.theme h3 {
     font-weight: normal;
     font-size: 20px;
 }
 
-.t-1 #bloc1 .texte {
+.theme #bloc1 .texte {
     padding-right: 40px;
     min-width: 60%;
 }
 
-.t-1 .texte p{
+.theme .texte p{
     text-align: justify;
 }
 
-.t-1 #bloc1 .photo {
+.theme #bloc1 .photo {
     min-width: 40%;
     overflow: hidden;
     max-width: 40%;
 }
 
-.t-1 .photo > img {
+.theme .photo > img {
     height: 100%;
 }
 
-.t-1 #bloc2 {
+.theme #bloc2 {
     display: flex;
     background: transparent;
 }
 
-.t-1 #bloc2 .texte {
+.theme #bloc2 .texte {
     min-width: 40%;
     overflow: hidden;
     padding: 40px 0;
 }
 
-.t-1 #bloc2 .photo {
+.theme #bloc2 .photo {
     padding-right: 40px;
     min-width: 60%;
 }
 
-.t-1 #bloc2 .photo > img {
+.theme #bloc2 .photo > img {
     width: 100%;
     object-fit: cover;
 }
 
-.t-1 #f1-footer {
+.theme #f1-footer {
     padding: 40px 0;
     background-color: #07b6ff;
     text-align: center;
     color: white
 }
-.t-1 #f1-footer a{
+.theme #f1-footer a{
     color: white
 }
 /* TEMPLATE 4 */

@@ -202,7 +202,7 @@ namespace RedactApplication.Controllers
 
         public ActionResult Theme2()
         {
-
+            Session["TemplateName"] = "Theme2";
             return View();
         }
 
@@ -229,8 +229,7 @@ namespace RedactApplication.Controllers
             modelVm = new Modeles().GetDetailsModele((Guid)Session["modeleId"]);
             Session["Menu"] = "1";
             var html = RenderViewAsString("Home", modelVm);
-            Session["Menu"] = "2";
-            var html2 = RenderViewAsString("Home", modelVm);
+           
 
             TEMPLATE newtemplate = new TEMPLATE();
             newtemplate.dateCreation = DateTime.Now;
@@ -254,9 +253,10 @@ namespace RedactApplication.Controllers
                 if (res > 0)
                 {
                     var templateName = Session["TemplateName"].ToString();
-                  
-                    int nb_menu = int.Parse(Session["nbmenu"].ToString());
-                    CreateFiles(nb_menu, html, html, html, html);
+
+                    int nb_menu = (Session["nbmenu"] == null) ? 1 : int.Parse(Session["nbmenu"].ToString());                   
+
+                    CreateFiles(nb_menu, html);
 
                     //Send Ftp
                     string pathParent = Server.MapPath("~/Themes/" + templateName);
@@ -280,51 +280,38 @@ namespace RedactApplication.Controllers
             }
         }
 
-        private void CreateFiles(int nb_menu,string menu1_html, string menu2_html ="", string menu3_html="", string menu4_html="")
+        private void CreateFiles(int nb_menu, string menu1_html)
         {
             var templateName = Session["TemplateName"].ToString();
-            string pathHtml = "~/Themes/" + templateName;
+            string pathHtml = "";
+            MODELEViewModel modelVm = new MODELEViewModel();
+            modelVm = new Modeles().GetDetailsModele((Guid)Session["modeleId"]);
+            var html = menu1_html;
 
             for (int i = 1; i <= nb_menu; i++)
             {
+                pathHtml = "~/Themes/" + templateName;
+
                 if (i == 1)
-                    pathHtml = Server.MapPath(pathHtml +"/home.html");
+                    pathHtml = pathHtml + "/home.html";
                 else
-                    pathHtml = Server.MapPath(pathHtml + "/page" + i + ".html");
+                    pathHtml = pathHtml + "/page" + i + ".html";
 
-                string html = "";
-                switch (i)
+                Session["Menu"] = i;
+                html = RenderViewAsString("Home", modelVm);
+
+
+                if (!System.IO.File.Exists(Server.MapPath(pathHtml)))
                 {
-                    case 2:
-                        html = menu2_html;
-                        break;
-                    case 3:
-                        html = menu3_html;
-                        break;
-                    case 4:
-                        html = menu4_html;
-                        break;
-                    default:
-                        html = menu1_html;
-                        break;
+                    FileInfo info = new FileInfo(Server.MapPath(pathHtml));
                 }
 
-                if (!System.IO.File.Exists(pathHtml))
-                {
-                    FileInfo info = new FileInfo(pathHtml);
-                }
-                
-                using (StreamWriter w = new StreamWriter(pathHtml, true))
+                using (StreamWriter w = new StreamWriter(Server.MapPath(pathHtml), false))
                 {
                     w.WriteLine(html); // Write the text
                     w.Close();
                 }
-                   
-                
             }
-
-           
-
         }
 
         private int SendToFtp(string ftpurl,string username,string password,string pathCss,string pathHtml,string pathImg)
@@ -420,7 +407,7 @@ namespace RedactApplication.Controllers
 
         public ActionResult Theme3()
         {
-
+            Session["TemplateName"] = "Theme3";
             return View();
         }
 
@@ -432,42 +419,6 @@ namespace RedactApplication.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public ActionResult SaveTheme4(TEMPLATEViewModel model, IEnumerable<HttpPostedFileBase> files)
-        //{
-        //    var path = "";
-        //    foreach (var file in files)
-        //    {
-        //        if (file.ContentLength > 0)
-        //        {
-        //            var fileName = Path.GetFileName(file.FileName);
-        //            path = Path.Combine(Server.MapPath("~/App_Data"), fileName);
-        //            file.SaveAs(path);
-        //        }
-        //    }
-        //    MODELE4 newmodel = new MODELE4();
-        //    newmodel.logoUrl = path;
-        //    newmodel.photoALaUneUrl = path;
-        //    newmodel.paragraphe1_titre = model.menu1_paragraphe1_titre;
-        //    newmodel.paragraphe2_titre = model.menu1_paragraphe2_titre;
-        //    newmodel.paragraphe_photoUrl = path;
-        //    newmodel.contenu1 = model.menu1_contenu1;
-        //    newmodel.contenu2 = model.menu1_contenu2;
-
-        //    db.MODELE4.Add(newmodel);
-        //    try
-        //    {
-        //        db.SaveChanges();
-        //        return View();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return View();
-        //    }
-        //    return View();
-
-        //    return View();
-
-        //}
+      
     }
 }

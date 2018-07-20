@@ -212,3 +212,8 @@ a.btn:hover,
 	max-width: inherit;
 	width: 100%;
 }
+
+.theme-customization .input-custom label {
+    border: none;
+    margin-right: 0;
+}

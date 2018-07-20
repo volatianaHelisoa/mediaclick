@@ -1,0 +1,89 @@
+.grey-bg {
+    background-color: #f7f7f7;
+}
+.template {
+    background: url(../img/pattern-body.jpg)repeat top left;
+}
+.template .wrapper{
+    max-width: 971px;
+    display: block;
+    margin: 0 auto;
+    background: white;
+}
+#topbar {
+    padding: 20px 40px;
+}
+#topbar.centered {
+    text-align: center;
+}
+.t-logo,
+.t-logo img,
+.t-logo .site-url {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.t-logo img {
+    max-width: 100px;
+}
+
+.t-logo .site-url {
+    color: #333;
+    margin-left: 10px;
+}
+
+.template #banner {
+    max-height: 360px;
+    overflow: hidden;
+}
+
+.template #banner img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+.template.theme #photo-l-texte {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: center;
+}
+.template.theme #contenu .col-50 {
+    flex:1;
+}
+.template.theme #contenu .texte > h1 {
+    font-size: 20px;
+    line-height: 30px;
+    color: #f1be22
+}
+.template.theme #photo-l-texte .photo {
+    object-fit: cover;
+    overflow: hidden;
+    margin-right: 20px;
+    position: relative;
+}
+.template.theme #photo-l-texte .photo img {
+    height: 100%;
+    width: auto;
+    position: absolute;
+}
+
+#full-text {
+    padding: 20px 25px;
+}
+
+.template.theme #f4-footer {
+    background-color: #f1be22;
+    padding:40px;
+    text-align: center;
+    color: white;
+    font-size: 12px;
+}
+#f4-footer a {
+    color: white;
+}
+
+#f4-footer .sep{
+    font-style: normal;
+    padding: 0 30px 0 20px;
+}

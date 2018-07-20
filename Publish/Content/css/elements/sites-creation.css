@@ -45,11 +45,28 @@
         background-color: #26b5ff
     }
 }
+.theme-customization .tab-nav li {
+    list-style: none;
+    display: inline-block;
+    background: #cfcfcf;
+}
+.theme-customization .tab-nav {
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid #f5f5f5;
+    margin-bottom: 20px;
+}
+
+.theme-customization .tab-nav li a {
+    padding: 10px 25px;
+}
+
 .theme-customization {
     max-width: 1024px !important;
 }
 .theme-customization .site-identity {
     display: flex;
+    margin-bottom: 20px;
 }
 .theme-customization .section-title {
     margin: 20px 0 30px;
@@ -91,7 +108,7 @@
 .theme-customization .thumbnail-photo {
     width: 100%;
     display: block;
-    height: 300px;
+    height: 252px;
     background-color: #f7f7f7;
     padding: 30px;
     margin-bottom: 18px;

@@ -568,10 +568,13 @@
     <Content Include="Themes\Theme1\img\t1-photo-l.jpg" />
     <Content Include="Themes\Theme1\img\t1-photo-r.jpg" />
     <Content Include="Themes\Theme1\img\tourisme à bangkok.jpg" />
-    <Content Include="Themes\Theme1\template-1.html" />
+    <Content Include="Themes\Theme2\css\bases.css" />
+    <Content Include="Themes\Theme2\css\templates-style.css" />
+    <Content Include="Themes\Theme2\img\t2-logo.png" />
+    <Content Include="Themes\Theme2\img\t2-photo.jpg" />
+    <Content Include="Themes\Theme2\img\texture_body.gif" />
     <Content Include="Themes\Theme4\css\bases.css" />
     <Content Include="Themes\Theme4\css\templates-style.css" />
-    <Content Include="Themes\Theme4\Home4.html" />
     <Content Include="Themes\Theme4\img\banner-landscape.jpg" />
     <Content Include="Themes\Theme4\img\credit taux zero.jpg" />
     <Content Include="Themes\Theme4\img\eco pret travaux.jpg" />
@@ -585,7 +588,6 @@
     <Content Include="Themes\Theme4\img\pret travaux renovation.jpg" />
     <Content Include="Themes\Theme4\img\t4-logo.png" />
     <Content Include="Themes\Theme4\img\tourisme à bangkok.jpg" />
-    <Content Include="Themes\Theme4\index.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
