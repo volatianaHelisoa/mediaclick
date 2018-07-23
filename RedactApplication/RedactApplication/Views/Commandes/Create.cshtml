@@ -200,7 +200,7 @@
                 <div class="head">
                     <i class="icon icon-create-command"></i>
                     <h1>Créer commande</h1>
-                    <p>Veuillez remplir les champs Requis et appuyez sur Enregistrer pour créer une commande</p>
+                    <p>Veuillez remplir les champs Requis (*) et appuyez sur Enregistrer pour créer une commande</p>
 
                     @if (ViewBag.ErrorRedacteur != null)
                     {
@@ -214,19 +214,19 @@
                     <!-- Champs -->
                     <section class="clearfix">
                         <label for="" class="col-50 pull-left">
-                            Projet
+                            Projet (*)
                             @Html.DropDownListFor(x => Model.listprojetId, new SelectList(Model.ListProjet, "Value", "Text"), htmlAttributes: new { @id = "SelectItemProjet", @required = true })
                         </label>
                         <label for="" class="col-50 pull-right">
-                            Thématique
+                            Thématique (*)
                             @Html.DropDownListFor(x => Model.listThemeId, new SelectList(Model.ListTheme, "Value", "Text"), htmlAttributes: new { id = "SelectItemTheme", @required = true })
                         </label>
                         <label for="" class="col-50 pull-left">
-                            Rédacteur
+                            Rédacteur (*)
                             @Html.DropDownListFor(x => Model.listRedacteurId, new SelectList(Model.ListRedacteur, "Value", "Text"), htmlAttributes: new { id = "SelectItemRedacteur", @required = true })
                         </label>
                         <label for="" class="col-50 pull-right">
-                            Type de texte
+                            Type de texte (*)
                             @Html.DropDownListFor(x => Model.listCommandeTypeId, new SelectList(Model.ListCommandeType, "Value", "Text"), htmlAttributes: new { @id = "SelectItemCommandeType", @required = true })
                         </label>
                         <label for="" class="col-50 pull-left">
@@ -245,19 +245,19 @@
                         </div>
 
                         <label for="" class="col-50 pull-left">
-                            Mot clé principal
+                            Mot clé principal (*)
                             @Html.TextBoxFor(x => x.mot_cle_pricipal, new { @required = true, @name = "name" })
                         </label>
                         <label for="" class="col-50 pull-right">
-                            Mot clé secondaire
+                            Mot clé secondaire (*)
                             @Html.TextBoxFor(x => x.mot_cle_secondaire, new { @required = true, @name = "name" })
                         </label>
                         <label for="" class="col-50 pull-left">
-                            Texte d'ancrage
+                            Texte d'ancrage (*)
                             @Html.TextBoxFor(x => x.texte_ancrage, new { @required = true, @name = "name" })
                         </label>
                         <label for="" class="col-50 pull-right">
-                            Nombre de mots
+                            Nombre de mots (*)
                             @Html.TextBoxFor(x => x.nombre_mots, new { @required = true, @name = "name", type = "number" })
                         </label>
                     </section>
@@ -267,21 +267,21 @@
                         </div>
 
                         <label for="" class="col-50 pull-left">
-                            Références
+                            Références (*)
                             @Html.TextAreaFor(x => x.consigne_references, new { @required = true, @name = "name" })
                         </label>
                         <label for="" class="col-50 pull-right">
-                            Autres
+                            Autres (*)
                             @Html.TextAreaFor(x => x.consigne_autres, new { @required = true, @name = "name" })
                         </label>
 
                         <label for="" class="col-50 pull-right">
-                            Date de livraison
+                            Date de livraison (*)
                             @Html.TextBoxFor(x => x.date_livraison, "{0:dd/MM/yyyy}", new { type = "text", @required = true })
                             @Html.ValidationMessageFor(m => m.date_livraison)
                         </label>
                         <label for="" class="col-50 pull-left">
-                            Ordre de priorité
+                            Ordre de priorité (*)
                             @Html.DropDownListFor(x => x.ordrePriorite,
                                                             new List<SelectListItem> {
                                                                 new SelectListItem { Value = " " , Text = "Selectionner priorité" },

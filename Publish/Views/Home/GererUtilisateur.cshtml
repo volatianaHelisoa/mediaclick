@@ -15,7 +15,9 @@
 @section Scripts{
 
     <link rel="stylesheet" href="~/Content/css/elements/profil.css">
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.js"></script>
+  
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/css/bootstrap-multiselect.css" rel="stylesheet" />
 
     <script>
@@ -64,7 +66,12 @@
             })
 
             $('#SelectItemTheme').multiselect({
-                includeSelectAllOption: true
+                includeSelectAllOption: true,
+                nSelectedText: 'selection',
+                nonSelectedText: 'Aucune selection',
+                selectAllText: 'Tout selectionner',
+                allSelectedText:'Selections'
+
             });
         });
 
@@ -112,7 +119,10 @@
             </div>
             <div class="card back-office with-shadow">
 
-
+                <div class="head">
+                    <h1>Créer utilisateur</h1>
+                    <p>Veuillez remplir les champs Requis (*) et appuyez sur Enregistrer pour créer un utilisateur</p>
+                </div>
 
 
                 @using (Html.BeginForm("EnregistrerUtilisateur", "Home", FormMethod.Post, new { @class = "formfields", @id = "enregistrerUtilisateur", enctype = "multipart/form-data" }))
@@ -197,7 +207,7 @@
                                 <span>Redacteur informations</span>
                             </div>
                             <label for="" class="col-50 pull-left">
-                                Tarif (Ariary) (*)
+                                Tarif (*) (en Ariary)
                                 @Html.TextBoxFor(x => x.redactTarif, new { @type = "number" })
                             </label>
                             <label for="" class="col-50 pull-right">
@@ -224,7 +234,7 @@
 
 
                             <label for="" class="col-50 pull-left clearfix">
-                                Mode de paiement (*)
+                                Mode de paiement
                                 @Html.DropDownListFor(x => x.redactModePaiement,
                                                                  new List<SelectListItem> {
                                                                      new SelectListItem { Value = " " , Text = "Selectionner mode de paiement" },
