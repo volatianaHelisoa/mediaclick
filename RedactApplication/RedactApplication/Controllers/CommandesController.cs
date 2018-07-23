@@ -1249,7 +1249,7 @@ namespace RedactApplication.Controllers
         public ActionResult RelanceSMS(Guid hash)
         {
             var commande = db.COMMANDEs.Find(hash);
-            string msgBody = "Nous voulons vous relancer sur la commande numéro "+commande.commandeREF;
+            string msgBody = "Nous voulons vous relancer sur la commande numéro " + commande.commandeREF;
             var accountSid =
                 System.Configuration.ConfigurationManager.AppSettings["SMSAccountIdentification"];
             var authToken = System.Configuration.ConfigurationManager.AppSettings["SMSAccountPassword"];
@@ -1258,7 +1258,7 @@ namespace RedactApplication.Controllers
             TwilioClient.Init(accountSid, authToken);
             if (commande.REDACTEUR != null)
             {
-                string redactNumber = "+"+commande.REDACTEUR.redactPhone.Trim();
+                string redactNumber = "+" + commande.REDACTEUR.redactPhone.Trim();
                 var to = new PhoneNumber(redactNumber);
                 var message = MessageResource.Create(
                     to,

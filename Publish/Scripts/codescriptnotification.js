@@ -47,9 +47,9 @@
                     var tr_str = '';
                     $.each(response, function (index, value) {
                         var divrole = $("#divrole").data('value');
-                      
+                        console.log(divrole);
                         var link = $(location).attr('host') + "/Commandes/DetailsCommande/" + value.commandeId + "?not=" + value.notificationId;
-                        if (divrole === "2")
+                        if (divrole == "2")
                          link = $(location).attr('host') + "/Commandes/DetailsCommandeAValider/" + value.commandeId + "?not=" + value.notificationId;
 
                         var dateStr = parseDate(value.datenotif);

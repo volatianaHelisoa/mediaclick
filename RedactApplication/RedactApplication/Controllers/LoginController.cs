@@ -232,50 +232,50 @@ namespace RedactApplication.Controllers
             List<string> Error = new List<string>();
             ViewBag.ErrorPassWord = "";
 
-            if (model.userMotdepasse == "")
-            {
-                Error.Add("The password entered is empty.");
-            }
-            if (model.userMotdepasseConfirme == "")
-            {
-                Error.Add("The confirmation password is empty.");
-            }
-            if (model.userMotdepasse != model.userMotdepasseConfirme)
-            {
-                Error.Add("The password entered and the confirmation password are not the same.");
-            }
-            if ((model.userMotdepasse.ToString().Length >= 8) == false)
-            {
-                Error.Add("The password must contain at least 8 characters.");
-            }
-            if ((Regex.IsMatch(model.userMotdepasse.ToString(), patternNoAplha)) == false)
-            {
-                Error.Add("The password must contain at least 1 non-alphanumeric character.");
-            }
-            if ((Regex.IsMatch(model.userMotdepasse.ToString(), patternDigit)) == false)
-            {
-                Error.Add("The password must contain at least 1 digit character.");
-            }
-            if ((Regex.IsMatch(model.userMotdepasse.ToString(), patternAlphaUpper)) == false)
-            {
-                Error.Add("The password must contain at least 1 uppercase character.");
-            }
-            if ((Regex.IsMatch(model.userMotdepasse.ToString(), patternAlphaLower)) == false)
-            {
-                Error.Add("The password must contain at least 1 lowercase character.");
-            }
-            if (Error.Count != 0)
-            {
-                Session["tokenPass"] = token;
-                ViewBag.userId = token;
-                ViewBag.ErrorPassWord = Error;
-                return View("ErrrorForgotPassword");
-            }
+            //if (model.userMotdepasse == "")
+            //{
+            //    Error.Add("The password entered is empty.");
+            //}
+            //if (model.userMotdepasseConfirme == "")
+            //{
+            //    Error.Add("The confirmation password is empty.");
+            //}
+            //if (model.userMotdepasse != model.userMotdepasseConfirme)
+            //{
+            //    Error.Add("The password entered and the confirmation password are not the same.");
+            //}
+            //if ((model.userMotdepasse.ToString().Length >= 8) == false)
+            //{
+            //    Error.Add("The password must contain at least 8 characters.");
+            //}
+            //if ((Regex.IsMatch(model.userMotdepasse.ToString(), patternNoAplha)) == false)
+            //{
+            //    Error.Add("The password must contain at least 1 non-alphanumeric character.");
+            //}
+            //if ((Regex.IsMatch(model.userMotdepasse.ToString(), patternDigit)) == false)
+            //{
+            //    Error.Add("The password must contain at least 1 digit character.");
+            //}
+            //if ((Regex.IsMatch(model.userMotdepasse.ToString(), patternAlphaUpper)) == false)
+            //{
+            //    Error.Add("The password must contain at least 1 uppercase character.");
+            //}
+            //if ((Regex.IsMatch(model.userMotdepasse.ToString(), patternAlphaLower)) == false)
+            //{
+            //    Error.Add("The password must contain at least 1 lowercase character.");
+            //}
+            //if (Error.Count != 0)
+            //{
+            //    Session["tokenPass"] = token;
+            //    ViewBag.userId = token;
+            //    ViewBag.ErrorPassWord = Error;
+            //    return View("ErrrorForgotPassword");
+            //}
             redactapplicationEntities db = new Models.redactapplicationEntities();
             UTILISATEUR utilisateur = db.UTILISATEURs.SingleOrDefault(x => x.token == token);
             if (utilisateur == null)
             {
-                Error = new List<string> {"You are no longer allowed to change your password."};
+                Error = new List<string> { "Vous n'êtes plus autorisé à changer votre mot de passe." };
                 Session["tokenPass"] = token;
                 ViewBag.userId = token;
                 ViewBag.ErrorPassWord = Error;
