@@ -37,7 +37,8 @@
     <script type="text/javascript" src="~/Scripts/js/bootstrap-datepicker.min.js"></script>
 
     <link rel="stylesheet" href="~/Content/css/elements/commandes.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-autocomplete/1.0.7/jquery.auto-complete.min.css">
+   
     <script type="text/javascript">
         jQuery(document).ready(function () {
             var date = new Date();
@@ -77,25 +78,49 @@
                         });
                     });
             });
- 
-             $("#tag").autocomplete({              
+
+            $("#SelectItemRedacteur").change(function () {
+              
+                var selectItemRedacteur = $(this).val();
+                $("#selectedRedact").text(selectItemRedacteur);
+                $.getJSON("../Commandes/LoadOtherRedacteur", { redact: selectItemRedacteur },
+                    function (data) {
+                        var select = $("#SelectItemOtherRedacteur");
+                      
+                        select.empty();
+                        select.append($('<option/>', {
+                            value: 0,
+                            text: "Choisir un autre redacteur"
+                        }));
+                        $.each(data, function (index, itemData) {
+                            select.append($('<option/>', {
+                                value: itemData.Value,
+                                text: itemData.Text
+                            }));
+                        });
+                    });
+            });
+
+            
+
+            $("#tag").autocomplete({
 
                 source: function (request, response) {
                     $.ajax({
-                      
+
                         type: 'GET',
                         url: '/Commandes/AutocompleteTagSuggestions',
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
 
-                        data: {                           
+                        data: {
                             term: request.term
                         },
                         success: function (data) {
                             console.log(data);
                             response($.map(data, function (val, item) {
-                                
-                                return {                                  
+
+                                return {
                                     value: val.Text,
                                     text: val.Value
                                 }
@@ -109,8 +134,8 @@
                 select: function (event, ui) {
                     $("#tag").val(ui.item.text);
                     console.log($("#tag").val(ui.item.text));
-                 },
-                 minLength: 1
+                },
+                minLength: 1
             });
 
             $("#site").autocomplete({
@@ -143,7 +168,7 @@
                 },
                 select: function (event, ui) {
                     $("#site").val(ui.item.text);
-                 
+
                 },
                 minLength: 1
             });
@@ -176,10 +201,7 @@
                     <i class="icon icon-create-command"></i>
                     <h1>Créer commande</h1>
                     <p>Veuillez remplir les champs Requis et appuyez sur Enregistrer pour créer une commande</p>
-                    @if (Session["VolumeInfo"] != null)
-                    {
-                        <p class="error-msg text-centered">@Session["VolumeInfo"].ToString()</p>
-                    }
+
                     @if (ViewBag.ErrorRedacteur != null)
                     {
                         <p class="error-msg text-centered">Veuillez selectionner un rédacteur.</p>
@@ -190,33 +212,33 @@
                 {
                     @Html.AntiForgeryToken()
                     <!-- Champs -->
-                <section class="clearfix">
-                    <label for="" class="col-50 pull-left">
-                        Projet
-                        @Html.DropDownListFor(x => Model.listprojetId, new SelectList(Model.ListProjet, "Value", "Text"), htmlAttributes: new { @id = "SelectItemProjet", @required = true })
-                    </label>
-                    <label for="" class="col-50 pull-right">
-                        Thématique
-                        @Html.DropDownListFor(x => Model.listThemeId, new SelectList(Model.ListTheme, "Value", "Text"), htmlAttributes: new { id = "SelectItemTheme", @required = true })
-                    </label>
-                    <label for="" class="col-50 pull-left">
-                        Rédacteur
-                        @Html.DropDownListFor(x => Model.listRedacteurId, new SelectList(Model.ListRedacteur, "Value", "Text"), htmlAttributes: new { id = "SelectItemRedacteur", @required = true })
-                    </label>
-                    <label for="" class="col-50 pull-right">
-                        Type de texte
-                        @Html.DropDownListFor(x => Model.listCommandeTypeId, new SelectList(Model.ListCommandeType, "Value", "Text"), htmlAttributes: new { @id = "SelectItemCommandeType", @required = true })
-                    </label>
-                    <label for="" class="col-50 pull-left">
-                        Tag
-                        @Html.EditorFor(model => model.tag, new { htmlAttributes = new { } })
-                    </label>
-                    <label for="" class="col-50 pull-right">
-                        Site
-                        @Html.EditorFor(model => model.site, new { htmlAttributes = new { } })
-                    </label>
+                    <section class="clearfix">
+                        <label for="" class="col-50 pull-left">
+                            Projet
+                            @Html.DropDownListFor(x => Model.listprojetId, new SelectList(Model.ListProjet, "Value", "Text"), htmlAttributes: new { @id = "SelectItemProjet", @required = true })
+                        </label>
+                        <label for="" class="col-50 pull-right">
+                            Thématique
+                            @Html.DropDownListFor(x => Model.listThemeId, new SelectList(Model.ListTheme, "Value", "Text"), htmlAttributes: new { id = "SelectItemTheme", @required = true })
+                        </label>
+                        <label for="" class="col-50 pull-left">
+                            Rédacteur
+                            @Html.DropDownListFor(x => Model.listRedacteurId, new SelectList(Model.ListRedacteur, "Value", "Text"), htmlAttributes: new { id = "SelectItemRedacteur", @required = true })
+                        </label>
+                        <label for="" class="col-50 pull-right">
+                            Type de texte
+                            @Html.DropDownListFor(x => Model.listCommandeTypeId, new SelectList(Model.ListCommandeType, "Value", "Text"), htmlAttributes: new { @id = "SelectItemCommandeType", @required = true })
+                        </label>
+                        <label for="" class="col-50 pull-left">
+                            Tag
+                            @Html.EditorFor(model => model.tag, new { htmlAttributes = new { } })
+                        </label>
+                        <label for="" class="col-50 pull-right">
+                            Site
+                            @Html.EditorFor(model => model.site, new { htmlAttributes = new { } })
+                        </label>
 
-                </section>
+                    </section>
                     <section class="clearfix">
                         <div class="section-title">
                             <span>Mots clés</span>
@@ -252,11 +274,21 @@
                             Autres
                             @Html.TextAreaFor(x => x.consigne_autres, new { @required = true, @name = "name" })
                         </label>
-                       
+
                         <label for="" class="col-50 pull-right">
                             Date de livraison
                             @Html.TextBoxFor(x => x.date_livraison, "{0:dd/MM/yyyy}", new { type = "text", @required = true })
                             @Html.ValidationMessageFor(m => m.date_livraison)
+                        </label>
+                        <label for="" class="col-50 pull-left">
+                            Ordre de priorité
+                            @Html.DropDownListFor(x => x.ordrePriorite,
+                                                            new List<SelectListItem> {
+                                                                new SelectListItem { Value = " " , Text = "Selectionner priorité" },
+                                                                new SelectListItem { Value = "Bas" , Text = "Bas" },
+                                                                new SelectListItem { Value = "Moyen" , Text = "Moyen" },
+                                                                new SelectListItem { Value = "Avancé" , Text = "Haut" }
+                                                            }, new {  @required = true })
                         </label>
                         <span class="pull-left" style="margin-bottom: 20px;">
                             Notification sms
@@ -273,6 +305,46 @@
                 }
             </div>
         </div>
+
+        @if (Session["VolumeInfo"] != null)
+        {
+            <script>
+                $(window).on('load', function () { $('#volumePopup').modal('show'); });
+            </script>
+
+            using (Html.BeginForm("CreateCommande", "Commandes", FormMethod.Post, new { role = "form", @id = "createcommande" }))
+            {@Html.AntiForgeryToken()
+            <div id="volumePopup" style="" class="modal modal-popup in" aria-hidden="false">
+                <div class="flex-content flex-jcenter-acenter flex-col pop-up">
+                    <div class="popup-container with-shadow">
+                        <div class="head gradient-blue">
+                            <h1>Attention !</h1>
+                        </div>
+                        <div class="content-section text-centered icon-bottom">
+                            <i class="pop-icon green-bg"></i>
+                            <p><i class="fa fa-info-circle"></i>Le volume journalier pour le rédacteur <span id="selectedRedact"></span> est atteint , votre commande peut être en retard. Confirmer la commande ou choisir un autre redacteur. </p>
+                            <label>
+                                Choisir Rédacteur
+                                @Html.DropDownListFor(x => Model.listOtherRedacteurId, new SelectList(Model.ListOtherRedacteur, "Value", "Text"), htmlAttributes: new { id = "SelectItemOtherRedacteur" })
+                            </label>
+                            <section class="clearfix submit-area">
+
+                                <button type="submit" class="btn btn-warning" onclick="@("window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "Choisir" }) + "'");">Choisir ce rédacteur</button>
+                                <input type="submit" value="Confirmer" class="btn btn-success" />
+                                <button type="button" class="btn btn-success" data-dismiss="modal">Editer</button>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
+    }
+
+
+
+
+
     </main>
 }
 else
@@ -280,3 +352,4 @@ else
 
 
 
+   

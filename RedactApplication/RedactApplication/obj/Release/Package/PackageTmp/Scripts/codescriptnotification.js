@@ -46,13 +46,17 @@
 
                     var tr_str = '';
                     $.each(response, function (index, value) {
-                       
-                        var link = $(location).attr('host') + "/Commandes/DetailsCommandeAValider/" + value.commandeId + "?not=" + value.notificationId;
+                        var divrole = $("#divrole").data('value');
+                      
+                        var link = $(location).attr('host') + "/Commandes/DetailsCommande/" + value.commandeId + "?not=" + value.notificationId;
+                        if (divrole === "2")
+                         link = $(location).attr('host') + "/Commandes/DetailsCommandeAValider/" + value.commandeId + "?not=" + value.notificationId;
+
                         var dateStr = parseDate(value.datenotif);
                         
                         //tr_str += '<li class="recent"><a href="' + link + '" id="submit-link"> La commande #' + value.commanderef + ' a été mise à jour par ' + value.fromUserName + ' le ' + dateStr + ' .</a></li>';
 
-                        tr_str += '<li class="recent"><a href="http://'+ link +'" target="_blank" > ' + value.message + '</a></li>';
+                        tr_str += '<li class="recent"><a href="http://'+ link +'"> ' + value.message + '</a></li>';
                     });
                 
                     $('#notiContent').html(tr_str);

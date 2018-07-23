@@ -308,28 +308,42 @@
 
         @if (Session["VolumeInfo"] != null)
         {
-        <div id="volumePoPup" class="modal-popup">
-            <div class="volumePoPup">
-                <div class="icone_type">
-                    <img src="~/images/icon-done.png" alt="Photo done">
-                </div>
-                <div class="pop_content">
-                    <h3>Done !</h3>
-                    <span class="ltl-consign"><i class="fa fa-info-circle"></i>Le volume journalier pour le rédacteur <span id="selectedRedact"></span> est atteint , votre commande peut être en retard. Confirmer la commande ou choisir un autre redacteur. </span>
-                    <label for="" class="col-50 pull-left">
-                        Choisir Rédacteur
-                        @Html.DropDownListFor(x => Model.listOtherRedacteurId, new SelectList(Model.ListOtherRedacteur, "Value", "Text"), htmlAttributes: new { id = "SelectItemOtherRedacteur" })
-                    </label>
+            <script>
+                $(window).on('load', function () { $('#volumePopup').modal('show'); });
+            </script>
 
-                    <ul class="bouttons_area">
-                        <li><button type="submit" class="green_hit" onclick="@("window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "ListCommandes" }) + "'");">Ok</button></li>
-                        <li><button type="submit" class="blue_hit" onclick="@("window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "Create" }) + "'");">Creer une commande</button></li>
-                    </ul>
+            using (Html.BeginForm("CreateCommande", "Commandes", FormMethod.Post, new { role = "form", @id = "createcommande" }))
+            {@Html.AntiForgeryToken()
+            <div id="volumePopup" style="" class="modal modal-popup in" aria-hidden="false">
+                <div class="flex-content flex-jcenter-acenter flex-col pop-up">
+                    <div class="popup-container with-shadow">
+                        <div class="head gradient-blue">
+                            <h1>Attention !</h1>
+                        </div>
+                        <div class="content-section text-centered icon-bottom">
+                            <i class="pop-icon green-bg"></i>
+                            <p><i class="fa fa-info-circle"></i>Le volume journalier pour le rédacteur <span id="selectedRedact"></span> est atteint , votre commande peut être en retard. Confirmer la commande ou choisir un autre redacteur. </p>
+                            <label>
+                                Choisir Rédacteur
+                                @Html.DropDownListFor(x => Model.listOtherRedacteurId, new SelectList(Model.ListOtherRedacteur, "Value", "Text"), htmlAttributes: new { id = "SelectItemOtherRedacteur" })
+                            </label>
+                            <section class="clearfix submit-area">
+
+                                <button type="submit" class="btn btn-warning" onclick="@("window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "Choisir" }) + "'");">Choisir ce rédacteur</button>
+                                <input type="submit" value="Confirmer" class="btn btn-success" />
+                                <button type="button" class="btn btn-success" data-dismiss="modal">Editer</button>
+                            </section>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
 
         }
+    }
+
+
+
+
 
     </main>
 }

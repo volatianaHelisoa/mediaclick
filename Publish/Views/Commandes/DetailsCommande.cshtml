@@ -83,13 +83,17 @@
                                             </a>
                                         </div>
                                     }
+                                    else if (Model.statut_cmde == "A corriger")
+                                    {
+                                        <span>Vous avez demandé une correction de la livraison prévue le  @Model.date_livraison.Value.ToString("dd/MM/yyyy").</span>
+                                    }
 
                                     else if (Model.statut_cmde == "Annulé" || Model.statut_cmde == "Refusé")
-                                    {                                        
-                                            <span>Livraison prévue le  @Model.date_livraison.Value.ToString("dd/MM/yyyy") a été annulée ou refusée.</span>
-                                     }
+                                    {
+                                        <span>Livraison prévue le  @Model.date_livraison.Value.ToString("dd/MM/yyyy") a été annulée ou refusée.</span>
+                                    }
 
-                                    </div>
+                                </div>
                                 }
                                 @if (Model.statut_cmde == "Livré" || Model.statut_cmde == "Validé" || Model.statut_cmde == "Refusé")
                                 {
@@ -117,6 +121,7 @@
                                 <span>Récapitulatif</span>
                             </div>
                             <div class="wrap with-shadow">
+                                <span><strong>Projet :</strong>@Html.DisplayFor(model => model.projet)</span>
                                 <span><strong>Demandeur :</strong>@Html.DisplayFor(model => model.commandeDemandeur)</span>
                                 <span><strong>Redacteur  :</strong>@Html.DisplayFor(model => model.commandeRedacteur)</span>
                                 <span><strong>Date de Commande :</strong>@Html.DisplayFor(model => model.date_cmde)</span>
@@ -128,7 +133,8 @@
                                     }
                                 </span>
                                 <span><strong>Ordre de priorité :</strong> @Html.DisplayFor(model => model.ordrePriorite)</span>
-                                <span><strong>Site :</strong> @Html.DisplayFor(model => model.projet)</span>
+                                <span><strong>Site :</strong> @Html.DisplayFor(model => model.site)</span>
+                                <span><strong>Tag :</strong> @Html.DisplayFor(model => model.tag)</span>
                                 <span><strong>Thème :</strong> @Html.DisplayFor(model => model.thematique)</span>
                                 <span><strong>Type de contenu :</strong>  @Html.DisplayFor(model => model.commandeType)</span>
                                 <span><strong>Mot clé principal :</strong> @Html.DisplayFor(model => model.mot_cle_pricipal)</span>
@@ -141,7 +147,7 @@
                                         <strong>Remarques :</strong> @Html.DisplayFor(model => model.remarques)
                                     </span>
                                 }
-                                </div>
+                            </div>
 
                         </section>
                         <div class="sep"></div>

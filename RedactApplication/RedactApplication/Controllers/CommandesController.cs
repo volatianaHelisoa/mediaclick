@@ -563,6 +563,7 @@ namespace RedactApplication.Controllers
                 commandeVm.ListCommandeType = val.GetListCommandeTypeItem();
                 commandeVm.ListTag = val.GetListTagItem();
                 commandeVm.ListStatut = val.GetListStatutItem();
+                commandeVm.ListOtherRedacteur = val.GetListRedacteurItem();
                 string theme = "";
                 if (commande.commandeProjetId != null)
                     commandeVm.listprojetId = (Guid)commande.commandeProjetId;
@@ -577,7 +578,9 @@ namespace RedactApplication.Controllers
                     commandeVm.listCommandeTypeId = (Guid)commande.commandeTypeId;
 
                 if (commande.commandeRedacteurId != null)
-                    commandeVm.listRedacteurId = (Guid)commande.commandeRedacteurId;
+                { commandeVm.listRedacteurId = (Guid)commande.commandeRedacteurId;
+                    commandeVm.ListOtherRedacteur = val.GetListRedacteurItem().Where(x=>x.Value != commande.commandeRedacteurId.ToString());
+                }
 
                 if (commande.tagId != null)
                     commandeVm.tag = commande.TAG.type;
@@ -691,6 +694,7 @@ namespace RedactApplication.Controllers
             commandeVm.ListRedacteur = val.GetListRedacteurItem();
             commandeVm.ListCommandeType = val.GetListCommandeTypeItem();
             commandeVm.ListTag = val.GetListTagItem();
+            commandeVm.ListOtherRedacteur = val.GetListRedacteurItem();
             return View(commandeVm);
         }
 
@@ -700,7 +704,8 @@ namespace RedactApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateCommande(COMMANDEViewModel model, FormCollection collection)
         {
-           
+            if (Session["cmdeEditModif"] != null)
+                model = (COMMANDEViewModel)Session["cmdeEditModif"];
 
             var selectedProjetId = model.listprojetId;
             var selectedThemeId = model.listThemeId;
@@ -725,6 +730,8 @@ namespace RedactApplication.Controllers
             }
 
             COMMANDE newcommande = new COMMANDE();
+         
+
             var commande = db.COMMANDEs.Count(x => x.commandeProjetId == selectedProjetId && x.commandeThemeId == selectedThemeId && x.commandeTypeId == model.listCommandeTypeId && x.date_livraison == model.date_livraison) ;
             
             if (commande <= 0)
@@ -795,7 +802,8 @@ namespace RedactApplication.Controllers
 
                 if (newcommande.REDACTEUR != null && volume > Convert.ToInt32(newcommande.REDACTEUR.redactVolume) && Session["VolumeInfo"] == null)
                 {
-                    Session["VolumeInfo"] = "Le volume journalier pour le rédacteur " + newcommande.REDACTEUR.userNom + " est atteint. Vous confirmez l'envoi de la commande ? ";                   
+                    Session["VolumeInfo"] = "Le volume journalier pour le rédacteur " + newcommande.REDACTEUR.userNom + " est atteint. Vous confirmez l'envoi de la commande ? ";
+                    Session["cmdeEditModif"] = cmd;
                     return View("Create", cmd);
                 }
                 if (model.listRedacteurId == Guid.Empty)
@@ -803,8 +811,8 @@ namespace RedactApplication.Controllers
                     ViewBag.ErrorRedacteur = true;
                     return View("Create", cmd);
                 }
-                  
 
+                Session["cmdeEditModif"] = null;
                 Session["VolumeInfo"] = null;
 
                 db.COMMANDEs.Add(newcommande);

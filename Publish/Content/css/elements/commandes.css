@@ -171,7 +171,7 @@
     padding: 20px 0;
 }
 
-#refuserCommandePoPup textarea,
+#refuserCommandePoPup textarea
 #updateCommandePoPup textarea {
     display: block;
     width: 100%;
@@ -179,8 +179,4 @@
     margin-top: 10px;
     resize: none;
     padding: 15px;
-}
-
-.medium-popup .submit-area {
-    padding: 20px 0;
 }
