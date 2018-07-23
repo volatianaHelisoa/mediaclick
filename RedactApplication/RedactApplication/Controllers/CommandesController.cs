@@ -148,17 +148,15 @@ namespace RedactApplication.Controllers
             return Json(new Notifications().GetAllMessages(_userId), JsonRequestBehavior.AllowGet);
             
         }
-        private int GetVolumeEnCours(Guid? redactId, DateTime? livraison)
+        private int GetVolumeEnCours(Guid? redactId, DateTime? date_livraison)
         {
             var redact = db.UTILISATEURs.Find(redactId);
             var now = DateTime.Now;
             var startOfMonth = new DateTime(now.Year, now.Month, 1);
             var daysInMonth = DateTime.DaysInMonth(now.Year, now.Month);
             var lastDay = new DateTime(now.Year, now.Month, daysInMonth);
-            //var commandes = db.COMMANDEs.Where(x => x.commandeRedacteurId == redactId && x.date_cmde >= startOfMonth &&
-            //x.date_cmde <= lastDay).ToList();
-            var commandes = db.COMMANDEs.Where(x => x.commandeRedacteurId == redactId && x.date_livraison == livraison &&
-                                                                 !x.STATUT_COMMANDE.statut_cmde.Contains("Annulé"));
+            var commandes = db.COMMANDEs.Where(x => x.commandeRedacteurId == redactId && x.date_livraison >= now &&
+            x.date_livraison <= date_livraison && !x.STATUT_COMMANDE.statut_cmde.Contains("Annulé")).ToList();
             int volume = 0;
             foreach (var commande in commandes)
             {
@@ -169,23 +167,29 @@ namespace RedactApplication.Controllers
         }
 
 
-        private int GetVolumeEnCours(Guid? redactId)
+        private bool IsLimiteVolumeEnCours(Guid? redactId,DateTime? date_livraison,int? nb_mots)
         {
             var redact = db.UTILISATEURs.Find(redactId);
             var now = DateTime.Now;
             var startOfMonth = new DateTime(now.Year, now.Month, 1);
             var daysInMonth = DateTime.DaysInMonth(now.Year, now.Month);
             var lastDay = new DateTime(now.Year, now.Month, daysInMonth);
-            var commandes = db.COMMANDEs.Where(x => x.commandeRedacteurId == redactId && x.date_cmde >= startOfMonth &&
-            x.date_cmde <= lastDay).ToList();
-
-            int volume = 0;
+            var commandes = db.COMMANDEs.Where(x => x.commandeRedacteurId == redactId && x.date_livraison >= now &&
+            x.date_livraison <= date_livraison &&  !x.STATUT_COMMANDE.statut_cmde.Contains("Annulé")).ToList();
+            bool limite = true ;
+            if (commandes.Count() == 0)
+                return false;
+            int? volume = 0;
             foreach (var commande in commandes)
             {
                 volume += Convert.ToInt32(commande.nombre_mots);
             }
+            volume += nb_mots;
+            int maxVolume = Convert.ToInt32(redact.redactVolume) * commandes.Count();
+            if (volume < maxVolume)
+                return false;
 
-            return volume;
+            return limite;
         }
 
         private int? GetVolumeRestant(Guid? redactId)
@@ -797,10 +801,10 @@ namespace RedactApplication.Controllers
 
                 COMMANDEViewModel cmd = SetCommandeViewModelDetails(newcommande);
 
-                int? volume = GetVolumeEnCours(newcommande.commandeRedacteurId,model.date_livraison) ; //total volume journalier en cours
-                volume = volume + newcommande.nombre_mots; 
+                bool limit = IsLimiteVolumeEnCours(newcommande.commandeRedacteurId,model.date_livraison,newcommande.nombre_mots) ; //total volume journalier en cours
+               
 
-                if (newcommande.REDACTEUR != null && volume > Convert.ToInt32(newcommande.REDACTEUR.redactVolume) && Session["VolumeInfo"] == null)
+                if (limit && Session["VolumeInfo"] == null)
                 {
                     Session["VolumeInfo"] = "Le volume journalier pour le rédacteur " + newcommande.REDACTEUR.userNom + " est atteint. Vous confirmez l'envoi de la commande ? ";
                     Session["cmdeEditModif"] = cmd;
@@ -1556,10 +1560,10 @@ namespace RedactApplication.Controllers
                         StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.consigne_autres));
                     commande.ordrePriorite = model.ordrePriorite;
                     commande.date_livraison = model.date_livraison;
-                    int? volume = GetVolumeEnCours(commande.commandeRedacteurId, model.date_livraison); //total volume journalier en cours
-                    volume = volume + commande.nombre_mots;
+                    bool limit = IsLimiteVolumeEnCours(commande.commandeRedacteurId, model.date_livraison, commande.nombre_mots); //total volume journalier en cours
 
-                    if (commande.REDACTEUR != null && volume > Convert.ToInt32(commande.REDACTEUR.redactVolume) && Session["VolumeInfo"] == null)
+
+                    if (limit && Session["VolumeInfo"] == null)
                     {
                         Session["VolumeInfo"] = "Le volume journalier pour le rédacteur " + commande.REDACTEUR.userNom + " est atteint. Vous confirmez l'envoi de la commande ? ";
                         COMMANDEViewModel cmd = SetCommandeViewModelDetails(commande);
