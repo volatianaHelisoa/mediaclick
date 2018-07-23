@@ -81,7 +81,7 @@ namespace RedactApplication.Models
         }
 
 
-        public static bool SendResetPasswordMail(string email,string content,string subject)
+        public static bool SendMail(string email,string content,string subject)
         {
             string body = content;
             return SendMessage(

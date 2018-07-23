@@ -29,7 +29,7 @@
                     <img src="~/images/logo_mc_large.png" alt="MediaClick" srcset="">
                 </a>
             </div>
-
+            <div id="divrole" data-value="@Request.RequestContext.HttpContext.Session["role"]"></div>
             <div class="pull-right">
                 <div class="notifications">
                     @Html.Partial("~/Views/Shared/_MessagesList.cshtml")

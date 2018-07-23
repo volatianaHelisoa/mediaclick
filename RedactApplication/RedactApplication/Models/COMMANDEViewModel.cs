@@ -54,8 +54,10 @@ namespace RedactApplication.Models
         public string tag { get; set; }
         public string site { get; set; }
 
-        public virtual UTILISATEUR REDACTEUR { get; set; }
-
+     //   public virtual UTILISATEUR REDACTEUR { get; set; }
+      //  public virtual SITE SITE { get; set; }
+    //    public virtual UTILISATEUR REFERENCEUR { get; set; }
+      //  public virtual TAG TAG { get; set; }
 
         [Required]
         [Display(Name = "SelectItemProjet")]
@@ -71,6 +73,11 @@ namespace RedactApplication.Models
         [Display(Name = "SelectItemRedacteur")]
         public Guid listRedacteurId { get; set; }
         public IEnumerable<SelectListItem> ListRedacteur { get; set; }
+
+        [Required]
+        [Display(Name = "SelectItemOtherRedacteur")]
+        public Guid listOtherRedacteurId { get; set; }
+        public IEnumerable<SelectListItem> ListOtherRedacteur { get; set; }
 
         public JsonResult JsonRedacteur { get; set; }
         

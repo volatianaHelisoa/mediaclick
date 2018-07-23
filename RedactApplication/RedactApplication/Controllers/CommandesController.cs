@@ -526,6 +526,15 @@ namespace RedactApplication.Controllers
             return Json(redactList, JsonRequestBehavior.AllowGet);
         }
 
+        [AcceptVerbs(HttpVerbs.Get)]
+        public JsonResult LoadOtherRedacteur(string redact)
+        {            
+            //Your Code For Getting Physicans Goes Here
+            var redactList = (redact != null) ? (new Commandes().GetListRedacteurItem().Where(x=>x.Value != redact)) : null;
+
+            return Json(redactList, JsonRequestBehavior.AllowGet);
+        }
+
         [Authorize]
         [HttpGet]
         public JsonResult AutocompleteTagSuggestions(string term)
@@ -580,7 +589,7 @@ namespace RedactApplication.Controllers
                     string cmdeType = val.GetCommandeType(commande.commandeTypeId).Type;
                    
                     string redacteur = (commande.commandeRedacteurId != Guid.Empty) ? val.GetUtilisateurReferenceur(commande.commandeRedacteurId).userNom:"";
-                    string priorite = commande.ordrePriorite == "0" ? "Moyen" : "Haut";
+                    //string priorite = commande.ordrePriorite == "0" ? "Moyen" : "Haut";
                     string projet = val.GetProjet(commande.commandeProjetId).projet_name;
                  
                     string statutcmde = (commande.commandeStatutId != Guid.Empty) ? val.GetStatutCommande(commande.commandeStatutId).statut_cmde:"";
@@ -596,15 +605,17 @@ namespace RedactApplication.Controllers
                     commandeVm.consigne_references = commande.consigne_references;
                     commandeVm.texte_ancrage = commande.texte_ancrage;
               
-                commandeVm.consigne_autres = commande.consigne_autres;
+                    commandeVm.consigne_autres = commande.consigne_autres;
                     commandeVm.etat_paiement = commande.etat_paiement;
                     commandeVm.commandeRedacteur = redacteur;
-                    commandeVm.ordrePriorite = priorite;
+                    commandeVm.ordrePriorite = commande.ordrePriorite;
                     commandeVm.balise_titre = commande.balise_titre;
                     commandeVm.contenu_livre = commande.contenu_livre;
                     commandeVm.projet = projet;
                     commandeVm.thematique = theme;
-                    commandeVm.statut_cmde = statutcmde;
+                commandeVm.site = commande.SITE.site_name;
+                commandeVm.tag = commande.TAG.type;
+                commandeVm.statut_cmde = statutcmde;
                     Session["cmdeEditModif"] = null;
                 commandeVm.commandeREF = commande.commandeREF;
                 commandeVm.remarques = commande.remarques;
@@ -630,72 +641,17 @@ namespace RedactApplication.Controllers
         }
 
 
-        //private COMMANDEViewModel SetCommandeDetails(Guid? commandeId)
-        //{
-        //    if (!string.IsNullOrEmpty(Request.QueryString["not"]))
-        //    {
-        //        Guid? notificationId;
-        //        notificationId = Guid.Parse(Request.QueryString["not"]);
-        //        int res = UpdateStatutNotification(notificationId);
-        //    }
+      
 
-
-        //    Commandes val = new Commandes();
-        //    COMMANDEViewModel commandeVm = val.GetDetailsCommande(commandeId);
-
-        //    if (commandeVm != null)
-        //    {
-        //        if (Session["cmdeEditModif"] != null)
-        //        {
-        //            COMMANDEViewModel commande = (COMMANDEViewModel)Session["cmdeEditModif"];
-        //            string referenceur = val.GetUtilisateurReferenceur(commande.commandeReferenceurId).userNom;
-        //            string cmdeType = val.GetCommandeType(commande.commandeTypeId).Type;
-        //            string consigneType = val.GetCommandeContenuType(commande.consigne_type_contenuId).Type;
-        //            string redacteur = val.GetUtilisateurReferenceur(commande.commandeRedacteurId).userNom;
-        //            string priorite = commande.ordrePriorite == "0" ? "Moyen" : "Haut";
-        //            string projet = val.GetProjet(commande.commandeProjetId).projet_name;
-        //            string theme = val.GetTheme(commande.commandeThemeId).theme_name;
-        //            commandeVm.ListStatut = val.GetListStatutItem();
-        //            if (commande.commandeStatutId != null)                       
-        //            {
-        //                commandeVm.listStatutId = (Guid)commande.commandeStatutId;
-        //                statutcmde = val.GetStatutCommande(commande.commandeStatutId).statut_cmde;
-        //            }
-        //            commandeVm.commandeId = commande.commandeId;
-        //            commandeVm.commandeDemandeur = referenceur;
-        //            commandeVm.date_cmde = commande.date_cmde;
-        //            commandeVm.date_livraison = commande.date_livraison;
-        //            commandeVm.commandeType = cmdeType;
-        //            commandeVm.nombre_mots = commande.nombre_mots;
-        //            commandeVm.mot_cle_pricipal = commande.mot_cle_pricipal;
-        //            commandeVm.mot_cle_secondaire = commande.mot_cle_secondaire;
-        //            commandeVm.consigne_references = commande.consigne_references;
-        //            commandeVm.consigneType = consigneType;
-        //            commandeVm.consigne_autres = commande.consigne_autres;
-        //            commandeVm.etat_paiement = commande.etat_paiement;
-        //            commandeVm.commandeRedacteur = redacteur;
-        //            commandeVm.ordrePriorite = priorite;
-        //            commandeVm.balise_titre = commande.balise_titre;
-        //            commandeVm.contenu_livre = commande.contenu_livre;
-        //            commandeVm.projet = projet;
-        //            commandeVm.thematique = theme;
-        //            commandeVm.statut_cmde = statutcmde;
-        //            Session["cmdeEditModif"] = null;
-        //        }
-
-        //        if (commandeVm.contenu_livre != null) ViewBag.ComptMetaContenu = commandeVm.contenu_livre.Length;
-
-        //        return commandeVm;
-        //    }
-
-        //    return null;
-        //}
-
-        // GET: COMMANDEs/Details/5
         public ActionResult DetailsCommande(Guid? hash, string not ="")
         {
             var commande = db.COMMANDEs.Find(hash);
-
+            var notifications = db.NOTIFICATIONs.Where(x => x.commandeId == hash).ToList();
+            foreach (var notif in notifications)
+            {
+                notif.statut = false;
+                db.SaveChanges();
+            }
             COMMANDEViewModel commandeVm = SetCommandeViewModelDetails(commande);
             if (commandeVm != null)
             {
@@ -825,8 +781,8 @@ namespace RedactApplication.Controllers
                 }
 
                 newcommande.consigne_autres = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.consigne_autres));
-              
-                newcommande.date_livraison = model.date_livraison;
+                newcommande.ordrePriorite = model.ordrePriorite;
+                 newcommande.date_livraison = model.date_livraison;
                 newcommande.date_cmde = DateTime.Now;
                 int? maxRef = db.COMMANDEs.Max(u => u.commandeREF);
                 newcommande.commandeREF = (maxRef != null) ? maxRef + 1 : 1;
@@ -927,7 +883,7 @@ namespace RedactApplication.Controllers
                                 mailBody.AppendFormat("<br />");
                                 mailBody.AppendFormat("Mediaclick Company.");
 
-                                bool isSendMail = MailClient.SendResetPasswordMail(newcommande.REDACTEUR.userMail,
+                                bool isSendMail = MailClient.SendMail(newcommande.REDACTEUR.userMail,
                                     mailBody.ToString(), "Redact application - nouvelle commande.");
                                 if (isSendMail)
                                 {
@@ -1074,6 +1030,10 @@ namespace RedactApplication.Controllers
                 return View("ErrorException");
         }
 
+        [HttpPost]
+        [Authorize]
+        [ValidateInput(false)]
+        [MvcApplication.CheckSessionOut]
         public ActionResult CancelCommande(Guid idCommande, COMMANDEViewModel model)
         {
             redactapplicationEntities db = new Models.redactapplicationEntities();
@@ -1099,7 +1059,7 @@ namespace RedactApplication.Controllers
             }
             db.SaveChanges();
           
-            string mailbody = "<p> Votre commande " + commande.commandeREF + " a été annulée le "+DateTime.Now.ToString("dd/MM/yyyy")+" , vous pouvez contacter le responsable pour plus de détails.</p>";
+            string mailbody = "<p> La commande " + commande.commandeREF + " a été annulée par "+commande.REFERENCEUR.userNom +" "+commande.REFERENCEUR.userPrenom+" le "+ DateTime.Now.ToString("dd/MM/yyyy")+" , vous pouvez contacter le responsable pour plus de détails.</p>";
             string mailobject = "Media click App - Annulation de la commande";
             bool isSendMail = SendeMailNotification(commande, mailbody, mailobject);
 
@@ -1169,9 +1129,9 @@ namespace RedactApplication.Controllers
                 }
                 db.SaveChanges();
              
-                 mailbody = "<p> Votre commande " + commande.commandeREF + " a été refusé par le rédacteur le " + DateTime.Now.ToString("dd/MM/yyyy") + ", vous pouvez  contacter " + commande.REDACTEUR.userNom.ToUpper() +" pour plus de détails.</p>";
-                string mailobject = "Media click App - Refus de la commande";
-                 isSendMail = SendeMailNotification(commande, mailbody, mailobject);
+                 mailbody = "Votre commande " + commande.commandeREF + " a été refusé par le rédacteur le " + DateTime.Now.ToString("dd/MM/yyyy") + ", vous pouvez  contacter " + commande.REDACTEUR.userNom.ToUpper() +" pour plus de détails.";
+               // string mailobject = "Media click App - Refus de la commande";
+               //  isSendMail = SendeMailNotification(commande, mailbody, mailobject);
             }
             else
             {
@@ -1225,20 +1185,23 @@ namespace RedactApplication.Controllers
             commande.remarques = model.remarques;
             db.SaveChanges();
            
-            string mailbody = "<p> Votre livraison " + commande.commandeREF + " a été modifié,veuillez revoir la commande s'il vous plait. Nous vous remercions de votre collaboration.</p>";
-            string mailobject = "Media click App - Validation de la commande";
+            string mailbody = "<p> "+commande.REFERENCEUR.userNom + " " + commande.REFERENCEUR.userPrenom + " a demandé un correctif sur votre livraison " + commande.commandeREF + ".veuillez revoir la commande s'il vous plait. Nous vous remercions de votre collaboration.</p>";
+            string mailobject = "Media click App - Demande de correction de la commande";
 
+            string notif = commande.REFERENCEUR.userNom + " " + commande.REFERENCEUR.userPrenom + " a demandé un correctif sur votre livraison " + commande.commandeREF + ".veuillez revoir la commande s'il vous plait. Nous vous remercions de votre collaboration.";
             bool isSendMail = SendeMailNotification(commande, mailbody, mailobject);
+            
             if (isSendMail)
             {
-                SendNotification(commande, commande.commandeReferenceurId, commande.commandeRedacteurId, Regex.Replace(mailbody, "<.*?>", String.Empty));
+                SendNotification(commande, commande.commandeReferenceurId, commande.commandeRedacteurId, notif);
+
                 return RedirectToRoute("Home", new RouteValueDictionary
-            {
-                {"controller", "Commandes"},
-                {"action", "ListCommandes"}
-            });
+                {
+                    {"controller", "Commandes"},
+                    {"action", "ListCommandes"}
+                });
             }
-               
+
             else
                 return View("ErrorException");
         }
@@ -1345,7 +1308,7 @@ namespace RedactApplication.Controllers
                     mailBody.AppendFormat("<br />");
                     mailBody.AppendFormat("Mediaclick Company.");
 
-                    bool isSendMail = MailClient.SendResetPasswordMail(newcommande.REDACTEUR.userMail,
+                    bool isSendMail = MailClient.SendMail(newcommande.REDACTEUR.userMail,
                         mailBody.ToString(), "Redact application - nouvelle commande.");
                     if (isSendMail)
                     {
@@ -1402,7 +1365,7 @@ namespace RedactApplication.Controllers
                 mailBody.AppendFormat("<br />");
                 mailBody.AppendFormat("Mediaclick Company.");
 
-                isSendMail = MailClient.SendResetPasswordMail(newcommande.REDACTEUR.userMail,
+                isSendMail = MailClient.SendMail(newcommande.REDACTEUR.userMail,
                     mailBody.ToString(), mailobject);
             }
             return isSendMail;
@@ -1583,7 +1546,7 @@ namespace RedactApplication.Controllers
                     commande.tagId = model.listTagId;
                     commande.consigne_autres =
                         StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.consigne_autres));
-
+                    commande.ordrePriorite = model.ordrePriorite;
                     commande.date_livraison = model.date_livraison;
                     int? volume = GetVolumeEnCours(commande.commandeRedacteurId, model.date_livraison); //total volume journalier en cours
                     volume = volume + commande.nombre_mots;
@@ -1663,7 +1626,7 @@ namespace RedactApplication.Controllers
                                 mailBody.AppendFormat("<br />");
                                 mailBody.AppendFormat("Mediaclick Company.");
 
-                                bool isSendMail = MailClient.SendResetPasswordMail(commande.REDACTEUR.userMail,
+                                bool isSendMail = MailClient.SendMail(commande.REDACTEUR.userMail,
                                     mailBody.ToString(), "Redact application - nouvelle commande.");
                                 if (isSendMail)
                                 {

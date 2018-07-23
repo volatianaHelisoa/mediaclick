@@ -328,3 +328,20 @@ ul.multiselect-container .multiselect-clear-filter {
     margin-top: -25px;
     display: block;
 }
+
+/* AUTOCOMPLETE DESIGN */
+ul.ui-autocomplete {
+    padding: 0;
+    background: white;
+    max-width: 380px;
+    margin: 0 !important;
+    padding: 10px 20px;
+    box-shadow: 0px 15px 20px rgba(0, 0, 0, .15);
+    -webkit-box-shadow: 0px 15px 20px rgba(0, 0, 0, .15);
+    -moz-box-shadow: 0px 15px 20px rgba(0, 0, 0, .15);
+    -ms-box-shadow: 0px 15px 20px rgba(0, 0, 0, .15);
+    color: #a7a7a7;
+}
+ul.ui-autocomplete li.ui-menu-item {
+    list-style: none;
+}

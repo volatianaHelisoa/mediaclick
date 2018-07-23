@@ -1161,7 +1161,7 @@ namespace RedactApplication.Controllers
                         mailBody.AppendFormat("<br />");
                         mailBody.AppendFormat("Mediaclick Company.");
 
-                        bool isSendMail = MailClient.SendResetPasswordMail(utilisateur.userMail, mailBody.ToString(), "Redact application - modification mot de passe.");
+                        bool isSendMail = MailClient.SendMail(utilisateur.userMail, mailBody.ToString(), "Redact application - modification mot de passe.");
                         if (isSendMail)
                         {
                             utilisateur.token = TemporaryIdUser;
