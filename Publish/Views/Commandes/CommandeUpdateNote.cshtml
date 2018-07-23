@@ -31,13 +31,13 @@
                     @if (Model.remarques != "")
                     {
                         <span>
-                            <strong>Remarques : </strong>  @Html.TextAreaFor(model => Model.remarques)
+                            <strong>Remarques : </strong>  @Html.TextAreaFor(model => Model.remarques, new{ placeholder = "Veuillez ajouter vos remarques"})
                         </span>
                     }
                 </div>
             </div>
         </section>
-        <section class="clearfix submit-area" id="toast">
+        <section class="clearfix submit-area">
             <input type="submit" value="Envoyer" class="btn btn-primary" >
             @Html.ActionLink("Retour", "ListCommandes", "Commandes", new { @class = "btn btn-warning" })
         </section>
