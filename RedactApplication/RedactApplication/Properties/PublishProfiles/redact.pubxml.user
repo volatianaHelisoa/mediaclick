@@ -1153,7 +1153,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>07/23/2018 11:17:04</publishTime>
     </File>
     <File Include="Views/Commandes/Create.cshtml">
-      <publishTime>07/23/2018 13:58:54</publishTime>
+      <publishTime>07/24/2018 17:11:32</publishTime>
     </File>
     <File Include="Views/Commandes/CreateCommandeConfirmation.cshtml">
       <publishTime>07/13/2018 14:54:59</publishTime>
