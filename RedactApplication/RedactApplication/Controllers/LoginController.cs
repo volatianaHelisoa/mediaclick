@@ -26,22 +26,22 @@ namespace RedactApplication.Controllers
         {
             try
             {
-               
-
-                string pwdCrypte = model.userMotdepasse.Trim();
+               string pwdCrypte = model.userMotdepasse.Trim();
                 redactapplicationEntities db = new Models.redactapplicationEntities();
                 UTILISATEUR utilisateur = null;
                 if (model.saveOnComputer)
                 {
+                    HttpCookie trigerAuths = Request.Cookies["trigerAuths"];
+                    pwdCrypte = Encryptor.EncryptPass(trigerAuths.Values["password"]);
                     utilisateur = db.UTILISATEURs.SingleOrDefault(x => x.userMail == model.userMail.Trim() && x.userMotdepasse == pwdCrypte);
                     if (utilisateur == null)
                         pwdCrypte = Encryptor.EncryptPass(pwdCrypte);
                 }
                 else
+                {
                     pwdCrypte = Encryptor.EncryptPass(pwdCrypte);
-
-
-                utilisateur = db.UTILISATEURs.SingleOrDefault(x => x.userMail == model.userMail.Trim() && x.userMotdepasse == pwdCrypte);
+                    utilisateur = db.UTILISATEURs.SingleOrDefault(x => x.userMail == model.userMail.Trim() && x.userMotdepasse == pwdCrypte);
+                }
 
                 if (utilisateur != null)
                 {
