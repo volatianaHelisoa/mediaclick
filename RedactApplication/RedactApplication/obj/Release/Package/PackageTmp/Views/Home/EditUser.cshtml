@@ -186,7 +186,7 @@
                         </label>
                         <label for="" class="col-50 pull-left">
                             Téléphone
-                            @Html.TextBoxFor(x => x.redactPhone, new { @placeholder = "0331110011", @maxlength = 10 })
+                            @Html.TextBoxFor(x => x.redactPhone, new { @placeholder = "331110011", @maxlength = 9 })
                             @if (ViewBag.ErrorPhoneValidation != null)
                             {
                                 <label class="error-msg ltl-consign input-error">Téléphone invalide.</label>

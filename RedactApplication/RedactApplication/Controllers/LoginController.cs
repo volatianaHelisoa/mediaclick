@@ -26,20 +26,23 @@ namespace RedactApplication.Controllers
         {
             try
             {
-               string pwdCrypte = model.userMotdepasse.Trim();
+               string pwdCrypte = model.userMotdepasse;
                 redactapplicationEntities db = new Models.redactapplicationEntities();
                 UTILISATEUR utilisateur = null;
                 if (model.saveOnComputer)
                 {
                     HttpCookie trigerAuths = Request.Cookies["trigerAuths"];
-                    pwdCrypte = Encryptor.EncryptPass(trigerAuths.Values["password"]);
+                    pwdCrypte = trigerAuths.Values["password"];
                     utilisateur = db.UTILISATEURs.SingleOrDefault(x => x.userMail == model.userMail.Trim() && x.userMotdepasse == pwdCrypte);
                     if (utilisateur == null)
-                        pwdCrypte = Encryptor.EncryptPass(pwdCrypte);
+                    {
+                        pwdCrypte = Encryptor.EncryptPass(model.userMotdepasse);
+                        utilisateur = db.UTILISATEURs.SingleOrDefault(x => x.userMail == model.userMail.Trim() && x.userMotdepasse == pwdCrypte);
+                    }
                 }
                 else
                 {
-                    pwdCrypte = Encryptor.EncryptPass(pwdCrypte);
+                    
                     utilisateur = db.UTILISATEURs.SingleOrDefault(x => x.userMail == model.userMail.Trim() && x.userMotdepasse == pwdCrypte);
                 }
 
@@ -47,17 +50,18 @@ namespace RedactApplication.Controllers
                 {
                     FormsAuthentication.SetAuthCookie(utilisateur.userId.ToString(), model.saveOnComputer);/*CREATION COOKIES*/
                     Session["mail"] = utilisateur.userMail;
-                    //Session["pass"] = pwdCrypte;
+                    Session["saveOnComputer"] = null;
                     Session["logoUrl"] = utilisateur.logoUrl;
                     Session["name"] = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(utilisateur.userNom);
                     Session["surname"] = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(utilisateur.userPrenom);
                     Session["role"] = (new Utilisateurs()).GetUtilisateurRoleToString(utilisateur.userId);
                     Session["UserId"] = utilisateur.userId;
+                    HttpCookie trigerAuths = new HttpCookie("trigerAuths");
                     if (model.saveOnComputer)
                     {
-                        HttpCookie trigerAuths = new HttpCookie("trigerAuths");
+                        Session["saveOnComputer"] = "1";
                         trigerAuths.Values["username"] = utilisateur.userMail;
-                        trigerAuths.Values["password"] = Encryptor.Decrypt(utilisateur.userMotdepasse);
+                        trigerAuths.Values["password"] = utilisateur.userMotdepasse;
                         trigerAuths.Expires = DateTime.Now.AddDays(Convert.ToInt32(ConfigurationManager.AppSettings["cookiesValidity"]));
                         Response.Cookies.Add(trigerAuths);
 
@@ -299,7 +303,7 @@ namespace RedactApplication.Controllers
         {
             HttpCookie trigerAuths = Request.Cookies["trigerAuths"];
             UTILISATEURViewModel user = new UTILISATEURViewModel();
-            if (trigerAuths != null)
+           if (trigerAuths != null && Session["saveOnComputer"] != null)
             {
                 user.userMail = trigerAuths["username"];
                 user.userMotdepasse = trigerAuths["password"];

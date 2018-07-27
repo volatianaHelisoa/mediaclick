@@ -814,7 +814,7 @@ namespace RedactApplication.Controllers
 
                 return View("GererUtilisateur", model);
             }
-            if (Regex.IsMatch(model.redactPhone, @"^\d{3}\d{2}\d{3}\d{2}$", RegexOptions.IgnoreCase) == false)
+            if (Regex.IsMatch(model.redactPhone, @"^\d{9}$", RegexOptions.IgnoreCase) == false)
             {
                 ViewBag.ErrorPhoneValidation = "Numéro non valide.";
                 model.ListTheme = val.GetListThemeItem();
@@ -971,7 +971,7 @@ namespace RedactApplication.Controllers
                 Session["userEditModif"] = model;
                 return RedirectToAction("EditUser", new { hash = idUser, error = "ErrorUserMailValidation" });
             }
-            if (Regex.IsMatch(model.redactPhone, @"^\d{3}\d{2}\d{3}\d{2}$", RegexOptions.IgnoreCase) == false)
+            if (Regex.IsMatch(model.redactPhone, @"^\d{9}$", RegexOptions.IgnoreCase) == false)
             {
                 Session["userEditModif"] = model;
                 ViewBag.ErrorPhoneValidation = "Numéro non valide.";
