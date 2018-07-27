@@ -961,7 +961,7 @@ namespace RedactApplication.Controllers
             //Recuperation de l'utilisateur
             UTILISATEUR user = db.UTILISATEURs.SingleOrDefault(x => x.userId == idUser);
 
-            if (selectedRole == null && currentrole != "2" && currentrole != "4")                
+            if (selectedRole == null && currentrole != "2" && currentrole != "4" && currentrole != "3")                
             {
                 Session["userEditModif"] = model;
                 return RedirectToAction("EditUser", new { hash = idUser, error = "ErrorRole" });

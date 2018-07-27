@@ -154,13 +154,13 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>05/24/2018 14:11:13</publishTime>
     </File>
     <File Include="bin/RedactApplication.dll">
-      <publishTime>07/27/2018 12:14:03</publishTime>
+      <publishTime>07/27/2018 14:44:47</publishTime>
     </File>
     <File Include="bin/RedactApplication.dll.config">
       <publishTime>07/24/2018 06:15:39</publishTime>
     </File>
     <File Include="bin/RedactApplication.pdb">
-      <publishTime>07/27/2018 12:14:03</publishTime>
+      <publishTime>07/27/2018 14:44:47</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>05/24/2018 14:11:16</publishTime>
@@ -1153,7 +1153,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>07/23/2018 11:17:04</publishTime>
     </File>
     <File Include="Views/Commandes/Create.cshtml">
-      <publishTime>07/24/2018 17:11:32</publishTime>
+      <publishTime>07/27/2018 14:40:27</publishTime>
     </File>
     <File Include="Views/Commandes/CreateCommandeConfirmation.cshtml">
       <publishTime>07/13/2018 14:54:59</publishTime>
@@ -1255,7 +1255,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>07/13/2018 14:55:02</publishTime>
     </File>
     <File Include="Views/Home/EditUser.cshtml">
-      <publishTime>07/27/2018 10:31:37</publishTime>
+      <publishTime>07/27/2018 14:41:42</publishTime>
     </File>
     <File Include="Views/Home/EditUserConfirmation.cshtml">
       <publishTime>07/13/2018 14:55:02</publishTime>
@@ -1270,7 +1270,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Views/Home/GererUtilisateur.cshtml">
-      <publishTime>07/27/2018 10:27:12</publishTime>
+      <publishTime>07/27/2018 14:41:27</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
       <publishTime>05/25/2018 16:43:20</publishTime>

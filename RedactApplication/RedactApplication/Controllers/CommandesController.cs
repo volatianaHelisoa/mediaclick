@@ -582,8 +582,9 @@ namespace RedactApplication.Controllers
                     commandeVm.listCommandeTypeId = (Guid)commande.commandeTypeId;
 
                 if (commande.commandeRedacteurId != null)
-                { commandeVm.listRedacteurId = (Guid)commande.commandeRedacteurId;
-                    commandeVm.ListOtherRedacteur = val.GetListRedacteurItem().Where(x=>x.Value != commande.commandeRedacteurId.ToString());
+                {
+                    commandeVm.listRedacteurId = (Guid)commande.commandeRedacteurId;
+                    commandeVm.ListOtherRedacteur = val.GetListRedacteurItem().Where(x => x.Value != commande.commandeRedacteurId.ToString());
                 }
 
                 if (commande.tagId != null)
@@ -593,42 +594,46 @@ namespace RedactApplication.Controllers
                     commandeVm.listStatutId = (Guid)commande.commandeStatutId;
 
                 string referenceur = val.GetUtilisateurReferenceur(commande.commandeReferenceurId).userNom;
-                    string cmdeType = val.GetCommandeType(commande.commandeTypeId).Type;
-                   
-                    string redacteur = (commande.commandeRedacteurId != Guid.Empty) ? val.GetUtilisateurReferenceur(commande.commandeRedacteurId).userNom:"";
-                    //string priorite = commande.ordrePriorite == "0" ? "Moyen" : "Haut";
-                    string projet = val.GetProjet(commande.commandeProjetId).projet_name;
-                 
-                    string statutcmde = (commande.commandeStatutId != Guid.Empty) ? val.GetStatutCommande(commande.commandeStatutId).statut_cmde:"";
+                string cmdeType = val.GetCommandeType(commande.commandeTypeId).Type;
 
-                    commandeVm.commandeId = commande.commandeId;
-                    commandeVm.commandeDemandeur = referenceur;
-                    commandeVm.date_cmde = commande.date_cmde;
-                    commandeVm.date_livraison = commande.date_livraison;
-                    commandeVm.commandeType = cmdeType;
-                    commandeVm.nombre_mots = commande.nombre_mots;
-                    commandeVm.mot_cle_pricipal = commande.mot_cle_pricipal;
-                    commandeVm.mot_cle_secondaire = commande.mot_cle_secondaire;
-                    commandeVm.consigne_references = commande.consigne_references;
-                    commandeVm.texte_ancrage = commande.texte_ancrage;
-              
-                    commandeVm.consigne_autres = commande.consigne_autres;
-                    commandeVm.etat_paiement = commande.etat_paiement;
-                    commandeVm.commandeRedacteur = redacteur;
-                    commandeVm.ordrePriorite = commande.ordrePriorite;
-                    commandeVm.balise_titre = commande.balise_titre;
-                    commandeVm.contenu_livre = commande.contenu_livre;
-                    commandeVm.projet = projet;
-                    commandeVm.thematique = theme;
-                commandeVm.site = commande.SITE.site_name;
-                commandeVm.tag = commande.TAG.type;
+                string redacteur = (commande.commandeRedacteurId != Guid.Empty) ? val.GetUtilisateurReferenceur(commande.commandeRedacteurId).userNom : "";
+                //string priorite = commande.ordrePriorite == "0" ? "Moyen" : "Haut";
+                string projet = val.GetProjet(commande.commandeProjetId).projet_name;
+
+                string statutcmde = (commande.commandeStatutId != Guid.Empty) ? val.GetStatutCommande(commande.commandeStatutId).statut_cmde : "";
+
+                commandeVm.commandeId = commande.commandeId;
+                commandeVm.commandeDemandeur = referenceur;
+                commandeVm.date_cmde = commande.date_cmde;
+                commandeVm.date_livraison = commande.date_livraison;
+                commandeVm.commandeType = cmdeType;
+                commandeVm.nombre_mots = commande.nombre_mots;
+                commandeVm.mot_cle_pricipal = commande.mot_cle_pricipal;
+                commandeVm.mot_cle_secondaire = commande.mot_cle_secondaire;
+                commandeVm.consigne_references = commande.consigne_references;
+                commandeVm.texte_ancrage = commande.texte_ancrage;
+
+                commandeVm.consigne_autres = commande.consigne_autres;
+                commandeVm.etat_paiement = commande.etat_paiement;
+                commandeVm.commandeRedacteur = redacteur;
+                commandeVm.ordrePriorite = commande.ordrePriorite;
+                commandeVm.balise_titre = commande.balise_titre;
+                commandeVm.contenu_livre = commande.contenu_livre;
+                commandeVm.projet = projet;
+                commandeVm.thematique = theme;
+
+                if (commande.SITE != null)
+                    commandeVm.site = commande.SITE.site_name;
+
+                if (commande.TAG != null)
+                    commandeVm.tag = commande.TAG.type;
                 commandeVm.statut_cmde = statutcmde;
-                    Session["cmdeEditModif"] = null;
+                Session["cmdeEditModif"] = null;
                 commandeVm.commandeREF = commande.commandeREF;
                 commandeVm.remarques = commande.remarques;
 
                 if (commandeVm.contenu_livre != null) ViewBag.ComptMetaContenu = commandeVm.contenu_livre.Length;
-                string contenu = (!string.IsNullOrEmpty( commande.contenu_livre))? Regex.Replace(commande.contenu_livre, "<.*?>", string.Empty):string.Empty;
+                string contenu = (!string.IsNullOrEmpty(commande.contenu_livre)) ? Regex.Replace(commande.contenu_livre, "<.*?>", string.Empty) : string.Empty;
 
                 if (CountWords(contenu) > 0)
                     ViewBag.ContentLength = CountWords(contenu);
