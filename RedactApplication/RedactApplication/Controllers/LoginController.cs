@@ -29,23 +29,20 @@ namespace RedactApplication.Controllers
                string pwdCrypte = model.userMotdepasse;
                 redactapplicationEntities db = new Models.redactapplicationEntities();
                 UTILISATEUR utilisateur = null;
-                if (model.saveOnComputer)
-                {
-                    HttpCookie trigerAuths = Request.Cookies["trigerAuths"];
-                    pwdCrypte = trigerAuths.Values["password"];
-                    utilisateur = db.UTILISATEURs.SingleOrDefault(x => x.userMail == model.userMail.Trim() && x.userMotdepasse == pwdCrypte);
+               
+                    HttpCookie currentTrigerAuths = Request.Cookies["trigerAuths"];
+                    if (currentTrigerAuths != null)
+                    {
+                        pwdCrypte = currentTrigerAuths.Values["password"];
+                        utilisateur = db.UTILISATEURs.SingleOrDefault(x => x.userMail == model.userMail.Trim() && x.userMotdepasse == pwdCrypte);
+                    }
                     if (utilisateur == null)
                     {
                         pwdCrypte = Encryptor.EncryptPass(model.userMotdepasse);
-
                         utilisateur = db.UTILISATEURs.SingleOrDefault(x => x.userMail == model.userMail.Trim() && x.userMotdepasse == pwdCrypte);
                     }
-                }
-                else
-                {
-                    pwdCrypte = Encryptor.EncryptPass(model.userMotdepasse);
-                    utilisateur = db.UTILISATEURs.SingleOrDefault(x => x.userMail == model.userMail.Trim() && x.userMotdepasse == pwdCrypte);
-                }
+                
+               
 
                 if (utilisateur != null)
                 {
@@ -312,7 +309,13 @@ namespace RedactApplication.Controllers
                 user.logoUrl = (string) Session["logoUrl"];
                 return View(user);
             }
-
+            else
+            {
+                user.saveOnComputer = false;
+                user.logoUrl = (string)Session["logoUrl"];
+                return View(user);
+            }
+          
             //if (!string.IsNullOrEmpty(HttpContext.User.Identity.Name))
             //{
             //    Guid userId = new Guid(HttpContext.User.Identity.Name);
