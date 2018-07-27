@@ -37,12 +37,13 @@ namespace RedactApplication.Controllers
                     if (utilisateur == null)
                     {
                         pwdCrypte = Encryptor.EncryptPass(model.userMotdepasse);
+
                         utilisateur = db.UTILISATEURs.SingleOrDefault(x => x.userMail == model.userMail.Trim() && x.userMotdepasse == pwdCrypte);
                     }
                 }
                 else
                 {
-                    
+                    pwdCrypte = Encryptor.EncryptPass(model.userMotdepasse);
                     utilisateur = db.UTILISATEURs.SingleOrDefault(x => x.userMail == model.userMail.Trim() && x.userMotdepasse == pwdCrypte);
                 }
 
