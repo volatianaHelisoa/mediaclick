@@ -29,10 +29,19 @@ namespace RedactApplication.Controllers
 
         public ActionResult ListTemplate()
         {
+            ViewBag.listeTemplateVm = new Templates().GetListTemplate();
 
             return View();
 
         }
+
+        public ActionResult ChoiceTemplate()
+        {
+            return View();
+
+        }
+        
+
         public ActionResult Theme1()
         {
             Session["TemplateName"] = "Theme1";
@@ -186,7 +195,10 @@ namespace RedactApplication.Controllers
             TEMPLATEViewModel templateVm = new TEMPLATEViewModel();
             templateVm.ListProjet = val.GetListProjetItem();
             templateVm.ListTheme = val.GetListThemeItem();
-          
+            var modeleId = Session["modeleId"];
+            MODELEViewModel modelVm = new MODELEViewModel();
+            modelVm = new Modeles().GetDetailsModele(Guid.Parse(modeleId.ToString()));
+            templateVm.url = modelVm.site_url;
             return View(templateVm);
         }
 
@@ -293,7 +305,7 @@ namespace RedactApplication.Controllers
                 pathHtml = "~/Themes/" + templateName;
 
                 if (i == 1)
-                    pathHtml = pathHtml + "/home.html";
+                    pathHtml = pathHtml + "/index.html";
                 else
                     pathHtml = pathHtml + "/page" + i + ".html";
 

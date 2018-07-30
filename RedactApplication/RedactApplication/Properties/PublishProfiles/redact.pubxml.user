@@ -154,13 +154,13 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>05/24/2018 14:11:13</publishTime>
     </File>
     <File Include="bin/RedactApplication.dll">
-      <publishTime>07/27/2018 14:44:47</publishTime>
+      <publishTime>07/30/2018 14:09:50</publishTime>
     </File>
     <File Include="bin/RedactApplication.dll.config">
       <publishTime>07/24/2018 06:15:39</publishTime>
     </File>
     <File Include="bin/RedactApplication.pdb">
-      <publishTime>07/27/2018 14:44:47</publishTime>
+      <publishTime>07/30/2018 14:09:50</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>05/24/2018 14:11:16</publishTime>
@@ -994,7 +994,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>07/19/2018 16:38:28</publishTime>
     </File>
     <File Include="Themes/Theme1/home.html">
-      <publishTime>07/20/2018 11:20:07</publishTime>
+      <publishTime>07/30/2018 11:12:50</publishTime>
     </File>
     <File Include="Themes/Theme1/img/credit taux zero.jpg">
       <publishTime>07/19/2018 16:59:20</publishTime>
@@ -1144,7 +1144,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>07/23/2018 08:57:56</publishTime>
     </File>
     <File Include="Views/Commandes/CommandeRefuser.cshtml">
-      <publishTime>07/17/2018 14:49:36</publishTime>
+      <publishTime>07/27/2018 17:30:50</publishTime>
     </File>
     <File Include="Views/Commandes/CommandeUpdateNote.cshtml">
       <publishTime>07/23/2018 11:17:04</publishTime>
@@ -1201,7 +1201,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>07/13/2018 14:55:02</publishTime>
     </File>
     <File Include="Views/Commandes/ListCommandes.cshtml">
-      <publishTime>07/17/2018 14:33:32</publishTime>
+      <publishTime>07/27/2018 15:20:04</publishTime>
     </File>
     <File Include="Views/Commandes/RelanceCommandeConfirmation.cshtml">
       <publishTime>07/17/2018 14:33:32</publishTime>
@@ -1225,7 +1225,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>07/03/2018 17:07:02</publishTime>
     </File>
     <File Include="Views/Facture/ListFacture.cshtml">
-      <publishTime>07/17/2018 14:33:32</publishTime>
+      <publishTime>07/27/2018 15:27:08</publishTime>
     </File>
     <File Include="Views/Home/About.cshtml">
       <publishTime>07/13/2018 14:55:02</publishTime>
@@ -1276,7 +1276,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>05/25/2018 16:43:20</publishTime>
     </File>
     <File Include="Views/Home/ListeUser.cshtml">
-      <publishTime>07/17/2018 14:33:32</publishTime>
+      <publishTime>07/27/2018 15:27:01</publishTime>
     </File>
     <File Include="Views/Home/sendMailRecovery.cshtml">
       <publishTime>07/13/2018 14:55:00</publishTime>
@@ -1371,11 +1371,20 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
     <File Include="Views/Shared/_MessagesList.cshtml">
       <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
+    <File Include="Views/Template/ChoiceTemplate.cshtml">
+      <publishTime>07/27/2018 15:42:07</publishTime>
+    </File>
     <File Include="Views/Template/CreateTemplate.cshtml">
       <publishTime>07/18/2018 16:18:59</publishTime>
     </File>
     <File Include="Views/Template/CreateTemplateConfirmation.cshtml">
       <publishTime>07/18/2018 11:33:57</publishTime>
+    </File>
+    <File Include="Views/Template/DeleteTemplate.cshtml">
+      <publishTime>07/27/2018 17:07:13</publishTime>
+    </File>
+    <File Include="Views/Template/ErrorNoSelection.cshtml">
+      <publishTime>07/27/2018 17:28:49</publishTime>
     </File>
     <File Include="Views/Template/Home.cshtml">
       <publishTime>07/20/2018 10:03:44</publishTime>
@@ -1387,16 +1396,16 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>07/17/2018 17:03:06</publishTime>
     </File>
     <File Include="Views/Template/ListTemplate.cshtml">
-      <publishTime>07/17/2018 15:37:44</publishTime>
+      <publishTime>07/30/2018 11:34:24</publishTime>
     </File>
     <File Include="Views/Template/Menu2.cshtml">
       <publishTime>07/19/2018 12:15:35</publishTime>
     </File>
     <File Include="Views/Template/Theme1.cshtml">
-      <publishTime>07/19/2018 17:30:57</publishTime>
+      <publishTime>07/30/2018 11:54:17</publishTime>
     </File>
     <File Include="Views/Template/Theme2.cshtml">
-      <publishTime>07/20/2018 10:09:40</publishTime>
+      <publishTime>07/30/2018 12:00:45</publishTime>
     </File>
     <File Include="Views/Template/Theme3.cshtml">
       <publishTime>07/17/2018 14:33:30</publishTime>

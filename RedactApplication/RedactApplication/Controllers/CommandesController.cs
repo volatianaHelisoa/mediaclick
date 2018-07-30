@@ -1144,11 +1144,11 @@ namespace RedactApplication.Controllers
                     commande.commandeStatutId = status.statutCommandeId;
                     commande.remarques = "Refus du redacteur :" + model.remarques;
                 }
-                db.SaveChanges();
+                isSendMail = db.SaveChanges() > 0 ;
              
                  mailbody = "Votre commande " + commande.commandeREF + " a été refusé par le rédacteur le " + DateTime.Now.ToString("dd/MM/yyyy") + ", vous pouvez  contacter " + commande.REDACTEUR.userNom.ToUpper() +" pour plus de détails.";
-               // string mailobject = "Media click App - Refus de la commande";
-               //  isSendMail = SendeMailNotification(commande, mailbody, mailobject);
+             
+            
             }
             else
             {

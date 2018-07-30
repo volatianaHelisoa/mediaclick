@@ -695,6 +695,9 @@
     <Content Include="Views\Shared\LayoutTemplate.cshtml" />
     <Content Include="Views\Template\CreateTemplateConfirmation.cshtml" />
     <Content Include="Views\Template\Menu2.cshtml" />
+    <Content Include="Views\Template\ChoiceTemplate.cshtml" />
+    <Content Include="Views\Template\DeleteTemplate.cshtml" />
+    <Content Include="Views\Template\ErrorNoSelection.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

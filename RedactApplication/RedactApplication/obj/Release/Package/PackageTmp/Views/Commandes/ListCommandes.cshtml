@@ -31,7 +31,7 @@
         <div id="single-container">
             <div class="onglets ease-in-out">
                 <ul>
-                    @if (@Session["role"] != null && @Session["role"].ToString() != "2")
+                    @if (@Session["role"] != null && @Session["role"].ToString() != "2"  && @Session["role"].ToString() != "5")
                     {
                         <li> @Html.ActionLink("Utilisateurs", "ListeUser", new { controller = "Home" }) </li>
                     }

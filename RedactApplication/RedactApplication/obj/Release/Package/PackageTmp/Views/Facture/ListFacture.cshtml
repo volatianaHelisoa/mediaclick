@@ -24,7 +24,7 @@
     </script>
 
 }
-@if (Session["name"] != null)
+@if (Session["name"] != null && @Session["role"] != null && @Session["role"].ToString() != "5")
 {
     <main id="wrapper">
         <div id="single-container">
@@ -39,7 +39,7 @@
                     <li>@Html.ActionLink("Factures", "ListFacture", new { controller = "Facture" }, new { @class = "active" })</li>
                     @if (@Session["role"] != null && @Session["role"].ToString() != "2")
                     {
-                        <li>@Html.ActionLink("Templates", "ListTemplate", new { controller = "Template" })</li>
+                        <li>@Html.ActionLink("Template", "ListTemplate", new { controller = "Template" })</li>
                     }
                     </ul>
             </div>

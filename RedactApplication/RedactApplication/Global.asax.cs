@@ -96,6 +96,10 @@ namespace RedactApplication
                     case 2:
                         temp.Add("Redacteur");
                         break;
+
+                    case 4:
+                        temp.Add("Template");
+                        break;
                     default:
                         return null;
                 }
@@ -131,24 +135,13 @@ namespace RedactApplication
                             if (userRole != null)
                             {
                                 int id = userRole.roleId;
-                                if (userRole.roleNom.Contains("administrateur") || userRole.roleNom.Contains("manager utilisateur") || userRole.roleNom.Contains("referenceur"))
+                                if (id == 4 || id == 3 || id == 2 || id == 5)
                                 {
                                     access = LoadAccess(0);
                                 }
                                
-                                else if (userRole.roleNom.Contains("redacteur"))
-                                {
-                                    access = LoadAccess(0);
-                                }
-                                //if (id == 4)
-                                //{
-                                //    access = LoadAccess(2);
-                                //    List<string> temp = LoadAccess(1);
-                                //    foreach (var val in temp)
-                                //    {
-                                //        access.Add(val);
-                                //    }
-                                //}
+                               
+                               
                             }
 
                             if (access != null)

@@ -8,6 +8,39 @@ namespace RedactApplication.Models
 {
     public class Templates
     {
+
+        public List<TEMPLATEViewModel> GetListTemplate()
+        {
+            redactapplicationEntities db = new redactapplicationEntities();
+            var req = db.TEMPLATEs.ToList();
+            List<TEMPLATEViewModel> listeTemplate = new List<TEMPLATEViewModel>();
+
+            foreach (var template in req)
+            {
+
+                listeTemplate.Add(new TEMPLATEViewModel()
+                {
+                    templateId = template.templateId,
+                    dateCreation = template.dateCreation,
+                    projetId = template.projetId,
+                    PROJET = template.PROJET,
+                    THEME = template.THEME,
+                    themeId = template.themeId,
+                    url = template.url,
+                    modeleId = template.modeleId,
+                    MODELE = template.MODELE,
+                    ftpUser = template.ftpUser,
+                    ftpPassword = template.ftpPassword,
+                    userId = template.userId,
+                    UTILISATEUR = template.UTILISATEUR,
+                    html = template.html
+                });
+
+            }
+            return listeTemplate.OrderBy(x => x.dateCreation).ToList();
+
+        }
+
         public IEnumerable<SelectListItem> GetListProjetItem()
         {
             using (var context = new redactapplicationEntities())

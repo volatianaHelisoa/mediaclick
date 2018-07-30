@@ -9,7 +9,7 @@
 
     <script>
         jQuery(document).ready(function () {
-            jQuery("#menu1").hide();
+            
             jQuery("#menu2").hide();
             jQuery("#menu3").hide();
             jQuery("#menu4").hide();
@@ -17,7 +17,7 @@
 
 
             $('#nb-menu').change(function () {
-                jQuery("#menu1").hide();
+               
                 jQuery("#menu2").hide();
                 jQuery("#menu3").hide();
                 jQuery("#menu4").hide();
@@ -81,8 +81,7 @@
                         <label for="" class="col-50 pull-left">
                             Nombre de menu
                             <select id="nb-menu" name="nbmenu">
-                                <option value="0">Selectionner le nombre de menu</option>
-                                <option value="1">1</option>
+                                <option value="0">Selectionner le nombre de menu</option>                            
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                                 <option value="4">4</option>
@@ -92,10 +91,10 @@
 
                         <!-- Navigation onglets -->
                         <ul class="tab-nav clearfix">
-                            <li><a href="#menu1">Menu 1</a></li>
-                            <li><a href="#menu2">Menu 2</a></li>
-                            <li><a href="#menu3">Menu 3</a></li>
-                            <li><a href="#menu4">Menu 4</a></li>
+                            <li><a href="#menu1">Accueil</a></li>
+                            <li><a href="#menu2">Menu 1</a></li>
+                            <li><a href="#menu3">Menu 2</a></li>
+                            <li><a href="#menu4">Menu 3</a></li>
                         </ul>
                         <!-- Menu 1 -->
                         <div class="item" id="menu1">
@@ -103,8 +102,8 @@
                                 <div class="clearfix">
                                     <div class="col-md-8">
                                         <label for="" class="col-100">
-                                            Titre menu
-                                            @Html.TextBoxFor(x => x.menu1_titre, new { placeholder = "Titre du menu 1" })
+                                            Titre accueil
+                                            @Html.TextBoxFor(x => x.menu1_titre, new { placeholder = "Titre accueil" })
                                         </label>
                                         <label for="" class="col-100">
                                             Titre paragraphe 1
@@ -269,7 +268,7 @@
                                     <div class="col-md-8">
                                         <label for="" class="col-100">
                                             Titre menu
-                                            @Html.TextBoxFor(x => x.menu2_titre, new { placeholder = "Titre du menu 4" })
+                                            @Html.TextBoxFor(x => x.menu4_titre, new { placeholder = "Titre du menu 4" })
                                         </label>
                                         <label for="" class="col-100">
                                             Titre paragraphe 1

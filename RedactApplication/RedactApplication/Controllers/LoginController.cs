@@ -82,11 +82,21 @@ namespace RedactApplication.Controllers
                             });
                         }
 
-                        if (data[0] == 3 || data[0] == 4 || data[0] == 5 || data[0] == 1)
+                        if (data[0] == 3 || data[0] == 4 || data[0] == 1)
                         {
                             return RedirectToRoute("Home", new RouteValueDictionary {
                                     { "controller", "Home" },
                                     { "action", "ListeUser" },
+                                    { "numpage",1 },
+                                    { "nbrow", 10 }
+                                });
+
+                        }
+                        if (data[0] == 5 )
+                        {
+                            return RedirectToRoute("Home", new RouteValueDictionary {
+                                    { "controller", "Template" },
+                                    { "action", "ListTemplate" },
                                     { "numpage",1 },
                                     { "nbrow", 10 }
                                 });
