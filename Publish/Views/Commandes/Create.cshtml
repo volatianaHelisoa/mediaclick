@@ -38,7 +38,7 @@
 
     <link rel="stylesheet" href="~/Content/css/elements/commandes.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-autocomplete/1.0.7/jquery.auto-complete.min.css">
-   
+
     <script type="text/javascript">
         jQuery(document).ready(function () {
             var date = new Date();
@@ -80,13 +80,13 @@
             });
 
             $("#SelectItemRedacteur").change(function () {
-              
+
                 var selectItemRedacteur = $(this).val();
                 $("#selectedRedact").text(selectItemRedacteur);
                 $.getJSON("../Commandes/LoadOtherRedacteur", { redact: selectItemRedacteur },
                     function (data) {
                         var select = $("#SelectItemOtherRedacteur");
-                      
+
                         select.empty();
                         select.append($('<option/>', {
                             value: 0,
@@ -101,7 +101,7 @@
                     });
             });
 
-            
+
 
             $("#tag").autocomplete({
 
@@ -172,7 +172,10 @@
                 },
                 minLength: 1
             });
+         
 
+          
+          
 
         });
 
@@ -181,7 +184,7 @@
     </script>
 }
 
-@if (Session["name"] != null)
+@if (Session["name"] != null && @Session["role"] != null && @Session["role"].ToString() != "5")
 {
     <main id="wrapper">
         <div id="single-container">
@@ -193,14 +196,14 @@
                     }
                     <li>@Html.ActionLink("Commandes", "ListCommandes", new { controller = "Commandes" }, new { @class = "active" })</li>
                     <li>@Html.ActionLink("Factures", "ListFacture", new { controller = "Facture" })</li>
-                    <li>@Html.ActionLink("Templates", "ListTemplate", new { controller = "Template" })</li>
+
                 </ul>
             </div>
             <div class="card back-office with-shadow">
                 <div class="head">
                     <i class="icon icon-create-command"></i>
                     <h1>Créer commande</h1>
-                    <p>Veuillez remplir les champs Requis (*) et appuyez sur Enregistrer pour créer une commande</p>
+                    <p class="erreur">Veuillez remplir les champs Requis (*) et appuyez sur Enregistrer pour créer une commande</p>
 
                     @if (ViewBag.ErrorRedacteur != null)
                     {
@@ -216,7 +219,13 @@
                         <label for="" class="col-50 pull-left">
                             Projet (*)
                             @Html.DropDownListFor(x => Model.listprojetId, new SelectList(Model.ListProjet, "Value", "Text"), htmlAttributes: new { @id = "SelectItemProjet", @required = true })
+                            @if (@Session["role"] != null && @Session["role"].ToString() == "4")
+                            {
+                               
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createprojet">Nouveau projet</button>
+                            }
                         </label>
+
                         <label for="" class="col-50 pull-right">
                             Thématique (*)
                             @Html.DropDownListFor(x => Model.listThemeId, new SelectList(Model.ListTheme, "Value", "Text"), htmlAttributes: new { id = "SelectItemTheme", @required = true })
@@ -249,7 +258,7 @@
                             @Html.TextBoxFor(x => x.mot_cle_pricipal, new { @required = true, @name = "name" })
                         </label>
                         <label for="" class="col-50 pull-right">
-                            Mot clé secondaire 
+                            Mot clé secondaire
                             @Html.TextBoxFor(x => x.mot_cle_secondaire)
                         </label>
                         <label for="" class="col-50 pull-left">
@@ -267,11 +276,11 @@
                         </div>
 
                         <label for="" class="col-50 pull-left">
-                            Références 
+                            Références
                             @Html.TextAreaFor(x => x.consigne_references)
                         </label>
                         <label for="" class="col-50 pull-right">
-                            Autres 
+                            Autres
                             @Html.TextAreaFor(x => x.consigne_autres)
                         </label>
 
@@ -317,21 +326,17 @@
             <div id="volumePopup" style="" class="modal modal-popup in" aria-hidden="false">
                 <div class="flex-content flex-jcenter-acenter flex-col pop-up">
                     <div class="popup-container with-shadow">
-                        <div class="head gradient-blue">
-                            <h1>Attention !</h1>
-                        </div>
                         <div class="content-section text-centered icon-bottom">
-                            <i class="pop-icon green-bg"></i>
-                            <p><i class="fa fa-info-circle"></i>Le volume journalier pour le rédacteur <span id="selectedRedact"></span> est atteint , votre commande peut être en retard. Confirmer la commande ou choisir un autre redacteur. </p>
+                            <h2>Attention !</h2>
+                            <p>Le volume journalier pour le rédacteur <span id="selectedRedact"></span> est atteint , votre commande peut être en retard. Confirmer la commande, choisir un autre redacteur ou bien <strong data-dismiss="modal">modifier la commande</strong>. </p>
                             <label>
                                 Choisir Rédacteur
                                 @Html.DropDownListFor(x => Model.listOtherRedacteurId, new SelectList(Model.ListOtherRedacteur, "Value", "Text"), htmlAttributes: new { id = "SelectItemOtherRedacteur" })
                             </label>
-                            <section class="clearfix submit-area">
-
-                                <button type="submit" class="btn btn-warning" onclick="@("window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "Choisir" }) + "'");">Choisir ce rédacteur</button>
-                                <input type="submit" value="Confirmer" class="btn btn-success" />
-                                <button type="button" class="btn btn-success" data-dismiss="modal">Editer</button>
+                            <section>
+                                <button type="submit" class="btn btn-warning" onclick="@("window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "Choisir" }) + "'");">Changer rédacteur</button>
+                                <input type="submit" value="Rédacteur actuel" class="btn btn-success" />
+                                <!-- <button type="button" class="btn btn-success" >Editer</button> -->
                             </section>
                         </div>
                     </div>
@@ -342,7 +347,32 @@
     }
 
 
+            <div id="createprojet"  class="modal modal-popup">
+                <div class="flex-content flex-jcenter-acenter flex-col pop-up">
+                    <div class="popup-container with-shadow">
+                        <div class="head gradient-blue">
+                            <h1>Nouveau projet</h1>
+                        </div>
+                        <div class="content-section text-centered icon-bottom">
 
+                            @using (Html.BeginForm("CreateProjet", "Commandes", FormMethod.Post))
+                            {
+                              
+                            <label for="" class="col-100 ">
+                                Nom du projet(*)
+                                @Html.TextBoxFor(x => x.projet, new { @required = true })
+                            </label>
+
+                                <input type="submit" value="Enregistrer" class="btn btn-primary ">
+                                @Html.ActionLink("Annuler", "Create", new { controller = "Commandes" }, new { @class = "btn btn-warning" })
+                            }
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
 
 
     </main>
@@ -351,5 +381,3 @@ else
 { Response.Redirect("~/Login/Accueil"); }
 
 
-
-   

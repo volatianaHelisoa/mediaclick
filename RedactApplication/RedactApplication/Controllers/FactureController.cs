@@ -219,27 +219,33 @@ namespace RedactApplication.Controllers
                 newFacture.dateEmission = DateTime.Now;
                 var commandesFacturer = db.COMMANDEs.Where(x => x.date_livraison >= model.dateDebut &&
                                                                  x.date_livraison <= model.dateFin && (x.STATUT_COMMANDE != null &&
-                                                                 x.STATUT_COMMANDE.statut_cmde.Contains("Validé"))).ToList();
+                                                                 (x.STATUT_COMMANDE.statut_cmde.Contains("Validé") || x.STATUT_COMMANDE.statut_cmde.Contains("Refusé")))).ToList();
                 if (commandesFacturer.Count() > 0)
                 {
                     var redacteur = db.UTILISATEURs.SingleOrDefault(x => x.userId == model.listRedacteurId);
-                    var volume = commandesFacturer.Sum(x => x.nombre_mots);
-                    double montant = Convert.ToDouble(volume.ToString()) * (Convert.ToDouble(redacteur.redactTarif));
+                    
+                    double montant = 0;
+                    Guid factureId = Guid.NewGuid();
+
+
+                    foreach (var commande in commandesFacturer)
+                    {
+                        if(commande.STATUT_COMMANDE.statut_cmde.Contains("Validé"))
+                            montant += Convert.ToDouble(commande.nombre_mots) * (Convert.ToDouble(redacteur.redactTarif));
+                        
+                        commande.factureId = factureId;
+                        commande.REDACTEUR.redactTarif = String.Format("{0:N0}", commande.REDACTEUR.redactTarif);
+                       
+                    }
+
                     newFacture.montant = String.Format("{0:N0}", montant);
                     newFacture.etat = false;
                     newFacture.redacteurId = model.listRedacteurId;
                     newFacture.createurId = _userId;
-                    newFacture.factureId = Guid.NewGuid();
+                    newFacture.factureId = factureId;
                     int maxRef = (db.FACTUREs.ToList().Count != 0) ? db.FACTUREs.Max(u => u.factureNumero) : 0;
                     newFacture.factureNumero = maxRef + 1;
                     db.FACTUREs.Add(newFacture);
-
-                    foreach (var commande in commandesFacturer)
-                    {
-                        commande.factureId = newFacture.factureId;
-                        commande.REDACTEUR.redactTarif = String.Format("{0:N0}", commande.REDACTEUR.redactTarif);
-                       
-                    }
 
                     int res = db.SaveChanges();
                     if (res > 0)

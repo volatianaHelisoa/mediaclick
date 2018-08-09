@@ -1,6 +1,7 @@
 ﻿using RedactApplication.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -8,6 +9,7 @@ using System.Net.Http;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace RedactApplication.Controllers
 {
@@ -66,6 +68,8 @@ namespace RedactApplication.Controllers
         }
 
         [HttpPost]
+        [Authorize]
+        [ValidateInput(false)]
         public ActionResult SaveTheme(MODELEViewModel  model, HttpPostedFileBase logoUrl, 
             HttpPostedFileBase menu1_paragraphe1_photoUrl, HttpPostedFileBase menu1_paragraphe2_photoUrl,
             HttpPostedFileBase menu2_paragraphe1_photoUrl, HttpPostedFileBase menu2_paragraphe2_photoUrl,
@@ -291,6 +295,91 @@ namespace RedactApplication.Controllers
             
             }
         }
+
+        /// <summary>
+        /// Charge une liste d'utilisateur à supprimer dans la base de données.
+        /// </summary>
+        /// <param name="hash">List d'id d'utilisateur</param>
+        /// <returns>bool</returns>
+        [Authorize]
+        [HttpPost]
+        public bool SelecteAllTemplateToDelete(string hash)
+        {
+            try
+            {
+                // Récupère la liste des id d'utilisateur                
+                Session["ListTemplateToDelete"] = hash;
+                if (Session["ListTemplateToDelete"] != null)
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Supprime une liste Template dans la base de données.
+        /// </summary>
+        /// <returns>View</returns>
+        [Authorize]
+        public ActionResult DeleteAllTemplateSelected()
+        {
+            Guid userSession = new Guid(HttpContext.User.Identity.Name);
+
+
+            try
+            {
+                bool unique = true;
+                if (Session["ListTemplateToDelete"] != null)
+                {
+                    string hash = Session["ListTemplateToDelete"].ToString();
+                    List<Guid> listIdTemplate = new List<Guid>();
+                    if (!string.IsNullOrEmpty(hash))
+                    {
+                        if (!hash.Contains(','))
+                        {
+                            listIdTemplate.Add(Guid.Parse(hash));
+                        }
+                        else
+                        {
+                            foreach (var id in (hash).Split(','))
+                            {
+                                listIdTemplate.Add(Guid.Parse(id));
+                            }
+                            unique = false;
+                        }
+                    }
+                    if (listIdTemplate.Count != 0)
+                    {
+                        redactapplicationEntities db = new Models.redactapplicationEntities();
+                        foreach (var templateId in listIdTemplate)
+                        {
+                            //suppression des commandes
+                            TEMPLATE template = db.TEMPLATEs.SingleOrDefault(x => x.templateId == templateId);
+                            if (template != null) db.TEMPLATEs.Remove(template);
+                        }
+                        db.SaveChanges();
+
+                        return View(unique ? "DeleteTemplateConfirmation" : "DeteleAllTemplateConfirmation");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+            return RedirectToRoute("Home", new RouteValueDictionary {
+                { "controller", "Template" },
+                { "action", "ListTemplate" }
+            });
+        }
+
+
+
 
         private void CreateFiles(int nb_menu, string menu1_html)
         {

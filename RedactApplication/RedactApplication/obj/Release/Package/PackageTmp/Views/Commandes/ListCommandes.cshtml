@@ -24,55 +24,24 @@
 
 }
 
-@if (Session["name"] != null)
+@if (Session["name"] != null && @Session["role"] != null  && @Session["role"].ToString() != "5")
 {
 
     <main id="wrapper">
         <div id="single-container">
             <div class="onglets ease-in-out">
                 <ul>
-                    @if (@Session["role"] != null && @Session["role"].ToString() != "2"  && @Session["role"].ToString() != "5")
+                    <li> @Html.ActionLink("Dashboard", "Dashboard", new { controller = "Home" }) </li>
+                    @if (@Session["role"] != null && @Session["role"].ToString() != "2" && @Session["role"].ToString() != "5")
                     {
                         <li> @Html.ActionLink("Utilisateurs", "ListeUser", new { controller = "Home" }) </li>
                     }
-                    <li>@Html.ActionLink("Commandes", "ListCommandes", new { controller = "Commandes" }, new { @class = "active" })</li>
+                    <li>@Html.ActionLink("Commandes", "ListCommandes", new { controller = "Commandes", statut = "all" }, new { @class = "active" })</li>
                     <li>@Html.ActionLink("Factures", "ListFacture", new { controller = "Facture" })</li>
-                    @if (@Session["role"] != null && @Session["role"].ToString() != "2")
-                    {
-                        <li>@Html.ActionLink("Templates", "ListTemplate", new { controller = "Template" })</li>
-                    }
+
                 </ul>
             </div>
-            <div class="head-list">
-                @if (@Session["role"] != null && @Session["role"].ToString() == "2")
-                {
-                    <div class="resume with-shadow">
-                        <ul>
-                            <li><a onclick="@(" window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "ListCommandes" }) + "' ");">Commande en cours : <strong>@ViewBag.commandesEnCours</strong></a></li>
-                            <li><a onclick="@(" window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "ListCommandes" }) + "' ");">Commande en attente : <strong>@ViewBag.commandesEnAttente</strong></a></li>                            
-                            <li><a onclick="@(" window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "ListCommandes" }) + "' ");">Livraison en retard : <strong>@ViewBag.commandesEnRetard</strong></a></li>
-                            <li><a onclick="@(" window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "ListCommandes" }) + "' ");">Commande livrée : <strong>@ViewBag.commandesLivrer</strong></a></li>
-                            <li><a onclick="@(" window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "ListCommandes" }) + "' ");">Commande à facturer : <strong>@ViewBag.commandesFacturer</strong></a></li>
-                        </ul>
-                    </div>
-                }
-                @if (@Session["role"] != null && @Session["role"].ToString() != "2")
-                {
-                    <div class="resume with-shadow">
-                        <ul>
-                            <li><a onclick="@(" window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "ListCommandes" }) + "' ");"></a>Livraisons reçues : <strong>@ViewBag.commandesLivrer</strong></li>
-                            <li><a onclick="@(" window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "ListCommandes" }) + "' ");"></a>Livraison en retard : <strong>@ViewBag.commandesEnRetard</strong></li>
-                            <li><a onclick="@(" window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "ListCommandes" }) + "' ");"></a>Commande refuser par le redacteur : <strong>@ViewBag.commandesRefuser</strong></li>
-                            <li><a onclick="@(" window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "ListCommandes" }) + "' ");"></a>Commande en attente : <strong>@ViewBag.commandesEnAttente</strong></li>
-                            <li><a onclick="@(" window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "ListCommandes" }) + "' ");"></a>Redaction en cours : <strong>@ViewBag.commandesEnCours</strong></li>
-                            <li><a onclick="@(" window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "ListCommandes" }) + "' ");">Commande annulée : <strong>@ViewBag.commandesAnnuler</strong></a></li>
-                            
-                            <li>Commande à facturer : @ViewBag.commandesFacturer</li>
-                        </ul>
-                    </div>
-                }
-
-            </div>
+            
             <div class="card back-office with-shadow">
                 <div class="action-bar flex-content flex-jsbet-acenter">
                     <div>
@@ -89,7 +58,7 @@
 
                     </div>
                     <div class="submit-area">
-                       
+
                         @if (@Session["role"] != null && @Session["role"].ToString() != "2")
                         {
                             <input type="button" value="Créer commande" class="btn btn-success btn-medium" onclick="@(" window.location.href='" + @Url.RouteUrl("Home", new { controller = "Commandes", action = "Create" }) + "' ");">
@@ -106,7 +75,7 @@
                             <button class="btn btn-small" onclick="DeleteAllCommandeSelected(@ViewBag.nbrow)"><i class="fa fa-trash"></i> Supprimer la sélection</button>
                         </div>
                     }
-                    </div>
+                </div>
                 <table id="myDataTable">
                     <thead>
                         <tr>
@@ -137,63 +106,63 @@
 
                             foreach (var item in ViewBag.listeCommandeVms)
                             {
-                        <tr>
-                            @if (@Session["role"] != null && @Session["role"].ToString() != "2")
-                            {
-                                <td><input type="checkbox" class="checkbox" name="selectedCmde" value="@item.commandeId" /></td>
-                            }
-                            <td>@item.commandeREF</td>
-                            <td>@item.commandeDemandeur</td>
-                            <td>@item.commandeRedacteur</td>
-                            <td>@item.date_cmde.ToShortDateString()</td>
+                                <tr>
+                                    @if (@Session["role"] != null && @Session["role"].ToString() != "2")
+                                    {
+                                        <td><input type="checkbox" class="checkbox" name="selectedCmde" value="@item.commandeId" /></td>
+                                    }
+                                    <td>@item.commandeREF</td>
+                                    <td>@item.commandeDemandeur</td>
+                                    <td>@item.commandeRedacteur</td>
+                                    <td>@item.date_cmde.ToShortDateString()</td>
 
-                            <td>@item.date_livraison.ToShortDateString()</td>
-                            <td>@item.projet </td>
-                            <td>@item.site</td>
-                            <td>@item.thematique</td>
-                            <td>@item.commandeType</td>
-                            <td>@item.tag</td>
-                            <td>@item.statut_cmde</td>
+                                    <td>@item.date_livraison.ToShortDateString()</td>
+                                    <td>@item.projet </td>
+                                    <td>@item.site</td>
+                                    <td>@item.thematique</td>
+                                    <td>@item.commandeType</td>
+                                    <td>@item.tag</td>
+                                    <td>@item.statut_cmde</td>
 
-                            @if (@item.etat_paiement == true)
-                            {
-                                <td> Payé</td>
-                            }
-                            else
-                            {
-                                <td>Non payé</td>
-                            }
+                                    @if (@item.etat_paiement == true)
+                                    {
+                                        <td> Payé</td>
+                                    }
+                                    else
+                                    {
+                                        <td>Non payé</td>
+                                    }
 
-                            <td class="col-option">
-                                <!--ViewBag.numpage/ViewBag.nbrow-->
-                                <div class="item">
-                                    <div class="option">
-                                        @if (@Session["role"] != null && @Session["role"].ToString() == "2")
-                                        {
-                                            <a href="~/Commandes/DetailsCommandeAValider/@item.commandeId" title="Détails"><i class="fa fa-eye"></i></a>
-                                        }
-                                        else
-                                        {
-                                            <a href="~/Commandes/DetailsCommande/@item.commandeId" title="Détails"><i class="fa fa-eye"></i></a>
-                                        }
+                                    <td class="col-option">
+                                        <!--ViewBag.numpage/ViewBag.nbrow-->
+                                        <div class="item">
+                                            <div class="option">
+                                                @if (@Session["role"] != null && @Session["role"].ToString() == "2")
+                                                {
+                                                    <a href="~/Commandes/DetailsCommandeAValider/@item.commandeId" title="Détails"><i class="fa fa-eye"></i></a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="~/Commandes/DetailsCommande/@item.commandeId" title="Détails"><i class="fa fa-eye"></i></a>
+                                                }
 
-                                        @if ((@item.statut_cmde == "En cours" || @item.statut_cmde == "A corriger") && @Session["role"] != null && @Session["role"].ToString() == "2")
-                                        {
-                                            <a href="~/Commandes/Edit/@item.commandeId" title="Editer"><i class="fa fa-edit"></i></a>
-                                        }
-                                        @if (@Session["role"] != null && @Session["role"].ToString() != "2" && (@item.statut_cmde == "Validé" || @item.statut_cmde == "Refusé" || @item.statut_cmde == "Annulé"))
-                                        {
-                                            <a onclick="DeleteCommandeClick('@item.commandeId')" title="Supprimer"><i class="fa fa-trash"></i></a>
-                                        }
-                                        @if (Session["role"] != null && Session["role"].ToString() != "2" && (@item.statut_cmde == "En cours" || @item.statut_cmde == "A corriger" || @item.statut_cmde == "En attente"))
-                                        {
+                                                @if ((@item.statut_cmde == "En cours" || @item.statut_cmde == "A corriger") && @Session["role"] != null && @Session["role"].ToString() == "2")
+                                                {
+                                                    <a href="~/Commandes/Edit/@item.commandeId" title="Editer"><i class="fa fa-edit"></i></a>
+                                                }
+                                                @if (@Session["role"] != null && @Session["role"].ToString() != "2" && (@item.statut_cmde == "Validé" || @item.statut_cmde == "Refusé" || @item.statut_cmde == "Annulé"))
+                                                {
+                                                    <a onclick="DeleteCommandeClick('@item.commandeId')" title="Supprimer"><i class="fa fa-trash"></i></a>
+                                                }
+                                                @if (Session["role"] != null && Session["role"].ToString() != "2" && (@item.statut_cmde == "En cours" || @item.statut_cmde == "A corriger" || @item.statut_cmde == "En attente"))
+                                                {
 
-                                            <a href="~/Commandes/CommandeCancel/@item.commandeId" title="Annuler"><i class="fa fa-undo"></i></a>
-                                        }
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
+                                                    <a href="~/Commandes/CommandeCancel/@item.commandeId" title="Annuler"><i class="fa fa-undo"></i></a>
+                                                }
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
 
                             }
                         }
@@ -212,7 +181,7 @@
         <div id="deleteAllUserPoPup" style="display: none" class="modal-popup">
             @Html.Partial("~/Views/Commandes/DeleteCommande.cshtml")
         </div>
-        
+
     </main>
 }
 else

@@ -21,11 +21,11 @@
                 <div id="topbar" class="clearfix">
                     <a href="#" class="t-logo theme">
                         <img src="@Model.logoUrl.Trim()" alt="@Model.logoUrl.Trim()" srcset="">
-                      
+
                     </a>
                     <nav class="menu">
                         <ul>
-                            <li class="current"><a href="home.html">@Model.menu1_titre</a></li>
+                            <li class="current"><a href="index.html">@Model.menu1_titre</a></li>
                             @if (@Model.menu2_titre != null)
                             {
                                 <li><a href="page2.html">@Model.menu2_titre</a></li>
@@ -339,6 +339,63 @@
 
 
 
+@if (@Session["TemplateName"] != null && @Session["TemplateName"].ToString() == "Theme3")
+
+{
+    <header>
+        <div id="topbar" class="clearfix">
+            <a href="javacsript:void(0)" class="t-logo">
+                <img src="@Model.logoUrl.Trim()" alt="@Model.logoUrl.Trim()" srcset="">
+            </a>
+        </div>
+    </header>
+    <!-- Fin Bloc header -->
+    <!-- Bloc de contenu -->
+    <main>
+        <div id="contenu">
+            <div class="wrapper">
+                <div class="wrap">
+                    <aside class="sidebar-menu">
+                        <nav class="menu">
+                            <ul>
+                                <li class="current"><a href="home.html">@Model.menu1_titre</a></li>
+                                @if (@Model.menu2_titre != null)
+                                {
+                                    <li><a href="page2.html">@Model.menu2_titre</a></li>
+                                }
+                                @if (@Model.menu3_titre != null)
+                                {
+                                    <li><a href="page3.html">@Model.menu3_titre</a></li>
+                                }
+                                @if (@Model.menu4_titre != null)
+                                {
+                                    <li><a href="page4.html">@Model.menu4_titre</a></li>
+                                }
+
+                            </ul>
+                        </nav>
+                    </aside>
+                    <section>
+                        <div class="photo">
+                            <img src="@Model.photoALaUneUrl" alt="@Model.photoALaUneUrl" srcset="">
+                        </div>
+                        <div class="texte">
+                            <h1> @Model.menu1_paragraphe1_titre</h1>
+                            @Html.Raw(Model.menu1_contenu1)
+                        </div>
+                    </section>
+
+                   
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer id="f2-footer">
+        <span>Copyright 2018 - @Model.site_url	<em class="sep">|</em> 	<a href="#">Mentions légales</a></span>
+    </footer>
+}
+
+
 @if (@Session["TemplateName"] != null && @Session["TemplateName"].ToString() == "Theme4")
 
 {
@@ -350,7 +407,7 @@
                 <div id="topbar" class="centered">
                     <a href="javacsript:void(0)" class="t-logo">
                         <img src="@Model.logoUrl.Trim()" alt="@Model.logoUrl.Trim()" srcset="">
-                      
+
                     </a>
                 </div>
             </header>

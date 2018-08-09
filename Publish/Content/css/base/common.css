@@ -345,3 +345,41 @@ ul.ui-autocomplete {
 ul.ui-autocomplete li.ui-menu-item {
     list-style: none;
 }
+
+/* Medium popups */
+main.full {
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+.medium-popup {
+    min-width: 500px;
+    margin: 0 auto;
+}
+
+.medium-popup h1 {
+    margin: 0 0 30px;
+    text-align: center;
+    color: gray;
+    font-weight: normal;
+    font-family: 'RL';
+    font-size: 28px;
+}
+
+.medium-popup textarea {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-height: 130px;
+    margin-top: 10px;
+    padding: 10px 15px;
+	resize: none;
+}
+
+.erreur {
+    color: red;
+}
+.mce-branding {
+    display:none !important;
+}

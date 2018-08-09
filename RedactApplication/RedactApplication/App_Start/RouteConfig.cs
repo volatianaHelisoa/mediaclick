@@ -13,11 +13,27 @@ namespace RedactApplication
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+           
+
             routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{hash}",
-                defaults: new { controller = "Login", action = "Accueil", hash = UrlParameter.Optional }
+                "ListeUser",                                           // Route name
+                "Home/ListeUser/{role}",                            // URL with parameters
+                new { controller = "Home", action = "ListeUser" }  // Parameter defaults
             );
+
+            routes.MapRoute(
+               "ListCommandes",                                           // Route name
+               "Commandes/ListCommandes/{statut}",                            // URL with parameters
+               new { controller = "Commandes", action = "ListCommandes" }  // Parameter defaults
+           );
+
+
+            routes.MapRoute(
+               name: "Default",
+               url: "{controller}/{action}/{hash}",
+               defaults: new { controller = "Login", action = "Accueil", hash = UrlParameter.Optional }
+           );
+            
 
             routes.MapRoute(
                 name: "LoginPass",
@@ -37,12 +53,15 @@ namespace RedactApplication
                 defaults: new { controller = "Home", action = "Index", currentHash = UrlParameter.Optional }
             );
 
+
             routes.MapRoute(
                 name: "HomeChange",
                 url: "{controller}/ListeUser/{action}/{data}",
                 defaults: new { controller = "Home", action = "ListeUser", data = UrlParameter.Optional }
             );
 
+
+           
             routes.MapRoute(
                 name: "SelectItemTag",
                 url: "{controller}/{action}/{term}",

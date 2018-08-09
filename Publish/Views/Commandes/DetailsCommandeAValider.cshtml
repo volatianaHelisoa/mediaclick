@@ -40,6 +40,7 @@
                         <div class="wrap">
                             <div class="flex-content flex-jsbet-astart">
                                 <div>
+                                    <span class="project-id"><strong>Projet :</strong> @Html.DisplayFor(model => model.projet)</span>
                                     <span><strong>Demandeur :</strong>@Html.DisplayFor(model => model.commandeDemandeur)</span>
                                     <span><strong>Redacteur  :</strong>@Html.DisplayFor(model => model.commandeRedacteur)</span>
                                     <span><strong>Date de Commande :</strong>@Html.DisplayFor(model => model.date_cmde)</span>
@@ -51,7 +52,7 @@
                                         }
                                     </span>
                                     <span><strong>Ordre de priorité :</strong> @Html.DisplayFor(model => model.ordrePriorite)</span>
-                                    <span><strong>Site :</strong> @Html.DisplayFor(model => model.projet)</span>
+                                    <span><strong>Site :</strong> @Html.DisplayFor(model => model.site)</span>
                                 </div>
                                 <div>
                                     <span><strong>Thème :</strong> @Html.DisplayFor(model => model.thematique)</span>
@@ -67,20 +68,30 @@
                                     <tr>
                                         <td><strong>Consignes:</strong></td>
                                         <td>
-                                            <p>@Html.DisplayFor(model => model.consigne_references)</p>
-                                            <p>@Html.DisplayFor(model => model.consigneType)</p>
-                                            <p>@Html.DisplayFor(model => model.consigne_autres)</p>
+                                            
+                                            
+                                            
                                         </td>
                                     </tr>
                                 </table>
                             </div>
-                            @if (Model.remarques != null)
-                            {
-                                <div>
-                                    <span><strong>Remarques :</strong> @Html.DisplayFor(model => model.remarques)</span>
-                                </div>
-                            }
                         </div>
+                        <span id="remarques">
+                            <div class="section-title">
+                                <span><i class="fa fa-exclamation-circle"></i>  Consignes et remarques</span>
+                            </div>
+                            <div class="contenu">
+                                <p>@Html.DisplayFor(model => model.consigne_references)</p>
+                                <p>@Html.DisplayFor(model => model.consigneType)</p>
+                                <p>@Html.DisplayFor(model => model.consigne_autres)</p>
+                                @if (Model.remarques != null)
+                                {
+                                    <p>
+                                        <span><strong>Remarques :</strong> @Html.DisplayFor(model => model.remarques)</span>
+                                    </p>
+                                }
+                            </div>
+                        </span>
                     </section>
                 </div>
 

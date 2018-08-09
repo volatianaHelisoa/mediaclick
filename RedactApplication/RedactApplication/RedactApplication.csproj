@@ -386,6 +386,7 @@
     <Content Include="Content\css\bootstrap-datepicker3.css" />
     <Content Include="Content\css\dataTables.css" />
     <Content Include="Content\css\elements\commandes.css" />
+    <Content Include="Content\css\elements\dashboard.css" />
     <Content Include="Content\css\elements\forms.css" />
     <Content Include="Content\css\elements\login.css" />
     <Content Include="Content\css\elements\profil.css" />
@@ -458,6 +459,17 @@
     <Content Include="images\creercommande-picto.png" />
     <Content Include="images\editcomande-picto.png" />
     <Content Include="images\email-picto.svg" />
+    <Content Include="images\icone-annulation.png" />
+    <Content Include="images\icone-attente.png" />
+    <Content Include="images\icone-encours.png" />
+    <Content Include="images\icone-facture.png" />
+    <Content Include="images\icone-liv-retard.png" />
+    <Content Include="images\icone-livraison.png" />
+    <Content Include="images\icone-manager.png" />
+    <Content Include="images\icone-montant.png" />
+    <Content Include="images\icone-redac.png" />
+    <Content Include="images\icone-ref.png" />
+    <Content Include="images\icone-refuse.png" />
     <Content Include="images\login\avatar.png" />
     <Content Include="images\logo_mc_large.png" />
     <Content Include="images\mongolfier.svg" />
@@ -601,7 +613,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Dashboard.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -698,6 +710,9 @@
     <Content Include="Views\Template\ChoiceTemplate.cshtml" />
     <Content Include="Views\Template\DeleteTemplate.cshtml" />
     <Content Include="Views\Template\ErrorNoSelection.cshtml" />
+    <Content Include="Views\Commandes\CreateProjet.cshtml" />
+    <Content Include="Views\Template\DeleteTemplateConfirmation.cshtml" />
+    <Content Include="Views\Template\DeteleAllTemplateConfirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

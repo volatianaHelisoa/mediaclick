@@ -117,7 +117,7 @@ function DecheckedCmdeClick() {
 
 
 
-//Select all Commande in ListCommande when the checkbox is selected.
+//Select all facture in liste facture when the checkbox is selected.
 function ClickAllFactureInListFacture() {
     if (document.getElementById('checkAllFacture').checked) {
         CheckedFactureClick();
@@ -136,6 +136,29 @@ function CheckedFactureClick() {
 function DecheckedFactureClick() {
     $('checkAllFacture').prop("checked", false);
     $('input[name="selectedFacture"]:checked').each(function () {
+        $(this).prop("checked", false);
+    });
+}
+
+//Select all template in list template when the checkbox is selected.
+function ClickAllTemplateInListTemplate() {
+    if (document.getElementById('checkAllTemplate').checked) {
+        CheckedTemplateClick();
+    }
+    else {
+        DecheckedTemplateClick();
+    }
+}
+
+function CheckedTemplateClick() {
+    $('input[name="selectedTemplate"]').each(function () {
+        $(this).prop("checked", true);
+    });
+}
+
+function DecheckedTemplateClick() {
+    $('checkAllTemplate').prop("checked", false);
+    $('input[name="selectedTemplate"]:checked').each(function () {
         $(this).prop("checked", false);
     });
 }

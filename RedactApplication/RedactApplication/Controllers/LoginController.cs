@@ -74,21 +74,24 @@ namespace RedactApplication.Controllers
                     if (data.Count == 1)
                     {
 
-                        if (data[0] == 2)
-                        {
-                            return RedirectToRoute("Home", new RouteValueDictionary {
-                                { "controller", "Commandes" },
-                                { "action", "ListCommandes" }
-                            });
-                        }
+                        //if (data[0] == 2)
+                        //{
+                        //    //return RedirectToRoute("Home", new RouteValueDictionary {
+                        //    //    { "controller", "Commandes" },
+                        //    //    { "action", "ListCommandes" }
+                        //    //});
+                        //    return RedirectToRoute("Home", new RouteValueDictionary {
+                        //            { "controller", "Home" },
+                        //            { "action", "Dashboard" }
+                        //        });
 
-                        if (data[0] == 3 || data[0] == 4 || data[0] == 1)
+                        //}
+
+                        if (data[0] == 3 || data[0] == 4 || data[0] == 1 || data[0] == 2)
                         {
                             return RedirectToRoute("Home", new RouteValueDictionary {
                                     { "controller", "Home" },
-                                    { "action", "ListeUser" },
-                                    { "numpage",1 },
-                                    { "nbrow", 10 }
+                                    { "action", "Dashboard" }
                                 });
 
                         }
@@ -96,9 +99,7 @@ namespace RedactApplication.Controllers
                         {
                             return RedirectToRoute("Home", new RouteValueDictionary {
                                     { "controller", "Template" },
-                                    { "action", "ListTemplate" },
-                                    { "numpage",1 },
-                                    { "nbrow", 10 }
+                                    { "action", "ListTemplate" }
                                 });
 
                         }
@@ -153,19 +154,19 @@ namespace RedactApplication.Controllers
                 ViewBag.mailRecepteur = model.userMail;
                 //var body = "<p>Email From: {0} ({1})</p><p>Message:</p><p>{2}</p>";
                 StringBuilder mailBody = new StringBuilder();
-                mailBody.AppendFormat("Dear " + CultureInfo.CurrentCulture.TextInfo.ToTitleCase(utilisateur.userNom.ToLower()));
+                mailBody.AppendFormat(CultureInfo.CurrentCulture.TextInfo.ToTitleCase(utilisateur.userNom.ToLower()) +",");
                 mailBody.AppendFormat("<br />");
-                mailBody.AppendFormat("<p>Your recently requested to reset your password for your " + CultureInfo.CurrentCulture.TextInfo.ToTitleCase(utilisateur.userNom.ToLower()) + " account. Click the link bellow to reset it.</p>");
+                mailBody.AppendFormat("<p>Votre avez récemment demandé de réinitialiser votre mot de passe pour le compte " + CultureInfo.CurrentCulture.TextInfo.ToTitleCase(utilisateur.userNom.ToLower()) + " .Cliquez sur le lien ci-dessous pour le réinitialiser.</p>");
                 mailBody.AppendFormat("<br />");
                 mailBody.AppendFormat(url + "/Login/UpdatePassword?token=" + TemporaryIdUser);
                 mailBody.AppendFormat("<br />");
-                mailBody.AppendFormat("<p>If you did not request a password reset, please ignore this email. </p>");
+                mailBody.AppendFormat("<p> Si vous n'avez pas demandé la réinitialisation du mot de passe, ignorez cet e-mail. </p>");
                 mailBody.AppendFormat("<br />");
-                mailBody.AppendFormat("Thanks.");
+                mailBody.AppendFormat("Codialement.");
                 mailBody.AppendFormat("<br />");
-                mailBody.AppendFormat("Mediaclick Company.");
+                mailBody.AppendFormat("Media click App .");
 
-                bool isSendMail = MailClient.SendMail(model.userMail, mailBody.ToString(), "Redact application - forgotten password.");
+                bool isSendMail = MailClient.SendMail(model.userMail, mailBody.ToString(), "Media click App - réinitialisation du mot de passe oublié.");
                 if (isSendMail)
                 {
                     utilisateur.token = TemporaryIdUser;

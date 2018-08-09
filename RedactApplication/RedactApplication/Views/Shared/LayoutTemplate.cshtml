@@ -1,14 +1,15 @@
-﻿<!DOCTYPE html>
+﻿@model RedactApplication.Models.MODELEViewModel
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex,nofollow" />
 
-    <title>Media click App </title>
+    <title>@Model.menu1_titre </title>
 
 
-  
+
     <link rel="stylesheet" href="css/templates-style.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
     <link rel="stylesheet" href="css/bases.css">
@@ -17,9 +18,9 @@
     @RenderBody()
     <footer></footer>
 
-   
+
     @RenderSection("scripts", required: false)
 
-   
+
 </body>
 </html>

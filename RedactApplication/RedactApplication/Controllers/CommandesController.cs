@@ -42,7 +42,50 @@ namespace RedactApplication.Controllers
             return View("ListCommandes");
         }
 
-        public ActionResult ListCommandes()
+        [HttpPost]       
+        public ActionResult CreateProjet(COMMANDEViewModel model)
+        {            
+            PROJET projet = new PROJET { projetId = Guid.NewGuid(), projet_name = model.projet };            
+            db.PROJETS.Add(projet);
+            db.SaveChanges();
+            
+            Commandes val = new Commandes();
+            COMMANDEViewModel commandeVm = new COMMANDEViewModel();
+            commandeVm.ListProjet = val.GetListProjetItem();
+            commandeVm.ListTheme = val.GetListThemeItem();
+            commandeVm.ListRedacteur = val.GetListRedacteurItem();
+            commandeVm.ListCommandeType = val.GetListCommandeTypeItem();
+            commandeVm.ListTag = val.GetListTagItem();
+            commandeVm.ListOtherRedacteur = val.GetListRedacteurItem();
+            return View("Create",commandeVm);
+            
+        }
+
+        private STATUT_COMMANDE GetStatut(string statut)
+        {                      
+            switch (statut)
+            {
+                case "livrer":
+                    return db.STATUT_COMMANDE.SingleOrDefault(x => x.statut_cmde.Contains("Livré"));                    
+                case "retard":
+                    return db.STATUT_COMMANDE.SingleOrDefault(x => x.statut_cmde.Contains("En cours"));
+                case "refuser":
+                    return db.STATUT_COMMANDE.SingleOrDefault(x => x.statut_cmde.Contains("Refusé"));
+                case "attente":
+                    return db.STATUT_COMMANDE.SingleOrDefault(x => x.statut_cmde.Contains("En attente"));
+                case "encours":
+                    return db.STATUT_COMMANDE.SingleOrDefault(x => x.statut_cmde.Contains("En cours"));
+                case "annuler":
+                    return db.STATUT_COMMANDE.SingleOrDefault(x => x.statut_cmde.Contains("Annulé"));                  
+                case "facturer":
+                    return db.STATUT_COMMANDE.SingleOrDefault(x => x.statut_cmde.Contains("Validé"));
+                default:                   
+                    break;
+            }
+            return null;
+        }
+
+        public ActionResult ListCommandes(string statut)
         {
             // Exécute le suivi de session utilisateur
             if (!string.IsNullOrEmpty(Request.QueryString["currentid"]))
@@ -54,28 +97,53 @@ namespace RedactApplication.Controllers
             {
                 _userId = Guid.Parse(HttpContext.User.Identity.Name);
 
-            // Exécute le traitement de la pagination
-            Commandes val = new Commandes();
+                // Exécute le traitement de la pagination
+                Commandes val = new Commandes();
 
-            // Récupère la liste des commandes
-            var listeDataCmde = val.GetListCommande();
-            ViewBag.listeCommandeVms = listeDataCmde.Distinct().ToList();
+                // Récupère la liste des commandes
+                var listeDataCmde = val.GetListCommande();
+                var now = DateTime.Now;
+                var startOfMonth = new DateTime(now.Year, now.Month, 1);
+                var daysInMonth = DateTime.DaysInMonth(now.Year, now.Month);
+                var lastDay = new DateTime(now.Year, now.Month, daysInMonth);
+                listeDataCmde = listeDataCmde.Where(x => x.date_cmde >= startOfMonth &&
+                                                              x.date_cmde <= lastDay).ToList();
+                if (statut != null)
+                {
+                    var currentStatus = GetStatut(statut);
 
-            var currentrole = (new Utilisateurs()).GetUtilisateurRoleToString(_userId);
-            if (currentrole != null)
+
+                    if (statut.Contains("retard"))
+                        listeDataCmde = listeDataCmde.Where(x => x.date_cmde >= startOfMonth &&
+                                                               x.date_cmde <= lastDay &&
+                                                               x.date_livraison <= now &&
+                                                               x.commandeStatutId == currentStatus.statutCommandeId).ToList();
+                    if (statut.Contains("all"))
+                        listeDataCmde = listeDataCmde.Where(x => x.date_cmde >= startOfMonth &&
+                                                             x.date_cmde <= lastDay).ToList();
+                    else
+                        listeDataCmde = listeDataCmde.Where(x => x.date_cmde >= startOfMonth &&
+                                                                x.date_cmde <= lastDay && x.commandeStatutId == currentStatus.statutCommandeId).ToList();
+
+                }
+
+                ViewBag.listeCommandeVms = listeDataCmde.Distinct().ToList();
+
+                var currentrole = (new Utilisateurs()).GetUtilisateurRoleToString(_userId);
+                if (currentrole != null)
                 {
                     GetRedacteurInformations(_userId);
                     if (currentrole.Contains("2"))
-                {
-                    ViewBag.listeCommandeVms = listeDataCmde.Where(x => x.commandeRedacteurId == _userId).ToList();
-                   
+                    {
+                        ViewBag.listeCommandeVms = listeDataCmde.Where(x => x.commandeRedacteurId == _userId).ToList();
+
+                    }
+                    if (currentrole.Contains("1"))
+                    {
+                        ViewBag.listeCommandeVms = listeDataCmde.Where(x => x.commandeReferenceurId == _userId).ToList();
+
+                    }
                 }
-                 if (currentrole.Contains("1"))
-                {
-                    ViewBag.listeCommandeVms = listeDataCmde.Where(x => x.commandeReferenceurId == _userId).ToList();
-                   
-                }
-            }               
                 return View();
             }
 
@@ -898,10 +966,10 @@ namespace RedactApplication.Controllers
                                 mailBody.AppendFormat("<br />");
                                 mailBody.AppendFormat("Cordialement,");
                                 mailBody.AppendFormat("<br />");
-                                mailBody.AppendFormat("Mediaclick Company.");
+                                mailBody.AppendFormat("Media click App .");
 
                                 bool isSendMail = MailClient.SendMail(newcommande.REDACTEUR.userMail,
-                                    mailBody.ToString(), "Redact application - nouvelle commande.");
+                                    mailBody.ToString(), "Media click App - nouvelle commande.");
                                 if (isSendMail)
                                 {
                                     newcommande.commandeToken = newcommande.commandeId;
@@ -1323,10 +1391,10 @@ namespace RedactApplication.Controllers
                     mailBody.AppendFormat("<br />");
                     mailBody.AppendFormat("Cordialement,");
                     mailBody.AppendFormat("<br />");
-                    mailBody.AppendFormat("Mediaclick Company.");
+                    mailBody.AppendFormat("Media click App .");
 
                     bool isSendMail = MailClient.SendMail(newcommande.REDACTEUR.userMail,
-                        mailBody.ToString(), "Redact application - nouvelle commande.");
+                        mailBody.ToString(), "Media click App  - nouvelle commande.");
                     if (isSendMail)
                     {
                         newcommande.commandeToken = newcommande.commandeId;
@@ -1380,7 +1448,7 @@ namespace RedactApplication.Controllers
                 mailBody.AppendFormat("<br />");
                 mailBody.AppendFormat("Cordialement,");
                 mailBody.AppendFormat("<br />");
-                mailBody.AppendFormat("Mediaclick Company.");
+                mailBody.AppendFormat("Media click App .");
 
                 isSendMail = MailClient.SendMail(newcommande.REDACTEUR.userMail,
                     mailBody.ToString(), mailobject);
@@ -1641,10 +1709,10 @@ namespace RedactApplication.Controllers
                                 mailBody.AppendFormat("<br />");
                                 mailBody.AppendFormat("Cordialement,");
                                 mailBody.AppendFormat("<br />");
-                                mailBody.AppendFormat("Mediaclick Company.");
+                                mailBody.AppendFormat("Media click App .");
 
                                 bool isSendMail = MailClient.SendMail(commande.REDACTEUR.userMail,
-                                    mailBody.ToString(), "Redact application - nouvelle commande.");
+                                    mailBody.ToString(), "Media click App  - nouvelle commande.");
                                 if (isSendMail)
                                 {
                                     string notif = "Vous avez une commande à corriger de " + commande.REFERENCEUR.userNom + " " + commande.REFERENCEUR.userPrenom + " le " + DateTime.Now + ".Veuillez regarder les détails de la commande.";

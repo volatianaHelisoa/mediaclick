@@ -42,6 +42,126 @@ namespace RedactApplication.Controllers
             return View();
         }
 
+        private void UserDashboard()
+        {
+            Utilisateurs val = new Utilisateurs();
+            var listeDataUser = val.GetListUtilisateur();
+            var managerCount = listeDataUser.Count(x => x.userRole == "3");
+            ViewBag.managerCount = managerCount;
+
+            var referenceurCount = listeDataUser.Count(x => x.userRole == "1");
+            ViewBag.referenceurCount = referenceurCount;
+
+            var redacteurCount = listeDataUser.Count(x => x.userRole == "2");
+            ViewBag.redacteurCount = redacteurCount;
+
+        }
+
+        private void CommandeDashboard()
+        {
+            redactapplicationEntities db = new redactapplicationEntities();
+            Utilisateurs val = new Utilisateurs();
+            Guid userId = Guid.Parse(HttpContext.User.Identity.Name);
+
+            // Exécute le suivi de session utilisateur
+            if (!string.IsNullOrEmpty(Request.QueryString["currentid"]))
+            {
+                userId = Guid.Parse(Request.QueryString["currentid"]);
+                Session["currentid"] = Request.QueryString["currentid"];
+            }
+            
+
+            var user = db.UTILISATEURs.Find(userId);
+            var now = DateTime.Now;
+            var startOfMonth = new DateTime(now.Year, now.Month, 1);
+            var daysInMonth = DateTime.DaysInMonth(now.Year, now.Month);
+            var lastDay = new DateTime(now.Year, now.Month, daysInMonth);
+            var role = val.GetUtilisateurRoleToString(userId);
+
+            var commandes = db.COMMANDEs.Where(x => x.date_cmde >= startOfMonth &&
+                                x.date_cmde <= lastDay).ToList();
+
+
+            if (user != null)
+            {
+                if (role == "1" || role == "3") //referenceur ou manager
+                    commandes = commandes.Where(x => x.commandeReferenceurId == userId).ToList();
+
+                if(role =="2") //redacteur
+                    commandes = commandes.Where(x => x.commandeRedacteurId == userId).ToList();
+
+                /* Livraisons reçues */
+                var commandesLivrer = commandes.Count(x => x.date_cmde >= startOfMonth &&
+                                                                x.date_cmde <= lastDay && (x.STATUT_COMMANDE != null &&
+                                                                                           x.STATUT_COMMANDE.statut_cmde.Contains("Livré")));
+                ViewBag.commandesLivrer = commandesLivrer;
+
+                /* Livraisons En Retard */
+                var commandesEnRetard = commandes.Count(x => x.date_cmde >= startOfMonth &&
+                                                               x.date_cmde <= lastDay &&
+                                                               x.date_livraison <= now &&
+                                                               (x.STATUT_COMMANDE != null &&
+                                                                x.STATUT_COMMANDE.statut_cmde.Contains("En cours")));
+
+
+                ViewBag.commandesEnRetard = commandesEnRetard;
+
+                /* Commande refusée */
+                var commandesRefuser = commandes.Count(x => x.date_cmde >= startOfMonth &&
+                                                                x.date_cmde <= lastDay && (x.STATUT_COMMANDE != null &&
+                                                                 x.STATUT_COMMANDE.statut_cmde.Contains("Refusé")));
+
+                ViewBag.commandesRefuser = commandesRefuser;
+
+                /*Commander en attente*/
+                var commandesEnAttente = commandes.Where(x => x.date_cmde >= startOfMonth &&
+                                             x.date_cmde <= lastDay &&
+                                                                 (x.STATUT_COMMANDE != null && x.STATUT_COMMANDE.statut_cmde.Contains("En attente"))).Distinct().ToList().Count;
+                ViewBag.commandesEnAttente = commandesEnAttente;
+
+                /* Redaction en cours */
+                 var commandesEnCours = commandes.Count(x => x.date_cmde >= startOfMonth &&
+                                x.date_cmde <= lastDay &&
+                               (x.STATUT_COMMANDE != null && x.STATUT_COMMANDE.statut_cmde.Contains("En cours"))
+                                                            );
+
+                ViewBag.commandesEnCours = commandesEnCours;
+
+               
+
+              
+                /* Commande annulée */
+
+                var commandesAnnuler = commandes.Count(x => x.date_cmde >= startOfMonth &&
+                                                                x.date_cmde <= lastDay && (x.STATUT_COMMANDE != null &&
+                                                                 x.STATUT_COMMANDE.statut_cmde.Contains("Annulé")));
+
+                ViewBag.commandesAnnuler = commandesAnnuler;
+
+
+                
+                var commandesAFacturer = commandes.Count(x => x.date_cmde >= startOfMonth &&
+                                                                  x.date_cmde <= lastDay && (x.STATUT_COMMANDE != null &&
+                                                                  x.STATUT_COMMANDE.statut_cmde.Contains("Validé")));
+                ViewBag.commandesAFacturer = commandesAFacturer;
+
+                
+
+            }
+
+            
+
+
+        }
+
+        public ActionResult Dashboard()
+        {
+
+            UserDashboard();
+            CommandeDashboard();
+            return View();
+        }
+
         [HttpPost]
         public JsonResult ReInitPagination(string hash)
         {
@@ -94,11 +214,11 @@ namespace RedactApplication.Controllers
         /// <summary>
         /// Retourne la vue d'une liste d'Utilisateur.
         /// </summary>
-        /// <param name="nbrow">nombre de ligne</param>
-        /// <param name="numpage">numero de page</param>
+        /// <param name="role">role</param>
+
         /// <returns>View</returns>       
         [Authorize]
-        public ActionResult ListeUser()
+        public ActionResult ListeUser(string role)
         {
           
             // Exécute le traitement de la pagination
@@ -106,6 +226,11 @@ namespace RedactApplication.Controllers
            
             // Récupère la liste des utilisateurs
             var listeDataUser = val.GetListUtilisateur();
+            if (role != null)
+            {
+                listeDataUser = listeDataUser.Where(x => x.userRole == role.ToString()).ToList();
+            }
+                
 
             ViewBag.listeUserVm = listeDataUser.Distinct().ToList();
 
@@ -1149,19 +1274,20 @@ namespace RedactApplication.Controllers
                         }
 
                         StringBuilder mailBody = new StringBuilder();
-                        mailBody.AppendFormat("Dear " + CultureInfo.CurrentCulture.TextInfo.ToTitleCase(utilisateur.userNom.ToLower()));
+                    
+                        mailBody.AppendFormat(CultureInfo.CurrentCulture.TextInfo.ToTitleCase(utilisateur.userNom.ToLower()) + ",");
                         mailBody.AppendFormat("<br />");
-                        mailBody.AppendFormat("<p> Monsieur / Madame " + CultureInfo.CurrentCulture.TextInfo.ToTitleCase(utilisateur.userNom.ToLower()) + " votre compte a été crée .Veuillez réinitialiser votre mot de passe en cliquant sur lien suivant : </p>");
+                        mailBody.AppendFormat("<p>Votre compte a été crée .Veuillez réinitialiser votre mot de passe en cliquant sur lien suivant : </p>");
                         mailBody.AppendFormat("<br />");
                         mailBody.AppendFormat(url + "/Login/UpdatePassword?token=" + TemporaryIdUser);
                         mailBody.AppendFormat("<br />");
-                        mailBody.AppendFormat("<p>Si vous n'avez pas demandé la réinitialisation du mot de passe, ignorez cet e-mail.</p>");
+                        mailBody.AppendFormat("<p>Si vous n'avez pas demandé la création / réinitialisation de ce compte, ignorez cet e-mail.</p>");
                         mailBody.AppendFormat("<br />");
                         mailBody.AppendFormat("Cordialement.");
                         mailBody.AppendFormat("<br />");
-                        mailBody.AppendFormat("Mediaclick Company.");
+                        mailBody.AppendFormat("Media click App.");
 
-                        bool isSendMail = MailClient.SendMail(utilisateur.userMail, mailBody.ToString(), "Redact application - modification mot de passe.");
+                        bool isSendMail = MailClient.SendMail(utilisateur.userMail, mailBody.ToString(), "Media click App - modification mot de passe.");
                         if (isSendMail)
                         {
                             utilisateur.token = TemporaryIdUser;

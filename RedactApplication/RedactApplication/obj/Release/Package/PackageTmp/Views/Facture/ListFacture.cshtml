@@ -30,18 +30,15 @@
         <div id="single-container">
             <div class="onglets ease-in-out">
                 <ul>
-
+                    <li> @Html.ActionLink("Dashboard", "Dashboard", new { controller = "Home" }) </li>
                     @if (@Session["role"] != null && @Session["role"].ToString() != "2")
                     {
                         <li> @Html.ActionLink("Utilisateurs", "ListeUser", new { controller = "Home" }) </li>
                     }
                     <li>@Html.ActionLink("Commandes", "ListCommandes", new { controller = "Commandes" })</li>
                     <li>@Html.ActionLink("Factures", "ListFacture", new { controller = "Facture" }, new { @class = "active" })</li>
-                    @if (@Session["role"] != null && @Session["role"].ToString() != "2")
-                    {
-                        <li>@Html.ActionLink("Template", "ListTemplate", new { controller = "Template" })</li>
-                    }
-                    </ul>
+                 
+                </ul>
             </div>
 
             <div class="card back-office with-shadow">

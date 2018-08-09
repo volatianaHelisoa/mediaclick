@@ -94,25 +94,38 @@
                     <tr>
                         <th class="service">N° c/de</th>
                         <th class="desc">Titre article</th>
+                        <th>Etat</th>
                         <th>Nombre de mot</th>
                         <th>Tarif au mot</th>
                         <th>Cout article</th>
+
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model.COMMANDEs)
                     {
-                        <tr>
-                            <td class="commande-ref">@item.commandeREF</td>
-                            <td class="balise-titre">@item.balise_titre</td>
-                            <td class="nb-mot">@String.Format("{0:N0}",item.nombre_mots.ToString())</td>
-                            <td class="tarif-mot">@String.Format("{0:N0}",item.REDACTEUR.redactTarif)</td>
-                            <td class="total">@(item.nombre_mots * Convert.ToDouble(item.REDACTEUR.redactTarif))</td>
-                        </tr>
+                    <tr>
+                        <td class="commande-ref">@item.commandeREF</td>
+                        <td class="balise-titre">@item.balise_titre</td>
+                        <td>@item.STATUT_COMMANDE.statut_cmde</td>
+                        <td class="nb-mot">@String.Format("{0:N0}", item.nombre_mots.ToString())</td>
+                        <td class="tarif-mot">@String.Format("{0:N0}", item.REDACTEUR.redactTarif)</td>
+                        @if (item.STATUT_COMMANDE.statut_cmde == "Refusé")
+                        {
+                            <td>0</td>
+                        }
+                        else
+                        {
+                          <td class="total">@(item.nombre_mots * Convert.ToDouble(item.REDACTEUR.redactTarif))</td>
+                        }
+
+                       
+
+                    </tr>
                     }
                     <tr>
                         <td ><strong>Total</strong></td>
-                        <td colspan="4" class="grand total"><div style="text-align:right">@Model.montant Ar</div></td>
+                        <td colspan="5" class="grand total"><div style="text-align:right">@Model.montant Ar</div></td>
                     </tr>
                 </tbody>
             </table>
