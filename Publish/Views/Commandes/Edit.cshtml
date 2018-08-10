@@ -5,19 +5,22 @@
     Layout = "~/Views/Shared/LayoutConnected.cshtml";
 
 }
-@if (Session["name"] != null)
+@if (Session["name"] != null && @Session["role"] != null && @Session["role"].ToString() != "5")
 {
     <main id="wrapper">
         <div id="single-container">
             <div class="onglets">
                 <ul>
+                    <li> @Html.ActionLink("Dashboard", "Dashboard", new { controller = "Home" }) </li>
                     @if (@Session["role"] != null && @Session["role"].ToString() != "2")
                     {
                         <li> @Html.ActionLink("Utilisateurs", "ListeUser", new { controller = "Home" }) </li>
                     }
                     <li>@Html.ActionLink("Commandes", "ListCommandes", new { controller = "Commandes" }, new { @class = "active" })</li>
                     <li>@Html.ActionLink("Factures", "ListFacture", new { controller = "Facture" })</li>
-                    <li>@Html.ActionLink("Templates", "ListTemplate", new { controller = "Template" })</li>
+
+
+
                 </ul>
             </div>
             <div class="card back-office with-shadow">
@@ -199,7 +202,7 @@ else
                 height: 500,
                 width: '100%',
                 menubar: false,
-               
+
                 plugins: [
                     'advlist autolink lists link image charmap anchor textcolor',
                     'searchreplace visualblocks code fullscreen',

@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="~/Content/css/elements/profil.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.js"></script>
-  
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/css/bootstrap-multiselect.css" rel="stylesheet" />
 
     <script>
@@ -70,7 +70,7 @@
                 nSelectedText: 'selection',
                 nonSelectedText: 'Aucune selection',
                 selectAllText: 'Tout selectionner',
-                allSelectedText:'Selections'
+                allSelectedText: 'Selections'
 
             });
         });
@@ -102,19 +102,20 @@
 }
 
 
-@if (Session["name"] != null && Model != null)
+@if (Session["name"] != null && @Session["role"] != null && @Session["role"].ToString() != "2" && @Session["role"].ToString() != "5")
 {
     <main id="wrapper">
         <div id="single-container">
             <div class="onglets ease-in-out">
                 <ul>
+                    <li> @Html.ActionLink("Dashboard", "Dashboard", new { controller = "Home" }) </li>
                     @if (@Session["role"] != null && @Session["role"].ToString() != "2")
                     {
                         <li> @Html.ActionLink("Utilisateurs", "ListeUser", new { controller = "Home" }, new { @class = "active" }) </li>
                     }
                     <li>@Html.ActionLink("Commandes", "ListCommandes", new { controller = "Commandes" })</li>
                     <li>@Html.ActionLink("Factures", "ListFacture", new { controller = "Facture" })</li>
-                    <li>@Html.ActionLink("Templates", "ListTemplate", new { controller = "Template" })</li>
+
                 </ul>
             </div>
             <div class="card back-office with-shadow">

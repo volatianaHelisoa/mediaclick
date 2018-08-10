@@ -154,13 +154,13 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>05/24/2018 14:11:13</publishTime>
     </File>
     <File Include="bin/RedactApplication.dll">
-      <publishTime>08/09/2018 17:22:19</publishTime>
+      <publishTime>08/10/2018 13:38:17</publishTime>
     </File>
     <File Include="bin/RedactApplication.dll.config">
       <publishTime>07/24/2018 06:15:39</publishTime>
     </File>
     <File Include="bin/RedactApplication.pdb">
-      <publishTime>08/09/2018 17:22:19</publishTime>
+      <publishTime>08/10/2018 13:38:17</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>05/24/2018 14:11:16</publishTime>
@@ -256,7 +256,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>08/01/2018 17:29:49</publishTime>
     </File>
     <File Include="Content/css/elements/dashboard.css">
-      <publishTime>08/01/2018 11:37:34</publishTime>
+      <publishTime>08/10/2018 09:29:43</publishTime>
     </File>
     <File Include="Content/css/elements/forms.css">
       <publishTime>07/19/2018 14:53:29</publishTime>
@@ -916,7 +916,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>04/06/2018 16:48:32</publishTime>
     </File>
     <File Include="Scripts/jquery-3.1.1.intellisense.js">
-      <publishTime>09/13/2017 17:24:54</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Scripts/jquery-3.1.1.js">
       <publishTime>09/13/2017 17:24:48</publishTime>
@@ -955,7 +955,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>06/15/2018 14:10:27</publishTime>
     </File>
     <File Include="Scripts/jquery.validate-vsdoc.js">
-      <publishTime>09/13/2017 17:24:54</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.js">
       <publishTime>09/13/2017 18:12:06</publishTime>
@@ -1006,22 +1006,22 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>06/28/2018 12:25:31</publishTime>
     </File>
     <File Include="Themes/Home4/css/bases.css">
-      <publishTime>07/17/2018 14:33:30</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Themes/Home4/css/templates-style.css">
-      <publishTime>07/17/2018 14:33:30</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Themes/Home4/img/banner-landscape.jpg">
-      <publishTime>07/17/2018 14:33:30</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Themes/Home4/img/pattern-body.jpg">
-      <publishTime>07/17/2018 14:33:30</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Themes/Home4/img/photo.jpg">
-      <publishTime>07/17/2018 14:33:30</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Themes/Home4/img/t4-logo.png">
-      <publishTime>07/17/2018 14:33:30</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Themes/Theme1/css/bases.css">
       <publishTime>07/16/2018 14:46:38</publishTime>
@@ -1069,7 +1069,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>07/19/2018 16:57:09</publishTime>
     </File>
     <File Include="Themes/Theme1/template-1.html">
-      <publishTime>07/16/2018 15:19:00</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Themes/Theme2/css/bases.css">
       <publishTime>07/17/2018 11:13:14</publishTime>
@@ -1093,7 +1093,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>07/19/2018 15:50:03</publishTime>
     </File>
     <File Include="Themes/Theme4/Home4.html">
-      <publishTime>07/18/2018 13:50:27</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Themes/Theme4/img/banner-landscape.jpg">
       <publishTime>07/18/2018 14:11:54</publishTime>
@@ -1135,7 +1135,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>07/18/2018 14:12:07</publishTime>
     </File>
     <File Include="Themes/Theme4/index.html">
-      <publishTime>07/18/2018 14:11:50</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Views/Account/ConfirmEmail.cshtml">
       <publishTime>05/24/2018 14:11:09</publishTime>
@@ -1189,7 +1189,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>07/31/2018 03:38:52</publishTime>
     </File>
     <File Include="Views/Commandes/Create.cshtml">
-      <publishTime>08/02/2018 15:05:40</publishTime>
+      <publishTime>08/09/2018 17:45:11</publishTime>
     </File>
     <File Include="Views/Commandes/CreateCommandeConfirmation.cshtml">
       <publishTime>07/13/2018 14:54:59</publishTime>
@@ -1213,16 +1213,16 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>07/02/2018 10:25:00</publishTime>
     </File>
     <File Include="Views/Commandes/DetailsCommande.cshtml">
-      <publishTime>07/31/2018 03:38:56</publishTime>
+      <publishTime>08/09/2018 17:46:04</publishTime>
     </File>
     <File Include="Views/Commandes/DetailsCommandeAValider.cshtml">
-      <publishTime>08/01/2018 17:36:30</publishTime>
+      <publishTime>08/09/2018 17:46:01</publishTime>
     </File>
     <File Include="Views/Commandes/DeteleAllCommandeConfirmation.cshtml">
       <publishTime>07/02/2018 10:26:14</publishTime>
     </File>
     <File Include="Views/Commandes/Edit.cshtml">
-      <publishTime>07/23/2018 14:01:04</publishTime>
+      <publishTime>08/09/2018 17:46:38</publishTime>
     </File>
     <File Include="Views/Commandes/EditCommandeConfirmation.cshtml">
       <publishTime>07/13/2018 14:55:02</publishTime>
@@ -1246,7 +1246,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>07/17/2018 14:33:32</publishTime>
     </File>
     <File Include="Views/Facture/Create.cshtml">
-      <publishTime>07/23/2018 14:07:02</publishTime>
+      <publishTime>08/09/2018 17:48:08</publishTime>
     </File>
     <File Include="Views/Facture/DeletedAllFactureConfirmation.cshtml">
       <publishTime>07/13/2018 14:55:00</publishTime>
@@ -1267,7 +1267,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>08/01/2018 09:49:12</publishTime>
     </File>
     <File Include="Views/Home/About.cshtml">
-      <publishTime>07/13/2018 14:55:02</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Views/Home/Contact.cshtml">
       <publishTime>01/01/0001 00:00:00</publishTime>
@@ -1276,7 +1276,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Views/Home/Dashboard.cshtml">
-      <publishTime>08/09/2018 17:20:07</publishTime>
+      <publishTime>08/10/2018 13:29:15</publishTime>
     </File>
     <File Include="Views/Home/DeletedAllUserConfirmation.cshtml">
       <publishTime>07/13/2018 14:55:00</publishTime>
@@ -1294,10 +1294,10 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Views/Home/DetailsRedacteurs.cshtml">
-      <publishTime>07/13/2018 14:55:02</publishTime>
+      <publishTime>08/09/2018 17:49:04</publishTime>
     </File>
     <File Include="Views/Home/EditUser.cshtml">
-      <publishTime>07/27/2018 14:41:42</publishTime>
+      <publishTime>08/09/2018 17:50:10</publishTime>
     </File>
     <File Include="Views/Home/EditUserConfirmation.cshtml">
       <publishTime>07/13/2018 14:55:02</publishTime>
@@ -1312,7 +1312,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Views/Home/GererUtilisateur.cshtml">
-      <publishTime>07/27/2018 14:41:27</publishTime>
+      <publishTime>08/09/2018 17:49:50</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
       <publishTime>05/25/2018 16:43:20</publishTime>
@@ -1345,7 +1345,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>07/03/2018 15:25:14</publishTime>
     </File>
     <File Include="Views/Login/UpdatePassword.cshtml">
-      <publishTime>08/01/2018 17:15:21</publishTime>
+      <publishTime>08/10/2018 13:37:24</publishTime>
     </File>
     <File Include="Views/Login/UpdatePasswordSuccess.cshtml">
       <publishTime>07/20/2018 13:48:35</publishTime>
@@ -1438,10 +1438,10 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>08/02/2018 17:29:38</publishTime>
     </File>
     <File Include="Views/Template/Home1.cshtml">
-      <publishTime>07/13/2018 14:55:00</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Views/Template/Home4.cshtml">
-      <publishTime>07/17/2018 17:03:06</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Views/Template/ListTemplate.cshtml">
       <publishTime>08/02/2018 17:18:21</publishTime>

@@ -840,7 +840,7 @@ namespace RedactApplication.Controllers
                 newcommande.consigne_references = model.consigne_references;
                 if (!string.IsNullOrEmpty(selectedTag))
                 {
-                    TAG currentTag = db.TAGS.SingleOrDefault(x => x.type.Contains(selectedTag.TrimEnd()));
+                    TAG currentTag = db.TAGS.FirstOrDefault(x => x.type.Contains(selectedTag.TrimEnd()));
                     if (currentTag == null)
                     {
                         currentTag = new TAG { tagId = Guid.NewGuid(), type = selectedTag };
@@ -853,7 +853,7 @@ namespace RedactApplication.Controllers
 
                 if (!string.IsNullOrEmpty(selectedSite))
                 {
-                    SITE currentSite = db.SITES.SingleOrDefault(x => x.site_name.Contains(selectedSite.TrimEnd()));
+                    SITE currentSite = db.SITES.FirstOrDefault(x => x.site_name.Contains(selectedSite.TrimEnd()));
                     if (currentSite == null)
                     {
                         currentSite = new SITE { siteId = Guid.NewGuid(), site_name = selectedSite };

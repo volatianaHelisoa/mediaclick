@@ -218,8 +218,11 @@ namespace RedactApplication.Controllers
                 newFacture.dateFin = model.dateFin;
                 newFacture.dateEmission = DateTime.Now;
                 var commandesFacturer = db.COMMANDEs.Where(x => x.date_livraison >= model.dateDebut &&
-                                                                 x.date_livraison <= model.dateFin && (x.STATUT_COMMANDE != null &&
-                                                                 (x.STATUT_COMMANDE.statut_cmde.Contains("Validé") || x.STATUT_COMMANDE.statut_cmde.Contains("Refusé")))).ToList();
+                                                                 x.date_livraison <= model.dateFin && 
+                                                                 (x.STATUT_COMMANDE != null &&
+                                                                 (x.STATUT_COMMANDE.statut_cmde.Contains("Validé") || x.STATUT_COMMANDE.statut_cmde.Contains("Refusé"))) &&
+                                                                 x.factureId == null
+                                                                 ).ToList();
                 if (commandesFacturer.Count() > 0)
                 {
                     var redacteur = db.UTILISATEURs.SingleOrDefault(x => x.userId == model.listRedacteurId);
