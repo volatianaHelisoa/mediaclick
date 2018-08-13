@@ -1103,7 +1103,7 @@ namespace RedactApplication.Controllers
 
             if (isSendMail)
             {
-                SendNotification(commande, commande.commandeRedacteurId, commande.commandeReferenceurId, Regex.Replace(mailbody, "<.*?>", String.Empty));
+                SendNotification(commande, commande.commandeReferenceurId, commande.commandeRedacteurId, Regex.Replace(mailbody, "<.*?>", String.Empty));
                 return RedirectToRoute("Home", new RouteValueDictionary{
                 {"controller", "Commandes"},
                 {"action", "ListCommandes"}
@@ -1215,12 +1215,13 @@ namespace RedactApplication.Controllers
                 isSendMail = db.SaveChanges() > 0 ;
              
                  mailbody = "Votre commande " + commande.commandeREF + " a été refusé par le rédacteur le " + DateTime.Now.ToString("dd/MM/yyyy") + ", vous pouvez  contacter " + commande.REDACTEUR.userNom.ToUpper() +" pour plus de détails.";
-             
-            
+                if (isSendMail)               
+                        SendNotification(commande, commande.commandeRedacteurId, commande.commandeReferenceurId, Regex.Replace(mailbody, "<.*?>", String.Empty));
+                else
+                    return View("ErrorException");
             }
             else
-            {
-               
+            {               
                     if (status != null)
                     {
                         commande.commandeStatutId = status.statutCommandeId;
@@ -1231,24 +1232,20 @@ namespace RedactApplication.Controllers
                      mailbody = "<p> Votre commande " + commande.commandeREF + " a été refusé, vous pouvez contacter le responsable pour plus de détails.</p>";
                     string mailobject = "Media click App - Refus de la commande";
                     isSendMail = SendeMailNotification(commande, mailbody, mailobject);
-
-            }
-
-            if (isSendMail)
-            {
-                if (Session["role"] != null && Session["role"].ToString() == "2")
+                if (isSendMail)
                     SendNotification(commande, commande.commandeReferenceurId, commande.commandeRedacteurId, Regex.Replace(mailbody, "<.*?>", String.Empty));
                 else
-                    SendNotification(commande, commande.commandeRedacteurId, commande.commandeReferenceurId, Regex.Replace(mailbody, "<.*?>", String.Empty));
+                    return View("ErrorException");
+            }         
+               
                 return RedirectToRoute("Home", new RouteValueDictionary
             {
                 {"controller", "Commandes"},
                 {"action", "ListCommandes"}
             });
-            }
+       
                
-            else
-                return View("ErrorException");
+            
         }
 
         [HttpPost]

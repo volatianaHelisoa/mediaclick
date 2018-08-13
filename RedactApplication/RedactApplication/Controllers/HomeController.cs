@@ -73,7 +73,8 @@ namespace RedactApplication.Controllers
 
             var user = db.UTILISATEURs.Find(userId);
             var now = DateTime.Now;
-            var startOfMonth = new DateTime(now.Year, now.Month, 1);
+            //var startOfMonth = new DateTime(now.Year, now.Month -1, 1);
+            var startOfMonth = new DateTime(now.Year, now.Month - 1, now.Day);
             var daysInMonth = DateTime.DaysInMonth(now.Year, now.Month);
             var lastDay = new DateTime(now.Year, now.Month, daysInMonth);
             var role = val.GetUtilisateurRoleToString(userId);
@@ -145,13 +146,18 @@ namespace RedactApplication.Controllers
                                                                   x.STATUT_COMMANDE.statut_cmde.Contains("Validé")));
                 ViewBag.commandesAFacturer = commandesAFacturer;
 
-                
-
             }
+            var factures = db.FACTUREs.Where(x => x.dateDebut >= startOfMonth &&
+                             x.dateFin <= lastDay).ToList();
 
-            
+            if (role == "1" || role == "3")
+                factures = factures.Where(x => x.createurId == userId).ToList();
 
+            if (role == "2")
+                factures = factures.Where(x => x.redacteurId == userId).ToList();
 
+            var montantAFacturer = factures.Sum(x => Convert.ToDouble(x.montant));
+            ViewBag.montantAFacturer = montantAFacturer;
         }
 
         public ActionResult Dashboard()
