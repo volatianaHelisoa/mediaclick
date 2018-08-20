@@ -157,7 +157,7 @@ namespace RedactApplication.Controllers
                 factures = factures.Where(x => x.redacteurId == userId).ToList();
 
             var montantAFacturer = factures.Sum(x => Convert.ToDouble(x.montant));
-            ViewBag.montantAFacturer = montantAFacturer;
+            ViewBag.montantAFacturer = String.Format("{0:N0}", montantAFacturer) ;
         }
 
         public ActionResult Dashboard()

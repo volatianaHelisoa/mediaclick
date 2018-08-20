@@ -1,3 +1,25 @@
+* {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+body {
+    margin: 0;
+    padding:0;
+    font-family: 'Roboto', Arial, sans-serif;
+    color: #585858;
+    font-size: 14px;
+    line-height: 21px;
+}
+p {
+    margin: 0 0 27px;
+}
+h2 { color: #f1be22 }
+a {
+    text-decoration: none;
+}
+
 .grey-bg {
     background-color: #f7f7f7;
 }
@@ -86,4 +108,9 @@
 #f4-footer .sep{
     font-style: normal;
     padding: 0 30px 0 20px;
+}
+
+.photo img{
+	    width: 100%;
+    height: auto;
 }

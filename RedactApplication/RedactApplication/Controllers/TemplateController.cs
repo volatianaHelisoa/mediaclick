@@ -432,19 +432,22 @@ namespace RedactApplication.Controllers
 
                 using (WebClient client = new WebClient())
                 {
-                    client.Credentials = new NetworkCredential(username, password);
+                
                     foreach (var html in htmlPaths)
                     {
+                        client.Credentials = new NetworkCredential(username, password);
                         client.UploadFile(
                             "ftp://" + ftpurl + "/" + Path.GetFileName(html), html);
                     }
 
                     foreach (var img in imgPaths)
-                    {                       
+                    {
+                        client.Credentials = new NetworkCredential(username, password);
                         client.UploadFile(
                             "ftp://" + ftpurl + "/img/" + Path.GetFileName(img), img);
                     }
 
+                    client.Credentials = new NetworkCredential(username, password);
                     client.UploadFile(
                            "ftp://" + ftpurl + "/css/" + Path.GetFileName(pathCss), pathCss);
                 }

@@ -10,7 +10,7 @@
                 return function (e) {
                     var image = e.target.result;
                     if ($(previewDiv).children().length) {
-                        console.log('efa misy image ato');
+                        
                         previewDiv.children().remove();
                         previewDiv.append('<img src="' + image + '" />');
                     }
@@ -36,7 +36,7 @@ var showThumbPhotos = (function (e) {
                 return function (e) {
                     var image = e.target.result;
                     if ($(previewDiv).children().length) {
-                        console.log('efa misy image ato');
+                        
                         previewDiv.children().remove();
                         previewDiv.append('<img src="' + image + '" />');
                     }
@@ -105,48 +105,39 @@ $(document).ready(function () {
         }
     });
 
+    tinymce.PluginManager.add('stylebuttons', function (editor, url) {
+        ['pre', 'p', 'code', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'].forEach(function (name) {
+            editor.addButton("style-" + name, {
+                tooltip: "Toggle " + name,
+                text: name.toUpperCase(),
+                onClick: function () { editor.execCommand('mceToggleFormat', false, name); },
+                onPostRender: function () {
+                    var self = this, setup = function () {
+                        editor.formatter.formatChanged(name, function (state) {
+                            self.active(state);
+                        });
+                    };
+                    editor.formatter ? setup() : editor.on('init', setup);
+                }
+            })
+        });
+    });
 
     tinymce.init({
-        selector: 'textarea',
-        height: 300,
+        selector: "textarea",
         width: '100%',
+        height: 270,
+        plugins: "stylebuttons",
+        statusbar: false,
         menubar: false,
-
-        plugins: [
-            'advlist autolink lists link image charmap anchor textcolor',
-            'searchreplace visualblocks code fullscreen',
-            'insertdatetime media table contextmenu paste code  wordcount'
-        ],
-        toolbar: 'insert | undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
+        toolbar: "bold italic | link | undo redo | style-p style-h1 style-h2 style-h3 style-pre style-code",
         content_css: [
             '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
-            '//www.tinymce.com/css/codepen.min.css'],
-        setup: function (ed) {
-            ed.on('keyup', function (e) {
-                tinyMceChange(ed);
-                var contenu = $.trim($(this).text());
-
-                var contenu_res = ed.getContent().replace(/(style="([^"]*)")/g, "");
-                var regex = /(&nbsp;|<([^>]+)>)/ig;
-                contenu_res = contenu_res.replace(regex, "");
-                var words = ed.plugins.wordcount.getCount();
-
-                var charLength = words.length;
-                var charLimit = $("#limit").val();
-                // Displays count
-                $(".left_char").html(charLength + " sur " + charLimit + " caractère(s) utilisé(s)");
-                // Alert when max is reached
-                /* if (charLength > charLimit) {
-                    $(".left_char").html("<strong>Le nombre de caractères maximum de " +
-                        charLimit +
-                        " atteint.</strong>");
-                } */
-            });
-            ed.on('change', function (e) {
-                tinyMceChange(ed);
-            });
-        }
+            '//www.tinymce.com/css/codepen.min.css']
+     
     });
+
+
 
 });
 
