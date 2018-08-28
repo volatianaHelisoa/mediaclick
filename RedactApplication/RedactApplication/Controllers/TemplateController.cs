@@ -278,7 +278,8 @@ namespace RedactApplication.Controllers
                     string pathParent = Server.MapPath("~/Themes/" + templateName);
                     string pathCss = pathParent + "/css/templates-style.css";
                     string pathImg = pathParent + "/img";
-                    int result = SendToFtp(model.url, model.ftpUser, model.ftpPassword, pathCss, pathParent, pathImg);
+                    string pathJs = pathParent + "/js";
+                    int result = SendToFtp(model.url, model.ftpUser, model.ftpPassword, pathCss, pathParent, pathImg,pathJs);
 
                     //return new FilePathResult(path, "text/html");
                     if (result == 0)
@@ -415,7 +416,7 @@ namespace RedactApplication.Controllers
             }
         }
 
-        private int SendToFtp(string ftpurl,string username,string password,string pathCss,string pathHtml,string pathImg)
+        private int SendToFtp(string ftpurl,string username,string password,string pathCss,string pathHtml,string pathImg,string pathJs)
         {
             int res = 0;
             try
@@ -425,6 +426,8 @@ namespace RedactApplication.Controllers
                 /* Create a New Directory */
                 ftpClient.createDirectory("/css");
                 ftpClient.createDirectory("/img");
+                ftpClient.createDirectory("/js");
+
                 ftpClient = null;
 
                 string[] htmlPaths = Directory.GetFiles(pathHtml, "*.html");    
@@ -450,6 +453,10 @@ namespace RedactApplication.Controllers
                     client.Credentials = new NetworkCredential(username, password);
                     client.UploadFile(
                            "ftp://" + ftpurl + "/css/" + Path.GetFileName(pathCss), pathCss);
+
+                    client.Credentials = new NetworkCredential(username, password);
+                    client.UploadFile(
+                           "ftp://" + ftpurl + "/js/" + Path.GetFileName(pathJs), pathJs);
                 }
             }
             catch (Exception ex)
