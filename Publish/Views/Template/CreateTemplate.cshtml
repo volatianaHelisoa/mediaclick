@@ -3,20 +3,64 @@
     ViewBag.Title = "CreateTemplate";
     Layout = "~/Views/Shared/LayoutConnected.cshtml";
 }
+
+@section Scripts{
+
+
+    <script>
+        $(document).ready(function () {
+
+            $('#ftpList').click(function () {
+                var url = $("#url").val();
+                var ftpUser = $("#ftpUser").val();
+                var ftpPassword = $("#ftpPassword").val();
+                var ftp_obj = { "url": url, "ftpUser": ftpUser, "ftpPassword": ftpPassword };
+                var el = $('select[name="ftpdirs"]');
+                $.ajax({
+                    url: '/Template/RefreshFtp',
+                    type: "POST",
+                    data: ftp_obj,
+                    cache: false,
+                    async: true,
+                    success: function (resp) {
+                      
+                        var data = resp.split(",");
+                       
+                        var htmlOptions = [];
+                        if (data.length) {
+                            for (item in data) {
+                                html = '<option value="' + data[item] + '">' + data[item] + '</option>';
+                                htmlOptions[htmlOptions.length] = html;
+                            }
+
+                            // here you will empty the pre-existing data from you selectbox and will append the htmlOption created in the loop result
+                            el.empty().append(htmlOptions.join(''));
+                        }
+
+                    }
+                });
+
+               
+            });
+        });
+    </script>
+}
+
+
 <main id="wrapper">
-    <div id="single-container">        
+    <div id="single-container">
         <div class="card back-office with-shadow">
             <div class="head">
                 <i class="icon icon-create-command"></i>
                 <h1>Créer modèle</h1>
                 <p>Veuillez remplir les champs Requis et appuyez sur Enregistrer pour éditer un modèle</p>
-               
+
             </div>
 
             @using (Html.BeginForm("SaveTemplate", "Template", FormMethod.Post, new { role = "form", @id = "createtemplate" }))
             {
                 @Html.AntiForgeryToken()
-                    <!-- Champs -->
+                <!-- Champs -->
                 <section class="clearfix">
                     <label for="" class="col-50 pull-left">
                         Projet
@@ -25,42 +69,42 @@
                     <label for="" class="col-50 pull-right">
                         Thématique
                         @Html.DropDownListFor(x => Model.listThemeId, new SelectList(Model.ListTheme, "Value", "Text"), htmlAttributes: new { id = "SelectItemTheme", @required = true })
-                    </label>                  
-                    
+                    </label>
+
                 </section>
-                    <section class="clearfix">                       
+                <section class="clearfix">
 
-                        <label for="" class="col-100">
-                            FTP Hote
-                            @Html.TextBoxFor(x => x.url, new { @required = true, @name = "name" })                            
-                        </label>
-                        <label for="" class="col-50 pull-left">                            
-                            Utilisateur
-                            @Html.TextBoxFor(x => x.ftpUser, new {  @name = "name", @required = true })
-                        </label>
-                        <label for="" class="col-50 pull-right">
-                            Mot de passe
-                            @Html.TextBoxFor(x => x.ftpPassword, new { required = true, @name = "name" })
-                        </label> 
-                                     
-                    </section>                   
-                    <section class="clearfix submit-area">
-                        <input type="submit" value="Enregistrer" class="btn btn-success" />
-
-                        @Html.ActionLink("Annuler", "ListTemplate", "Template", new { @class = "btn btn-warning" })
-                    </section>
+                    <label for="" class="col-100">
+                        FTP Hote
+                        @Html.TextBoxFor(x => x.url, new { @required = true, @name = "name" })
+                    </label>
+                    <label for="" class="col-50 pull-left">
+                        Utilisateur
+                        @Html.TextBoxFor(x => x.ftpUser, new { @name = "name", @required = true })
+                    </label>
+                    <label for="" class="col-50 pull-right">
+                        Mot de passe
+                        @Html.TextBoxFor(x => x.ftpPassword, new { required = true, @name = "name" })
+                    </label>
+                    <input type="button" value="Récupérer FTP liste" id="ftpList" />
+                    <select id="ftpdir" name="ftpdirs"></select>
+                </section>
+                <section class="clearfix submit-area">
+                    <input type="submit" value="Enregistrer" class="btn btn-success" />
+                  
+                    @Html.ActionLink("Annuler", "ListTemplate", "Template", new { @class = "btn btn-warning" })
+                </section>
             }
         </div>
     </div>
 </main>
 
 
-    
-    
-    
 
-    
-    
-    
-    
-    
+
+
+
+
+
+
+

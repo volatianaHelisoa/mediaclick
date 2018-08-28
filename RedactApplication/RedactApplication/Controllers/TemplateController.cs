@@ -223,13 +223,19 @@ namespace RedactApplication.Controllers
         }
 
 
-        public ActionResult SaveTemplate(TEMPLATEViewModel model)
+        public ActionResult SaveTemplate(TEMPLATEViewModel model, FormCollection collection)
         {
             int res = 0;       
             
             var selectedProjetId = model.listprojetId;
             var selectedThemeId = model.listThemeId;
+            string ftpdir = "";
 
+            if (!string.IsNullOrEmpty(collection["ftpdirs"]))
+            {
+                 ftpdir = collection["ftpdirs"];
+               
+            }
 
             if (!string.IsNullOrEmpty(Request.QueryString["currentid"]))
             {
@@ -279,7 +285,7 @@ namespace RedactApplication.Controllers
                     string pathCss = pathParent + "/css/templates-style.css";
                     string pathImg = pathParent + "/img";
                     string pathJs = pathParent + "/js";
-                    int result = SendToFtp(model.url, model.ftpUser, model.ftpPassword, pathCss, pathParent, pathImg,pathJs);
+                    int result = SendToFtp(ftpdir,model.url, model.ftpUser, model.ftpPassword, pathCss, pathParent, pathImg,pathJs);
 
                     //return new FilePathResult(path, "text/html");
                     if (result == 0)
@@ -416,13 +422,19 @@ namespace RedactApplication.Controllers
             }
         }
 
-        private int SendToFtp(string ftpurl,string username,string password,string pathCss,string pathHtml,string pathImg,string pathJs)
+        private int SendToFtp(string ftpDir, string ftpurl,string username,string password,string pathCss,string pathHtml,string pathImg,string pathJs)
         {
             int res = 0;
             try
             {
+                var url = ftpurl ;
+                if (!string.IsNullOrEmpty(ftpDir))
+                {
+                    url = ftpurl + "/" + ftpDir;
+
+                }
                 /*Create directory*/
-                FTP ftpClient = new FTP(@"ftp://" + ftpurl + "/", username, password);
+                FTP ftpClient = new FTP(@"ftp://" + url + "/", username, password);
                 /* Create a New Directory */
                 ftpClient.createDirectory("/css");
                 ftpClient.createDirectory("/img");
@@ -440,23 +452,26 @@ namespace RedactApplication.Controllers
                     {
                         client.Credentials = new NetworkCredential(username, password);
                         client.UploadFile(
-                            "ftp://" + ftpurl + "/" + Path.GetFileName(html), html);
+                            "ftp://" + url + "/" + Path.GetFileName(html), html);
                     }
 
                     foreach (var img in imgPaths)
                     {
                         client.Credentials = new NetworkCredential(username, password);
                         client.UploadFile(
-                            "ftp://" + ftpurl + "/img/" + Path.GetFileName(img), img);
+                            "ftp://" + url + "/img/" + Path.GetFileName(img), img);
                     }
 
                     client.Credentials = new NetworkCredential(username, password);
                     client.UploadFile(
-                           "ftp://" + ftpurl + "/css/" + Path.GetFileName(pathCss), pathCss);
+                           "ftp://" + url + "/css/" + Path.GetFileName(pathCss), pathCss);
 
-                    client.Credentials = new NetworkCredential(username, password);
-                    client.UploadFile(
-                           "ftp://" + ftpurl + "/js/" + Path.GetFileName(pathJs), pathJs);
+                    if (System.IO.File.Exists(pathJs))
+                    {
+                        client.Credentials = new NetworkCredential(username, password);
+                        client.UploadFile(
+                               "ftp://" + url + "/js/" + Path.GetFileName(pathJs), pathJs);
+                    }
                 }
             }
             catch (Exception ex)
@@ -515,6 +530,37 @@ namespace RedactApplication.Controllers
             return res;
 
         }
+
+        [HttpPost]
+        public string RefreshFtp(string url, string ftpUser,string ftpPassword)
+        {
+
+            try
+            {
+              
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://" + url);
+                request.Method = WebRequestMethods.Ftp.ListDirectory;
+
+                request.Credentials = new NetworkCredential(ftpUser, ftpPassword);
+                FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+                Stream responseStream = response.GetResponseStream();
+                StreamReader reader = new StreamReader(responseStream);
+                string names = reader.ReadToEnd();
+
+                reader.Close();
+                response.Close();
+
+                var list = names.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
+                return string.Join(",", list.ToArray());
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+           
+        }
+
 
         public ActionResult Theme3()
         {
