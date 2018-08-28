@@ -56,7 +56,7 @@
                                 <div class="texte">
                                     <h1> @Model.menu1_paragraphe1_titre</h1>
                                     @Html.Raw(Model.menu1_contenu1)
-                                </div>
+                                </div>	<a href="/">
                                 <div class="photo">
                                     <img src="@Model.menu1_paragraphe1_photoUrl" alt="@Model.menu1_paragraphe1_photoUrl" srcset="">
                                 </div>
@@ -67,7 +67,7 @@
                                 <div class="photo">
                                     <img src="@Model.menu1_paragraphe2_photoUrl" alt="@Model.menu1_paragraphe2_photoUrl" srcset="">
                                 </div>
-                                <div class="texte">
+                                <div class="texe">
                                     <h2>@Model.menu1_paragraphe2_titre</h2>
                                     @Html.Raw(Model.menu1_contenu2)
                                 </div>
@@ -332,7 +332,7 @@
 
 
         <footer id="f2-footer">
-            <span>© Copyright 2018 - <a href="#">@Model.site_url</a></span><span class="menu-foot"><a href="">Mentions légales</a></span>
+            <span>© Copyright 2018 - <a href="#">@Model.site_url</a></span>
         </footer>
     </div>
 }
@@ -345,6 +345,7 @@
     <div class="template theme">
         <header>
             <div id="topbar" class="clearfix">
+                <img src="@Model.photoALaUneUrl" alt="@Model.photoALaUneUrl" srcset="">
                 <a href="javacsript:void(0)" class="t-logo">
                     <img src="@Model.logoUrl.Trim()" alt="@Model.logoUrl.Trim()" srcset="">
                 </a>
@@ -480,7 +481,7 @@
         }
 
         <footer id="f2-footer">
-            <span>Copyright 2018 - @Model.site_url	<em class="sep">|</em> 	<a href="#">Mentions légales</a></span>
+            <span>Copyright 2018 - @Model.site_url	</span>
         </footer>
     </div>
         }
@@ -531,7 +532,7 @@
                     </main>
                     <footer id="f4-footer">
                         <nav class="footer-nav">
-                            <span>Copyright 2018 - @Model.site_url	<em class="sep">|</em> 	<a href="/">Mentions légales</a></span>
+                            <span>Copyright 2018 - @Model.site_url	 </span>
                         </nav>
                     </footer>
                 </div>

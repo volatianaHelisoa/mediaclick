@@ -10,6 +10,9 @@
     <script type="text/javascript" src="~/Scripts/codetemplate.js"></script>
     <script type="text/javascript" src="//cdn.tinymce.com/4/tinymce.min.js"></script>
 
+
+
+
 }
 
 <main id="wrapper">
@@ -44,7 +47,16 @@
                                 </label>
                             </div>
                             <div class="col-md-8">
-
+                                <label for="" class="col-100 banner-area">
+                                    @Html.TextBoxFor(x => x.photoALaUneUrl, new { type = "file", name = "files", id = "photoALaUneUrl" })
+                                    <div class="action">
+                                        <i class="fa fa-camera"></i>  Photo à la une
+                                        <div class="input-custom">
+                                            <label for="photoALaUneUrl" class="btn btn-primary btn-small">Choisir</label>
+                                        </div>
+                                    </div>
+                                    <span class="thumbnail-photo"></span>
+                                </label>
                             </div>
                         </div>
                         <label for="" class="col-50 pull-left" style="margin-top: 30px;">
@@ -96,7 +108,7 @@
                                             </label>
                                         </div>
                                         <div class="clearfix bloccontenu">
-                                           
+
                                         </div>
                                     </div>
                                 </div>
@@ -127,7 +139,7 @@
 
                                         </div>
                                         <div class="clearfix bloccontenu">
-                                            
+
 
                                         </div>
                                     </div>
@@ -163,7 +175,7 @@
 
                                         </div>
                                         <div class="clearfix bloccontenu">
-                                           
+
                                         </div>
                                     </div>
                                 </div>
@@ -198,7 +210,7 @@
 
                                         </div>
                                         <div class="clearfix bloccontenu">
-                                           
+
                                         </div>
                                     </div>
                                 </div>

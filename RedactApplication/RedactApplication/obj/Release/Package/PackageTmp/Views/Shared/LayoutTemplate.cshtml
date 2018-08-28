@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="css/templates-style.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
-    <link rel="stylesheet" href="css/bases.css">
+
 </head>
 <body>
     @RenderBody()
@@ -20,7 +20,25 @@
 
 
     @RenderSection("scripts", required: false)
-
-
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous" ></script>
+    <script>
+        $('#topbar').each(function () {
+            var blk = $(this);
+            var img = blk.find("img").first();
+            var urlImg = img.attr("src");
+            var imageUrl = urlImg;
+            if (urlImg) {
+                blk.css('background', 'url("' + imageUrl + '")').css({
+                    "background-size": "cover",
+                    "background-repeat": "no-repeat",
+                    "background-position": "center",
+                });
+                img.hide();
+            }
+            else {
+                blk.removeAttr("style");
+            }
+        });
+    </script>
 </body>
 </html>
