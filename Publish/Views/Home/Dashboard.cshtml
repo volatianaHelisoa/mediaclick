@@ -30,11 +30,13 @@
                         <li> @Html.ActionLink("Utilisateurs", "ListeUser", new { controller = "Home" }) </li>
                     }
                     <li>@Html.ActionLink("Commandes", "ListCommandes", new { controller = "Commandes" })</li>
-                    <li>@Html.ActionLink("Factures", "ListFacture", new { controller = "Facture" })</li>
+                    @if (@Session["role"] != null && @Session["role"].ToString() != "1")
+                    {
+                        <li>@Html.ActionLink("Factures", "ListFacture", new { controller = "Facture" })</li>
 
+                    }
 
-
-                </ul>
+                    </ul>
             </div>
             <div class="card back-office with-shadow clearfix">
                 @if (@Session["role"].ToString() == "4")

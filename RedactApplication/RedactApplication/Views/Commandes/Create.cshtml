@@ -191,16 +191,18 @@
             <div class="onglets">
                 <ul>
                     <li> @Html.ActionLink("Dashboard", "Dashboard", new { controller = "Home" }) </li>
-                    @if (@Session["role"] != null && @Session["role"].ToString() != "2")
+                    @if (@Session["role"] != null && @Session["role"].ToString() != "2" && @Session["role"].ToString() != "1")
                     {
                         <li> @Html.ActionLink("Utilisateurs", "ListeUser", new { controller = "Home" }) </li>
                     }
                     <li>@Html.ActionLink("Commandes", "ListCommandes", new { controller = "Commandes" }, new { @class = "active" })</li>
-                    <li>@Html.ActionLink("Factures", "ListFacture", new { controller = "Facture" })</li>
+                    @if (@Session["role"] != null &&  @Session["role"].ToString() != "1")
+                    {
+                        <li>@Html.ActionLink("Factures", "ListFacture", new { controller = "Facture" })</li>
 
+                    }
 
-
-                </ul>
+                    </ul>
             </div>
             <div class="card back-office with-shadow">
                 <div class="head">
@@ -265,8 +267,8 @@
                             @Html.TextBoxFor(x => x.mot_cle_secondaire)
                         </label>
                         <label for="" class="col-50 pull-left">
-                            Texte d'ancrage (*)
-                            @Html.TextBoxFor(x => x.texte_ancrage, new { @required = true, @name = "name" })
+                            Texte d'ancrage 
+                            @Html.TextBoxFor(x => x.texte_ancrage, new { @name = "name" })
                         </label>
                         <label for="" class="col-50 pull-right">
                             Nombre de mots (*)

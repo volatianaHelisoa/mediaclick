@@ -31,14 +31,17 @@
             <div class="onglets ease-in-out">
                 <ul>
                     <li> @Html.ActionLink("Dashboard", "Dashboard", new { controller = "Home" }) </li>
-                    @if (@Session["role"] != null && @Session["role"].ToString() != "2")
+                    @if (@Session["role"] != null && @Session["role"].ToString() != "2" && @Session["role"].ToString() != "1")
                     {
                         <li> @Html.ActionLink("Utilisateurs", "ListeUser", new { controller = "Home" }) </li>
                     }
                     <li>@Html.ActionLink("Commandes", "ListCommandes", new { controller = "Commandes" })</li>
-                    <li>@Html.ActionLink("Factures", "ListFacture", new { controller = "Facture" }, new { @class = "active" })</li>
-                 
-                </ul>
+                    @if (@Session["role"] != null && @Session["role"].ToString() != "1")
+                    {
+                        <li>@Html.ActionLink("Factures", "ListFacture", new { controller = "Facture" }, new { @class = "active" })</li>
+                    }
+
+                    </ul>
             </div>
 
             <div class="card back-office with-shadow">
@@ -79,6 +82,7 @@
                                 <input type="checkbox" class="checkbox" onclick="ClickAllFactureInListFacture()" id="checkAllFacture" />
                             </th>
                             <th>N° facture </th>
+                            <th>Rédacteur</th>
                             <th>Date d’émission</th>
                             <th>Période concerné</th>
                             <th>Montant facture</th>
@@ -92,33 +96,39 @@
 
                             foreach (var item in ViewBag.listeFactureVm)
                             {
-                                <tr>
-                                    <td><input type="checkbox" class="checkbox" name="selectedFacture" value="@item.factureId" /></td>
-                                    <td>@item.factureNumero</td>
-                                    <td>@item.dateEmission</td>
-                                    <td>@item.periode</td>
-                                    <td>@item.montant</td>
-                                    @if (@item.etat == false)
-                                    {
-                                        <td>Non payé</td>
-                                    }
-                                    else if (@item.etat == true)
-                                    {
-                                        <td>Payé</td>
-                                    }
+                        <tr>
+                            <td><input type="checkbox" class="checkbox" name="selectedFacture" value="@item.factureId" /></td>
+                            <td>@item.factureNumero</td>
+                            <td>@item.REDACTEUR.userNom @item.REDACTEUR.userPrenom</td>
+                            <td>@item.dateEmission</td>
+                            <td>@item.periode</td>
+                            <td>@item.montant</td>
+                            @if (@item.etat == false)
+                            {
+                                <td>Non payé</td>
+                            }
+                            else if (@item.etat == true)
+                            {
+                                <td>Payé</td>
+                            }
 
-                                    <td class="col-option">
-                                        <div class="item">
-                                            <div class="option">
-                                                <a href="~/Facture/Details/@item.factureId" title="Détails"><i class="fa fa-eye"></i></a>
-                                                @if (@Session["role"] != null && @Session["role"].ToString() != "2")
-                                                {
-                                                    <a onclick="DeleteFactureClick('@item.factureId')" title="Supprimer Facture"><i class="fa fa-trash"></i></a>
-                                                }
-                                                </div>
-                                        </div>
-                                    </td>
-                                </tr>
+                            <td class="col-option">
+                                <div class="item">
+                                    <div class="option">
+                                        <a href="~/Facture/Details/@item.factureId" title="Détails"><i class="fa fa-eye"></i></a>
+                                        @if (@Session["role"] != null && @Session["role"].ToString() != "2")
+                                        {
+                                            <a onclick="DeleteFactureClick('@item.factureId')" title="Supprimer Facture"><i class="fa fa-trash"></i></a>
+                                            if (@item.etat == false)
+                                            {
+                                                <a onclick="PayerFactureClick('@item.factureId')" title="Payer Facture"><i class="fa fa-edit"></i></a>
+                                            }
+
+                                        }
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
 
                             }
                         }
@@ -164,7 +174,7 @@ else
             });
         }
     }
-
+    
     var DeleteAllFactureSelected = function (nbrow) {
         var ListFactureId = '';
         $('input[name="selectedFacture"]:checked').each(function () {
@@ -201,6 +211,29 @@ else
             }
         });
     }
+
+    /*pour la mise a jour de la facture*/
+    var PayerFactureClick = function (facture) {
+        //  alert(facture);
+        if (facture !== '') {
+
+          
+            
+            var facture_obj = { "id": facture};
+           
+            $.ajax({
+                url: '/Facture/UpdateFacture',
+                type: "POST",
+                data: facture_obj,
+                cache: false,
+                async: true,
+                success: function (resp) {
+                    location.reload(); 
+                }
+            });
+        }
+    }
+
 
 </script>
 

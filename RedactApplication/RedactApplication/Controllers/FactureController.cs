@@ -36,11 +36,42 @@ namespace RedactApplication.Controllers
         public ActionResult ListFacture()
         {
             ViewBag.listeFactureVm = new Factures().GetListFacture();
+            if (!string.IsNullOrEmpty(Request.QueryString["currentid"]))
+            {
+                _userId = Guid.Parse(Request.QueryString["currentid"]);
+                Session["currentid"] = Request.QueryString["currentid"];
+            }
+            else
+                _userId = Guid.Parse(HttpContext.User.Identity.Name);
+
+            var currentrole = (new Utilisateurs()).GetUtilisateurRoleToString(_userId);
+
+            if (currentrole != null && currentrole.Contains("2"))
+                ViewBag.listeFactureVm = new Factures().GetListFacture().Where(x=>x.redacteurId == _userId);
+
 
             return View();
         }
 
-        
+        [HttpPost]
+        public string UpdateFacture(string id)
+        {
+            try
+            {
+
+                var facture = db.FACTUREs.Where(x => x.factureId.ToString() == id).SingleOrDefault();
+                facture.etat = true;
+                var res = db.SaveChanges();
+                return res.ToString();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+
+        }
+
 
         // GET: Facture/Details/5
         public ActionResult Details(Guid? hash)

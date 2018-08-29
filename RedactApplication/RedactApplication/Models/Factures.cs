@@ -28,7 +28,9 @@ namespace RedactApplication.Models
                     dateFin = facture.dateFin,
                     montant = facture.montant,
                     etat = facture.etat,
-                    periode = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(facture.dateFin.Month)
+                    periode = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(facture.dateFin.Month),
+                    redacteurId = facture.redacteurId,
+                    REDACTEUR = db.UTILISATEURs.Find(facture.redacteurId)
             });
 
             }
