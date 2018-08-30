@@ -1510,7 +1510,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>07/27/2018 17:28:49</publishTime>
     </File>
     <File Include="Views/Template/Home.cshtml">
-      <publishTime>08/30/2018 09:40:41</publishTime>
+      <publishTime>08/30/2018 13:33:44</publishTime>
     </File>
     <File Include="Views/Template/Home1.cshtml">
       <publishTime>01/01/0001 00:00:00</publishTime>
