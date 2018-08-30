@@ -5,7 +5,7 @@
 
 .content-button a { display:block; color:#fff; padding:40px 36px 0 76px; min-height:184px; position:relative;-webkit-box-shadow: 0px 3px 15px 0px rgba(0, 0, 0, 0.04);-moz-box-shadow:0px 3px 15px 0px rgba(0, 0, 0, 0.1);
 box-shadow:0px 3px 15px 0px rgba(0, 0, 0, 0.04);}
-.content-button a>div { display:inline-block; vertical-align:top; text-align:center; position:relative; z-index:99}
+.content-button a>div { display:inline-block; vertical-align:top; text-align:center; position:relative; z-index:10}
 .content-button a span { display:inline-block; vertical-align:top; font:normal 35px/64px RL; vertical-align:top; text-align:center; padding:0 14px; border-radius:34px; border:2px solid #fff}
 .ttl { padding-bottom:18px; text-transform:uppercase;}
 .manager { background: #3988e9;background: -moz-linear-gradient(45deg, #3988e9 0%, #ab74f2 61%);background: -webkit-linear-gradient(45deg, #3988e9 0%, #ab74f2 61%);background: linear-gradient(45deg, #3988e9 0%, #ab74f2 61%); margin-bottom:30px;}
@@ -35,7 +35,7 @@ box-shadow:0px 3px 15px 0px rgba(0, 0, 0, 0.04);}
 .annulation:after { content:''; display:block; position:absolute; top:0; right:0; bottom:0; left:0; background:url(../../../images/icone-annulation.png) right bottom no-repeat}
 
 .bottom-dash { margin-top:36px;}
-.bottom-dash .content { padding:32px 36px}
+.bottom-dash .content { padding:32px 0}
 .facturation { background: #fd8d98;background: -moz-linear-gradient(120deg, #fd8d98 0%, #c23552 86%);background: -webkit-linear-gradient(120deg, #fd8d98 0%, #c23552 86%);background: linear-gradient(120deg, #fd8d98 0%, #c23552 86%);}
 .facturation:after { content:''; display:block; position:absolute; top:0; right:0; bottom:0; left:0; background:url(../../../images/icone-facture.png) right bottom no-repeat}
 .montant { background: #9043a3;background: -moz-linear-gradient(120deg, #9043a3 0%, #f4602c 86%);background: -webkit-linear-gradient(120deg, #9043a3 0%, #f4602c 86%);background: linear-gradient(120deg, #9043a3 0%, #f4602c 86%);}
