@@ -15,7 +15,7 @@ body {
 p {
     margin: 0 0 22px;
 }
-h2 { color: #f1be22 }
+h3 { color: #f1be22 }
 a {
     text-decoration: none;
 }
@@ -60,16 +60,10 @@ a {
 }
 
 .t-logo,
-.t-logo img,
-.t-logo .site-url {
+.t-logo img{
     display: block;
     max-width: 147px;
     margin: 0 auto;
-}
-
-.t-logo .site-url {
-    color: #333;
-    margin-left: 10px;
 }
 
 .template #banner img {
@@ -121,20 +115,16 @@ h2 {
     color: #232323;
     border-bottom: 1px solid #acacac;
 }
-
-.theme #bloc1 {
-    display: flex;
-    padding: 40px 0 20px;
-}
-
-.theme h3 {
+h3 {
     font-weight: normal;
     font-size: 20px;
 }
-
-.theme #bloc1 .texte {
-    padding-right: 40px;
-    min-width: 60%;
+h4 {
+    color: #f18822;
+}
+.photo {
+    max-height: 600px;
+    overflow: hidden;
 }
 
 .theme .texte p{
