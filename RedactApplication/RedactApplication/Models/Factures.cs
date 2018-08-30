@@ -79,7 +79,7 @@ namespace RedactApplication.Models
                         new SelectListItem
                         {
                             Value = n.userId.ToString(),
-                            Text = n.userNom
+                            Text = n.userNom +" "+ n.userPrenom
                         }).ToList();
                 var redacteurItem = new SelectListItem()
                 {

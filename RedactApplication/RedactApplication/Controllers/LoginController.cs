@@ -71,7 +71,7 @@ namespace RedactApplication.Controllers
                 }
                 var data = (new Utilisateurs()).GetUtilisateurRole(utilisateur.userId).ToList();
                 {
-                    if (data.Count == 1)
+                    if (data.Count >= 1)
                     {
 
                         //if (data[0] == 2)

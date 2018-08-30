@@ -35,7 +35,7 @@ a {
     background-color: #f7f7f7;
 }
 .template {
-    background: url(../img/texture_body.gif)repeat top left;
+    background: url(texture_body.gif)repeat top left;
 }
 .template .wrapper{
     max-width: 970px;

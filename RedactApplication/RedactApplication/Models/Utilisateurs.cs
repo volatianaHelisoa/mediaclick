@@ -75,7 +75,7 @@ namespace RedactApplication.Models
             UTILISATEUR utilisateur = db.UTILISATEURs.SingleOrDefault(x => x.userId == id);
             var data = (from idrole in db.UserRoles
                         where idrole.idUser == utilisateur.userId
-                        select (int)idrole.idRole).ToList<int>();
+                        select  (int)idrole.idRole).ToList<int>();
             return data;
         }
         public string GetUtilisateurRoleToString(Guid id)
@@ -84,11 +84,8 @@ namespace RedactApplication.Models
             if (data != null && data.Count >= 1)
             {
                 string x = "";
-                foreach (var role in data)
-                {
-                    x += role.ToString() + ",";
-                }
-                return x.Substring(0, x.Length - 1);
+               
+                return data[0].ToString();
             }
             return "";
         }

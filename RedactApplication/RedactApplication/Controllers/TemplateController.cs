@@ -50,13 +50,29 @@ namespace RedactApplication.Controllers
             return View();
         }
 
+        private void DeleteFiles(string path)
+        {
+            System.IO.DirectoryInfo di = new DirectoryInfo(path);
+            if (Directory.Exists(path))
+            {
+                
+                foreach (FileInfo tmp in di.EnumerateFiles())
+                {
+                    tmp.Delete();
+                }
+            }
+        }
+
+
         private string SavePhoto(HttpPostedFileBase file,string templateName)
         {
             string path = Server.MapPath("~/Themes/"+ templateName + "/img/");
+          
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
             }
+           
             if (file != null)
             {
                 string fileName = Path.GetFileName(file.FileName);
@@ -90,7 +106,11 @@ namespace RedactApplication.Controllers
             {
                 Directory.CreateDirectory(path);
             }
-            
+            else DeleteFiles(path);
+            string pathimg = Server.MapPath("~/Themes/" + templateName + "/img/");
+            DeleteFiles(pathimg);
+
+
             MODELE newmodel = new MODELE();
             newmodel.logoUrl = SavePhoto(logoUrl, templateName);
             
@@ -196,6 +216,19 @@ namespace RedactApplication.Controllers
         public ActionResult CreateTemplate(Guid? hash)
         {
             Templates val = new Templates();
+            TEMPLATEViewModel templateVm = SetTemplateVM();
+            //templateVm.ListProjet = val.GetListProjetItem();
+            //templateVm.ListTheme = val.GetListThemeItem();
+            //var modeleId = Session["modeleId"];
+            //MODELEViewModel modelVm = new MODELEViewModel();
+            //modelVm = new Modeles().GetDetailsModele(Guid.Parse(modeleId.ToString()));
+            //templateVm.url = modelVm.site_url;
+            return View(templateVm);
+        }
+
+        private TEMPLATEViewModel SetTemplateVM()
+        {
+            Templates val = new Templates();
             TEMPLATEViewModel templateVm = new TEMPLATEViewModel();
             templateVm.ListProjet = val.GetListProjetItem();
             templateVm.ListTheme = val.GetListThemeItem();
@@ -203,7 +236,27 @@ namespace RedactApplication.Controllers
             MODELEViewModel modelVm = new MODELEViewModel();
             modelVm = new Modeles().GetDetailsModele(Guid.Parse(modeleId.ToString()));
             templateVm.url = modelVm.site_url;
-            return View(templateVm);
+            return templateVm;
+        }
+
+        [HttpPost]
+        public ActionResult CreateProjet(TEMPLATEViewModel model)
+        {
+            PROJET projet = new PROJET { projetId = Guid.NewGuid(), projet_name = model.PROJET.projet_name };
+            db.PROJETS.Add(projet);
+            db.SaveChanges();
+
+            TEMPLATEViewModel templateVm = SetTemplateVM();
+            return View("CreateTemplate", templateVm);
+
+        }
+
+        [Authorize]
+        [HttpGet]
+        public JsonResult AutocompleteThemeSuggestions(string term)
+        {
+            var suggestions = new Templates().GetListThemeItem(term);
+            return Json(suggestions, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Home()
@@ -263,8 +316,17 @@ namespace RedactApplication.Controllers
             newtemplate.userId = _userId;
             newtemplate.PROJET = db.PROJETS.Find(selectedProjetId);
             newtemplate.projetId = selectedProjetId;
-            newtemplate.THEME = db.THEMES.Find(selectedThemeId);
-            newtemplate.themeId = selectedThemeId;
+            var selectedTheme = model.THEME.theme_name;
+            THEME currentTheme = db.THEMES.FirstOrDefault(x => x.theme_name.Contains(selectedTheme.TrimEnd()));
+            if (currentTheme == null)
+            {
+                currentTheme = new THEME { themeId = Guid.NewGuid(), theme_name = selectedTheme };
+                db.THEMES.Add(currentTheme);
+                db.SaveChanges();
+            }
+            
+            newtemplate.THEME = currentTheme;
+            newtemplate.themeId = currentTheme.themeId;
             newtemplate.html = html;
             newtemplate.templateId = Guid.NewGuid();
 
@@ -282,7 +344,7 @@ namespace RedactApplication.Controllers
 
                     //Send Ftp
                     string pathParent = Server.MapPath("~/Themes/" + templateName);
-                    string pathCss = pathParent + "/css/templates-style.css";
+                    string pathCss = pathParent + "/css/";
                     string pathImg = pathParent + "/img";
                     string pathJs = pathParent + "/js";
                     int result = SendToFtp(ftpdir,model.url, model.ftpUser, model.ftpPassword, pathCss, pathParent, pathImg,pathJs);
@@ -438,12 +500,15 @@ namespace RedactApplication.Controllers
                 /* Create a New Directory */
                 ftpClient.createDirectory("/css");
                 ftpClient.createDirectory("/img");
-                ftpClient.createDirectory("/js");
+               
 
                 ftpClient = null;
 
                 string[] htmlPaths = Directory.GetFiles(pathHtml, "*.html");    
                 string[] imgPaths = Directory.GetFiles(pathImg, "*.jpg");
+                var pathCssfiles = Directory.EnumerateFiles(pathCss, "*.*", SearchOption.AllDirectories)
+                .Where(s => s.EndsWith(".css") || s.EndsWith(".gif"));
+              
 
                 using (WebClient client = new WebClient())
                 {
@@ -462,15 +527,30 @@ namespace RedactApplication.Controllers
                             "ftp://" + url + "/img/" + Path.GetFileName(img), img);
                     }
 
-                    client.Credentials = new NetworkCredential(username, password);
-                    client.UploadFile(
-                           "ftp://" + url + "/css/" + Path.GetFileName(pathCss), pathCss);
 
-                    if (System.IO.File.Exists(pathJs))
+                    foreach (var pcss in pathCssfiles)
                     {
                         client.Credentials = new NetworkCredential(username, password);
                         client.UploadFile(
-                               "ftp://" + url + "/js/" + Path.GetFileName(pathJs), pathJs);
+                               "ftp://" + url + "/css/" + Path.GetFileName(pcss), pcss);
+                    }
+
+
+
+                    if (Session["TemplateName"] != null && Session["TemplateName"].ToString() == "Theme3")
+                    {
+                        ftpClient = new FTP(@"ftp://" + url + "/", username, password);
+                        ftpClient.createDirectory("/js");
+                        ftpClient = null;
+                        var pathJsfiles = Directory.EnumerateFiles(pathJs, "*.*", SearchOption.AllDirectories)
+                          .Where(s => s.EndsWith(".js"));
+                        foreach (var pJs in pathJsfiles)
+                        {
+                            client.Credentials = new NetworkCredential(username, password);
+                            client.UploadFile(
+                                   "ftp://" + url + "/js/" + Path.GetFileName(pJs), pJs);
+                        }
+                       
                     }
                 }
             }
@@ -553,9 +633,9 @@ namespace RedactApplication.Controllers
                 var list = names.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
                 return string.Join(",", list.ToArray());
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                return e.ToString();
             }
 
            

@@ -60,7 +60,18 @@ namespace RedactApplication.Controllers
             {
 
                 var facture = db.FACTUREs.Where(x => x.factureId.ToString() == id).SingleOrDefault();
-                facture.etat = true;
+
+                facture.etat = (facture.etat == true) ? false : true;
+
+                var commandesFacturer = db.COMMANDEs.Where(x => x.factureId.ToString() == id  ).ToList();
+                foreach (var commande in commandesFacturer)
+                {
+                   
+                    var status = (facture.etat == true) ? db.STATUT_COMMANDE.SingleOrDefault(s => s.statut_cmde.Contains("Payé")) : db.STATUT_COMMANDE.SingleOrDefault(s => s.statut_cmde.Contains("Facturé")); ;
+                    commande.STATUT_COMMANDE = status;
+                    db.SaveChanges();
+                }
+
                 var res = db.SaveChanges();
                 return res.ToString();
             }
@@ -269,7 +280,7 @@ namespace RedactApplication.Controllers
                         
                         commande.factureId = factureId;
                         commande.REDACTEUR.redactTarif = String.Format("{0:N0}", commande.REDACTEUR.redactTarif);
-                       
+                        
                     }
 
                     newFacture.montant = String.Format("{0:N0}", montant);
@@ -283,7 +294,16 @@ namespace RedactApplication.Controllers
 
                     int res = db.SaveChanges();
                     if (res > 0)
+                    {
+                        foreach (var commande in commandesFacturer)
+                        {                            
+                            var status = db.STATUT_COMMANDE.SingleOrDefault(s => s.statut_cmde.Contains("Facturé"));
+                            commande.STATUT_COMMANDE = status;
+                            db.SaveChanges();
+                        }
                         return RedirectToAction("ListFacture");
+                    }
+                   
                 }
                 else
                 {

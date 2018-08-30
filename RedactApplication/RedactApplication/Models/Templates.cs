@@ -84,5 +84,24 @@ namespace RedactApplication.Models
                 return new SelectList(listtheme, "Value", "Text");
             }
         }
+
+        public IEnumerable<SelectListItem> GetListThemeItem(string term)
+        {
+            using (var context = new redactapplicationEntities())
+            {
+                var theme = context.THEMES.Where(x => x.theme_name.StartsWith(term));
+                List<SelectListItem> listtheme = theme
+                    .OrderBy(n => n.theme_name)
+                    .Select(n =>
+                        new SelectListItem
+                        {
+                            Value = n.themeId.ToString(),
+                            Text = n.theme_name
+                        }).ToList();
+
+                return new SelectList(listtheme, "Value", "Text");
+            }
+        }
+
     }
 }

@@ -164,17 +164,17 @@
 
 /* POPUPS COMMANDES */
 #refuserCommandePoPup,
-#updateCommandePoPup {    
+#updateCommandePoPup {
     margin: -278px auto 0;
-    max-width: 500px;
     background: white;
-    padding: 0 30px;
+    padding: 20px 30px 30px;
+    max-width: 570px;
 }
 
 #refuserCommandePoPup .commande-review,
 #updateCommandePoPup .commande-review {
-    margin: 0 auto;
-}    
+    margin: 0 auto 20px;
+}
 
 #refuserCommandePoPup h1,
 #updateCommandePoPup h1 {

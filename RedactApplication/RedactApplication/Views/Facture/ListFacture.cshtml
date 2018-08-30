@@ -83,6 +83,7 @@
                             </th>
                             <th>N° facture </th>
                             <th>Rédacteur</th>
+                            <th>Tarif</th>
                             <th>Date d’émission</th>
                             <th>Période concerné</th>
                             <th>Montant facture</th>
@@ -100,6 +101,7 @@
                             <td><input type="checkbox" class="checkbox" name="selectedFacture" value="@item.factureId" /></td>
                             <td>@item.factureNumero</td>
                             <td>@item.REDACTEUR.userNom @item.REDACTEUR.userPrenom</td>
+                            <td>@item.REDACTEUR.redactTarif</td>
                             <td>@item.dateEmission</td>
                             <td>@item.periode</td>
                             <td>@item.montant</td>
@@ -119,9 +121,9 @@
                                         @if (@Session["role"] != null && @Session["role"].ToString() != "2")
                                         {
                                             <a onclick="DeleteFactureClick('@item.factureId')" title="Supprimer Facture"><i class="fa fa-trash"></i></a>
-                                            if (@item.etat == false)
+                                            if (@Session["role"] != null && @Session["role"].ToString() != "2")
                                             {
-                                                <a onclick="PayerFactureClick('@item.factureId')" title="Payer Facture"><i class="fa fa-edit"></i></a>
+                                                <a onclick="PayerFactureClick('@item.factureId')" title="Payer Facture"><i class="fa fa-money "></i></a>
                                             }
 
                                         }

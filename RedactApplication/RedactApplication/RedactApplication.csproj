@@ -566,27 +566,13 @@
     <Content Include="Scripts\tinymce.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Themes\Theme1\css\templates-style.css" />
-    <Content Include="Themes\Theme1\img\pret accession sociale.jpg" />
-    <Content Include="Themes\Theme1\img\pret travaux isolation.jpg" />
-    <Content Include="Themes\Theme1\img\pret travaux renovation.jpg" />
     <Content Include="Themes\Theme1\index.html" />
-    <Content Include="Themes\Theme2\css\bases.css" />
     <Content Include="Themes\Theme2\css\templates-style.css" />
-    <Content Include="Themes\Theme2\img\marche bangkok.jpg" />
-    <Content Include="Themes\Theme2\img\pret epargne logement.jpg" />
-    <Content Include="Themes\Theme2\img\pret travaux isolation.jpg" />
     <Content Include="Themes\Theme2\index.html" />
-    <Content Include="Themes\Theme2\page2.html" />
     <Content Include="Themes\Theme3\css\templates-style.css" />
-    <Content Include="Themes\Theme3\img\eco pret travaux.jpg" />
-    <Content Include="Themes\Theme3\img\logo.png" />
-    <Content Include="Themes\Theme3\img\marche bangkok.jpg" />
-    <Content Include="Themes\Theme3\img\pret accession sociale.jpg" />
-    <Content Include="Themes\Theme3\img\pret epargne logement.jpg" />
-    <Content Include="Themes\Theme3\img\pret travaux isolation.jpg" />
-    <Content Include="Themes\Theme3\img\texture_body.gif" />
     <Content Include="Themes\Theme3\index.html" />
     <Content Include="Themes\Theme3\js\jquery.min.js" />
+    <Content Include="Themes\Theme3\js\theme.js" />
     <Content Include="Themes\Theme3\page2.html" />
     <Content Include="Themes\Theme4\css\bases.css" />
     <Content Include="Themes\Theme4\css\templates-style.css" />
@@ -709,12 +695,14 @@
     <Content Include="Views\Commandes\CreateProjet.cshtml" />
     <Content Include="Views\Template\DeleteTemplateConfirmation.cshtml" />
     <Content Include="Views\Template\DeteleAllTemplateConfirmation.cshtml" />
-    <Content Include="Themes\Theme1\img\Theme1 - Raccourci.lnk" />
     <Content Include="Themes\Theme3.rar" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="images\Logo\" />
+    <Folder Include="Themes\Theme1\img\" />
+    <Folder Include="Themes\Theme2\img\" />
+    <Folder Include="Themes\Theme3\img\" />
     <Folder Include="Views\Sms\" />
   </ItemGroup>
   <ItemGroup>

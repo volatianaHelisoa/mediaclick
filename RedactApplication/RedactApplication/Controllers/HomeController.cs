@@ -85,7 +85,7 @@ namespace RedactApplication.Controllers
 
             if (user != null)
             {
-                if (role == "1" || role == "3") //referenceur ou manager
+                if (role == "1" ) //referenceur ou manager
                     commandes = commandes.Where(x => x.commandeReferenceurId == userId).ToList();
 
                 if(role =="2") //redacteur
@@ -150,8 +150,8 @@ namespace RedactApplication.Controllers
             var factures = db.FACTUREs.Where(x => x.dateDebut >= startOfMonth &&
                              x.dateFin <= lastDay).ToList();
 
-            if (role == "1" || role == "3")
-                factures = factures.Where(x => x.createurId == userId).ToList();
+            //if (role == "1" || role == "3")
+            //    factures = factures.Where(x => x.createurId == userId).ToList();
 
             if (role == "2")
                 factures = factures.Where(x => x.redacteurId == userId).ToList();

@@ -99,7 +99,7 @@
                             <th>Type de textes</th>
                             <th>Tags</th>
                             <th>Etat </th>
-                            <th>Paiement</th>
+                         
                             <th class="option">Action</th>
                         </tr>
                     </thead>
@@ -127,14 +127,7 @@
                                     <td>@item.tag</td>
                                     <td>@item.statut_cmde</td>
 
-                                    @if (@item.etat_paiement == true)
-                                    {
-                                        <td> Payé</td>
-                                    }
-                                    else
-                                    {
-                                        <td>Non payé</td>
-                                    }
+                                   
 
                                     <td class="col-option">
                                         <!--ViewBag.numpage/ViewBag.nbrow-->
