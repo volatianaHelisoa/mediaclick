@@ -223,6 +223,7 @@ namespace RedactApplication.Controllers
             //MODELEViewModel modelVm = new MODELEViewModel();
             //modelVm = new Modeles().GetDetailsModele(Guid.Parse(modeleId.ToString()));
             //templateVm.url = modelVm.site_url;
+        
             return View(templateVm);
         }
 
@@ -447,7 +448,37 @@ namespace RedactApplication.Controllers
             });
         }
 
+        public static string ExtractDomainName(string Url)
+        {
+            return System.Text.RegularExpressions.Regex.Replace(
+                Url,
+                @"^([a-zA-Z]+:\/\/)?([^\/]+)\/.*?$",
+                "$2"
+            );
+        }
 
+        private string GetMetatitle(int menu,MODELEViewModel modelVm)
+        {
+            var result = modelVm.menu1_paragraphe1_titre;
+
+            switch (menu)
+            {
+                case 2:
+                    result = modelVm.menu2_paragraphe1_titre;
+                    break;
+                case 3:
+                    result = modelVm.menu3_paragraphe1_titre;
+                    break;
+                case 4:
+                    result = modelVm.menu4_paragraphe1_titre;
+                    break;
+                default:
+                    result =  modelVm.menu1_paragraphe1_titre;
+                    break;
+            };
+
+            return result;
+        }
 
 
         private void CreateFiles(int nb_menu, string menu1_html)
@@ -468,7 +499,9 @@ namespace RedactApplication.Controllers
                     pathHtml = pathHtml + "/page" + i + ".html";
 
                 Session["Menu"] = i;
-                html = RenderViewAsString("Home", modelVm);
+
+                modelVm.meta_title = GetMetatitle(i, modelVm);
+              html = RenderViewAsString("Home", modelVm);
 
 
                 if (!System.IO.File.Exists(Server.MapPath(pathHtml)))
@@ -505,7 +538,12 @@ namespace RedactApplication.Controllers
                 ftpClient = null;
 
                 string[] htmlPaths = Directory.GetFiles(pathHtml, "*.html");    
-                string[] imgPaths = Directory.GetFiles(pathImg, "*.jpg");
+                
+                var imgPaths = Directory.EnumerateFiles(pathImg, "*.*", SearchOption.AllDirectories)
+               .Where(s => s.EndsWith(".jpg") || s.EndsWith(".jpeg") || s.EndsWith(".svg") || s.EndsWith(".gif") || s.EndsWith(".png") || s.EndsWith(".bmp") || s.EndsWith(".tiff") || s.EndsWith(".tif"));
+
+                
+
                 var pathCssfiles = Directory.EnumerateFiles(pathCss, "*.*", SearchOption.AllDirectories)
                 .Where(s => s.EndsWith(".css") || s.EndsWith(".gif"));
               

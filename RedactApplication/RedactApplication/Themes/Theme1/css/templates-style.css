@@ -15,7 +15,6 @@ body {
 p {
     margin: 0 0 22px;
 }
-h2 { color: #f1be22 }
 a {
     text-decoration: none;
 }
@@ -36,7 +35,7 @@ a {
     background-color: #f7f7f7;
 }
 .template {
-    background: url(../img/pattern-body.jpg)repeat top left;
+    background: url(pattern-body.jpg)repeat top left;
 }
 .template .wrapper{
     max-width: 971px;
@@ -102,9 +101,7 @@ nav.menu .current a {
     display: flex;
     padding: 40px 0 20px;
 }
-
-.theme h1,
-.theme h2 {
+h1 {
     font-size: 25px;
     font-weight: normal;
     color: #07b6ff;
@@ -112,10 +109,18 @@ nav.menu .current a {
     line-height: normal;
     margin: 0 0 14px;
 }
-
-.theme h3 {
+h2 {
     font-weight: normal;
     font-size: 20px;
+}
+h3 {
+    font-weight: normal;
+    font-size: 18px;
+    color: #ff4d86;
+}
+h4 {
+    font-size: 18px;
+    color: #171717
 }
 
 .theme #bloc1 .texte {
@@ -131,6 +136,14 @@ nav.menu .current a {
     min-width: 40%;
     overflow: hidden;
     max-width: 40%;
+    position: relative;
+}
+
+.theme #bloc1 .photo > img {
+    position: absolute;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .theme .photo > img {
@@ -154,8 +167,10 @@ nav.menu .current a {
 }
 
 .theme #bloc2 .photo {
-    padding-right: 40px;
-    min-width: 60%;
+    margin-right: 40px;
+    min-width: calc(60% - 40px);
+    position: relative;
+    overflow: hidden;
 }
 
 .theme #bloc2 .photo > img {

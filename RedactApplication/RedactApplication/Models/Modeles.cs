@@ -47,10 +47,23 @@ namespace RedactApplication.Models
 
             modeleVm.photoALaUneUrl = modele.photoALaUneUrl;
             modeleVm.site_url = modele.site_url;
-           
-
+            modeleVm.domaine = ExtractDomainName(modele.site_url);
+          
             return modeleVm;
 
+        }
+
+        public  string ExtractDomainName(string Url)
+        {
+            Uri baseUri = new Uri(Url);
+            var fullDomain = baseUri.GetComponents(UriComponents.Host, UriFormat.SafeUnescaped);
+            var domainParts = fullDomain
+                .Split('.') 
+                .Reverse() 
+                .Take(2)  
+                .Reverse(); 
+            var domain = String.Join(".", domainParts);
+            return domain;
         }
 
         public MODELEViewModel GetPrincipalModele(Guid? modeleId)

@@ -566,9 +566,7 @@
     <Content Include="Scripts\tinymce.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Themes\Theme1\css\templates-style.css" />
-    <Content Include="Themes\Theme1\index.html" />
     <Content Include="Themes\Theme2\css\templates-style.css" />
-    <Content Include="Themes\Theme2\index.html" />
     <Content Include="Themes\Theme3\css\templates-style.css" />
     <Content Include="Themes\Theme3\index.html" />
     <Content Include="Themes\Theme3\js\jquery.min.js" />

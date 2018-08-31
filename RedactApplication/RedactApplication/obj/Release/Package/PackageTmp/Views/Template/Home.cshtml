@@ -19,7 +19,7 @@
         <header>
             <div class="wrapper">
                 <div id="topbar" class="clearfix">
-                    <a href="#" class="t-logo theme">
+                    <a href="@Model.site_url" class="t-logo theme">
                         <img src="@Model.logoUrl.Trim()" alt="@Model.logoUrl.Trim()" srcset="">
 
                     </a>
@@ -56,7 +56,7 @@
                                 <div class="texte">
                                     <h1> @Model.menu1_paragraphe1_titre</h1>
                                     @Html.Raw(Model.menu1_contenu1)
-                                </div>	<a href="/">
+                                </div>	
                                 <div class="photo">
                                     <img src="@Model.menu1_paragraphe1_photoUrl" alt="@Model.menu1_paragraphe1_photoUrl" srcset="">
                                 </div>
@@ -174,7 +174,7 @@
         }
 
         <footer id="f1-footer">
-            <span>© Copyright 2018 - <a href="#">@Model.site_url</a></span>
+            <span>© Copyright 2018 - @Model.domaine </span>
         </footer>
     </div>
 }
@@ -187,7 +187,7 @@
         <!-- Bloc header -->
         <header>
             <div id="topbar" class="clearfix">
-                <a href="#" class="t-logo">
+                <a href="@Model.site_url" class="t-logo">
                     <img src="@Model.logoUrl.Trim()" alt="@Model.logoUrl.Trim()" srcset="">
                 </a>
             </div>
@@ -331,9 +331,9 @@
         }
 
 
-        <footer id="f2-footer">
-            <span>© Copyright 2018 - <a href="#">@Model.site_url</a></span>
-        </footer>
+            <footer id="f2-footer">
+                <span>© Copyright 2018 - @Model.domaine</span>
+            </footer>
     </div>
 }
 
@@ -346,7 +346,7 @@
         <header>
             <div id="topbar" class="clearfix">
                 <img src="@Model.photoALaUneUrl" alt="@Model.photoALaUneUrl" srcset="">
-                <a href="javacsript:void(0)" class="t-logo">
+                <a href="@Model.site_url" class="t-logo">
                     <img src="@Model.logoUrl.Trim()" alt="@Model.logoUrl.Trim()" srcset="">
                 </a>
             </div>
@@ -481,9 +481,9 @@
             </main>
         }
       
-        <footer id="f2-footer">
-            <span>Copyright 2018 - @Model.site_url	</span>
-        </footer>
+            <footer id="f2-footer">
+                <span>© Copyright 2018 - @Model.domaine</span>
+            </footer>
     </div>
         }
 
@@ -497,7 +497,7 @@
                     <!-- Bloc header -->
                     <header>
                         <div id="topbar" class="centered">
-                            <a href="javacsript:void(0)" class="t-logo">
+                            <a href="@Model.site_url" class="t-logo">
                                 <img src="@Model.logoUrl.Trim()" alt="@Model.logoUrl.Trim()" srcset="">
 
                             </a>
@@ -533,7 +533,7 @@
                     </main>
                     <footer id="f4-footer">
                         <nav class="footer-nav">
-                            <span>Copyright 2018 - @Model.site_url	 </span>
+                            <span>© Copyright 2018 - @Model.site_url</span>
                         </nav>
                     </footer>
                 </div>

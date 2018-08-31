@@ -60,7 +60,7 @@ header { background: #f4f4f4; border-bottom: 6px solid #57545a; min-height: 67px
 
 .t-logo {
     float: left;
-    padding: 16px 46px;
+    padding: 19px 46px;
     max-width: 200px;
     display: block;
 }
@@ -68,8 +68,8 @@ header { background: #f4f4f4; border-bottom: 6px solid #57545a; min-height: 67px
 
 .t-logo img {
     display: block;
-    width: 100%;
-    height: auto;
+    height: 38px;
+    width: auto;
 }
 
 h1, h2 {

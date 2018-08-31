@@ -154,13 +154,13 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>05/24/2018 14:11:13</publishTime>
     </File>
     <File Include="bin/RedactApplication.dll">
-      <publishTime>08/30/2018 12:23:06</publishTime>
+      <publishTime>08/30/2018 21:47:36</publishTime>
     </File>
     <File Include="bin/RedactApplication.dll.config">
       <publishTime>07/24/2018 06:15:39</publishTime>
     </File>
     <File Include="bin/RedactApplication.pdb">
-      <publishTime>08/30/2018 12:23:05</publishTime>
+      <publishTime>08/30/2018 21:47:36</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>05/24/2018 14:11:16</publishTime>
@@ -1141,7 +1141,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>08/01/2018 10:35:08</publishTime>
     </File>
     <File Include="Themes/Theme3/index.html">
-      <publishTime>08/30/2018 10:20:33</publishTime>
+      <publishTime>08/30/2018 21:18:34</publishTime>
     </File>
     <File Include="Themes/Theme3/js/jquery.min.js">
       <publishTime>08/28/2018 13:18:54</publishTime>
@@ -1150,7 +1150,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>08/30/2018 05:09:33</publishTime>
     </File>
     <File Include="Themes/Theme3/page2.html">
-      <publishTime>08/30/2018 10:20:33</publishTime>
+      <publishTime>08/30/2018 21:18:36</publishTime>
     </File>
     <File Include="Themes/Theme4/css/bases.css">
       <publishTime>06/20/2018 10:12:50</publishTime>
@@ -1465,7 +1465,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>07/13/2018 14:55:00</publishTime>
     </File>
     <File Include="Views/Shared/LayoutTemplate.cshtml">
-      <publishTime>08/30/2018 09:33:21</publishTime>
+      <publishTime>08/30/2018 20:58:35</publishTime>
     </File>
     <File Include="Views/Shared/Lockout.cshtml">
       <publishTime>05/24/2018 14:11:10</publishTime>
@@ -1510,7 +1510,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>07/27/2018 17:28:49</publishTime>
     </File>
     <File Include="Views/Template/Home.cshtml">
-      <publishTime>08/30/2018 13:33:44</publishTime>
+      <publishTime>08/30/2018 17:27:14</publishTime>
     </File>
     <File Include="Views/Template/Home1.cshtml">
       <publishTime>01/01/0001 00:00:00</publishTime>

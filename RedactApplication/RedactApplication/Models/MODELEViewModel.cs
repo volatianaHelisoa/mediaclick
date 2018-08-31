@@ -41,5 +41,7 @@ namespace RedactApplication.Models
         public string menu4_paragraphe2_photoUrl { get; set; }
         public string photoALaUneUrl { get; set; }
         public string site_url { get; set; }
+        public string domaine { get; set; }
+        public string meta_title { get; set; }
     }
 }

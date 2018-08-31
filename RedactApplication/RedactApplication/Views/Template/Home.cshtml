@@ -56,7 +56,7 @@
                                 <div class="texte">
                                     <h1> @Model.menu1_paragraphe1_titre</h1>
                                     @Html.Raw(Model.menu1_contenu1)
-                                </div>	<a href="/">
+                                </div>	
                                 <div class="photo">
                                     <img src="@Model.menu1_paragraphe1_photoUrl" alt="@Model.menu1_paragraphe1_photoUrl" srcset="">
                                 </div>
@@ -174,7 +174,7 @@
         }
 
         <footer id="f1-footer">
-            <span>© Copyright 2018 - <a href="@Model.site_url">@Model.site_url</a></span>
+            <span>© Copyright 2018 - @Model.domaine </span>
         </footer>
     </div>
 }
@@ -331,9 +331,9 @@
         }
 
 
-        <footer id="f2-footer">
-            <span>© Copyright 2018 - <a href="#">@Model.site_url</a></span>
-        </footer>
+            <footer id="f2-footer">
+                <span>© Copyright 2018 - @Model.domaine</span>
+            </footer>
     </div>
 }
 
@@ -482,7 +482,7 @@
         }
       
             <footer id="f2-footer">
-                <span>Copyright 2018 - <a href="@Model.site_url">@Model.site_url</a></span>
+                <span>© Copyright 2018 - @Model.domaine</span>
             </footer>
     </div>
         }
@@ -533,7 +533,7 @@
                     </main>
                     <footer id="f4-footer">
                         <nav class="footer-nav">
-                            <span>Copyright 2018 - <a href="@Model.site_url">@Model.site_url</a></span>
+                            <span>© Copyright 2018 - @Model.site_url</span>
                         </nav>
                     </footer>
                 </div>
