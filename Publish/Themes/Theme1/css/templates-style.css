@@ -34,9 +34,6 @@ a {
 .grey-bg {
     background-color: #f7f7f7;
 }
-.template {
-    background: url(pattern-body.jpg)repeat top left;
-}
 .template .wrapper{
     max-width: 971px;
     display: block;
@@ -61,7 +58,7 @@ a {
 .t-logo .site-url {
     display: inline-block;
     vertical-align: middle;
-    width: 70px;
+    max-height: 50px;
 }
 
 .t-logo .site-url {
@@ -98,7 +95,6 @@ nav.menu .current a {
 }
 
 .theme #bloc1 {
-    display: flex;
     padding: 40px 0 20px;
 }
 h1 {
@@ -123,27 +119,15 @@ h4 {
     color: #171717
 }
 
-.theme #bloc1 .texte {
-    padding-right: 40px;
-    min-width: 60%;
-}
-
 .theme .texte p{
     text-align: justify;
 }
 
 .theme #bloc1 .photo {
-    min-width: 40%;
-    overflow: hidden;
-    max-width: 40%;
+    float: right;
+    margin: 0 0 20px 40px;
     position: relative;
-}
-
-.theme #bloc1 .photo > img {
-    position: absolute;
-    width: 100%;
-    object-fit: cover;
-    object-position: center;
+    min-width: 400px;
 }
 
 .theme .photo > img {
@@ -151,33 +135,27 @@ h4 {
 }
 
 .photo img{
-	    width: 100%;
+    width: 100%;
     height: auto;
 }
 
 .theme #bloc2 {
-    display: flex;
     background: transparent;
 }
 
 .theme #bloc2 .texte {
-    min-width: 40%;
-    overflow: hidden;
     padding: 40px 0;
 }
 
 .theme #bloc2 .photo {
     margin-right: 40px;
-    min-width: calc(60% - 40px);
-    position: relative;
-    overflow: hidden;
+    float: left;
+    margin-top: 40px;
+    margin-bottom: 40px;
 }
 
 .theme #bloc2 .photo > img {
     width: 100%;
-    object-fit: cover;
-    position: absolute;
-    height: 100%;
 }
 
 .theme #f1-footer {
