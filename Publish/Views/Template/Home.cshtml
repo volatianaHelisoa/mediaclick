@@ -20,7 +20,7 @@
             <div class="wrapper">
                 <div id="topbar" class="clearfix">
                     <a href="@Model.site_url" class="t-logo theme">
-                        <img src="@Model.logoUrl.Trim()" alt="@Model.logoUrl.Trim()" srcset="">
+                        <img src="@Html.Raw(Model.logoUrl.Trim())" alt="@Html.Raw(Model.logoUrl.Trim())" srcset="">
 
                     </a>
                     <nav class="menu">
@@ -56,16 +56,16 @@
                                 <div class="texte">
                                     <h1> @Model.menu1_paragraphe1_titre</h1>
                                     @Html.Raw(Model.menu1_contenu1)
-                                </div>	<a href="/">
+                                </div>	
                                 <div class="photo">
-                                    <img src="@Model.menu1_paragraphe1_photoUrl" alt="@Model.menu1_paragraphe1_photoUrl" srcset="">
+                                    <img src="@Html.Raw(Model.menu1_paragraphe1_photoUrl)" alt="@Html.Raw(Model.menu1_paragraphe1_photoUrl)" srcset="">
                                 </div>
                             </section>
                         </div>
                         <section class="grey-bg clearfix">
                             <div class="wrapper" id="bloc2">
                                 <div class="photo">
-                                    <img src="@Model.menu1_paragraphe2_photoUrl" alt="@Model.menu1_paragraphe2_photoUrl" srcset="">
+                                    <img src="@Html.Raw(Model.menu1_paragraphe2_photoUrl)" alt="@Html.Raw(Model.menu1_paragraphe2_photoUrl)" srcset="">
                                 </div>
                                 <div class="texe">
                                     <h2>@Model.menu1_paragraphe2_titre</h2>
@@ -90,7 +90,7 @@
                                     @Html.Raw(Model.menu2_contenu1)
                                 </div>
                                 <div class="photo">
-                                    <img src="@Model.menu2_paragraphe1_photoUrl" alt="@Model.menu2_paragraphe1_photoUrl" srcset="">
+                                    <img src="@Html.Raw(Model.menu2_paragraphe2_photoUrl)" alt="@Html.Raw(Model.menu2_paragraphe2_photoUrl)" srcset="">
                                 </div>
                             </section>
                         </div>
@@ -121,14 +121,14 @@
                                     @Html.Raw(Model.menu3_contenu1)
                                 </div>
                                 <div class="photo">
-                                    <img src="@Model.menu3_paragraphe1_photoUrl" alt="@Model.menu3_paragraphe1_photoUrl" srcset="">
+                                    <img src="@Html.Raw(Model.menu3_paragraphe1_photoUrl)" alt="@Html.Raw(Model.menu3_paragraphe1_photoUrl)" srcset="">
                                 </div>
                             </section>
                         </div>
                         <section class="grey-bg clearfix">
                             <div class="wrapper" id="bloc2">
                                 <div class="photo">
-                                    <img src="@Model.menu3_paragraphe2_photoUrl" alt="@Model.menu3_paragraphe2_photoUrl" srcset="">
+                                    <img src="@Html.Raw(Model.menu3_paragraphe2_photoUrl)" alt="@Html.Raw(Model.menu3_paragraphe2_photoUrl)" srcset="">
                                 </div>
                                 <div class="texte">
                                     <h2>@Model.menu3_paragraphe2_titre</h2>
@@ -153,14 +153,14 @@
                                     @Html.Raw(Model.menu4_contenu1)
                                 </div>
                                 <div class="photo">
-                                    <img src="@Model.menu4_paragraphe1_photoUrl" alt="@Model.menu4_paragraphe1_photoUrl" srcset="">
+                                    <img src="@Html.Raw(Model.menu4_paragraphe1_photoUrl)" alt="@Html.Raw(Model.menu4_paragraphe1_photoUrl)" srcset="">
                                 </div>
                             </section>
                         </div>
                         <section class="grey-bg clearfix">
                             <div class="wrapper" id="bloc2">
                                 <div class="photo">
-                                    <img src="@Model.menu4_paragraphe2_photoUrl" alt="@Model.menu4_paragraphe2_photoUrl" srcset="">
+                                    <img src="@Html.Raw(Model.menu4_paragraphe2_photoUrl)" alt="@Html.Raw(Model.menu4_paragraphe2_photoUrl)" srcset="">
                                 </div>
                                 <div class="texte">
                                     <h2>@Model.menu4_paragraphe2_titre</h2>
@@ -174,7 +174,7 @@
         }
 
         <footer id="f1-footer">
-            <span>© Copyright 2018 - <a href="@Model.site_url">@Model.site_url</a></span>
+            <span>© Copyright 2018 - @Model.domaine </span>
         </footer>
     </div>
 }
@@ -188,7 +188,7 @@
         <header>
             <div id="topbar" class="clearfix">
                 <a href="@Model.site_url" class="t-logo">
-                    <img src="@Model.logoUrl.Trim()" alt="@Model.logoUrl.Trim()" srcset="">
+                    <img src="@Html.Raw(Model.logoUrl.Trim())" alt="@Html.Raw(Model.logoUrl.Trim())" srcset="">
                 </a>
             </div>
             <div class="wrapper" style="padding: 0;">
@@ -227,7 +227,7 @@
                                     @Html.Raw(Model.menu1_contenu1)
                                 </div>
                                 <div class="photo">
-                                    <img src="@Model.menu1_paragraphe1_photoUrl" alt="@Model.menu1_paragraphe1_photoUrl" srcset="">
+                                    <img src="@Html.Raw(Model.menu1_paragraphe1_photoUrl)" alt="@Html.Raw(Model.menu1_paragraphe1_photoUrl)" srcset="">
                                 </div>
                             </section>
 
@@ -256,7 +256,7 @@
                                     @Html.Raw(Model.menu2_contenu1)
                                 </div>
                                 <div class="photo">
-                                    <img src="@Model.menu2_paragraphe1_photoUrl" alt="@Model.menu2_paragraphe1_photoUrl" srcset="">
+                                    <img src="@Html.Raw(Model.menu2_paragraphe2_photoUrl)" alt="@Html.Raw(Model.menu2_paragraphe2_photoUrl)" srcset="">
                                 </div>
                             </section>
 
@@ -284,7 +284,7 @@
                                     @Html.Raw(Model.menu3_contenu1)
                                 </div>
                                 <div class="photo">
-                                    <img src="@Model.menu3_paragraphe1_photoUrl" alt="@Model.menu3_paragraphe1_photoUrl" srcset="">
+                                    <img src="@Html.Raw(Model.menu3_paragraphe1_photoUrl)" alt="@Html.Raw(Model.menu3_paragraphe1_photoUrl)" srcset="">
                                 </div>
                             </section>
 
@@ -313,7 +313,7 @@
                                     @Html.Raw(Model.menu1_contenu1)
                                 </div>
                                 <div class="photo">
-                                    <img src="@Model.menu4_paragraphe1_photoUrl" alt="@Model.menu4_paragraphe1_photoUrl" srcset="">
+                                    <img src="@Html.Raw(Model.menu4_paragraphe1_photoUrl)" alt="@Html.Raw(Model.menu4_paragraphe1_photoUrl)" srcset="">
                                 </div>
                             </section>
 
@@ -331,9 +331,9 @@
         }
 
 
-        <footer id="f2-footer">
-            <span>© Copyright 2018 - <a href="#">@Model.site_url</a></span>
-        </footer>
+            <footer id="f2-footer">
+                <span>© Copyright 2018 - @Model.domaine</span>
+            </footer>
     </div>
 }
 
@@ -347,7 +347,7 @@
             <div id="topbar" class="clearfix">
                 <img src="@Model.photoALaUneUrl" alt="@Model.photoALaUneUrl" srcset="">
                 <a href="@Model.site_url" class="t-logo">
-                    <img src="@Model.logoUrl.Trim()" alt="@Model.logoUrl.Trim()" srcset="">
+                    <img src="@Html.Raw(Model.logoUrl.Trim())" alt="@Html.Raw(Model.logoUrl.Trim())" srcset="">
                 </a>
             </div>
 
@@ -382,7 +382,7 @@
                             </aside>
                             <section>
                                 <div class="photo">
-                                    <img src="@Model.menu1_paragraphe1_photoUrl" alt="@Model.menu1_paragraphe1_photoUrl" srcset="">
+                                    <img src="@Html.Raw(Model.menu1_paragraphe1_photoUrl)" alt="@Html.Raw(Model.menu1_paragraphe1_photoUrl)" srcset="">
                                 </div>
                                 <div class="texte">
                                     <h1> @Model.menu1_paragraphe1_titre</h1>
@@ -424,7 +424,7 @@
                             </aside>
                             <section>
                                 <div class="photo">
-                                    <img src="@Model.menu2_paragraphe1_photoUrl" alt="@Model.menu2_paragraphe1_photoUrl" srcset="">
+                                    <img src="@Html.Raw(Model.menu2_paragraphe2_photoUrl)" alt="@Html.Raw(Model.menu2_paragraphe2_photoUrl)" srcset="">
                                 </div>
                                 <div class="texte">
                                     <h1> @Model.menu2_paragraphe1_titre</h1>
@@ -466,7 +466,7 @@
                             </aside>
                             <section>
                                 <div class="photo">
-                                    <img src="@Model.menu3_paragraphe1_photoUrl" alt="@Model.menu3_paragraphe1_photoUrl" srcset="">
+                                    <img src="@Html.Raw(Model.menu3_paragraphe1_photoUrl)" alt="@Html.Raw(Model.menu3_paragraphe1_photoUrl)" srcset="">
                                 </div>
                                 <div class="texte">
                                     <h1> @Model.menu3_paragraphe1_titre</h1>
@@ -482,7 +482,7 @@
         }
       
             <footer id="f2-footer">
-                <span>Copyright 2018 - <a href="@Model.site_url">@Model.site_url</a></span>
+                <span>© Copyright 2018 - @Model.domaine</span>
             </footer>
     </div>
         }
@@ -498,7 +498,7 @@
                     <header>
                         <div id="topbar" class="centered">
                             <a href="@Model.site_url" class="t-logo">
-                                <img src="@Model.logoUrl.Trim()" alt="@Model.logoUrl.Trim()" srcset="">
+                                <img src="@Html.Raw(Model.logoUrl.Trim())" alt="@Html.Raw(Model.logoUrl.Trim())" srcset="">
 
                             </a>
                         </div>
@@ -514,7 +514,7 @@
                             <div class="container">
                                 <section id="photo-l-texte" class="row">
                                     <div class="col-50 photo">
-                                        <img src="@Model.menu1_paragraphe1_photoUrl" alt="@Model.menu1_paragraphe1_photoUrl" srcset="">
+                                        <img src="@Html.Raw(Model.menu1_paragraphe1_photoUrl)" alt="@Html.Raw(Model.menu1_paragraphe1_photoUrl)" srcset="">
                                     </div>
                                     <div class="col-50 texte">
                                         <h1>
@@ -533,7 +533,7 @@
                     </main>
                     <footer id="f4-footer">
                         <nav class="footer-nav">
-                            <span>Copyright 2018 - <a href="@Model.site_url">@Model.site_url</a></span>
+                            <span>© Copyright 2018 - @Model.site_url</span>
                         </nav>
                     </footer>
                 </div>

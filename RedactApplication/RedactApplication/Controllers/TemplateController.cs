@@ -2,11 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -76,12 +78,26 @@ namespace RedactApplication.Controllers
             if (file != null)
             {
                 string fileName = Path.GetFileName(file.FileName);
-                file.SaveAs(path + fileName);
+                file.SaveAs(path + removeDiacritics(fileName));
                 //return "/Themes/" + templateName + "/img/" + fileName;
-                return "img/" + fileName;
+                return "img/" + removeDiacritics(fileName);
             }
             return "";
         }
+
+        public static String removeDiacritics(string str)
+        {
+            if (null == str) return null;
+            var chars = str
+                .Normalize(NormalizationForm.FormD)
+                .ToCharArray()
+                .Where(c => CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
+                .ToArray();
+            var res = new string(chars).Normalize(NormalizationForm.FormC);
+            return res.Replace(" ", "_");
+        }
+
+
 
         [HttpPost]
         [Authorize]
@@ -191,6 +207,7 @@ namespace RedactApplication.Controllers
 
         public string RenderViewAsString(string viewName, object model)
         {
+            Response.Headers["Content-Type"] = "charset=utf-8";
             // create a string writer to receive the HTML code
             StringWriter stringWriter = new StringWriter();
 
@@ -207,9 +224,9 @@ namespace RedactApplication.Controllers
 
             // render the view to a HTML code
             viewResult.View.Render(viewContext, stringWriter);
-
+            viewResult.ViewEngine.ReleaseView(ControllerContext, viewResult.View);
             // return the HTML code
-            return stringWriter.ToString();
+            return stringWriter.GetStringBuilder().ToString();
         }
 
 
@@ -305,7 +322,7 @@ namespace RedactApplication.Controllers
             modelVm = new Modeles().GetDetailsModele((Guid)Session["modeleId"]);
             Session["Menu"] = "1";
             var html = RenderViewAsString("Home", modelVm);
-           
+        
 
             TEMPLATE newtemplate = new TEMPLATE();
             newtemplate.dateCreation = DateTime.Now;
@@ -328,7 +345,11 @@ namespace RedactApplication.Controllers
             
             newtemplate.THEME = currentTheme;
             newtemplate.themeId = currentTheme.themeId;
+
             newtemplate.html = html;
+
+           
+            var results = 
             newtemplate.templateId = Guid.NewGuid();
 
             db.TEMPLATEs.Add(newtemplate);
@@ -542,10 +563,10 @@ namespace RedactApplication.Controllers
                 var imgPaths = Directory.EnumerateFiles(pathImg, "*.*", SearchOption.AllDirectories)
                .Where(s => s.EndsWith(".jpg") || s.EndsWith(".jpeg") || s.EndsWith(".svg") || s.EndsWith(".gif") || s.EndsWith(".png") || s.EndsWith(".bmp") || s.EndsWith(".tiff") || s.EndsWith(".tif"));
 
-                
 
-                var pathCssfiles = Directory.EnumerateFiles(pathCss, "*.*", SearchOption.AllDirectories)
-                .Where(s => s.EndsWith(".css") || s.EndsWith(".gif"));
+
+                var pathCssfiles = Directory.EnumerateFiles(pathCss, "*.*", SearchOption.AllDirectories);
+             
               
 
                 using (WebClient client = new WebClient())

@@ -176,6 +176,8 @@ h4 {
 .theme #bloc2 .photo > img {
     width: 100%;
     object-fit: cover;
+    position: absolute;
+    height: 100%;
 }
 
 .theme #f1-footer {

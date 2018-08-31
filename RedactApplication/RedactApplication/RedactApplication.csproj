@@ -572,14 +572,7 @@
     <Content Include="Themes\Theme3\js\jquery.min.js" />
     <Content Include="Themes\Theme3\js\theme.js" />
     <Content Include="Themes\Theme3\page2.html" />
-    <Content Include="Themes\Theme4\css\bases.css" />
     <Content Include="Themes\Theme4\css\templates-style.css" />
-    <Content Include="Themes\Theme4\img\alaUne-575x362-02.jpg" />
-    <Content Include="Themes\Theme4\img\alaUne-575x362-03.jpg" />
-    <Content Include="Themes\Theme4\img\financement sante.jpg" />
-    <Content Include="Themes\Theme4\img\pattern-body.jpg" />
-    <Content Include="Themes\Theme4\index.html" />
-    <Content Include="Themes\Theme4\page2.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -693,7 +686,6 @@
     <Content Include="Views\Commandes\CreateProjet.cshtml" />
     <Content Include="Views\Template\DeleteTemplateConfirmation.cshtml" />
     <Content Include="Views\Template\DeteleAllTemplateConfirmation.cshtml" />
-    <Content Include="Themes\Theme3.rar" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -701,6 +693,7 @@
     <Folder Include="Themes\Theme1\img\" />
     <Folder Include="Themes\Theme2\img\" />
     <Folder Include="Themes\Theme3\img\" />
+    <Folder Include="Themes\Theme4\img\" />
     <Folder Include="Views\Sms\" />
   </ItemGroup>
   <ItemGroup>
