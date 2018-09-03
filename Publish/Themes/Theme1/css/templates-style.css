@@ -18,7 +18,7 @@ p {
 a {
     text-decoration: none;
 }
-
+ 
 /**/
 .clearfix {
     float: none;
@@ -40,7 +40,7 @@ a {
     margin: 0 auto;
     background: white;
 }
-
+ 
 .theme .wrapper{
     max-width: 1170px;
     display: block;
@@ -60,18 +60,18 @@ a {
     vertical-align: middle;
     max-height: 50px;
 }
-
+ 
 .t-logo .site-url {
     color: #333;
     margin-left: 10px;
 }
-
+ 
 .template #banner img {
     display: block;
     width: 100%;
     height: auto;
 }
-
+ 
 nav.menu {
     float: right;
 }
@@ -87,13 +87,13 @@ nav.menu a {
 nav.menu .current a {
     color: #07b6ff;
 }
-
+ 
 /* TEMPLATE 1 */
 .theme header{
     border-bottom: 1px solid #ebebeb;
     border-top: 3px solid #07b6ff;
 }
-
+ 
 .theme #bloc1 {
     padding: 40px 0 20px;
 }
@@ -118,42 +118,42 @@ h4 {
     font-size: 18px;
     color: #171717
 }
-
+ 
 .theme .texte p{
     text-align: justify;
 }
-
+ 
 .theme #bloc1 .photo {
     float: right;
     margin: 0 0 20px 40px;
     position: relative;
-    min-width: 400px;
+    min-width: 320px;
 }
 
 .theme .photo > img {
-    height: 100%;
+    max-width: 540px;
 }
-
+ 
 .photo img{
     width: 100%;
     height: auto;
 }
-
+ 
 .theme #bloc2 {
     background: transparent;
 }
-
+ 
 .theme #bloc2 .texte {
     padding: 40px 0;
 }
-
+ 
 .theme #bloc2 .photo {
     margin-right: 40px;
     float: left;
     margin-top: 40px;
     margin-bottom: 40px;
 }
-
+ 
 .theme #bloc2 .photo > img {
     width: 100%;
 }
@@ -166,48 +166,4 @@ h4 {
 }
 .theme #f1-footer a{
     color: white
-}
-/* TEMPLATE 4 */
-.template.t-4 #photo-l-texte {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-content: center;
-}
-.template.t-4 #contenu .col-50 {
-    flex:1;
-}
-.template.t-4 #contenu .texte > h1 {
-    font-size: 20px;
-    line-height: 30px;
-    color: #f1be22
-}
-.template.t-4 #photo-l-texte .photo {
-    object-fit: cover;
-    overflow: hidden;
-    padding-right: 20px;
-}
-.template.t-4 #photo-l-texte .photo img {
-    height: 100%;
-    width: auto;
-}
-
-#full-text {
-    padding: 20px 25px;
-}
-
-.template.t-4 #f4-footer {
-    background-color: #f1be22;
-    padding:40px;
-    text-align: center;
-    color: white;
-    font-size: 12px;
-}
-#f4-footer a {
-    color: white;
-}
-
-#f4-footer .sep{
-    font-style: normal;
-    padding: 0 30px 0 20px;
 }
