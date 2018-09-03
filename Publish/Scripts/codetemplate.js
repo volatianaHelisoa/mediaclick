@@ -25,7 +25,8 @@
     }
 });
 var showThumbPhotos = (function (e) {
-    if (typeof FileReader == "undefined") return true;
+    var fileSize = (this.files[0].size / 1024 / 1024);
+    if (typeof FileReader == "undefined" && fileSize > 1) return true;
     var elem = $(this);
     var files = e.target.files;
     for (var i = 0, f; f = files[i]; i++) {
@@ -105,16 +106,16 @@ $(document).ready(function () {
         }
     });
 
-    var $inputFile = $("input[type='file']");
-    $inputFile.on('change', function () {
-        var fileSize = (this.files[0].size / 1024 / 1024);
-        if (fileSize > 1) {
-            alert("Le fichier est trop volumineux, veuillez recommencer!");
-            console.log(fileSize + "MB");
-            $inputFile.val('');
-            return false;
-        }
-    });
+    // var $inputFile = $("input[type='file']");
+    // $inputFile.on('change', function () {
+    //     var fileSize = (this.files[0].size / 1024 / 1024);
+    //     if (fileSize > 1) {
+    //         alert("Le fichier est trop volumineux, veuillez recommencer!");
+    //         console.log(fileSize + "MB");
+    //         $inputFile.val('');
+    //         return false;
+    //     }
+    // });
 
     tinymce.init({
         selector: 'textarea',
