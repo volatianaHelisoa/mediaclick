@@ -154,13 +154,13 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>06/28/2018 16:58:52</publishTime>
     </File>
     <File Include="bin/RedactApplication.dll">
-      <publishTime>09/04/2018 10:10:54</publishTime>
+      <publishTime>09/04/2018 11:13:39</publishTime>
     </File>
     <File Include="bin/RedactApplication.dll.config">
       <publishTime>08/31/2018 09:51:40</publishTime>
     </File>
     <File Include="bin/RedactApplication.pdb">
-      <publishTime>09/04/2018 10:10:54</publishTime>
+      <publishTime>09/04/2018 11:13:39</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>05/24/2018 14:11:16</publishTime>
@@ -1543,7 +1543,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>07/10/2018 16:29:52</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>09/04/2018 10:15:23</publishTime>
+      <publishTime>09/04/2018 11:13:46</publishTime>
     </File>
   </ItemGroup>
 </Project>

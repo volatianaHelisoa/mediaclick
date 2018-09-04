@@ -553,7 +553,7 @@ namespace RedactApplication.Controllers
 
         private string GetMetaDescription(int menu, MODELEViewModel modelVm)
         {
-            var result = modelVm.menu1_paragraphe1_titre;
+            var result = modelVm.menu1_meta_description;
 
             switch (menu)
             {

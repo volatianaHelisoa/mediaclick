@@ -52,6 +52,11 @@ namespace RedactApplication.Models
             modeleVm.site_url = modele.site_url;
             modeleVm.domaine = ExtractDomainName(modele.site_url);
 
+            modeleVm.menu1_meta_description = modele.menu1_meta_description;
+            modeleVm.menu2_meta_description = modele.menu2_meta_description;
+            modeleVm.menu3_meta_description = modele.menu3_meta_description;
+            modeleVm.menu4_meta_description = modele.menu4_meta_description;
+
             modeleVm.menu1_paragraphe1_alt = modele.menu1_p1_alt;
             modeleVm.menu1_paragraphe2_alt = modele.menu1_p2_alt;
             modeleVm.menu2_paragraphe1_alt = modele.menu2_p1_alt;
