@@ -593,7 +593,7 @@ namespace RedactApplication.Controllers
                 else
                 {
                     string title = GetMenuTitle(i, modelVm);
-                    pathHtml = pathHtml + "/" + title + ".html";
+                    pathHtml = pathHtml + "/" + removeDiacritics(title) + ".html";
                 }
 
                 Session["Menu"] = i;
