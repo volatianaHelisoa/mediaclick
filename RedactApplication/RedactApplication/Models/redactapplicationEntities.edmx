@@ -94,6 +94,18 @@
           <Property Name="menu4_paragraphe2_photoUrl" Type="nvarchar(max)" />
           <Property Name="photoALaUneUrl" Type="nvarchar(max)" />
           <Property Name="site_url" Type="nvarchar(max)" />
+          <Property Name="menu1_meta_description" Type="nvarchar(max)" />
+          <Property Name="menu2_meta_description" Type="nvarchar(max)" />
+          <Property Name="menu3_meta_description" Type="nvarchar(max)" />
+          <Property Name="menu4_meta_description" Type="nvarchar(max)" />
+          <Property Name="menu1_p1_alt" Type="nvarchar(max)" />
+          <Property Name="menu1_p2_alt" Type="nvarchar(max)" />
+          <Property Name="menu2_p1_alt" Type="nvarchar(max)" />
+          <Property Name="menu2_p2_alt" Type="nvarchar(max)" />
+          <Property Name="menu3_p1_alt" Type="nvarchar(max)" />
+          <Property Name="menu3_p2_alt" Type="nvarchar(max)" />
+          <Property Name="menu4_p1_alt" Type="nvarchar(max)" />
+          <Property Name="menu4_p2_alt" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="NOTIFICATION">
           <Key>
@@ -164,6 +176,7 @@
           <Property Name="userId" Type="uniqueidentifier" />
           <Property Name="html" Type="nvarchar(max)" />
           <Property Name="modeleId" Type="uniqueidentifier" />
+          <Property Name="ip" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="THEMES">
           <Key>
@@ -838,6 +851,18 @@
           <Property Name="photoALaUneUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="TEMPLATEs" Relationship="redactapplicationModel.FK_TEMPLATE_MODELE" FromRole="MODELE" ToRole="TEMPLATE" />
           <Property Name="site_url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="menu1_meta_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="menu2_meta_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="menu3_meta_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="menu4_meta_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="menu1_p1_alt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="menu1_p2_alt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="menu2_p1_alt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="menu2_p2_alt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="menu3_p1_alt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="menu3_p2_alt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="menu4_p1_alt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="menu4_p2_alt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="NOTIFICATION">
           <Key>
@@ -897,6 +922,7 @@
           <NavigationProperty Name="PROJET" Relationship="redactapplicationModel.FK_TEMPLATE_PROJETS" FromRole="TEMPLATE" ToRole="PROJET" />
           <NavigationProperty Name="THEME" Relationship="redactapplicationModel.FK_TEMPLATE_THEMES" FromRole="TEMPLATE" ToRole="THEME" />
           <NavigationProperty Name="UTILISATEUR" Relationship="redactapplicationModel.FK_TEMPLATE_UTILISATEUR" FromRole="TEMPLATE" ToRole="UTILISATEUR" />
+          <Property Name="ip" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="THEME">
           <Key>
@@ -1344,6 +1370,18 @@
           <EntitySetMapping Name="MODELEs">
             <EntityTypeMapping TypeName="redactapplicationModel.MODELE">
               <MappingFragment StoreEntitySet="MODELE">
+                <ScalarProperty Name="menu4_p2_alt" ColumnName="menu4_p2_alt" />
+                <ScalarProperty Name="menu4_p1_alt" ColumnName="menu4_p1_alt" />
+                <ScalarProperty Name="menu3_p2_alt" ColumnName="menu3_p2_alt" />
+                <ScalarProperty Name="menu3_p1_alt" ColumnName="menu3_p1_alt" />
+                <ScalarProperty Name="menu2_p2_alt" ColumnName="menu2_p2_alt" />
+                <ScalarProperty Name="menu2_p1_alt" ColumnName="menu2_p1_alt" />
+                <ScalarProperty Name="menu1_p2_alt" ColumnName="menu1_p2_alt" />
+                <ScalarProperty Name="menu1_p1_alt" ColumnName="menu1_p1_alt" />
+                <ScalarProperty Name="menu4_meta_description" ColumnName="menu4_meta_description" />
+                <ScalarProperty Name="menu3_meta_description" ColumnName="menu3_meta_description" />
+                <ScalarProperty Name="menu2_meta_description" ColumnName="menu2_meta_description" />
+                <ScalarProperty Name="menu1_meta_description" ColumnName="menu1_meta_description" />
                 <ScalarProperty Name="site_url" ColumnName="site_url" />
                 <ScalarProperty Name="photoALaUneUrl" ColumnName="photoALaUneUrl" />
                 <ScalarProperty Name="menu4_paragraphe2_photoUrl" ColumnName="menu4_paragraphe2_photoUrl" />
@@ -1419,6 +1457,7 @@
           <EntitySetMapping Name="TEMPLATEs">
             <EntityTypeMapping TypeName="redactapplicationModel.TEMPLATE">
               <MappingFragment StoreEntitySet="TEMPLATE">
+                <ScalarProperty Name="ip" ColumnName="ip" />
                 <ScalarProperty Name="modeleId" ColumnName="modeleId" />
                 <ScalarProperty Name="html" ColumnName="html" />
                 <ScalarProperty Name="userId" ColumnName="userId" />

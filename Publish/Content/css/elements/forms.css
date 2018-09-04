@@ -19,16 +19,17 @@ input[type="search"]::-webkit-search-decoration {
 }
 
 /* Champs */
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="number"],
-input[type="date"],
-input[type="tel"],
-select {
-    padding: 12px 20px;
-    color: #898989
-}
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="number"],
+    input[type="date"],
+    input[type="tel"],
+    input[type="url"],
+    select {
+        padding: 12px 20px;
+        color: #898989
+    }
 input[type="checkbox"] {
     margin: 0;
     vertical-align: middle;

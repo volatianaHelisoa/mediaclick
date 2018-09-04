@@ -19,6 +19,7 @@ namespace RedactApplication.Models
         public Nullable<System.Guid> userId { get; set; }
         public string html { get; set; }
         public Nullable<System.Guid> modeleId { get; set; }
+        public string ip { get; set; }
 
         public virtual PROJET PROJET { get; set; }
         public virtual THEME THEME { get; set; }

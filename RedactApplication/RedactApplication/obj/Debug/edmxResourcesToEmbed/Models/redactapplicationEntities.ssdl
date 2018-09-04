@@ -89,6 +89,18 @@
     <Property Name="menu4_paragraphe2_photoUrl" Type="nvarchar(max)" />
     <Property Name="photoALaUneUrl" Type="nvarchar(max)" />
     <Property Name="site_url" Type="nvarchar(max)" />
+    <Property Name="menu1_meta_description" Type="nvarchar(max)" />
+    <Property Name="menu2_meta_description" Type="nvarchar(max)" />
+    <Property Name="menu3_meta_description" Type="nvarchar(max)" />
+    <Property Name="menu4_meta_description" Type="nvarchar(max)" />
+    <Property Name="menu1_p1_alt" Type="nvarchar(max)" />
+    <Property Name="menu1_p2_alt" Type="nvarchar(max)" />
+    <Property Name="menu2_p1_alt" Type="nvarchar(max)" />
+    <Property Name="menu2_p2_alt" Type="nvarchar(max)" />
+    <Property Name="menu3_p1_alt" Type="nvarchar(max)" />
+    <Property Name="menu3_p2_alt" Type="nvarchar(max)" />
+    <Property Name="menu4_p1_alt" Type="nvarchar(max)" />
+    <Property Name="menu4_p2_alt" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="NOTIFICATION">
     <Key>
@@ -159,6 +171,7 @@
     <Property Name="userId" Type="uniqueidentifier" />
     <Property Name="html" Type="nvarchar(max)" />
     <Property Name="modeleId" Type="uniqueidentifier" />
+    <Property Name="ip" Type="nvarchar" MaxLength="250" />
   </EntityType>
   <EntityType Name="THEMES">
     <Key>

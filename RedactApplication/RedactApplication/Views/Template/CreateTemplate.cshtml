@@ -9,7 +9,8 @@
 
     <script>
         $(document).ready(function () {
-
+            
+            $(".save-template").hide();                
             $('#ftpList').click(function () {
                 var url = $("#url").val();
                 var ftpUser = $("#ftpUser").val();
@@ -23,7 +24,7 @@
                     cache: false,
                     async: true,
                     success: function (resp) {
-                      
+                        $(".save-template").show();              
                         var data = resp.split(",");
                        
                         var htmlOptions = [];
@@ -109,10 +110,13 @@
 
                     </section>
                     <section class="clearfix">
-
+                        <label for="" class="col-100">
+                            IP
+                            @Html.TextBoxFor(x => x.ip, new { @required = true })
+                        </label>
                         <label for="" class="col-100">
                             FTP Hote
-                            @Html.TextBoxFor(x => x.url, new { @required = true, @name = "name" })
+                            @Html.TextBoxFor(x => x.url, new { @required = true})
                         </label>
                         <label for="" class="col-50 pull-left">
                             Utilisateur
@@ -125,7 +129,7 @@
                         <input type="button" value="Récupérer FTP liste" id="ftpList" />
                         <select id="ftpdir" name="ftpdirs"></select>
                     </section>
-                    <section class="clearfix submit-area">
+                    <section class="clearfix submit-area save-template">
                         <input type="submit" value="Enregistrer" class="btn btn-success" />
 
                         @Html.ActionLink("Annuler", "ChoiceTemplate", "Template", new { @class = "btn btn-warning" })

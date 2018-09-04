@@ -33,11 +33,12 @@ namespace RedactApplication.Models
                     ftpPassword = template.ftpPassword,
                     userId = template.userId,
                     UTILISATEUR = template.UTILISATEUR,
-                    html = template.html
+                    html = template.html,
+                    ip = template.ip
                 });
 
             }
-            return listeTemplate.OrderBy(x => x.dateCreation).ToList();
+            return listeTemplate.OrderByDescending(x => x.dateCreation).ToList();
 
         }
 

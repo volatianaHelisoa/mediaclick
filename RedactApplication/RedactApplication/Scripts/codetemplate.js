@@ -10,7 +10,7 @@
                 return function (e) {
                     var image = e.target.result;
                     if ($(previewDiv).children().length) {
-                        
+                        console.log('efa misy image ato');
                         previewDiv.children().remove();
                         previewDiv.append('<img src="' + image + '" />');
                     }
@@ -25,7 +25,8 @@
     }
 });
 var showThumbPhotos = (function (e) {
-    if (typeof FileReader == "undefined") return true;
+    var fileSize = (this.files[0].size / 1024 / 1024);
+    if (typeof FileReader == "undefined" || fileSize > 1) return true;
     var elem = $(this);
     var files = e.target.files;
     for (var i = 0, f; f = files[i]; i++) {
@@ -36,7 +37,7 @@ var showThumbPhotos = (function (e) {
                 return function (e) {
                     var image = e.target.result;
                     if ($(previewDiv).children().length) {
-                        
+                        console.log('efa misy image ato');
                         previewDiv.children().remove();
                         previewDiv.append('<img src="' + image + '" />');
                     }
@@ -105,39 +106,32 @@ $(document).ready(function () {
         }
     });
 
-    tinymce.PluginManager.add('stylebuttons', function (editor, url) {
-        ['pre', 'p', 'code', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'].forEach(function (name) {
-            editor.addButton("style-" + name, {
-                tooltip: "Toggle " + name,
-                text: name.toUpperCase(),
-                onClick: function () { editor.execCommand('mceToggleFormat', false, name); },
-                onPostRender: function () {
-                    var self = this, setup = function () {
-                        editor.formatter.formatChanged(name, function (state) {
-                            self.active(state);
-                        });
-                    };
-                    editor.formatter ? setup() : editor.on('init', setup);
-                }
-            })
-        });
-    });
+    // var $inputFile = $("input[type='file']");
+    // $inputFile.on('change', function () {
+    //     var fileSize = (this.files[0].size / 1024 / 1024);
+    //     if (fileSize > 1) {
+    //         alert("Le fichier est trop volumineux, veuillez recommencer!");
+    //         console.log(fileSize + "MB");
+    //         $inputFile.val('');
+    //         return false;
+    //     }
+    // });
 
     tinymce.init({
-        selector: "textarea",
+        selector: 'textarea',
+        height: 300,
         width: '100%',
-        height: 270,
-        plugins: "stylebuttons",
-        statusbar: false,
         menubar: false,
-        toolbar: "bold italic | link | undo redo | style-p style-h1 style-h2 style-h3 style-pre style-code",
+        plugins: [
+            'advlist autolink lists link image charmap anchor textcolor',
+            'searchreplace visualblocks code fullscreen'
+        ],
+        toolbar: ' formatselect | bold italic link ',
         content_css: [
             '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
             '//www.tinymce.com/css/codepen.min.css']
-     
+    
     });
-
-
 
 });
 

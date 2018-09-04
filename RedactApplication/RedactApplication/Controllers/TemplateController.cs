@@ -78,12 +78,29 @@ namespace RedactApplication.Controllers
             if (file != null)
             {
                 string fileName = Path.GetFileName(file.FileName);
+
                 file.SaveAs(path + removeDiacritics(fileName));
                 //return "/Themes/" + templateName + "/img/" + fileName;
                 return "img/" + removeDiacritics(fileName);
             }
             return "";
         }
+
+        private string AltPhoto(HttpPostedFileBase file, string templateName)
+        {
+            string path = Server.MapPath("~/Themes/" + templateName + "/img/");
+
+           
+            if (file != null)
+            {
+                string fileName = Path.GetFileNameWithoutExtension(file.FileName);
+
+                return fileName.Replace("_", " ");
+               
+            }
+            return "";
+        }
+
 
         public static String removeDiacritics(string str)
         {
@@ -131,16 +148,18 @@ namespace RedactApplication.Controllers
             newmodel.logoUrl = SavePhoto(logoUrl, templateName);
             
             /*Menu 1 */
-
             newmodel.menu1_titre = model.menu1_titre;
 
             newmodel.menu1_paragraphe1_titre = model.menu1_paragraphe1_titre;
             newmodel.menu1_paragraphe1_photoUrl = SavePhoto(menu1_paragraphe1_photoUrl, templateName);
+            newmodel.menu1_p1_alt = AltPhoto(menu1_paragraphe1_photoUrl, templateName);
             newmodel.menu1_contenu1 = model.menu1_contenu1;
 
             newmodel.menu1_paragraphe2_titre = model.menu1_paragraphe2_titre;
             newmodel.menu1_paragraphe2_photoUrl = SavePhoto(menu1_paragraphe2_photoUrl, templateName);
+            newmodel.menu1_p2_alt = AltPhoto(menu1_paragraphe2_photoUrl, templateName);
             newmodel.menu1_contenu2 = model.menu1_contenu2;
+            newmodel.menu1_meta_description = model.menu1_meta_description;
 
             /*Menu 2 */
             newmodel.menu2_titre = model.menu2_titre;                     
@@ -148,31 +167,39 @@ namespace RedactApplication.Controllers
             newmodel.menu2_paragraphe1_titre = model.menu2_paragraphe1_titre;
             newmodel.menu2_paragraphe2_titre = model.menu2_paragraphe2_titre;
             newmodel.menu2_paragraphe1_photoUrl = SavePhoto(menu2_paragraphe1_photoUrl, templateName);
+            newmodel.menu2_p1_alt = AltPhoto(menu2_paragraphe1_photoUrl, templateName);
             newmodel.menu2_paragraphe2_photoUrl = SavePhoto(menu2_paragraphe2_photoUrl, templateName);
+            newmodel.menu2_p2_alt = AltPhoto(menu2_paragraphe2_photoUrl, templateName);
             newmodel.menu2_contenu1 = model.menu2_contenu1;
             newmodel.menu2_contenu2 = model.menu2_contenu2;
+            newmodel.menu2_meta_description = model.menu2_meta_description;
 
-            /*Menu 3 */    
+            /*Menu 3 */
             newmodel.menu3_titre = model.menu3_titre;
 
             newmodel.menu3_paragraphe1_titre = model.menu3_paragraphe1_titre;
             newmodel.menu3_paragraphe2_titre = model.menu3_paragraphe2_titre;
             newmodel.menu3_paragraphe1_photoUrl = SavePhoto(menu3_paragraphe1_photoUrl, templateName);
+            newmodel.menu3_p1_alt = AltPhoto(menu3_paragraphe1_photoUrl, templateName);
             newmodel.menu3_paragraphe2_photoUrl = SavePhoto(menu3_paragraphe2_photoUrl, templateName);
+            newmodel.menu3_p2_alt = AltPhoto(menu3_paragraphe2_photoUrl, templateName);
             newmodel.menu3_contenu1 = model.menu3_contenu1;
             newmodel.menu3_contenu2 = model.menu3_contenu2;
+            newmodel.menu3_meta_description = model.menu3_meta_description;
 
             /*Menu 4 */
-                    
+
             newmodel.menu4_titre = model.menu4_titre;
                         
             newmodel.menu4_paragraphe1_titre = model.menu4_paragraphe1_titre;
             newmodel.menu4_paragraphe2_titre = model.menu4_paragraphe2_titre;
             newmodel.menu4_paragraphe1_photoUrl = SavePhoto(menu4_paragraphe1_photoUrl, templateName);
+            newmodel.menu4_p1_alt = AltPhoto(menu4_paragraphe1_photoUrl, templateName);
             newmodel.menu4_paragraphe2_photoUrl = SavePhoto(menu4_paragraphe2_photoUrl, templateName);
+            newmodel.menu4_p2_alt = AltPhoto(menu4_paragraphe2_photoUrl, templateName);
             newmodel.menu4_contenu1 = model.menu4_contenu1;
             newmodel.menu4_contenu2 = model.menu4_contenu2;
-
+            newmodel.menu4_meta_description = model.menu4_meta_description;
 
             /*A la une*/
             newmodel.photoALaUneUrl = SavePhoto(photoALaUneUrl, templateName);
@@ -321,16 +348,15 @@ namespace RedactApplication.Controllers
             MODELEViewModel modelVm = new MODELEViewModel();
             modelVm = new Modeles().GetDetailsModele((Guid)Session["modeleId"]);
             Session["Menu"] = "1";
-            var html = RenderViewAsString("Home", modelVm);
-        
+            var html = RenderViewAsString("Home", modelVm);        
 
             TEMPLATE newtemplate = new TEMPLATE();
             newtemplate.dateCreation = DateTime.Now;
-            newtemplate.url = model.url;
+            newtemplate.url = modelVm.site_url;
             newtemplate.ftpUser = model.ftpUser;
             newtemplate.ftpPassword = model.ftpPassword;
             newtemplate.modeleId = (Guid)Session["modeleId"];
-
+            newtemplate.ip = model.ip;
             newtemplate.userId = _userId;
             newtemplate.PROJET = db.PROJETS.Find(selectedProjetId);
             newtemplate.projetId = selectedProjetId;
@@ -478,6 +504,30 @@ namespace RedactApplication.Controllers
             );
         }
 
+        private string GetMenuTitle(int menu, MODELEViewModel modelVm)
+        {
+            var result = modelVm.menu1_titre;
+
+            switch (menu)
+            {
+                case 2:
+                    result = modelVm.menu2_titre;
+                    break;
+                case 3:
+                    result = modelVm.menu3_titre;
+                    break;
+                case 4:
+                    result = modelVm.menu4_titre;
+                    break;
+                default:
+                    result = modelVm.menu1_titre;
+                    break;
+            };
+
+            return result;
+        }
+
+
         private string GetMetatitle(int menu,MODELEViewModel modelVm)
         {
             var result = modelVm.menu1_paragraphe1_titre;
@@ -501,6 +551,30 @@ namespace RedactApplication.Controllers
             return result;
         }
 
+        private string GetMetaDescription(int menu, MODELEViewModel modelVm)
+        {
+            var result = modelVm.menu1_paragraphe1_titre;
+
+            switch (menu)
+            {
+                case 2:
+                    result = modelVm.menu2_meta_description;
+                    break;
+                case 3:
+                    result = modelVm.menu3_meta_description;
+                    break;
+                case 4:
+                    result = modelVm.menu4_meta_description;
+                    break;
+                default:
+                    result = modelVm.menu1_meta_description;
+                    break;
+            };
+
+            return result;
+        }
+
+      
 
         private void CreateFiles(int nb_menu, string menu1_html)
         {
@@ -517,12 +591,18 @@ namespace RedactApplication.Controllers
                 if (i == 1)
                     pathHtml = pathHtml + "/index.html";
                 else
-                    pathHtml = pathHtml + "/page" + i + ".html";
+                {
+                    string title = GetMenuTitle(i, modelVm);
+                    pathHtml = pathHtml + "/" + title + ".html";
+                }
 
                 Session["Menu"] = i;
 
                 modelVm.meta_title = GetMetatitle(i, modelVm);
-              html = RenderViewAsString("Home", modelVm);
+                modelVm.meta_description = GetMetaDescription(i, modelVm);
+              
+
+                html = RenderViewAsString("Home", modelVm);
 
 
                 if (!System.IO.File.Exists(Server.MapPath(pathHtml)))

@@ -218,6 +218,18 @@
     <Property Name="photoALaUneUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="TEMPLATEs" Relationship="redactapplicationModel.FK_TEMPLATE_MODELE" FromRole="MODELE" ToRole="TEMPLATE" />
     <Property Name="site_url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="menu1_meta_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="menu2_meta_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="menu3_meta_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="menu4_meta_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="menu1_p1_alt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="menu1_p2_alt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="menu2_p1_alt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="menu2_p2_alt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="menu3_p1_alt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="menu3_p2_alt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="menu4_p1_alt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="menu4_p2_alt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="NOTIFICATION">
     <Key>
@@ -277,6 +289,7 @@
     <NavigationProperty Name="PROJET" Relationship="redactapplicationModel.FK_TEMPLATE_PROJETS" FromRole="TEMPLATE" ToRole="PROJET" />
     <NavigationProperty Name="THEME" Relationship="redactapplicationModel.FK_TEMPLATE_THEMES" FromRole="TEMPLATE" ToRole="THEME" />
     <NavigationProperty Name="UTILISATEUR" Relationship="redactapplicationModel.FK_TEMPLATE_UTILISATEUR" FromRole="TEMPLATE" ToRole="UTILISATEUR" />
+    <Property Name="ip" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="THEME">
     <Key>

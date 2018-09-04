@@ -52,6 +52,18 @@ namespace RedactApplication.Models
         public string menu4_paragraphe2_photoUrl { get; set; }
         public string photoALaUneUrl { get; set; }
         public string site_url { get; set; }
+        public string menu1_meta_description { get; set; }
+        public string menu2_meta_description { get; set; }
+        public string menu3_meta_description { get; set; }
+        public string menu4_meta_description { get; set; }
+        public string menu1_p1_alt { get; set; }
+        public string menu1_p2_alt { get; set; }
+        public string menu2_p1_alt { get; set; }
+        public string menu2_p2_alt { get; set; }
+        public string menu3_p1_alt { get; set; }
+        public string menu3_p2_alt { get; set; }
+        public string menu4_p1_alt { get; set; }
+        public string menu4_p2_alt { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TEMPLATE> TEMPLATEs { get; set; }

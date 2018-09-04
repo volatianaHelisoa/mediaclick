@@ -60,6 +60,18 @@
     <EntitySetMapping Name="MODELEs">
       <EntityTypeMapping TypeName="redactapplicationModel.MODELE">
         <MappingFragment StoreEntitySet="MODELE">
+          <ScalarProperty Name="menu4_p2_alt" ColumnName="menu4_p2_alt" />
+          <ScalarProperty Name="menu4_p1_alt" ColumnName="menu4_p1_alt" />
+          <ScalarProperty Name="menu3_p2_alt" ColumnName="menu3_p2_alt" />
+          <ScalarProperty Name="menu3_p1_alt" ColumnName="menu3_p1_alt" />
+          <ScalarProperty Name="menu2_p2_alt" ColumnName="menu2_p2_alt" />
+          <ScalarProperty Name="menu2_p1_alt" ColumnName="menu2_p1_alt" />
+          <ScalarProperty Name="menu1_p2_alt" ColumnName="menu1_p2_alt" />
+          <ScalarProperty Name="menu1_p1_alt" ColumnName="menu1_p1_alt" />
+          <ScalarProperty Name="menu4_meta_description" ColumnName="menu4_meta_description" />
+          <ScalarProperty Name="menu3_meta_description" ColumnName="menu3_meta_description" />
+          <ScalarProperty Name="menu2_meta_description" ColumnName="menu2_meta_description" />
+          <ScalarProperty Name="menu1_meta_description" ColumnName="menu1_meta_description" />
           <ScalarProperty Name="site_url" ColumnName="site_url" />
           <ScalarProperty Name="photoALaUneUrl" ColumnName="photoALaUneUrl" />
           <ScalarProperty Name="menu4_paragraphe2_photoUrl" ColumnName="menu4_paragraphe2_photoUrl" />
@@ -135,6 +147,7 @@
     <EntitySetMapping Name="TEMPLATEs">
       <EntityTypeMapping TypeName="redactapplicationModel.TEMPLATE">
         <MappingFragment StoreEntitySet="TEMPLATE">
+          <ScalarProperty Name="ip" ColumnName="ip" />
           <ScalarProperty Name="modeleId" ColumnName="modeleId" />
           <ScalarProperty Name="html" ColumnName="html" />
           <ScalarProperty Name="userId" ColumnName="userId" />

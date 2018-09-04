@@ -26,7 +26,7 @@
 });
 var showThumbPhotos = (function (e) {
     var fileSize = (this.files[0].size / 1024 / 1024);
-    if (typeof FileReader == "undefined" && fileSize > 1) return true;
+    if (typeof FileReader == "undefined" || fileSize > 1) return true;
     var elem = $(this);
     var files = e.target.files;
     for (var i = 0, f; f = files[i]; i++) {

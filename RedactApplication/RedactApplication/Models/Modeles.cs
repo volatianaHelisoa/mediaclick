@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 
 namespace RedactApplication.Models
@@ -48,12 +51,36 @@ namespace RedactApplication.Models
             modeleVm.photoALaUneUrl = modele.photoALaUneUrl;
             modeleVm.site_url = modele.site_url;
             modeleVm.domaine = ExtractDomainName(modele.site_url);
-          
+
+            modeleVm.menu1_paragraphe1_alt = modele.menu1_p1_alt;
+            modeleVm.menu1_paragraphe2_alt = modele.menu1_p2_alt;
+            modeleVm.menu2_paragraphe1_alt = modele.menu2_p1_alt;
+            modeleVm.menu2_paragraphe2_alt = modele.menu2_p2_alt;
+            modeleVm.menu3_paragraphe1_alt = modele.menu3_p1_alt;
+            modeleVm.menu3_paragraphe2_alt = modele.menu3_p2_alt;
+            modeleVm.menu4_paragraphe1_alt = modele.menu4_p1_alt;
+            modeleVm.menu4_paragraphe2_alt = modele.menu4_p2_alt;
+
+
             return modeleVm;
 
         }
 
-        public  string ExtractDomainName(string Url)
+      
+        public static String removeDiacritics(string str)
+        {
+            if (null == str) return null;
+            var chars = str
+                .Normalize(NormalizationForm.FormD)
+                .ToCharArray()
+                .Where(c => CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
+                .ToArray();
+            var res = new string(chars).Normalize(NormalizationForm.FormC);
+            return res;
+        }
+
+
+        public string ExtractDomainName(string Url)
         {
             Uri baseUri = new Uri(Url);
             var fullDomain = baseUri.GetComponents(UriComponents.Host, UriFormat.SafeUnescaped);
