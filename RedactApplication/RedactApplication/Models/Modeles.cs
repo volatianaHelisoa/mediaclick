@@ -66,6 +66,10 @@ namespace RedactApplication.Models
             modeleVm.menu4_paragraphe1_alt = modele.menu4_p1_alt;
             modeleVm.menu4_paragraphe2_alt = modele.menu4_p2_alt;
 
+            modeleVm.menu1_meta_description = modele.menu1_meta_description;
+            modeleVm.menu2_meta_description = modele.menu2_meta_description;
+            modeleVm.menu3_meta_description = modele.menu3_meta_description;
+            modeleVm.menu4_meta_description = modele.menu4_meta_description;
 
             return modeleVm;
 

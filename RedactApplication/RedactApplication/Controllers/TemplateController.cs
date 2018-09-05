@@ -77,7 +77,7 @@ namespace RedactApplication.Controllers
            
             if (file != null)
             {
-                string fileName = Path.GetFileName(file.FileName);
+                string fileName = Path.GetFileName(file.FileName.ToLower());
 
                 file.SaveAs(path + removeDiacritics(fileName));
                 //return "/Themes/" + templateName + "/img/" + fileName;
@@ -111,7 +111,7 @@ namespace RedactApplication.Controllers
                 .Where(c => CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
                 .ToArray();
             var res = new string(chars).Normalize(NormalizationForm.FormC);
-            return res.Replace(" ", "_");
+            return res.Replace(" ", "-");
         }
 
 
@@ -551,6 +551,29 @@ namespace RedactApplication.Controllers
             return result;
         }
 
+        private string GetMenuClass(int menu, MODELEViewModel modelVm)
+        {
+            var result = "current";
+
+            switch (menu)
+            {
+                case 2:
+                    result = "current";
+                    break;
+                case 3:
+                    result = "current";
+                    break;
+                case 4:
+                    result = "current";
+                    break;
+                default:
+                    result = "current";
+                    break;
+            };
+
+            return result;
+        }
+
         private string GetMetaDescription(int menu, MODELEViewModel modelVm)
         {
             var result = modelVm.menu1_meta_description;
@@ -593,17 +616,24 @@ namespace RedactApplication.Controllers
                 else
                 {
                     string title = GetMenuTitle(i, modelVm);
-                    pathHtml = pathHtml + "/" + removeDiacritics(title) + ".html";
+                    pathHtml = pathHtml + "/" + removeDiacritics(title.ToLower()).Replace("_", "-") + ".html";
                 }
 
                 Session["Menu"] = i;
 
                 modelVm.meta_title = GetMetatitle(i, modelVm);
                 modelVm.meta_description = GetMetaDescription(i, modelVm);
-              
+                modelVm.menu1_link_class = (i == 1) ? "current" : "";
+                modelVm.menu2_link_class = (i == 2) ? "current" : "";
+                modelVm.menu3_link_class = (i == 3) ? "current" : "";
+                modelVm.menu4_link_class = (i == 4) ? "current" : "";
+
+                modelVm.menu1_link = removeDiacritics(modelVm.menu1_titre.ToLower());
+                modelVm.menu2_link = !string.IsNullOrEmpty(modelVm.menu2_titre) ? removeDiacritics(modelVm.menu2_titre.ToLower()) : "";
+                modelVm.menu3_link = !string.IsNullOrEmpty(modelVm.menu3_titre) ? removeDiacritics(modelVm.menu3_titre.ToLower()) :"";
+                modelVm.menu4_link = !string.IsNullOrEmpty(modelVm.menu4_titre) ? removeDiacritics(modelVm.menu4_titre.ToLower()) : "";
 
                 html = RenderViewAsString("Home", modelVm);
-
 
                 if (!System.IO.File.Exists(Server.MapPath(pathHtml)))
                 {

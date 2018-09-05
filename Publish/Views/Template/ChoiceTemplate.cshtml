@@ -13,9 +13,13 @@
     <div id="single-container">
         <div class="onglets ease-in-out">
             <ul>
-                <li><a href="" class="active">Creation Site</a></li>
+                <li> @Html.ActionLink("Dashboard", "ListTemplate", new { controller = "Template" }) </li>
+
+                <li> @Html.ActionLink("Creation Site", "ChoiceTemplate", new { controller = "Template" }, new { @class = "active" })</li>
+
             </ul>
         </div>
+       
         <div class="theme-select grey-bg">
             <h1>CHOISIR VOTRE THEME</h1>
             <section class="clearfix container">

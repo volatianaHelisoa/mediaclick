@@ -154,13 +154,13 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>06/28/2018 16:58:52</publishTime>
     </File>
     <File Include="bin/RedactApplication.dll">
-      <publishTime>09/04/2018 11:13:39</publishTime>
+      <publishTime>09/04/2018 16:47:04</publishTime>
     </File>
     <File Include="bin/RedactApplication.dll.config">
-      <publishTime>08/31/2018 09:51:40</publishTime>
+      <publishTime>09/04/2018 12:15:14</publishTime>
     </File>
     <File Include="bin/RedactApplication.pdb">
-      <publishTime>09/04/2018 11:13:39</publishTime>
+      <publishTime>09/04/2018 16:47:04</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>05/24/2018 14:11:16</publishTime>
@@ -870,8 +870,146 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
     <File Include="images/Themes/pret epargne logement.jpg">
       <publishTime>07/10/2018 10:09:34</publishTime>
     </File>
+    <File Include="Models/AccountViewModels.cs">
+      <publishTime>06/28/2018 16:58:52</publishTime>
+    </File>
+    <File Include="Models/BaseviewModelCommande.cs">
+      <publishTime>06/28/2018 16:58:52</publishTime>
+    </File>
+    <File Include="Models/COMMANDE.cs">
+      <publishTime>07/19/2018 13:42:50</publishTime>
+    </File>
+    <File Include="Models/Commandes.cs">
+      <publishTime>08/30/2018 13:32:16</publishTime>
+    </File>
+    <File Include="Models/COMMANDEViewModel.cs">
+      <publishTime>07/23/2018 12:25:16</publishTime>
+    </File>
+    <File Include="Models/COMMANDE_TYPE.cs">
+      <publishTime>06/28/2018 16:58:52</publishTime>
+    </File>
+    <File Include="Models/Encryptor.cs">
+      <publishTime>06/28/2018 16:58:52</publishTime>
+    </File>
+    <File Include="Models/FACTURE.cs">
+      <publishTime>07/16/2018 16:09:56</publishTime>
+    </File>
+    <File Include="Models/Factures.cs">
+      <publishTime>08/30/2018 13:32:16</publishTime>
+    </File>
+    <File Include="Models/FACTUREViewModel.cs">
+      <publishTime>06/28/2018 16:58:52</publishTime>
+    </File>
+    <File Include="Models/FTP.cs">
+      <publishTime>07/19/2018 13:42:50</publishTime>
+    </File>
+    <File Include="Models/IdentityModels.cs">
+      <publishTime>06/28/2018 16:58:52</publishTime>
+    </File>
+    <File Include="Models/MailClient.cs">
+      <publishTime>07/23/2018 12:25:16</publishTime>
+    </File>
+    <File Include="Models/ManageViewModels.cs">
+      <publishTime>06/28/2018 16:58:52</publishTime>
+    </File>
+    <File Include="Models/MODELE.cs">
+      <publishTime>09/03/2018 17:01:40</publishTime>
+    </File>
+    <File Include="Models/Modeles.cs">
+      <publishTime>09/04/2018 11:10:15</publishTime>
+    </File>
+    <File Include="Models/MODELEViewModel.cs">
+      <publishTime>09/04/2018 13:16:04</publishTime>
+    </File>
+    <File Include="Models/NOTIFICATION.cs">
+      <publishTime>07/16/2018 16:09:56</publishTime>
+    </File>
+    <File Include="Models/Notifications.cs">
+      <publishTime>08/30/2018 13:32:16</publishTime>
+    </File>
+    <File Include="Models/NOTIFICATIONViewModel.cs">
+      <publishTime>07/16/2018 16:09:56</publishTime>
+    </File>
+    <File Include="Models/PdfContent .cs">
+      <publishTime>07/04/2018 10:16:46</publishTime>
+    </File>
+    <File Include="Models/PROJET.cs">
+      <publishTime>06/28/2018 16:58:52</publishTime>
+    </File>
+    <File Include="Models/redactapplicationEntities.Context.cs">
+      <publishTime>07/16/2018 16:09:56</publishTime>
+    </File>
+    <File Include="Models/redactapplicationEntities.Context.tt">
+      <publishTime>06/28/2018 16:58:52</publishTime>
+    </File>
+    <File Include="Models/redactapplicationEntities.Context1.cs">
+      <publishTime>09/03/2018 17:26:18</publishTime>
+    </File>
+    <File Include="Models/redactapplicationEntities.cs">
+      <publishTime>09/03/2018 17:26:24</publishTime>
+    </File>
+    <File Include="Models/redactapplicationEntities.Designer.cs">
+      <publishTime>07/16/2018 16:09:56</publishTime>
+    </File>
+    <File Include="Models/redactapplicationEntities.edmx">
+      <publishTime>09/03/2018 17:26:12</publishTime>
+    </File>
     <File Include="Models/redactapplicationEntities.edmx.diagram">
       <publishTime>07/19/2018 13:42:50</publishTime>
+    </File>
+    <File Include="Models/redactapplicationEntities.tt">
+      <publishTime>06/28/2018 16:58:52</publishTime>
+    </File>
+    <File Include="Models/redactapplicationEntities1.Designer.cs">
+      <publishTime>09/03/2018 17:26:26</publishTime>
+    </File>
+    <File Include="Models/REDACT_THEME.cs">
+      <publishTime>07/16/2018 16:09:56</publishTime>
+    </File>
+    <File Include="Models/ROLE.cs">
+      <publishTime>06/28/2018 16:58:52</publishTime>
+    </File>
+    <File Include="Models/SearchData.cs">
+      <publishTime>06/28/2018 16:58:52</publishTime>
+    </File>
+    <File Include="Models/SITE.cs">
+      <publishTime>07/19/2018 13:42:50</publishTime>
+    </File>
+    <File Include="Models/StatePageSingleton.cs">
+      <publishTime>06/28/2018 16:58:52</publishTime>
+    </File>
+    <File Include="Models/STATUT_COMMANDE.cs">
+      <publishTime>06/28/2018 16:58:52</publishTime>
+    </File>
+    <File Include="Models/TAG.cs">
+      <publishTime>07/19/2018 13:42:50</publishTime>
+    </File>
+    <File Include="Models/TEMPLATE.cs">
+      <publishTime>09/03/2018 17:01:40</publishTime>
+    </File>
+    <File Include="Models/Templates.cs">
+      <publishTime>09/03/2018 17:01:40</publishTime>
+    </File>
+    <File Include="Models/TEMPLATEViewModel.cs">
+      <publishTime>09/03/2018 17:01:40</publishTime>
+    </File>
+    <File Include="Models/THEME.cs">
+      <publishTime>07/16/2018 16:09:56</publishTime>
+    </File>
+    <File Include="Models/UserRole.cs">
+      <publishTime>06/28/2018 16:58:52</publishTime>
+    </File>
+    <File Include="Models/USER_THEME.cs">
+      <publishTime>07/10/2018 10:09:32</publishTime>
+    </File>
+    <File Include="Models/UTILISATEUR.cs">
+      <publishTime>07/16/2018 16:09:56</publishTime>
+    </File>
+    <File Include="Models/Utilisateurs.cs">
+      <publishTime>08/30/2018 13:32:16</publishTime>
+    </File>
+    <File Include="Models/UTILISATEURViewModel.cs">
+      <publishTime>07/16/2018 16:09:56</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>06/28/2018 16:58:54</publishTime>
@@ -898,7 +1036,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>07/23/2018 16:46:30</publishTime>
     </File>
     <File Include="Scripts/codetemplate.js">
-      <publishTime>09/03/2018 17:01:40</publishTime>
+      <publishTime>09/04/2018 17:25:37</publishTime>
     </File>
     <File Include="Scripts/dataTables.js">
       <publishTime>07/02/2018 17:54:00</publishTime>
@@ -1377,6 +1515,9 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
     <File Include="Views/Home/EditUserConfirmation.cshtml">
       <publishTime>07/13/2018 14:55:02</publishTime>
     </File>
+    <File Include="Views/Home/EditUserTemplate.cshtml">
+      <publishTime>09/04/2018 17:14:27</publishTime>
+    </File>
     <File Include="Views/Home/ErrorEditUser.cshtml">
       <publishTime>07/04/2018 17:22:32</publishTime>
     </File>
@@ -1459,7 +1600,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>07/13/2018 14:55:02</publishTime>
     </File>
     <File Include="Views/Shared/LayoutConnected.cshtml">
-      <publishTime>07/23/2018 16:38:50</publishTime>
+      <publishTime>09/04/2018 16:44:55</publishTime>
     </File>
     <File Include="Views/Shared/LayoutFullPage.cshtml">
       <publishTime>07/05/2018 17:34:04</publishTime>
@@ -1489,7 +1630,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>07/09/2018 09:30:04</publishTime>
     </File>
     <File Include="Views/Template/ChoiceTemplate.cshtml">
-      <publishTime>09/03/2018 17:01:40</publishTime>
+      <publishTime>09/04/2018 13:24:19</publishTime>
     </File>
     <File Include="Views/Template/CreateTemplate.cshtml">
       <publishTime>09/03/2018 17:01:40</publishTime>
@@ -1510,7 +1651,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>09/03/2018 17:01:40</publishTime>
     </File>
     <File Include="Views/Template/Home.cshtml">
-      <publishTime>09/04/2018 10:06:44</publishTime>
+      <publishTime>09/04/2018 18:05:39</publishTime>
     </File>
     <File Include="Views/Template/Home1.cshtml">
       <publishTime>01/01/0001 00:00:00</publishTime>
@@ -1519,7 +1660,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Views/Template/ListTemplate.cshtml">
-      <publishTime>09/03/2018 17:01:40</publishTime>
+      <publishTime>09/04/2018 13:24:49</publishTime>
     </File>
     <File Include="Views/Template/Menu2.cshtml">
       <publishTime>07/19/2018 12:15:36</publishTime>
@@ -1543,7 +1684,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>07/10/2018 16:29:52</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>09/04/2018 11:13:46</publishTime>
+      <publishTime>09/04/2018 16:40:23</publishTime>
     </File>
   </ItemGroup>
 </Project>

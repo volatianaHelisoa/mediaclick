@@ -568,10 +568,8 @@
     <Content Include="Themes\Theme1\css\templates-style.css" />
     <Content Include="Themes\Theme2\css\templates-style.css" />
     <Content Include="Themes\Theme3\css\templates-style.css" />
-    <Content Include="Themes\Theme3\index.html" />
     <Content Include="Themes\Theme3\js\jquery.min.js" />
     <Content Include="Themes\Theme3\js\theme.js" />
-    <Content Include="Themes\Theme3\page2.html" />
     <Content Include="Themes\Theme4\css\templates-style.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -686,6 +684,7 @@
     <Content Include="Views\Commandes\CreateProjet.cshtml" />
     <Content Include="Views\Template\DeleteTemplateConfirmation.cshtml" />
     <Content Include="Views\Template\DeteleAllTemplateConfirmation.cshtml" />
+    <Content Include="Views\Home\EditUserTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -471,6 +471,131 @@ namespace RedactApplication.Controllers
         /// <param name="error">message d'erreur</param>
         /// <returns>View</returns>
         [Authorize]
+        public ActionResult EditUserTemplate(Guid? hash, string error)
+        {
+            switch (error)
+            {
+                case "ErrorMessage":
+                    ViewBag.ErrorMessage = "role null";
+                    break;
+                case "ErrorMail":
+                    ViewBag.ErrorMail = "mail invalid";
+                    break;
+                case "ErrorRole":
+                    ViewBag.ErrorRole = "role null";
+                    break;
+                case "ErrorUserMailValidation":
+                    ViewBag.ErrorUserValidation = "mail is not valid";
+                    break;
+                case "ErrorPhoneValidation":
+                    ViewBag.ErrorPhoneValidation = "phone is not valid";
+                    break;
+            }
+
+            Guid userId = (Guid)hash;
+            ViewBag.currentid = hash;
+
+            Guid user = Guid.Parse(HttpContext.User.Identity.Name);
+            ViewBag.userRoleEdit = (new Utilisateurs()).GetUtilisateurRoleToString(user);
+
+            var val = new Utilisateurs();
+
+            if (userId != Guid.Empty)
+            {
+                redactapplicationEntities db = new Models.redactapplicationEntities();
+                UTILISATEUR utilisateur = db.UTILISATEURs.SingleOrDefault(x => x.userId == userId);
+
+                UTILISATEURViewModel userVm = new UTILISATEURViewModel();
+                if (utilisateur != null)
+                {
+                    userVm.userId = utilisateur.userId;
+                    userVm.userMail = utilisateur.userMail;
+                    userVm.userNom = utilisateur.userNom;
+                    userVm.userPrenom = utilisateur.userPrenom;
+                    userVm.redactSkype = utilisateur.redactSkype;
+                    userVm.redactModePaiement = utilisateur.redactModePaiement;
+                    userVm.redactNiveau = utilisateur.redactNiveau;
+                    userVm.redactPhone = utilisateur.redactPhone;
+                    userVm.redactReferenceur = utilisateur.redactReferenceur;
+                    userVm.redactThemes = val.RedactThemes(utilisateur.userId);
+                    userVm.redactVolume = utilisateur.redactVolume;
+                    userVm.redactTarif = utilisateur.redactTarif;
+                    userVm.logoUrl = utilisateur.logoUrl;
+
+
+                    if (Session["userEditModif"] != null)
+                    {
+                        UTILISATEURViewModel model = (UTILISATEURViewModel)Session["userEditModif"];
+                        userVm.userMail = model.userMail;
+                        userVm.userNom = model.userNom;
+                        userVm.userPrenom = model.userPrenom;
+                        userVm.redactSkype = model.redactSkype;
+                        userVm.redactModePaiement = model.redactModePaiement;
+                        userVm.redactNiveau = model.redactNiveau;
+                        userVm.redactPhone = model.redactPhone;
+                        userVm.redactReferenceur = model.redactReferenceur;
+                        userVm.redactThemes = model.redactThemes;
+
+                        userVm.redactVolume = model.redactVolume;
+                        userVm.redactTarif = model.redactTarif;
+                        Session["userEditModif"] = null;
+                    }
+
+                    userVm.userRole = (new Utilisateurs()).GetUtilisateurRoleToString(utilisateur.userId);
+                    List<UserRole> listeUserRole = db.UserRoles.Where(x => x.idUser == utilisateur.userId).ToList();
+                    if (listeUserRole.Any())
+                    {
+                        switch (listeUserRole[0].idRole)
+                        {
+                            case 1:
+                                ViewBag.userRole = 1; /*referenceur manager*/
+                                break;
+                            case 2:
+                                ViewBag.userRole = 2; /*redacteur manager*/
+                                break;
+                            case 3:
+                                ViewBag.userRole = 3; /*manager utilisateur*/
+                                break;
+                            case 4:
+                                ViewBag.userRole = 4; /*administrateur*/
+                                break;
+                            case 5:
+                                ViewBag.userRole = 5; /*super administrateur*/
+                                break;
+                            default:
+                                ViewBag.userRole = 0;
+                                break;
+                        }
+
+                        ViewBag.listeUserRole = listeUserRole;
+                    }
+                    userVm.ListTheme = val.GetListThemeItem();
+                    List<REDACT_THEME> listeUserThemes = db.REDACT_THEME.Where(x => x.redactId == utilisateur.userId).ToList();
+
+                    if (listeUserThemes.Count() > 0)
+                    {
+                        var listeThemes = db.REDACT_THEME.Where(x => x.redactId == utilisateur.userId).Select(x => x.themeId).ToList();
+                        userVm.listThemeId = listeThemes;
+
+                        var themes = val.GetListThemeItem(utilisateur.userId);
+                        userVm.themeId = listeThemes.ToArray();
+                        userVm.themeList = new MultiSelectList(themes, "Value", "Text", listeThemes);
+                    }
+
+                }
+
+                return View(userVm);
+            }
+            return View();
+        }
+
+        /// <summary>
+        /// Retourne la vue d'édition d'Utilisateur.
+        /// </summary>
+        /// <param name="hash">id de l'Utilisateur</param>
+        /// <param name="error">message d'erreur</param>
+        /// <returns>View</returns>
+        [Authorize]
         public ActionResult EditUser(Guid? hash, string error)
         {
             switch (error)

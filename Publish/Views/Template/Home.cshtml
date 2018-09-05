@@ -17,6 +17,7 @@
     <div class="template theme">
         <!-- Bloc header -->
         <header>
+
             <div class="wrapper">
                 <div id="topbar" class="clearfix">
                     <a href="@Model.site_url" class="t-logo theme">
@@ -25,21 +26,21 @@
                     </a>
                     <nav class="menu">
                         <ul>
-                            <li class="current"><a href="/">@Model.menu1_titre</a></li>
-                            @if (Model.menu2_titre != null)
+                            <li class="@Model.menu1_link_class"><a href="/">@Model.menu1_titre</a></li>
+                            @if (!String.IsNullOrEmpty(Model.menu2_titre))
                             {
-                                <li><a href="@String.Format("{0}.html", Model.menu2_titre)">@Model.menu2_titre</a></li>
-
-                                if (Model.menu3_titre != null)
-                                {
-                                    <li><a href="@String.Format("{0}.html", Model.menu3_titre)">@Model.menu3_titre</a></li>
-                                }
-                                if (Model.menu4_titre != null)
-                                {
-                                    <li><a href="@String.Format("{0}.html", Model.menu4_titre)">@Model.menu4_titre</a></li>
-                                }
+                                <li class="@Model.menu2_link_class"><a href="@String.Format("{0}.html", Model.menu2_link)">@Model.menu2_titre</a></li>
                             }
-                            </ul>
+                            @if (!String.IsNullOrEmpty(Model.menu3_titre))
+                            {
+                                <li class="@Model.menu3_link_class"><a href="@String.Format("{0}.html", Model.menu3_link)">@Model.menu3_titre</a></li>
+                            }
+                            @if (!String.IsNullOrEmpty(Model.menu4_titre))
+                            {
+                                <li class="@Model.menu4_link_class"><a href="@String.Format("{0}.html", Model.menu4_link)">@Model.menu4_titre</a></li>
+                            }
+
+                        </ul>
                     </nav>
                 </div>
             </div>
@@ -228,18 +229,18 @@
             <div class="wrapper" style="padding: 0;">
                 <nav class="menu">
                     <ul>
-                        <li class="current"><a href="/">@Model.menu1_titre</a></li>
-                        @if (@Model.menu2_titre != null)
+                        <li class="@Model.menu1_link_class"><a href="/">@Model.menu1_titre</a></li>
+                        @if (!String.IsNullOrEmpty(Model.menu2_titre))
                         {
-                            <li><a href="page2.html">@Model.menu2_titre</a></li>
+                            <li class="@Model.menu2_link_class"><a href="@String.Format("{0}.html", Model.menu2_link)">@Model.menu2_titre</a></li>
                         }
-                        @if (@Model.menu3_titre != null)
+                        @if (!String.IsNullOrEmpty(Model.menu3_titre))
                         {
-                            <li><a href="page3.html">@Model.menu3_titre</a></li>
+                            <li class="@Model.menu3_link_class"><a href="@String.Format("{0}.html", Model.menu3_link)">@Model.menu3_titre</a></li>
                         }
-                        @if (@Model.menu4_titre != null)
+                        @if (!String.IsNullOrEmpty(Model.menu4_titre))
                         {
-                            <li><a href="page4.html">@Model.menu4_titre</a></li>
+                            <li class="@Model.menu4_link_class"><a href="@String.Format("{0}.html", Model.menu4_link)">@Model.menu4_titre</a></li>
                         }
 
                     </ul>
@@ -344,7 +345,7 @@
                             <section>
                                 <div class="texte">
                                     <h1> @Model.menu4_paragraphe1_titre</h1>
-                                    @Html.Raw(Model.menu1_contenu1)
+                                    @Html.Raw(Model.menu4_contenu1)
                                 </div>
                                 <div class="photo">
                                     <img src="@Html.Raw(Model.menu4_paragraphe1_photoUrl)" alt="@Html.Raw(Model.menu4_paragraphe1_photoUrl)" srcset="">
@@ -397,18 +398,18 @@
                             <aside class="sidebar-menu">
                                 <nav class="menu">
                                     <ul>
-                                        <li class="current"><a href="/">@Model.menu1_titre</a></li>
-                                        @if (@Model.menu2_titre != null)
+                                        <li class="@Model.menu1_link_class"><a href="/">@Model.menu1_titre</a></li>
+                                        @if (!String.IsNullOrEmpty(Model.menu2_titre))
                                         {
-                                            <li><a href="page2.html">@Model.menu2_titre</a></li>
+                                            <li class="@Model.menu2_link_class"><a href="@String.Format("{0}.html", Model.menu2_link)">@Model.menu2_titre</a></li>
                                         }
-                                        @if (@Model.menu3_titre != null)
+                                        @if (!String.IsNullOrEmpty(Model.menu3_titre))
                                         {
-                                            <li><a href="page3.html">@Model.menu3_titre</a></li>
+                                            <li class="@Model.menu3_link_class"><a href="@String.Format("{0}.html", Model.menu3_link)">@Model.menu3_titre</a></li>
                                         }
-                                        @if (@Model.menu4_titre != null)
+                                        @if (!String.IsNullOrEmpty(Model.menu4_titre))
                                         {
-                                            <li><a href="page4.html">@Model.menu4_titre</a></li>
+                                            <li class="@Model.menu4_link_class"><a href="@String.Format("{0}.html", Model.menu4_link)">@Model.menu4_titre</a></li>
                                         }
 
                                     </ul>
@@ -439,18 +440,18 @@
                             <aside class="sidebar-menu">
                                 <nav class="menu">
                                     <ul>
-                                        <li class="current"><a href="/">@Model.menu1_titre</a></li>
-                                        @if (@Model.menu2_titre != null)
+                                        <li class="@Model.menu1_link_class"><a href="/">@Model.menu1_titre</a></li>
+                                        @if (!String.IsNullOrEmpty(Model.menu2_titre))
                                         {
-                                            <li><a href="page2.html">@Model.menu2_titre</a></li>
+                                            <li class="@Model.menu2_link_class"><a href="@String.Format("{0}.html", Model.menu2_link)">@Model.menu2_titre</a></li>
                                         }
-                                        @if (@Model.menu3_titre != null)
+                                        @if (!String.IsNullOrEmpty(Model.menu3_titre))
                                         {
-                                            <li><a href="page3.html">@Model.menu3_titre</a></li>
+                                            <li class="@Model.menu3_link_class"><a href="@String.Format("{0}.html", Model.menu3_link)">@Model.menu3_titre</a></li>
                                         }
-                                        @if (@Model.menu4_titre != null)
+                                        @if (!String.IsNullOrEmpty(Model.menu4_titre))
                                         {
-                                            <li><a href="page4.html">@Model.menu4_titre</a></li>
+                                            <li class="@Model.menu4_link_class"><a href="@String.Format("{0}.html", Model.menu4_link)">@Model.menu4_titre</a></li>
                                         }
 
                                     </ul>
@@ -481,18 +482,18 @@
                             <aside class="sidebar-menu">
                                 <nav class="menu">
                                     <ul>
-                                        <li class="current"><a href="/">@Model.menu1_titre</a></li>
-                                        @if (@Model.menu2_titre != null)
+                                        <li class="@Model.menu1_link_class"><a href="/">@Model.menu1_titre</a></li>
+                                        @if (!String.IsNullOrEmpty(Model.menu2_titre))
                                         {
-                                            <li><a href="page2.html">@Model.menu2_titre</a></li>
+                                            <li class="@Model.menu2_link_class"><a href="@String.Format("{0}.html", Model.menu2_link)">@Model.menu2_titre</a></li>
                                         }
-                                        @if (@Model.menu3_titre != null)
+                                        @if (!String.IsNullOrEmpty(Model.menu3_titre))
                                         {
-                                            <li><a href="page3.html">@Model.menu3_titre</a></li>
+                                            <li class="@Model.menu3_link_class"><a href="@String.Format("{0}.html", Model.menu3_link)">@Model.menu3_titre</a></li>
                                         }
-                                        @if (@Model.menu4_titre != null)
+                                        @if (!String.IsNullOrEmpty(Model.menu4_titre))
                                         {
-                                            <li><a href="page4.html">@Model.menu4_titre</a></li>
+                                            <li class="@Model.menu4_link_class"><a href="@String.Format("{0}.html", Model.menu4_link)">@Model.menu4_titre</a></li>
                                         }
 
                                     </ul>
@@ -514,10 +515,53 @@
                 </div>
             </main>
         }
-      
-            <footer id="f2-footer">
-                <span>© Copyright 2018 - <a href="@Html.Raw(Model.site_url)">@Model.domaine </a>  </span>
-            </footer>
+
+        @if (@Session["Menu"] != null && @Session["Menu"].ToString() == "4")
+        {
+            <main>
+                <div id="contenu">
+                    <div class="wrapper">
+                        <div class="wrap">
+                            <aside class="sidebar-menu">
+                                <nav class="menu">
+                                    <ul>
+                                        <li class="@Model.menu1_link_class"><a href="/">@Model.menu1_titre</a></li>
+                                        @if (!String.IsNullOrEmpty(Model.menu2_titre))
+                                        {
+                                            <li class="@Model.menu2_link_class"><a href="@String.Format("{0}.html", Model.menu2_link)">@Model.menu2_titre</a></li>
+                                        }
+                                        @if (!String.IsNullOrEmpty(Model.menu3_titre))
+                                        {
+                                            <li class="@Model.menu3_link_class"><a href="@String.Format("{0}.html", Model.menu3_link)">@Model.menu3_titre</a></li>
+                                        }
+                                        @if (!String.IsNullOrEmpty(Model.menu4_titre))
+                                        {
+                                            <li class="@Model.menu4_link_class"><a href="@String.Format("{0}.html", Model.menu4_link)">@Model.menu4_titre</a></li>
+                                        }
+
+                                    </ul>
+                                </nav>
+                            </aside>
+                            <section>
+                                <div class="photo">
+                                    <img src="@Html.Raw(Model.menu4_paragraphe1_photoUrl)" alt="@Model.menu4_paragraphe1_photoUrl" srcset="">
+                                </div>
+                                <div class="texte">
+                                    <h1> @Model.menu4_paragraphe1_titre</h1>
+                                    @Html.Raw(Model.menu4_contenu1)
+                                </div>
+                            </section>
+
+
+                        </div>
+                    </div>
+                </div>
+            </main>
+        }
+
+        <footer id="f2-footer">
+            <span>© Copyright 2018 - <a href="@Html.Raw(Model.site_url)">@Model.domaine </a>  </span>
+        </footer>
     </div>
         }
 

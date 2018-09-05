@@ -61,5 +61,15 @@ namespace RedactApplication.Models
         public string menu2_meta_description { get; set; }
         public string menu3_meta_description { get; set; }
         public string menu4_meta_description { get; set; }
+
+        public string menu1_link { get; set; }
+        public string menu2_link { get; set; }
+        public string menu3_link { get; set; }
+        public string menu4_link { get; set; }
+
+        public string menu1_link_class { get; set; }
+        public string menu2_link_class { get; set; }
+        public string menu3_link_class { get; set; }
+        public string menu4_link_class { get; set; }
     }
 }

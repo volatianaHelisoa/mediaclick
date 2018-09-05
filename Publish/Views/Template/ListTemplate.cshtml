@@ -19,7 +19,12 @@
 {
     <main id="wrapper">
         <div id="single-container">
-
+            <div class="onglets ease-in-out">
+                <ul>
+                    <li> @Html.ActionLink("Dashboard", "ListTemplate", new { controller = "Template" }, new { @class = "active" })</li>
+                    <li> @Html.ActionLink("Creation Site", "ChoiceTemplate", new { controller = "Template" })</li>
+                </ul>
+            </div>
 
             <div class="card back-office with-shadow">
                 <div class="action-bar flex-content flex-jsbet-acenter">
@@ -33,12 +38,12 @@
                             </div>
                         }
                     </div>
-                  
-                        <div class="submit-area">
 
-                            <input type="submit" value="Créer une template" class="btn btn-success btn-medium" onclick="@("window.location.href='" + @Url.RouteUrl("Home", new { controller = "Template", action = "ChoiceTemplate" }) + "'");">
-                        </div>
-                    
+                    <div class="submit-area">
+
+                        <input type="submit" value="Créer une template" class="btn btn-success btn-medium" onclick="@("window.location.href='" + @Url.RouteUrl("Home", new { controller = "Template", action = "ChoiceTemplate" }) + "'");">
+                    </div>
+
                 </div>
                 <div class="filters flex-content flex-jsbet-acenter">
 
@@ -77,28 +82,28 @@
 
                             foreach (var item in ViewBag.listeTemplateVm)
                             {
-                        <tr>
-                            <td><input type="checkbox" class="checkbox" name="selectedTemplate" value="@item.templateId" /></td>
-                            <td>@(count + 1)</td>
-                            <td>@item.dateCreation.ToShortDateString()</td>
-                            <td>@item.ip</td>
-                            <td>@item.PROJET.projet_name</td>
-                            <td>@item.THEME.theme_name</td>
-                            <td>@item.MODELE.site_url</td>
+                                <tr>
+                                    <td><input type="checkbox" class="checkbox" name="selectedTemplate" value="@item.templateId" /></td>
+                                    <td>@(count + 1)</td>
+                                    <td>@item.dateCreation.ToShortDateString()</td>
+                                    <td>@item.ip</td>
+                                    <td>@item.PROJET.projet_name</td>
+                                    <td>@item.THEME.theme_name</td>
+                                    <td>@item.MODELE.site_url</td>
 
-                            <td>@item.ftpUser</td>
-                            <td>@item.ftpPassword</td>
-                            <td>@item.UTILISATEUR.userNom @item.UTILISATEUR.userPrenom</td>
-                            <td class="col-option">
-                                <div class="item">
-                                    <div class="option">
-                                        <a href="@Html.Raw(item.url)" title="Voir"><i class="fa fa-eye"></i></a>
-                                        <a onclick="DeleteTemplateClick('@item.templateId')" title="Supprimer template"><i class="fa fa-trash"></i></a>
+                                    <td>@item.ftpUser</td>
+                                    <td>@item.ftpPassword</td>
+                                    <td>@item.UTILISATEUR.userNom @item.UTILISATEUR.userPrenom</td>
+                                    <td class="col-option">
+                                        <div class="item">
+                                            <div class="option">
+                                                <a href="@Html.Raw(item.url)" title="Voir"><i class="fa fa-eye"></i></a>
+                                                <a onclick="DeleteTemplateClick('@item.templateId')" title="Supprimer template"><i class="fa fa-trash"></i></a>
 
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
                                 count++;
                             }
                         }

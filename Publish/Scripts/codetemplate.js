@@ -123,10 +123,11 @@ $(document).ready(function () {
         width: '100%',
         menubar: false,
         plugins: [
-            'advlist autolink lists link image charmap anchor textcolor',
+            'advlist autolink lists link image charmap anchor textcolor paste',
             'searchreplace visualblocks code fullscreen'
         ],
-        toolbar: ' formatselect | bold italic link ',
+        paste_as_text: true,
+        toolbar: ' formatselect | bold italic link | code ',
         content_css: [
             '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
             '//www.tinymce.com/css/codepen.min.css']
