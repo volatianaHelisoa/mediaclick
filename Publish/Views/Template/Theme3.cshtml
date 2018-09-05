@@ -32,17 +32,15 @@
                         </div>
                         <div class="row site-identity">
                             <div class="col-md-4 logo-area">
-                                <label for="" class="col-100" style="margin-bottom: 30px;">
+                                <label for="" class="col-100" style="margin-bottom: 30px;display: flex; justify-content: flex-start; align-items: center;">
                                     <span class="thumbnail"></span>
-
-                                    <strong>Votre logo</strong>
                                     @Html.TextBoxFor(m => m.logoUrl, new { type = "file", accept = "image/*", name = "file", id = "logoUrl" })
                                     <div class="input-custom">
-                                        <label for="logoUrl" class="btn btn-warm btn-small">Choisir</label>
+                                        <label for="logoUrl" class="btn btn-warm btn-small">Choisir le logo</label>
                                     </div>
                                 </label>
                                 <label for="" class="col-100">
-                                    <i class="fa fa-link"></i>  Site
+                                    <i class="fa fa-link"></i>  L'url de votre site
                                     @Html.TextBoxFor(m => m.site_url, new { placeholder = "www.example.com",  required = true, type = "url" })
                                 </label>
                             </div>
@@ -60,7 +58,7 @@
                             </div>
                         </div>
                         <label for="" class="col-50 pull-left" style="margin-top: 30px;">
-                            Nombre de menu
+                            <i class="fa fa-bars"></i>  Nombre de menu
                             <select id="nb-menu" name="nbmenu">
                                 <option value="1">Selectionner le nombre de menu</option>
                                 <option value="2">2</option>
@@ -95,7 +93,7 @@
                                                 @Html.TextBoxFor(x => x.menu1_paragraphe1_photoUrl, new { type = "file", accept = "image/*", name = "files", id = "menu1_paragraphe1_photoUrl" })
                                                 <div class="input-custom">
                                                     <dd><i class="fa fa-image"></i>Photo 1</dd>
-                                                    <label for="menu1_paragraphe1_photoUrl" class="btn btn-primary btn-small">Choisir</label>
+                                                    <label for="menu1_paragraphe1_photoUrl" class="btn btn-primary btn-small"><i class="fa fa-download"></i> Choisir</label>
                                                 </div>
                                                 <span class="thumbnail-photo"></span>
                                             </label>
@@ -135,7 +133,7 @@
                                                 @Html.TextBoxFor(x => x.menu2_paragraphe1_photoUrl, new { type = "file", accept = "image/*", name = "files", id = "menu2_paragraphe1_photoUrl" })
                                                 <div class="input-custom">
                                                     <dd><i class="fa fa-image"></i>  Photo 1</dd>
-                                                    <label for="menu2_paragraphe1_photoUrl" class="btn btn-primary btn-small">Choisir</label>
+                                                    <label for="menu2_paragraphe1_photoUrl" class="btn btn-primary btn-small"><i class="fa fa-download"></i> Choisir</label>
                                                 </div>
                                                 <span class="thumbnail-photo"></span>
                                             </label>
@@ -173,7 +171,7 @@
                                                 @Html.TextBoxFor(x => x.menu3_paragraphe1_photoUrl, new { type = "file", accept = "image/*", name = "files", id = "menu3_paragraphe1_photoUrl" })
                                                 <div class="input-custom">
                                                     <dd><i class="fa fa-image"></i>  Photo 1</dd>
-                                                    <label for="menu3_paragraphe1_photoUrl" class="btn btn-primary btn-small">Choisir</label>
+                                                    <label for="menu3_paragraphe1_photoUrl" class="btn btn-primary btn-small"><i class="fa fa-download"></i> Choisir</label>
                                                 </div>
                                                 <span class="thumbnail-photo"></span>
                                             </label>
@@ -212,7 +210,7 @@
                                                 @Html.TextBoxFor(x => x.menu4_paragraphe1_photoUrl, new { type = "file", accept = "image/*", name = "files", id = "menu4_paragraphe1_photoUrl" })
                                                 <div class="input-custom">
                                                     <dd><i class="fa fa-image"></i>  Photo 1</dd>
-                                                    <label for="menu4_paragraphe1_photoUrl" class="btn btn-primary btn-small">Choisir</label>
+                                                    <label for="menu4_paragraphe1_photoUrl" class="btn btn-primary btn-small"><i class="fa fa-download"></i> Choisir</label>
                                                 </div>
                                                 <span class="thumbnail-photo"></span>
                                             </label>
