@@ -16,7 +16,8 @@
     <div id="single-container">
         <div class="onglets ease-in-out">
             <ul>
-                <li><a href="" class="active">Creation Site</a></li>
+                <li> @Html.ActionLink("Dashboard", "ListTemplate", new { controller = "Template" }) </li>
+                <li> @Html.ActionLink("Creation Site", "ChoiceTemplate", new { controller = "Template" }, new { @class = "active" })</li>
             </ul>
         </div>
         <div class="theme-select grey-bg">
@@ -55,6 +56,19 @@
 
                             </select>
                         </label>
+                        <div class="col-50 pull-right favicon-select" style="margin-top: 30px;">
+                            <label for="" class="col-100">
+                                Choisir un favicon
+                                @Html.TextBoxFor(m => m.favicone, new { type = "file", accept = "image/*", name = "file", id = "favicone" })
+                                <div class="favicon-input-wrapper">
+                                    <div class="input-custom">
+                                        <label for="favicone" class="btn btn-warm btn-small">Parcourir</label>
+                                    </div>
+                                    
+                                    <span class="thumbnail"></span>
+                                </div>
+                            </label>
+                        </div>
 
                         <div class="content-to-show clearfix">
                             <!-- TAB NAVIGATION -->

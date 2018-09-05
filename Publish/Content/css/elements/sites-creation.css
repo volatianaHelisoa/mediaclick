@@ -250,3 +250,29 @@
 .ftp-area select {
     flex: 3;
 }
+
+/* FAVICON */
+.favicon-select .thumbnail {
+    max-width: 70px;
+    display: inline-block;
+    vertical-align: middle;
+    border: none;
+}
+
+.favicon-select .thumbnail img {
+    border: none;
+    border-radius: 0;
+    width: 100%;
+    display: block;
+}
+
+.favicon-select .input-custom {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+}
+
+.favicon-select .favicon-input-wrapper{
+    display: flex;
+    margin-top: 15px;
+}
