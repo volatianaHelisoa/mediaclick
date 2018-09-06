@@ -135,14 +135,18 @@ namespace RedactApplication
                             if (userRole != null)
                             {
                                 int id = userRole.roleId;
-                                if (id == 4 || id == 3 || id == 2 || id == 1 || id == 5)
+                                if (id == 4 || id == 3 || id == 2 || id == 1 )
                                 {
                                     access = LoadAccess(0);
                                 }
-                               
-                               
-                               
-                            }
+                                if ( id == 5 || id == 6)
+                                {
+                                     controllerName = "Template";
+                                    access = LoadAccess(4);
+                                }
+
+
+                                }
 
                             if (access != null)
                             {

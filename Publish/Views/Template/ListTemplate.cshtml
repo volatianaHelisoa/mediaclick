@@ -15,15 +15,18 @@
     </script>
 }
 
-@if (Session["name"] != null && @Session["role"] != null && @Session["role"].ToString() == "5")
-{
+
     <main id="wrapper">
         <div id="single-container">
             <div class="onglets ease-in-out">
                 <ul>
                     <li> @Html.ActionLink("Dashboard", "ListTemplate", new { controller = "Template" }, new { @class = "active" })</li>
                     <li> @Html.ActionLink("Creation Site", "ChoiceTemplate", new { controller = "Template" })</li>
-                </ul>
+                    @if (Session["name"] != null && @Session["role"] != null && @Session["role"].ToString() != "6")
+                    {
+                        <li> @Html.ActionLink("Utilisateurs", "ListeUserTemplate", new { controller = "Home" }) </li>
+                    }
+                    </ul>
             </div>
 
             <div class="card back-office with-shadow">
@@ -125,9 +128,7 @@
 
     </main>
 
-}
-else
-{ Response.Redirect("~/Login/Accueil"); }
+
 <script>
     /*pour la suppression des utilisateurs séléctionnés*/
     var DeleteTemplateClick = function (Template) {

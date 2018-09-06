@@ -198,8 +198,9 @@ C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication.T
 C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication.Tests\bin\Debug\Microsoft.AspNet.SignalR.Core.dll
 C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication.Tests\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
 C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication.Tests\bin\Debug\EntityFramework.dll
-C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication.Tests\bin\Debug\itextsharp.dll
 C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication.Tests\bin\Debug\Twilio.dll
+C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication.Tests\bin\Debug\itextsharp.dll
+C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication.Tests\bin\Debug\itextsharp.xmlworker.dll
 C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication.Tests\bin\Debug\Twilio.AspNet.Mvc.dll
 C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication.Tests\bin\Debug\Microsoft.Owin.Host.SystemWeb.dll
 C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication.Tests\bin\Debug\HtmlSanitizationLibrary.dll
@@ -207,6 +208,7 @@ C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication.T
 C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication.Tests\bin\Debug\Microsoft.IdentityModel.Tokens.dll
 C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication.Tests\bin\Debug\Microsoft.IdentityModel.Logging.dll
 C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication.Tests\bin\Debug\RedactApplication.pdb
+C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication.Tests\bin\Debug\RedactApplication.dll.config
 C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication.Tests\bin\Debug\Newtonsoft.Json.xml
 C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication.Tests\bin\Debug\System.Web.Helpers.xml
 C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication.Tests\bin\Debug\System.Web.Mvc.xml
@@ -221,10 +223,8 @@ C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication.T
 C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication.Tests\bin\Debug\fr\System.Web.WebPages.resources.dll
 C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication.Tests\bin\Debug\fr\System.Web.WebPages.Deployment.resources.dll
 C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication.Tests\bin\Debug\fr\System.Web.WebPages.Razor.resources.dll
-C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication.Tests\obj\Debug\RedactApplication.Tests.dll
-C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication.Tests\obj\Debug\RedactApplication.Tests.pdb
-C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication.Tests\bin\Debug\RedactApplication.dll.config
 C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication.Tests\obj\Debug\RedactApplication.Tests.csprojAssemblyReference.cache
 C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication.Tests\obj\Debug\RedactApplication.Tests.csproj.CoreCompileInputs.cache
 C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication.Tests\obj\Debug\RedactApplication.Tests.csproj.CopyComplete
-C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication.Tests\bin\Debug\itextsharp.xmlworker.dll
+C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication.Tests\obj\Debug\RedactApplication.Tests.dll
+C:\Users\ramin\Documents\GitHub\mediaclick\RedactApplication\RedactApplication.Tests\obj\Debug\RedactApplication.Tests.pdb

@@ -95,7 +95,7 @@ namespace RedactApplication.Controllers
                                 });
 
                         }
-                        if (data[0] == 5 )
+                        if (data[0] == 5 || data[0] == 6)
                         {
                             return RedirectToRoute("Home", new RouteValueDictionary {
                                     { "controller", "Template" },

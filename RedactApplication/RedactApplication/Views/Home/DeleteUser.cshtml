@@ -12,10 +12,21 @@
         <div class="content-section text-centered icon-bottom">
             <i class="pop-icon green-bg"></i>
             <p>Voulez-vous vraiment supprimer la sélection ?</p>
-            @using (Html.BeginForm("ListeUser", "Home", FormMethod.Post))
+            @if (@Session["role"] != null && @Session["role"].ToString() == "4")
             {
-                @Html.ActionLink("Supprimer", "DeleteAllUserSelected", new { controller = "Home" }, new { @class = "btn btn-primary" })          
-                <input type="submit" value="Annuler" class="btn btn-warning" onclick="DecheckedClick()">
+                using (Html.BeginForm("ListeUser", "Home", FormMethod.Post))
+                {
+                    @Html.ActionLink("Supprimer", "DeleteAllUserSelected", new { controller = "Home" }, new { @class = "btn btn-primary" })
+                    <input type="submit" value="Annuler" class="btn btn-warning" onclick="DecheckedClick()">
+                }
+            }
+            else if (@Session["role"] != null && @Session["role"].ToString() == "5")
+            {
+                using (Html.BeginForm("ListeUserTemplate", "Home", FormMethod.Post))
+                {
+                    @Html.ActionLink("Supprimer", "DeleteAllUserSelected", new { controller = "Home" }, new { @class = "btn btn-primary" })
+                    <input type="submit" value="Annuler" class="btn btn-warning" onclick="DecheckedClick()">
+                }
             }
         </div>
     </div>

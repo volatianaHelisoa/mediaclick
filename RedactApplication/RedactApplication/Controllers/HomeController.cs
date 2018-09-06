@@ -284,6 +284,67 @@ namespace RedactApplication.Controllers
         }
 
         /// <summary>
+        /// Retourne la vue d'une liste d'Utilisateur.
+        /// </summary>
+        /// <param name="role">role</param>
+
+        /// <returns>View</returns>       
+        [Authorize]
+        public ActionResult ListeUserTemplate(string role)
+        {
+
+            // Exécute le traitement de la pagination
+            Utilisateurs val = new Utilisateurs();
+
+            // Récupère la liste des utilisateurs
+            var listeDataUser = val.GetListUtilisateur();
+            if (role != null)
+            {
+                listeDataUser = listeDataUser.Where(x => x.userRole == role.ToString()).ToList();
+            }
+
+
+            ViewBag.listeUserVm = listeDataUser.Distinct().ToList();
+
+            // Exécute le suivi de session utilisateur
+            if (!string.IsNullOrEmpty(Request.QueryString["currentid"]))
+            {
+                _userId = Guid.Parse(Request.QueryString["currentid"]);
+                Session["currentid"] = Request.QueryString["currentid"];
+            }
+            else
+                _userId = Guid.Parse(HttpContext.User.Identity.Name);
+
+            if (_userId != Guid.Empty)
+            {
+                ViewBag.CurrentUser = val.GetUtilisateur(_userId);
+                if (val.GetUtilisateur(_userId) != null)
+                {
+                    UTILISATEURViewModel userVm = new UTILISATEURViewModel();
+                    var currentuser = val.GetUtilisateur(_userId);
+                    userVm.userNom = currentuser.userNom;
+                    userVm.userPrenom = currentuser.userPrenom;
+                    userVm.userId = currentuser.userId;
+
+                    ViewBag.userRole = val.GetUtilisateurRoleToString(userVm.userId);
+                    userVm.redactSkype = currentuser.redactSkype;
+                
+                    userVm.logoUrl = currentuser.logoUrl;
+
+                    userVm.ListTheme = val.GetListThemeItem();
+                    Session["logoUrl"] = currentuser.logoUrl;
+                    return View(userVm);
+                }
+
+
+            }
+            return RedirectToRoute("Home", new RouteValueDictionary {
+                    { "controller", "Login" },
+                    { "action", "Accueil" }
+                });
+        }
+
+        /// <summary>
         /// Redirige vers la vue d'affichage d'une liste d'Utilisateur.
         /// </summary>
         /// <returns>View</returns>        
@@ -344,7 +405,54 @@ namespace RedactApplication.Controllers
             return View();
         }
 
-      
+        /// <summary>
+        /// Retourne la vue de création d'Utilisateur.
+        /// </summary>
+        /// <returns>View</returns>
+        [Authorize]
+        public ActionResult CreateUser()
+        {
+
+            _userId = Guid.Parse(HttpContext.User.Identity.Name);
+
+            ViewBag.userRole = (new Utilisateurs()).GetUtilisateurRoleToString(_userId);
+
+            Guid editUserId;
+
+            if (!string.IsNullOrEmpty(Request.QueryString["currentid"]))
+            {
+                editUserId = Guid.Parse(Request.QueryString["currentid"]);
+            }
+            else
+            {
+                editUserId = Guid.NewGuid();
+            }
+            var val = new Utilisateurs();
+            UTILISATEURViewModel userVm = new UTILISATEURViewModel();
+          
+
+            if (_userId != Guid.Empty)
+            {
+                redactapplicationEntities db = new Models.redactapplicationEntities();
+                UTILISATEUR utilisateur = db.UTILISATEURs.SingleOrDefault(x => x.userId == _userId);
+                ViewBag.CurrentUser = utilisateur;
+
+
+              
+
+                if (utilisateur != null)
+                {
+
+                    userVm.userNom = utilisateur.userNom;
+                    userVm.userPrenom = utilisateur.userPrenom;
+                    userVm.userId = editUserId;
+                  
+
+                    return View(userVm);
+                }
+            }
+            return RedirectToAction("CreateUser", "Home");
+        }
 
         /// <summary>
         /// Retourne la vue de création d'Utilisateur.
@@ -999,13 +1107,126 @@ namespace RedactApplication.Controllers
                         { "controller", "Home" },
                         { "action", "ListeUser" }
                     });
-        }   
+        }
 
         /// <summary>
         /// Ajoute un nouvel Utilisateur dans la base de données.
         /// </summary>
         /// <param name="model">information Utilisateur</param>
-       
+
+        /// <param name="selectedRole">liste des roles de l'utilisateur à créer</param>
+        /// <returns>View</returns>
+        [Authorize]
+        [ValidateInput(false)]
+        [HttpPost]
+        public ActionResult EnregistrerTemplateUtilisateur(UTILISATEURViewModel model, HttpPostedFileBase logoUrl)
+        {
+
+            model.userNom = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.userNom));
+            model.userPrenom = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.userPrenom));
+            model.userMail = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.userMail));
+
+            var val = new Utilisateurs();
+            UTILISATEURViewModel userVm = new UTILISATEURViewModel();
+           
+
+
+            if (string.IsNullOrEmpty(model.userNom) || string.IsNullOrEmpty(model.userPrenom) || string.IsNullOrEmpty(model.userMail))
+            {
+                ViewBag.succes = 3;
+
+                model.ListTheme = val.GetListThemeItem();
+                Session["userEditModif"] = model;
+                return View("CreateUser", model);
+            }
+
+            Guid user = Guid.Parse(HttpContext.User.Identity.Name);
+            
+
+
+            string path = Server.MapPath("~/images/Logo/");
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            if (logoUrl != null)
+            {
+                string fileName = Path.GetFileName(logoUrl.FileName);
+                logoUrl.SaveAs(path + fileName);
+                model.logoUrl = "/images/Logo/" + fileName;
+            }
+
+            redactapplicationEntities db = new Models.redactapplicationEntities();
+
+            bool isRoleValid = true;
+          
+
+          
+            if (Regex.IsMatch(model.userMail, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase) == false)
+            {
+                ViewBag.ErrorUserValidation = "E-mail non valide.";
+                model.ListTheme = val.GetListThemeItem();
+                Session["userEditModif"] = model;
+
+                return View("CreateUser", model);
+            }
+           
+            try
+            {
+                UTILISATEUR utilisateur = new UTILISATEUR();
+                var users = db.UTILISATEURs.Count(x => x.userMail == model.userMail);
+                if (users <= 0)
+                {
+                    utilisateur.userNom = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(model.userNom.ToLower());
+                    utilisateur.userPrenom = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(model.userPrenom.ToLower());
+                    utilisateur.userMail = model.userMail;
+                    utilisateur.logoUrl = model.logoUrl;
+
+
+                    var newId = Guid.NewGuid();
+                    utilisateur.userId = newId;
+                    db.UTILISATEURs.Add(utilisateur);
+
+
+                    UserRole userRole = new UserRole();
+
+                    userRole.idRole = 6; //role CEO
+                    userRole.idUser = newId;
+                    db.UserRoles.Add(userRole);
+
+
+                    db.SaveChanges();
+
+                 
+
+                    return RedirectToRoute("Home", new RouteValueDictionary {
+                        { "controller", "Home" },
+                        { "action", "sendMailRecovery" },
+                        { "hash",newId }
+                    });
+                }
+                else
+                {
+
+                    ViewBag.ErrorUserCreation = true;
+                    return View("CreateUser");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                ViewBag.ErrorMessage = "role null";
+                return View("ErrorException");
+            }
+        }
+
+
+        /// <summary>
+        /// Ajoute un nouvel Utilisateur dans la base de données.
+        /// </summary>
+        /// <param name="model">information Utilisateur</param>
+
         /// <param name="selectedRole">liste des roles de l'utilisateur à créer</param>
         /// <returns>View</returns>
         [Authorize]
@@ -1309,6 +1530,121 @@ namespace RedactApplication.Controllers
         }
 
 
+        /// <summary>
+        /// Enregistre les modifications d'un Utilisateur dans la base de données.
+        /// </summary>
+        /// <param name="model">information Utilisateur</param>
+        /// <param name="selectedDiv">liste des divisions de l'utilisateur à créer</param>
+        /// <param name="selectedRole">liste des roles de l'utilisateur à créer</param>
+        /// <param name="idUser">id de l'Utilisateur</param>
+        /// <returns>View</returns>
+        [Authorize]
+        [ValidateInput(false)]
+        [HttpPost]
+        public ActionResult ModifierUserTemplate(UTILISATEURViewModel model, Guid idUser, HttpPostedFileBase logoUrl)
+        {
+            _userId = idUser;
+            Guid userID = Guid.Parse(HttpContext.User.Identity.Name);
+            var currentrole = (new Utilisateurs()).GetUtilisateurRoleToString(userID);
+            ViewBag.userRole = currentrole;
+           
+          
+                model.userNom = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.userNom));
+                model.userPrenom = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.userPrenom));
+                model.userMail = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.userMail));
+                model.userMotdepasse = StatePageSingleton.SanitizeString(Sanitizer.GetSafeHtmlFragment(model.userMotdepasse));
+            
+            
+
+
+
+            string path = Server.MapPath("~/images/Logo/");
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            if (logoUrl != null)
+            {
+                string fileName = Path.GetFileName(logoUrl.FileName);
+                logoUrl.SaveAs(path + fileName);
+                model.logoUrl = "/images/Logo/" + fileName;
+            }
+
+            if (string.IsNullOrEmpty(model.userNom) || string.IsNullOrEmpty(model.userPrenom) || string.IsNullOrEmpty(model.userMail))
+            {
+                return View("ErrorEditUser");
+            }
+           
+
+
+
+            redactapplicationEntities db = new Models.redactapplicationEntities();
+            //Recuperation de l'utilisateur
+            UTILISATEUR user = db.UTILISATEURs.SingleOrDefault(x => x.userId == idUser);
+
+           
+            if (Regex.IsMatch(model.userMail, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase) == false)
+            {
+                Session["userEditModif"] = model;
+                return RedirectToAction("EditUserTemplate", new { hash = idUser, error = "ErrorUserMailValidation" });
+            }
+           
+            //Verify the user email
+            bool userMailValid = true;
+            UTILISATEUR userByMail = db.UTILISATEURs.SingleOrDefault(x => x.userMail == model.userMail);
+            if (userByMail != null)
+            {
+                if (userByMail.userId != user.userId) userMailValid = false;
+            }
+            if (userMailValid)
+            {
+                try
+                {
+                    
+
+                    // mise à jour de user
+                    user.userNom = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(model.userNom.ToLower());
+                    user.userPrenom = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(model.userPrenom.ToLower());
+                    user.userMail = model.userMail;
+
+                   
+                    
+                    if (model.userMotdepasse != "")
+                    {
+                        user.userMotdepasse = model.userMotdepasse;
+                       
+                    }
+
+                    if (!string.IsNullOrEmpty(model.logoUrl))
+                    {
+                        user.logoUrl = model.logoUrl;
+
+                    }
+
+                    db.SaveChanges();
+                    _userId = Guid.Parse(HttpContext.User.Identity.Name);
+                    if (user.userId == _userId)
+                        UpdateInfoProfilSession(user.userNom, user.userPrenom, user.userMail, user.UserRoles.FirstOrDefault(x => x.idUser == user.userId).idRole.ToString(), user.logoUrl);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex);
+                    Session["userEditModif"] = model;
+                    return RedirectToAction("EditUserTemplate", new { hash = idUser, error = "ErrorMessage" });
+                }
+            }
+            else
+            {
+                Session["userEditModif"] = model;
+                return RedirectToAction("EditUserTemplate", new { hash = idUser, error = "ErrorMail" });
+            }
+            ViewBag.hashUser = user.userId;
+            return View("EditUserConfirmationTemplate");
+        }
+
+
+
         private void UpdateInfoProfilSession(string nom, string prenom,string mail,string role, string logourl)
         {
             if(!string.IsNullOrEmpty(nom))
@@ -1405,7 +1741,7 @@ namespace RedactApplication.Controllers
                         }
 
                         StringBuilder mailBody = new StringBuilder();
-                    
+
                         mailBody.AppendFormat(CultureInfo.CurrentCulture.TextInfo.ToTitleCase(utilisateur.userNom.ToLower()) + ",");
                         mailBody.AppendFormat("<br />");
                         mailBody.AppendFormat("<p>Votre compte a été crée .Veuillez réinitialiser votre mot de passe en cliquant sur lien suivant : </p>");
@@ -1430,16 +1766,19 @@ namespace RedactApplication.Controllers
                             }
                         }
                     }
-                    else return RedirectToRoute("Home", new RouteValueDictionary {
+                    else {
+                        
+                        return RedirectToRoute("Home", new RouteValueDictionary {
                         { "controller", "Home" },
-                        { "action", "ListeUser" }
-                    });
+                        { "action", "ListeUserTemplate" }
+                        });
+                    }
                 }
                 catch
                 {
                     return RedirectToRoute("Home", new RouteValueDictionary {
                         { "controller", "Home" },
-                        { "action", "ListeUser" }
+                        { "action", "ListeUserTemplate" }
                     });
                 }
             }
@@ -1515,6 +1854,12 @@ namespace RedactApplication.Controllers
                             {
                                 db.UserRoles.Remove(role);
                             }
+                            var userCommandes = db.COMMANDEs.Where(x => x.commandeReferenceurId == userId);
+                            foreach (var cmde in userCommandes)
+                            {
+                                db.COMMANDEs.Remove(cmde);
+                            }
+
                             //suppression des utilisateurs
                             UTILISATEUR user = db.UTILISATEURs.SingleOrDefault(x => x.userId == userId);
                             db.UTILISATEURs.Remove(user);

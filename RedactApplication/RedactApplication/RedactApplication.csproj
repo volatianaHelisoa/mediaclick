@@ -571,6 +571,7 @@
     <Content Include="Themes\Theme3\js\jquery.min.js" />
     <Content Include="Themes\Theme3\js\theme.js" />
     <Content Include="Themes\Theme4\css\templates-style.css" />
+    <Content Include="Views\Home\EditUserConfirmationTemplate.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -685,6 +686,8 @@
     <Content Include="Views\Template\DeleteTemplateConfirmation.cshtml" />
     <Content Include="Views\Template\DeteleAllTemplateConfirmation.cshtml" />
     <Content Include="Views\Home\EditUserTemplate.cshtml" />
+    <Content Include="Views\Home\ListeUserTemplate.cshtml" />
+    <Content Include="Views\Home\CreateUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
