@@ -234,23 +234,6 @@
     margin-top: 10px;
 }
 
-.ftp-area {
-    display: flex;
-    clear: both;
-}
-
-.ftp-area input#ftpList {
-    flex: 1;
-    min-width: 200px;
-    background-color: #646464;
-    color: white;
-    margin-right: 40px
-}
-
-.ftp-area select {
-    flex: 3;
-}
-
 /* FAVICON */
 .favicon-select .thumbnail {
     max-width: 70px;
