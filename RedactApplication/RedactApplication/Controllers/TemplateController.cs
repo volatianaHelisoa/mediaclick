@@ -825,6 +825,12 @@ namespace RedactApplication.Controllers
             return View();
         }
 
+        public ActionResult Theme5()
+        {
+            Session["TemplateName"] = "Theme5";
+            return View();
+        }
+
       
     }
 }
