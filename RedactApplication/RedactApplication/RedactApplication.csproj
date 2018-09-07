@@ -485,6 +485,8 @@
     <Content Include="images\theme2_thumb.jpg" />
     <Content Include="images\theme3_thumb.jpg" />
     <Content Include="images\theme4_thumb.jpg" />
+    <Content Include="images\theme5_thumb.jpg" />
+    <Content Include="images\theme6_thumb.jpg" />
     <Content Include="images\Themes\financement sante.jpg" />
     <Content Include="images\Themes\pret epargne logement.jpg" />
     <Content Include="Models\redactapplicationEntities.Context.tt">
@@ -571,6 +573,11 @@
     <Content Include="Themes\Theme3\js\jquery.min.js" />
     <Content Include="Themes\Theme3\js\theme.js" />
     <Content Include="Themes\Theme4\css\templates-style.css" />
+    <Content Include="Themes\Theme5\css\templates-style.css" />
+    <Content Include="Themes\Theme5\css\title_deco.png" />
+    <Content Include="Themes\Theme5\img\logo.png" />
+    <Content Include="Themes\Theme5\img\photo1.jpg" />
+    <Content Include="Themes\Theme5\img\photo2.jpg" />
     <Content Include="Views\Home\EditUserConfirmationTemplate.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -688,6 +695,7 @@
     <Content Include="Views\Home\EditUserTemplate.cshtml" />
     <Content Include="Views\Home\ListeUserTemplate.cshtml" />
     <Content Include="Views\Home\CreateUser.cshtml" />
+    <Content Include="Views\Template\Theme5.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

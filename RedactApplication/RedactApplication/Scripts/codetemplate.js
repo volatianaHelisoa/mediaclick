@@ -61,6 +61,7 @@ $('input[type=file]#menu3_paragraphe1_photoUrl').bind("change", showThumbPhotos)
 $('input[type=file]#menu3_paragraphe2_photoUrl').bind("change", showThumbPhotos);
 $('input[type=file]#menu4_paragraphe1_photoUrl').bind("change", showThumbPhotos);
 $('input[type=file]#menu4_paragraphe2_photoUrl').bind("change", showThumbPhotos);
+$('input[type=file]#favicone').bind("change", showThumb);
 
 $('.content-to-show').each(function () {
     var current = null;
