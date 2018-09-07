@@ -271,4 +271,3 @@ C:\Users\ramin\Documents\GitHub\sources\RedactApplication\RedactApplication\obj\
 C:\Users\ramin\Documents\GitHub\sources\RedactApplication\RedactApplication\obj\Debug\RedactApplication.csproj.CopyComplete
 C:\Users\ramin\Documents\GitHub\sources\RedactApplication\RedactApplication\obj\Debug\RedactApplication.dll
 C:\Users\ramin\Documents\GitHub\sources\RedactApplication\RedactApplication\obj\Debug\RedactApplication.pdb
-C:\Users\ramin\Documents\GitHub\sources\RedactApplication\RedactApplication\obj\Debug\RedactApplication.csprojAssemblyReference.cache

@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Routing;
 
@@ -88,19 +89,33 @@ namespace RedactApplication.Controllers
 
         private string AltPhoto(HttpPostedFileBase file, string templateName)
         {
-            string path = Server.MapPath("~/Themes/" + templateName + "/img/");
-
-           
+            string path = Server.MapPath("~/Themes/" + templateName + "/img/");           
             if (file != null)
             {
                 string fileName = Path.GetFileNameWithoutExtension(file.FileName);
-
-                return fileName.Replace("_", " ");
-               
+                return fileName.Replace("-", " ");               
             }
             return "";
         }
 
+        private string SaveFavicon(HttpPostedFileBase file, string templateName)
+        {
+            string path = Server.MapPath("~/Themes/" + templateName + "/img/");
+            
+            if (file != null)
+            {
+                string fileName = Path.GetFileNameWithoutExtension(file.FileName);
+
+                WebImage img = new WebImage(file.InputStream);
+                if (img.Width > 17)
+                    img.Resize(16, 16);
+
+                img.Save(path+ removeDiacritics(fileName));
+
+                return "img/" + removeDiacritics(fileName);
+            }
+            return "";
+        }
 
         public static String removeDiacritics(string str)
         {
@@ -124,7 +139,7 @@ namespace RedactApplication.Controllers
             HttpPostedFileBase menu2_paragraphe1_photoUrl, HttpPostedFileBase menu2_paragraphe2_photoUrl,
             HttpPostedFileBase menu3_paragraphe1_photoUrl, HttpPostedFileBase menu3_paragraphe2_photoUrl,
            HttpPostedFileBase menu4_paragraphe1_photoUrl, HttpPostedFileBase menu4_paragraphe2_photoUrl,
-           HttpPostedFileBase photoALaUneUrl, FormCollection collection)
+           HttpPostedFileBase photoALaUneUrl, HttpPostedFileBase favicone, FormCollection collection)
         {
             var templateName = Session["TemplateName"].ToString();
             if (!string.IsNullOrEmpty(collection["nbmenu"]))
@@ -146,7 +161,8 @@ namespace RedactApplication.Controllers
 
             MODELE newmodel = new MODELE();
             newmodel.logoUrl = SavePhoto(logoUrl, templateName);
-            
+            newmodel.favicone = SaveFavicon(favicone, templateName);
+
             /*Menu 1 */
             newmodel.menu1_titre = model.menu1_titre;
 

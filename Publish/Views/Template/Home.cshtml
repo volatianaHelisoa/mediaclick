@@ -841,3 +841,199 @@
         </footer>
     </div>
 }
+
+@if (@Session["TemplateName"] != null && @Session["TemplateName"].ToString() == "Theme6")
+{
+    <div class="template theme">
+        <!-- Bloc header -->
+        <header>
+            <div class="wrapper">
+                <div id="topbar" class="clearfix">
+                    <a href="@Model.site_url" class="t-logo theme">
+                        <img src="@Html.Raw(Model.logoUrl.Trim())" alt="@Model.domaine" srcset="">
+                    </a>
+                    <nav class="menu">
+                        <ul>
+                            <li class="@Model.menu1_link_class"><a href="/">@Model.menu1_titre</a></li>
+                            @if (!String.IsNullOrEmpty(Model.menu2_titre))
+                            {
+                                <li class="@Model.menu2_link_class"><a href="@String.Format("{0}.html", Model.menu2_link)">@Model.menu2_titre</a></li>
+                            }
+                            @if (!String.IsNullOrEmpty(Model.menu3_titre))
+                            {
+                                <li class="@Model.menu3_link_class"><a href="@String.Format("{0}.html", Model.menu3_link)">@Model.menu3_titre</a></li>
+                            }
+                            @if (!String.IsNullOrEmpty(Model.menu4_titre))
+                            {
+                                <li class="@Model.menu4_link_class"><a href="@String.Format("{0}.html", Model.menu4_link)">@Model.menu4_titre</a></li>
+                            }
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <!-- Fin Bloc header -->
+        <!-- Bloc de contenu -->
+        @if (@Session["Menu"] != null && @Session["Menu"].ToString() == "1")
+        {
+            <main>
+                <div id="contenu">
+                    <div class="container">
+                        <div class="wrapper">
+                            <section class="row" id="bloc1">
+                                <div class="texte">                                    
+                                    <h1> @Model.menu1_paragraphe1_titre</h1>
+                                    @Html.Raw(Model.menu1_contenu1)
+                                </div>
+                                @if (Model.menu1_paragraphe1_photoUrl != null && !String.IsNullOrEmpty(Model.menu1_paragraphe1_photoUrl))
+                                {
+                                    <div class="photo">
+                                        <img src="@Html.Raw(Model.menu1_paragraphe1_photoUrl)" alt="@Model.menu1_paragraphe1_alt" srcset="">
+                                    </div>
+                                }
+                            </section>
+                        </div>
+                            
+                        <section class="clearfix bloc2">                            
+                            <div class="wrapper" id="bloc2">
+                                @if (Model.menu1_paragraphe2_photoUrl != null && !String.IsNullOrEmpty(Model.menu1_paragraphe2_photoUrl))
+                                {
+                                    <div class="photo">
+                                        <img src="@Html.Raw(Model.menu1_paragraphe2_photoUrl)" alt="@Model.menu1_paragraphe2_alt" srcset="">
+                                    </div>
+                                }
+                                <div class="texte">
+                                    <h2>@Model.menu1_paragraphe2_titre</h2>
+                                    @Html.Raw(Model.menu1_contenu2)
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </main>
+        }
+
+        @if (@Session["Menu"] != null && @Session["Menu"].ToString() == "2")
+        {
+            <main>
+                <div id="contenu">
+                    <div class="container">
+                        <div class="wrapper">
+                            <section class="row" id="bloc1">
+                                <div class="texte">                                    
+                                    <h1> @Model.menu2_paragraphe1_titre</h1>
+                                    @Html.Raw(Model.menu2_contenu1)
+                                </div>
+                                @if (Model.menu2_paragraphe1_photoUrl != null && !String.IsNullOrEmpty(Model.menu2_paragraphe1_photoUrl))
+                                {
+                                    <div class="photo">
+                                        <img src="@Html.Raw(Model.menu2_paragraphe1_photoUrl)" alt="@Model.menu2_paragraphe1_alt" srcset="">
+                                    </div>
+                                }
+                            </section>
+                        </div>
+                            
+                        <section class="clearfix bloc2">                            
+                            <div class="wrapper" id="bloc2">
+                                @if (Model.menu2_paragraphe2_photoUrl != null && !String.IsNullOrEmpty(Model.menu2_paragraphe2_photoUrl))
+                                {
+                                    <div class="photo">
+                                        <img src="@Html.Raw(Model.menu2_paragraphe2_photoUrl)" alt="@Model.menu2_paragraphe2_alt" srcset="">
+                                    </div>
+                                }
+                                <div class="texte">
+                                    <h2>@Model.menu2_paragraphe2_titre</h2>
+                                    @Html.Raw(Model.menu2_contenu2)
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </main>
+        }
+        @if (@Session["Menu"] != null && @Session["Menu"].ToString() == "3")
+        {
+            <main>
+                <div id="contenu">
+                    <div class="container">
+                        <div class="wrapper">
+                            <section class="row" id="bloc1">
+                                <div class="texte">                                    
+                                    <h1> @Model.menu3_paragraphe1_titre</h1>
+                                    @Html.Raw(Model.menu3_contenu1)
+                                </div>
+                                @if (Model.menu3_paragraphe1_photoUrl != null && !String.IsNullOrEmpty(Model.menu3_paragraphe1_photoUrl))
+                                {
+                                    <div class="photo">
+                                        <img src="@Html.Raw(Model.menu3_paragraphe1_photoUrl)" alt="@Model.menu3_paragraphe1_alt" srcset="">
+                                    </div>
+                                }
+                            </section>
+                        </div>
+                            
+                        <section class="clearfix bloc2">                            
+                            <div class="wrapper" id="bloc2">
+                                @if (Model.menu3_paragraphe2_photoUrl != null && !String.IsNullOrEmpty(Model.menu3_paragraphe2_photoUrl))
+                                {
+                                    <div class="photo">
+                                        <img src="@Html.Raw(Model.menu3_paragraphe2_photoUrl)" alt="@Model.menu3_paragraphe2_alt" srcset="">
+                                    </div>
+                                }
+                                <div class="texte">
+                                    <h2>@Model.menu3_paragraphe2_titre</h2>
+                                    @Html.Raw(Model.menu3_contenu2)
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </main>
+        }
+
+        @if (@Session["Menu"] != null && @Session["Menu"].ToString() == "4")
+        {
+            <main>
+                <div id="contenu">
+                    <div class="container">
+                        <div class="wrapper">
+                            <section class="row" id="bloc1">
+                                <div class="texte">                                    
+                                    <h1> @Model.menu4_paragraphe1_titre</h1>
+                                    @Html.Raw(Model.menu4_contenu1)
+                                </div>
+                                @if (Model.menu4_paragraphe1_photoUrl != null && !String.IsNullOrEmpty(Model.menu4_paragraphe1_photoUrl))
+                                {
+                                    <div class="photo">
+                                        <img src="@Html.Raw(Model.menu4_paragraphe1_photoUrl)" alt="@Model.menu4_paragraphe1_alt" srcset="">
+                                    </div>
+                                }
+                            </section>
+                        </div>
+                            
+                        <section class="clearfix bloc2">                            
+                            <div class="wrapper" id="bloc2">
+                                @if (Model.menu4_paragraphe2_photoUrl != null && !String.IsNullOrEmpty(Model.menu4_paragraphe2_photoUrl))
+                                {
+                                    <div class="photo">
+                                        <img src="@Html.Raw(Model.menu4_paragraphe2_photoUrl)" alt="@Model.menu4_paragraphe2_alt" srcset="">
+                                    </div>
+                                }
+                                <div class="texte">
+                                    <h2>@Model.menu4_paragraphe2_titre</h2>
+                                    @Html.Raw(Model.menu4_contenu2)
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </main>
+        }
+
+        <footer id="f1-footer">
+            <div class="wrapper">
+                <span><strong>©</strong> Copyright 2018, <a href="@Html.Raw(Model.site_url)">@Model.domaine</a> Tous droits réservés</span>
+            </div>
+        </footer>
+    </div>
+}
