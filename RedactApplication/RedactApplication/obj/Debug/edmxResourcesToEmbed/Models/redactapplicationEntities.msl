@@ -60,6 +60,7 @@
     <EntitySetMapping Name="MODELEs">
       <EntityTypeMapping TypeName="redactapplicationModel.MODELE">
         <MappingFragment StoreEntitySet="MODELE">
+          <ScalarProperty Name="favicone" ColumnName="favicone" />
           <ScalarProperty Name="menu4_p2_alt" ColumnName="menu4_p2_alt" />
           <ScalarProperty Name="menu4_p1_alt" ColumnName="menu4_p1_alt" />
           <ScalarProperty Name="menu3_p2_alt" ColumnName="menu3_p2_alt" />

@@ -64,6 +64,7 @@ namespace RedactApplication.Models
         public string menu3_p2_alt { get; set; }
         public string menu4_p1_alt { get; set; }
         public string menu4_p2_alt { get; set; }
+        public string favicone { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TEMPLATE> TEMPLATEs { get; set; }

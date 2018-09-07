@@ -106,6 +106,7 @@
           <Property Name="menu3_p2_alt" Type="nvarchar(max)" />
           <Property Name="menu4_p1_alt" Type="nvarchar(max)" />
           <Property Name="menu4_p2_alt" Type="nvarchar(max)" />
+          <Property Name="favicone" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="NOTIFICATION">
           <Key>
@@ -321,30 +322,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_COMMANDE_UTILISATEUR">
-          <End Role="UTILISATEUR" Type="Self.UTILISATEUR" Multiplicity="0..1" />
-          <End Role="COMMANDE" Type="Self.COMMANDE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UTILISATEUR">
-              <PropertyRef Name="userId" />
-            </Principal>
-            <Dependent Role="COMMANDE">
-              <PropertyRef Name="commandeReferenceurId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FACTURE_UTILISATEUR">
-          <End Role="UTILISATEUR" Type="Self.UTILISATEUR" Multiplicity="0..1" />
-          <End Role="FACTURE" Type="Self.FACTURE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UTILISATEUR">
-              <PropertyRef Name="userId" />
-            </Principal>
-            <Dependent Role="FACTURE">
-              <PropertyRef Name="redacteurId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_FACTURE_UTILISATEUR1">
           <End Role="UTILISATEUR" Type="Self.UTILISATEUR" Multiplicity="0..1" />
           <End Role="FACTURE" Type="Self.FACTURE" Multiplicity="*" />
@@ -368,30 +345,6 @@
             </Principal>
             <Dependent Role="NOTIFICATION">
               <PropertyRef Name="commandeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_NOTIFICATION_DEMANDEUR">
-          <End Role="UTILISATEUR" Type="Self.UTILISATEUR" Multiplicity="0..1" />
-          <End Role="NOTIFICATION" Type="Self.NOTIFICATION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UTILISATEUR">
-              <PropertyRef Name="userId" />
-            </Principal>
-            <Dependent Role="NOTIFICATION">
-              <PropertyRef Name="fromId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_NOTIFICATION_REDACTEUR">
-          <End Role="UTILISATEUR" Type="Self.UTILISATEUR" Multiplicity="0..1" />
-          <End Role="NOTIFICATION" Type="Self.NOTIFICATION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UTILISATEUR">
-              <PropertyRef Name="userId" />
-            </Principal>
-            <Dependent Role="NOTIFICATION">
-              <PropertyRef Name="toId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -504,7 +457,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserRole_UTILISATEUR">
-          <End Role="UTILISATEUR" Type="Self.UTILISATEUR" Multiplicity="0..1" />
+          <End Role="UTILISATEUR" Type="Self.UTILISATEUR" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UTILISATEUR">
@@ -564,28 +519,12 @@
             <End Role="THEMES" EntitySet="THEMES" />
             <End Role="COMMANDE" EntitySet="COMMANDE" />
           </AssociationSet>
-          <AssociationSet Name="FK_COMMANDE_UTILISATEUR" Association="Self.FK_COMMANDE_UTILISATEUR">
-            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
-            <End Role="COMMANDE" EntitySet="COMMANDE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FACTURE_UTILISATEUR" Association="Self.FK_FACTURE_UTILISATEUR">
-            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
-            <End Role="FACTURE" EntitySet="FACTURE" />
-          </AssociationSet>
           <AssociationSet Name="FK_FACTURE_UTILISATEUR1" Association="Self.FK_FACTURE_UTILISATEUR1">
             <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
             <End Role="FACTURE" EntitySet="FACTURE" />
           </AssociationSet>
           <AssociationSet Name="FK_NOTIFICATION_COMMANDE" Association="Self.FK_NOTIFICATION_COMMANDE">
             <End Role="COMMANDE" EntitySet="COMMANDE" />
-            <End Role="NOTIFICATION" EntitySet="NOTIFICATION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_NOTIFICATION_DEMANDEUR" Association="Self.FK_NOTIFICATION_DEMANDEUR">
-            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
-            <End Role="NOTIFICATION" EntitySet="NOTIFICATION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_NOTIFICATION_REDACTEUR" Association="Self.FK_NOTIFICATION_REDACTEUR">
-            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
             <End Role="NOTIFICATION" EntitySet="NOTIFICATION" />
           </AssociationSet>
           <AssociationSet Name="FK_REDACT_THEME_THEMES" Association="Self.FK_REDACT_THEME_THEMES">
@@ -863,6 +802,7 @@
           <Property Name="menu3_p2_alt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="menu4_p1_alt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="menu4_p2_alt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="favicone" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="NOTIFICATION">
           <Key>
@@ -1370,6 +1310,7 @@
           <EntitySetMapping Name="MODELEs">
             <EntityTypeMapping TypeName="redactapplicationModel.MODELE">
               <MappingFragment StoreEntitySet="MODELE">
+                <ScalarProperty Name="favicone" ColumnName="favicone" />
                 <ScalarProperty Name="menu4_p2_alt" ColumnName="menu4_p2_alt" />
                 <ScalarProperty Name="menu4_p1_alt" ColumnName="menu4_p1_alt" />
                 <ScalarProperty Name="menu3_p2_alt" ColumnName="menu3_p2_alt" />

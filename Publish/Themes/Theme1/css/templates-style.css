@@ -87,6 +87,10 @@ nav.menu a {
 nav.menu .current a {
     color: #07b6ff;
 }
+
+nav.menu a:hover {
+    color: #07b6ff;
+}
  
 /* TEMPLATE 1 */
 .theme header{

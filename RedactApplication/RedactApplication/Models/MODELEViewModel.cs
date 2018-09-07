@@ -71,5 +71,7 @@ namespace RedactApplication.Models
         public string menu2_link_class { get; set; }
         public string menu3_link_class { get; set; }
         public string menu4_link_class { get; set; }
+
+        public string favicone { get; set; }
     }
 }

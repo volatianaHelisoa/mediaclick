@@ -230,6 +230,7 @@
     <Property Name="menu3_p2_alt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="menu4_p1_alt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="menu4_p2_alt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="favicone" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="NOTIFICATION">
     <Key>
