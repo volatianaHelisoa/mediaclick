@@ -567,7 +567,10 @@
     <Content Include="Scripts\summernote.js" />
     <Content Include="Scripts\tinymce.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Themes\Theme1\css\dark-theme.css" />
+    <Content Include="Themes\Theme1\css\pattern-body.jpg" />
     <Content Include="Themes\Theme1\css\templates-style.css" />
+    <Content Include="Themes\Theme1\css\theme2.css" />
     <Content Include="Themes\Theme2\css\templates-style.css" />
     <Content Include="Themes\Theme3\css\templates-style.css" />
     <Content Include="Themes\Theme3\js\jquery.min.js" />

@@ -47,10 +47,29 @@ namespace RedactApplication.Controllers
         }
         
 
-        public ActionResult Theme1()
+        public ActionResult Theme1(FormCollection collection)
         {
+            if (!string.IsNullOrEmpty(collection["color-select"]))
+            {
+                string color_select = collection["color-select"];
+                Session["Color"] = get_css_link(color_select.Trim());
+            }             
             Session["TemplateName"] = "Theme1";
+
             return View();
+        }
+
+        private string get_css_link(string color)
+        {
+            switch(color){
+                case "dark":
+                    return "css/dark-theme.css";
+                case "light":
+                    return "css/theme2.css";
+                default:
+                    return "css/templates-style.css";
+
+            }
         }
 
         private void DeleteFiles(string path)
@@ -104,7 +123,7 @@ namespace RedactApplication.Controllers
             
             if (file != null)
             {
-                string fileName = Path.GetFileNameWithoutExtension(file.FileName);
+                string fileName = Path.GetFileName(file.FileName.ToLower());
 
                 WebImage img = new WebImage(file.InputStream);
                 if (img.Width > 17)
@@ -129,8 +148,6 @@ namespace RedactApplication.Controllers
             return res.Replace(" ", "-");
         }
 
-
-
         [HttpPost]
         [Authorize]
         [ValidateInput(false)]
@@ -146,8 +163,7 @@ namespace RedactApplication.Controllers
             {
                 string nbmenu = collection["nbmenu"];
                 Session["nbmenu"]  = nbmenu ;
-            }
-         
+            }         
 
             string path = Server.MapPath("~/Themes/"+ templateName );
             if (!Directory.Exists(path))
@@ -157,7 +173,6 @@ namespace RedactApplication.Controllers
             else DeleteFiles(path);
             string pathimg = Server.MapPath("~/Themes/" + templateName + "/img/");
             DeleteFiles(pathimg);
-
 
             MODELE newmodel = new MODELE();
             newmodel.logoUrl = SavePhoto(logoUrl, templateName);
@@ -330,8 +345,13 @@ namespace RedactApplication.Controllers
         }
 
 
-        public ActionResult Theme2()
+        public ActionResult Theme2(FormCollection collection)
         {
+            if (!string.IsNullOrEmpty(collection["color-select"]))
+            {
+                string color_select = collection["color-select"];
+                Session["Color"] = get_css_link(color_select.Trim());
+            }
             Session["TemplateName"] = "Theme2";
             return View();
         }
@@ -827,28 +847,48 @@ namespace RedactApplication.Controllers
         }
 
 
-        public ActionResult Theme3()
+        public ActionResult Theme3(FormCollection collection)
         {
+            if (!string.IsNullOrEmpty(collection["color-select"]))
+            {
+                string color_select = collection["color-select"];
+                Session["Color"] = get_css_link(color_select.Trim());
+            }
             Session["TemplateName"] = "Theme3";
             return View();
         }
 
      
 
-        public ActionResult Theme4()
+        public ActionResult Theme4(FormCollection collection)
         {
+            if (!string.IsNullOrEmpty(collection["color-select"]))
+            {
+                string color_select = collection["color-select"];
+                Session["Color"] = get_css_link(color_select.Trim());
+            }
             Session["TemplateName"] = "Theme4";
             return View();
         }
 
-        public ActionResult Theme5()
+        public ActionResult Theme5(FormCollection collection)
         {
+            if (!string.IsNullOrEmpty(collection["color-select"]))
+            {
+                string color_select = collection["color-select"];
+                Session["Color"] = get_css_link(color_select.Trim());
+            }
             Session["TemplateName"] = "Theme5";
             return View();
         }
 
-        public ActionResult Theme6()
+        public ActionResult Theme6(FormCollection collection)
         {
+            if (!string.IsNullOrEmpty(collection["color-select"]))
+            {
+                string color_select = collection["color-select"];
+                Session["Color"] = get_css_link(color_select.Trim());
+            }
             Session["TemplateName"] = "Theme6";
             return View();
         }
