@@ -54,16 +54,6 @@ $(document).ready(function(){
     $('.file-name').text(fileName);
   });
 
-    $(".theme-select .item").each(function (e) {
-        $(this).click(function () {
-            $(this).addClass("open");
-        })
-    })
-    $("#close-1").click(function () {
-        if ($("#theme1").hasClass("open")) {
-            $("#theme1").removeClass("open")
-        }
-    })
-
+ 
  
 });
