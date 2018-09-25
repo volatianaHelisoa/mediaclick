@@ -10,6 +10,7 @@
 .theme-select a {
     display: block;
     text-align: center;
+    margin-bottom:20px;
 }
 
 .theme-select a.btn {
@@ -258,4 +259,16 @@
 .favicon-select .favicon-input-wrapper{
     display: flex;
     margin-top: 15px;
+}
+
+.errorMaximage {
+    margin: 0;
+    text-align: center;
+    font-weight: normal;
+    color: #af3221;
+    padding: 20px 0;
+    background: #f9aea4;
+    border-radius: 3px;
+    border: 1px solid #d68f86;
+    margin: 20px 0;
 }

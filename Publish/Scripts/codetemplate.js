@@ -25,23 +25,26 @@
     }
 });
 var showThumbPhotos = (function (e) {
-    var fileSize = (this.files[0].size / 1024 / 1024);
-    if (typeof FileReader == "undefined" || fileSize > 1) return true;
-    var elem = $(this);
-    var files = e.target.files;
+    var fileSize = (this.files[0].size / 1024 / 1024),
+        elem = $(this),  
+        files = e.target.files,
+        previewDiv = $('.thumbnail-photo', elem.parent()),
+        errorMessage = '<p class="errorMaximage">Fichier trop volumineux, veuillez reessayer</p>';
+    if (typeof FileReader == "undefined" || fileSize > 1 ) {     
+        previewDiv.children().remove();
+        previewDiv.append(errorMessage);
+        return true;
+    }
     for (var i = 0, f; f = files[i]; i++) {
         if (f.type.match('image.*')) {
             var reader = new FileReader();
-            var previewDiv = $('.thumbnail-photo', elem.parent());
             reader.onload = (function (theFile) {
                 return function (e) {
                     var image = e.target.result;
                     if ($(previewDiv).children().length) {
-                        console.log('efa misy image ato');
                         previewDiv.children().remove();
                         previewDiv.append('<img src="' + image + '" />');
                     }
-
                     else {
                         previewDiv.append('<img src="' + image + '"/>');
                     }
