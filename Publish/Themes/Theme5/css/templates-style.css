@@ -126,7 +126,6 @@ nav.menu .current a::before {
 }
 
 .template #bloc1 {
-    display: flex;
     padding: 40px 0 20px;
 }
 
@@ -153,7 +152,6 @@ nav.menu .current a::before {
     margin-right: 10px;
 }
 .template #bloc1 .texte {
-    padding-left: 50px;
     min-width: 60%;
 }
 
@@ -162,9 +160,11 @@ nav.menu .current a::before {
 }
 
 .template #bloc1 .photo {
-    min-width: 40%;
+	min-width: 40%;
     overflow: hidden;
     max-width: 40%;
+    float: left;
+    margin-right: 40px;
 }
 
 .template .photo > img {
@@ -172,17 +172,17 @@ nav.menu .current a::before {
 }
 
 .template #bloc2 {
-    display: flex;
     background: transparent;
 }
 
 .template #bloc2 .texte {
-    margin-right: 50px;
+	margin-bottom: 60px;
 }
 
 .template #bloc2 .photo {
-    padding-right: 0;
+    margin-left: 50px;
     min-width: 40%;
+	float:right;
 }
 
 .template #bloc2 .photo > img {

@@ -119,11 +119,11 @@ nav.menu .current a::before {
 }
 
 .template header{
-    border-bottom: 1px solid #f8f8f8
+	border-bottom: 1px solid #272727;
+    background: #131313;
 }
 
 .template #bloc1 {
-    display: flex;
     padding: 40px 0 20px;
 }
 
@@ -143,14 +143,13 @@ nav.menu .current a::before {
 .template h3::before {
     content: "";
     display: inline-block;
-    background: url(../img/title_deco.png) no-repeat center;
+    background: url(title_deco.png) no-repeat center;
     width: 16px;
     height: 13px;
     vertical-align: middle;
     margin-right: 10px;
 }
 .template #bloc1 .texte {
-    padding-left: 50px;
     min-width: 60%;
 }
 
@@ -159,9 +158,11 @@ nav.menu .current a::before {
 }
 
 .template #bloc1 .photo {
-    min-width: 40%;
+	min-width: 40%;
     overflow: hidden;
     max-width: 40%;
+    float: left;
+    margin-right: 40px;
 }
 
 .template .photo > img {
@@ -169,17 +170,17 @@ nav.menu .current a::before {
 }
 
 .template #bloc2 {
-    display: flex;
     background: transparent;
 }
 
 .template #bloc2 .texte {
-    margin-right: 50px;
+	margin-bottom: 60px;
 }
 
 .template #bloc2 .photo {
-    padding-right: 0;
+    margin-left: 50px;
     min-width: 40%;
+	float:right;
 }
 
 .template #bloc2 .photo > img {
@@ -223,7 +224,7 @@ nav.menu .current a::before {
 .footer-logo {
     display: block;
     position: absolute;
-    background: white;
+	background: #131313;
     padding: 30px;
     top: -20px;
 }
