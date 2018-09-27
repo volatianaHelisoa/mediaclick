@@ -47,6 +47,7 @@ a {
 }
 .t-logo {
     padding: 16px 0;
+	max-width: 60px;
 }
 .t-logo,
 .t-logo img,
@@ -166,7 +167,8 @@ nav.menu .current a::before {
 }
 
 .template .photo > img {
-    height: 100%;
+    width: 100%;
+    height: auto;
 }
 
 .template #bloc2 {
@@ -179,8 +181,8 @@ nav.menu .current a::before {
 
 .template #bloc2 .photo {
     margin-left: 50px;
-    min-width: 40%;
-	float:right;
+	max-width: 40%;
+    float: right;
 }
 
 .template #bloc2 .photo > img {
@@ -222,13 +224,20 @@ nav.menu .current a::before {
 }
 
 .footer-logo {
-    display: block;
+	display: block;
     position: absolute;
-	background: #131313;
+    background: white;
     padding: 30px;
     top: -20px;
+    max-height: 110px;
+    width: 250px;
 }
 
+.footer-logo img {
+    display: block;
+    margin: 0 auto;
+    max-width: 90px;
+}
 .space {
     display: block;
     margin: 25px 0;
