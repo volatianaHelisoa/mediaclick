@@ -581,6 +581,22 @@
     <Content Include="Themes\Theme5\img\logo.png" />
     <Content Include="Themes\Theme5\img\photo1.jpg" />
     <Content Include="Themes\Theme5\img\photo2.jpg" />
+    <Content Include="Themes\Theme6\a-propos.html" />
+    <Content Include="Themes\Theme6\css\active_menu_deco.png" />
+    <Content Include="Themes\Theme6\css\dark-theme.css" />
+    <Content Include="Themes\Theme6\css\templates-style.css" />
+    <Content Include="Themes\Theme6\css\theme2.css" />
+    <Content Include="Themes\Theme6\img\active_menu_deco.png" />
+    <Content Include="Themes\Theme6\img\credit-taux-zero.jpeg" />
+    <Content Include="Themes\Theme6\img\credit-taux-zero.jpg" />
+    <Content Include="Themes\Theme6\img\financement-sante.jpg" />
+    <Content Include="Themes\Theme6\img\logo.png" />
+    <Content Include="Themes\Theme6\img\photo1.jpg" />
+    <Content Include="Themes\Theme6\img\photo2.jpg" />
+    <Content Include="Themes\Theme6\img\pret-epargne-logement.jpg" />
+    <Content Include="Themes\Theme6\img\pret-travaux-isolation.jpg" />
+    <Content Include="Themes\Theme6\img\pret-travaux-renovation.jpg" />
+    <Content Include="Themes\Theme6\index.html" />
     <Content Include="Views\Home\EditUserConfirmationTemplate.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

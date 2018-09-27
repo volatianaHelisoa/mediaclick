@@ -52,8 +52,22 @@ $(document).ready(function(){
   $('input[type="file"]').change(function(e){
     var fileName = e.target.files[0].name;
     $('.file-name').text(fileName);
-  });
+});
 
- 
+$('.theme-select .choose-color').click(function () {
+    var themeparam = $(this).next('.theme-param'),
+        actionBtn = $(this).closest('.create-theme').siblings();
+    var controlGroup = themeparam.children('.control-group');
+
+    controlGroup.removeClass('show');
+    controlGroup.toggleClass('show');
+   // console.log(actionBtn)
+    $('.theme-param').not(themeparam).hide();
+    themeparam.show();
+});
+
+$('.cancel-color-choice').click(function () {
+    $('.theme-param').hide();
+})
  
 });

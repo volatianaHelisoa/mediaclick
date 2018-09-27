@@ -267,7 +267,6 @@ C:\Users\ramin\Documents\GitHub\sources\RedactApplication\RedactApplication\bin\
 C:\Users\ramin\Documents\GitHub\sources\RedactApplication\RedactApplication\bin\RedactApplication.dll.config
 C:\Users\ramin\Documents\GitHub\sources\RedactApplication\RedactApplication\bin\RedactApplication.dll
 C:\Users\ramin\Documents\GitHub\sources\RedactApplication\RedactApplication\bin\RedactApplication.pdb
-C:\Users\ramin\Documents\GitHub\sources\RedactApplication\RedactApplication\obj\Debug\RedactApplication.csprojAssemblyReference.cache
 C:\Users\ramin\Documents\GitHub\sources\RedactApplication\RedactApplication\obj\Debug\RedactApplication.csproj.CoreCompileInputs.cache
 C:\Users\ramin\Documents\GitHub\sources\RedactApplication\RedactApplication\obj\Debug\RedactApplication.csproj.CopyComplete
 C:\Users\ramin\Documents\GitHub\sources\RedactApplication\RedactApplication\obj\Debug\RedactApplication.dll
