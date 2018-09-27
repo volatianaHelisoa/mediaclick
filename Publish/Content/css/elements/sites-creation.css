@@ -438,9 +438,9 @@
 
 .theme-customization .logo-area .thumbnail {
     display: block;
-    width: 100px;
+    width: 80px;
     min-height: 80px;
-    margin: 0 auto;
+	margin: 0 20px 0 0;
 }
 
 .theme-customization .logo-area .thumbnail > img {
