@@ -123,15 +123,15 @@ namespace RedactApplication.Controllers
             
             if (file != null)
             {
-                string fileName = Path.GetFileName(file.FileName.ToLower());
+                string fileName = Path.GetFileNameWithoutExtension(file.FileName.ToLower()) + "-favicon";
 
                 WebImage img = new WebImage(file.InputStream);
                 if (img.Width > 17)
                     img.Resize(16, 16);
 
-                img.Save(path+ removeDiacritics(fileName));
+                img.Save(path+ removeDiacritics(fileName) + Path.GetExtension(file.FileName));
 
-                return "img/" + removeDiacritics(fileName);
+                return "img/" + removeDiacritics(fileName) + Path.GetExtension(file.FileName);
             }
             return "";
         }

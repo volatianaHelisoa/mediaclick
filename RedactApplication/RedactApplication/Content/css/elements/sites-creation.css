@@ -276,38 +276,42 @@
 /* Mnomboka eto ny modifs */
 .theme-select .item {
     display: block;
-    text-align: center;
     position: relative;
 }
 
-    .theme-select .item .thumb {
-        display: block;
-        overflow: hidden;
-    }
+.theme-select form {
+    margin-bottom: 2em;
+}
 
-    .theme-select .item img {
-        width: 100%;
-        height: auto;
-        display: block;
-        transition: ease-in-out all 300ms;
-        -webkit-transition: ease-in-out all 300ms;
-        -moz-transition: ease-in-out all 300ms;
-        -ms-transition: ease-in-out all 300ms;
-    }
+.theme-select .item .thumb {
+	display: block;
+	overflow: hidden;
+}
 
-    .theme-select .item > span {
-        display: block;
-        width: 100%;
-        background: #cfcfcf;
-        color: white;
-        text-transform: uppercase;
-        padding: 12px 0;
-        margin-top: 10px;
-        transition: ease-in-out all 300ms;
-        -webkit-transition: ease-in-out all 300ms;
-        -moz-transition: ease-in-out all 300ms;
-        -ms-transition: ease-in-out all 300ms;
-    }
+.theme-select .item img {
+	width: 100%;
+	height: auto;
+	display: block;
+	transition: ease-in-out all 300ms;
+	-webkit-transition: ease-in-out all 300ms;
+	-moz-transition: ease-in-out all 300ms;
+	-ms-transition: ease-in-out all 300ms;
+}
+
+.theme-select .item > span {
+	display: block;
+	width: 100%;
+	background: #cfcfcf;
+	color: white;
+	text-transform: uppercase;
+	padding: 12px 0;
+	margin-top: 10px;
+	transition: ease-in-out all 300ms;
+	-webkit-transition: ease-in-out all 300ms;
+	-moz-transition: ease-in-out all 300ms;
+	-ms-transition: ease-in-out all 300ms;
+	text-align: center;
+}
 
 .control-group {
     display: none;
@@ -395,28 +399,28 @@
         cursor: pointer;
     }
 
-        .theme-select .item:hover img {
-            transform: scale(1.2);
-        }
+	.theme-select .item:hover > img {
+		transform: scale(1.2);
+	}
 
-        .theme-select .item:hover > span {
-            background-color: #26b5ff;
-        }
+	.theme-select .item:hover > span {
+		background-color: #26b5ff;
+	}
 }
 
 .theme-customization {
     max-width: 1024px !important;
 }
 
-    .theme-customization .site-identity {
-        display: flex;
-        padding: 0 15px;
-    }
+.theme-customization .site-identity {
+	display: flex;
+	padding: 0 15px;
+}
 
-    .theme-customization .section-title {
-        margin: 20px 0 30px;
-        padding: 0;
-    }
+.theme-customization .section-title {
+	margin: 20px 0 30px;
+	padding: 0;
+}
 
 .theme-select .item.selected > span {
     background-color: #26b5ff
@@ -439,9 +443,9 @@
 
 .theme-customization .logo-area .thumbnail {
     display: block;
-    width: 100px;
+    width: 80px;
     min-height: 80px;
-    margin: 0 auto;
+	margin: 0 20px 0 0;
 }
 
 .theme-customization .logo-area .thumbnail > img {
@@ -471,6 +475,7 @@
     -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, .1);
     -moz-box-shadow: 0 0 10px rgba(0, 0, 0, .1);
     -ms-box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+	margin: 0;
 }
 
 .theme-customization label > strong {
