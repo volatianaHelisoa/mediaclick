@@ -188,6 +188,7 @@ nav.menu .current a::before {
     padding-top: 50px;
     overflow: hidden;
     display: table;
+	background-color: #f7f7f7;
 }
 
 #bloc1 .photo > img {
@@ -215,6 +216,7 @@ nav.menu .current a::before {
     margin-top: -66px;
     float: left;
     margin-right: 40px;
+	background-color: #f7f7f7;
 }
 
 .template #bloc2 .photo > img {
