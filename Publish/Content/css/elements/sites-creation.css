@@ -481,7 +481,7 @@
 .theme4__templates .default .color3 {
     background-color: #d5a512
 }
-/*** theme 3 Dark ***/
+/*** theme 4 Dark ***/
 .theme4__templates .dark .color1 {
     background-color: #232A46
 }
@@ -493,7 +493,7 @@
 .theme4__templates .dark .color3 {
     background-color: #222
 }
-/*** theme 3 theme2 ***/
+/*** theme 4 theme2 ***/
 .theme4__templates .theme2 .color1 {
     background-color: #473b3a
 }
@@ -504,6 +504,80 @@
 
 .theme4__templates .theme2 .color3 {
     background-color: #585858
+}
+
+/*** THEME 5 ***/
+.theme5__templates .default .color1 {
+    background-color: #585858
+}
+
+.theme5__templates .default .color2 {
+    background-color: #f7f7f7
+}
+
+.theme5__templates .default .color3 {
+    background-color: #d5a512
+}
+/*** theme 5 Dark ***/
+.theme5__templates .dark .color1 {
+    background-color: #eb5639
+}
+
+.theme5__templates .dark .color2 {
+    background-color: #eb5639
+}
+
+.theme5__templates .dark .color3 {
+    background-color: #e0e0e0
+}
+/*** theme 5 theme2 ***/
+.theme5__templates .theme2 .color1 {
+    background-color: #66BA8D
+}
+
+.theme5__templates .theme2 .color2 {
+    background-color: #d4d4d4
+}
+
+.theme5__templates .theme2 .color3 {
+    background-color: #0e0908
+}
+
+/*** THEME 6 ***/
+.theme6__templates .default .color1 {
+    background-color: #f9f9f9
+}
+
+.theme6__templates .default .color2 {
+    background-color: #8b1e62
+}
+
+.theme6__templates .default .color3 {
+    background-color: #d5911a
+}
+/*** theme 6 Dark ***/
+.theme6__templates .dark .color1 {
+    background-color: #3c3c3c
+}
+
+.theme6__templates .dark .color2 {
+    background-color: #8b1e62
+}
+
+.theme6__templates .dark .color3 {
+    background-color: #d5911a
+}
+/*** theme 6 theme2 ***/
+.theme6__templates .theme2 .color1 {
+    background-color: #03A9F4
+}
+
+.theme6__templates .theme2 .color2 {
+    background-color: #585858
+}
+
+.theme6__templates .theme2 .color3 {
+    background-color: #d5911a
 }
 @media(min-width:1201px) {
     .theme-select .item:hover {
