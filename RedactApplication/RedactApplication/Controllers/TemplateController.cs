@@ -828,6 +828,7 @@ namespace RedactApplication.Controllers
 
                 request.Credentials = new NetworkCredential(ftpUser, ftpPassword);
                 FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+               var stat = FtpStatusCode.ClosingData;
                 Stream responseStream = response.GetResponseStream();
                 StreamReader reader = new StreamReader(responseStream);
                 string names = reader.ReadToEnd();
@@ -840,7 +841,7 @@ namespace RedactApplication.Controllers
             }
             catch (Exception e)
             {
-                return e.ToString();
+                return "error";
             }
 
            

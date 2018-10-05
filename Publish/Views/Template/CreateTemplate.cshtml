@@ -11,7 +11,9 @@
         $(document).ready(function () {
             
             $('select[name="ftpdirs"]').hide();
-            $(".save-template").hide();                
+            $(".save-template").hide();    
+            $(".ftp-error").hide();      
+           
             $('#ftpList').click(function () {
                 var url = $("#url").val();
                 var ftpUser = $("#ftpUser").val();
@@ -25,18 +27,23 @@
                     cache: false,
                     async: true,
                     success: function (resp) {
-                        el.show();
-                        $(".save-template").show();              
-                        var data = resp.split(",");
-                       
-                        var htmlOptions = [];
-                        if (data.length) {
-                            for (item in data) {
-                                html = '<option value="' + data[item] + '">' + data[item] + '</option>';
-                                htmlOptions[htmlOptions.length] = html;
+                        if (resp == "error") {
+                            $(".ftp-error").show();      
+                        } else {
+                            $(".ftp-error").hide();      
+                            el.show();
+                            $(".save-template").show();
+                            var data = resp.split(",");
+
+                            var htmlOptions = [];
+                            if (data.length) {
+                                for (item in data) {
+                                    html = '<option value="' + data[item] + '">' + data[item] + '</option>';
+                                    htmlOptions[htmlOptions.length] = html;
+                                }
+                                el.empty().append(htmlOptions.join(''));
                             }
-                            el.empty().append(htmlOptions.join(''));
-                        }
+                        }                     
 
                     }
                 });               
@@ -108,7 +115,7 @@
                         <label for="" class="col-50 pull-left">
                             Thématique
                             @*@Html.DropDownListFor(x => Model.listThemeId, new SelectList(Model.ListTheme, "Value", "Text"), htmlAttributes: new { id = "SelectItemTheme", @required = true })*@
-                            @Html.EditorFor(model => model.THEME.theme_name, new { htmlAttributes = new { } })
+                            @Html.EditorFor(model => model.THEME.theme_name, new { htmlAttributes = new { @placeholder = "Saisir Thème" } })
                         </label>
 
                     </section>
@@ -119,7 +126,7 @@
                         </label>
                         <label for="" class="col-50 pull-right">
                             <i class="fa fa-upload"></i> FTP Hote
-                            @Html.TextBoxFor(x => x.url, new { @required = true})
+                            @Html.TextBoxFor(x => x.url, new { @required = true })
                         </label>
                         <label for="" class="col-50 pull-left">
                             <i class="fa fa-user"></i>  Utilisateur
@@ -132,6 +139,9 @@
                         <div class="ftp-area">
                             <input type="button" value="Récupérer dossiers FTP" id="ftpList" />
                             <select id="ftpdir" name="ftpdirs"></select>
+                        </div>
+                        <div class="ftp-error">                            
+                            <p class="error-msg text-centered">Veuillez vérifier vos paramètres de connexion sur le serveur.</p>
                         </div>
                     </section>
                     <section class="clearfix submit-area save-template">

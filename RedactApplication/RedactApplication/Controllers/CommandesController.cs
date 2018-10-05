@@ -112,7 +112,6 @@ namespace RedactApplication.Controllers
                 {
                     var currentStatus = GetStatut(statut);
 
-
                     if (statut.Contains("retard"))
                         listeDataCmde = listeDataCmde.Where(x => x.date_cmde >= startOfMonth &&
                                                                x.date_cmde <= lastDay &&
