@@ -56,6 +56,11 @@ a {
     vertical-align: middle;
 }
 
+.t-logo img {
+	width: auto;
+    max-height: 43px;
+}
+
 .t-logo .site-url {
     color: #333;
     margin-left: 10px;
@@ -117,6 +122,7 @@ nav.menu .current a::before {
     width: 87px;
     margin-bottom: 25px;
     margin-top: 5px;
+	margin-left: 44%;
 }
 
 .template header{
@@ -233,10 +239,13 @@ nav.menu .current a::before {
     width: 250px;
 }
 
+
 .footer-logo img {
+	max-height: 60px;
+	max-height: 51px;
     display: block;
+    vertical-align: middle;
     margin: 0 auto;
-    max-width: 90px;
 }
 .space {
     display: block;
