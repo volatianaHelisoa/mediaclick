@@ -15,10 +15,12 @@
         <link rel="stylesheet" href="@Session["Color"]">
     }
 
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
 	
 	@if (@Session["TemplateName"] != null && @Session["TemplateName"].ToString() == "Theme5") {
 		<link href="https://fonts.googleapis.com/css?family=Oswald:300,700" rel="stylesheet">
+	}
+	else{	
+		<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
 	}
 
 </head>

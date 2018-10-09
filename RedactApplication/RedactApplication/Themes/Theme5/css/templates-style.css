@@ -17,7 +17,8 @@ p {
 }
 h2 { color: #07b6ff }
 a {
-    text-decoration: none;
+    text-decoration: underline;
+    color: #eb5639;
 }
 
 /**/
@@ -56,7 +57,7 @@ a {
 }
 
 .t-logo img {
-    max-height: 50px;
+    max-height: 43px;
 }
 
 .t-logo .site-url {
@@ -88,6 +89,7 @@ nav.menu a {
     padding: 25px 0 30px;
     display: block;
     position: relative;
+	text-decoration: none;
 }
 nav.menu .current {
     background: #f3f3f3;
@@ -146,7 +148,7 @@ nav.menu .current a::before {
 .template h3::before {
     content: "";
     display: inline-block;
-    background: url(css/title_deco.png) no-repeat center;
+    background: url(title_deco.png) no-repeat center;
     width: 16px;
     height: 13px;
     vertical-align: middle;
@@ -202,11 +204,11 @@ nav.menu .current a::before {
 
 .template #f1-footer > div {
     text-align: right;
-    max-width: 280px;
 }
 
 .template #f1-footer a{
-    color: white
+    color: white;
+	text-decoration: none;
 }
 
 .template #bloc3 {
@@ -238,6 +240,9 @@ nav.menu .current a::before {
 
 .footer-logo img {
     max-height: 60px;
+    width: 100%;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .space {

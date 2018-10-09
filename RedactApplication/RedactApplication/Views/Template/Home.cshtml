@@ -719,10 +719,7 @@
                             
                             <section class="clearfix">                                
                                 <h2>@Model.menu2_paragraphe2_titre</h2>
-                                <div id="bloc2">
-                                    <div class="texte">
-                                        @Html.Raw(Model.menu2_contenu2)
-                                    </div>
+                                <div id="bloc2">								
                                     
                                     @if (Model.menu2_paragraphe2_photoUrl != null && !String.IsNullOrEmpty(Model.menu2_paragraphe2_photoUrl))
                                     {
@@ -730,6 +727,9 @@
                                             <img src="@Html.Raw(Model.menu2_paragraphe2_photoUrl)" alt="@Model.menu2_paragraphe2_alt" srcset="">
                                         </div>
                                     }
+                                    <div class="texte">
+                                        @Html.Raw(Model.menu2_contenu2)
+                                    </div>
                                 </div>
                             </section>
                         </div>
@@ -761,10 +761,7 @@
                             
                             <section class="clearfix">                                
                                 <h2>@Model.menu3_paragraphe2_titre</h2>
-                                <div id="bloc2">
-                                    <div class="texte">
-                                        @Html.Raw(Model.menu3_contenu2)
-                                    </div>
+                                <div id="bloc2">								
                                     
                                     @if (Model.menu3_paragraphe2_photoUrl != null && !String.IsNullOrEmpty(Model.menu3_paragraphe2_photoUrl))
                                     {
@@ -772,6 +769,9 @@
                                             <img src="@Html.Raw(Model.menu3_paragraphe2_photoUrl)" alt="@Model.menu3_paragraphe2_alt" srcset="">
                                         </div>
                                     }
+                                    <div class="texte">
+                                        @Html.Raw(Model.menu3_contenu2)
+                                    </div>
                                 </div>
                             </section>
                         </div>
@@ -805,9 +805,6 @@
                             <section class="clearfix">                                
                                 <h2>@Model.menu4_paragraphe2_titre</h2>
                                 <div id="bloc2">
-                                    <div class="texte">
-                                        @Html.Raw(Model.menu4_contenu2)
-                                    </div>
                                     
                                     @if (Model.menu4_paragraphe2_photoUrl != null && !String.IsNullOrEmpty(Model.menu4_paragraphe2_photoUrl))
                                     {
@@ -815,6 +812,9 @@
                                             <img src="@Html.Raw(Model.menu4_paragraphe2_photoUrl)" alt="@Model.menu4_paragraphe2_alt" srcset="">
                                         </div>
                                     }
+                                    <div class="texte">
+                                        @Html.Raw(Model.menu4_contenu2)
+                                    </div>
                                 </div>
                             </section>
                         </div>
