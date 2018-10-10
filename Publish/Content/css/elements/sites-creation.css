@@ -328,7 +328,7 @@
 .theme-param {
     position: absolute;
     transition: 300ms ease-in-out;
-    width: calc(100% - 30px);
+    width: 100%;
     left: 0;
     bottom: 0;
     height: 100%;
