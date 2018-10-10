@@ -1,0 +1,38 @@
+@media screen and ( max-width: 991px){
+	.template .wrapper {
+		padding: 0 25px;
+		max-width: 100%;
+	}
+	#topbar {
+		max-width: 100%;
+	}
+	header {
+		padding: 0 40px;
+	}
+	.template .wrap {
+		padding: 40px;
+	}	
+	.sidebar-menu {
+		display: none;
+	}
+}
+
+@media screen and ( max-width: 768px){
+	h1 {
+		padding: 10px 0 0px;
+	}
+	header {
+		padding: 0 25px;
+	}
+	.template .wrap {
+		padding: 25px;
+	}
+	.t-logo {
+		padding: 19px 15px;
+	}
+	.texte {
+		text-align: justify;
+		word-break: break-word;
+	}
+	
+}
