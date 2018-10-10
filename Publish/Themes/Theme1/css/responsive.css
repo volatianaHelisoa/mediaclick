@@ -1,0 +1,36 @@
+@media screen and ( max-width: 1200px){
+	.template .wrapper {
+		padding: 0 40px;
+	}
+}
+
+@media screen and ( max-width: 768px){
+	.menu {
+		display: none;
+	}
+	.template .wrapper {
+		padding: 0 25px;
+	}
+	.theme #bloc1 .photo,
+	.theme #bloc2 .photo {
+		float: none;
+		margin: 0 0 20px;
+		position: relative;
+		min-width: inherit;
+		width: 100%;
+	}
+	.theme #bloc2 .photo {
+		margin-top: 30px
+	}
+	.theme .photo > img {
+		max-width: 100%;
+		margin: 0 auto;
+		display: block;
+		max-height: 350px;
+		object-fit: cover;
+		object-position: center;
+	}
+	.theme #bloc2 .texte {
+		padding: 0;
+	}
+}
