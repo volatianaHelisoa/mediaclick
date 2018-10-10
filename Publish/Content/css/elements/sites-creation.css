@@ -248,6 +248,7 @@
     border-radius: 0;
     width: 100%;
     display: block;
+	max-height: 30px;
 }
 
 .favicon-select .input-custom {
@@ -321,14 +322,18 @@
     vertical-align: top;
     background: #fff;
     width: 100%;
+	height: 100%;
 }
 
 .theme-param {
     position: absolute;
     transition: 300ms ease-in-out;
-    width: 100%;
+    width: calc(100% - 30px);
     left: 0;
-    bottom: 45px
+    bottom: 0;
+    height: 100%;
+    right: 0;
+    margin: auto;
 }
 
 .theme-select .item.open .control-group {
@@ -348,13 +353,14 @@
 	flex: 1;
 	display: block;
 	margin: 0;
-	max-width: 30px;
+	height: 7px;
 }
 
 .theme-param h4 {
 	padding-bottom: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
     border-bottom: 1px solid #f1f1f1;
+	text-align: center;
 }
 /*** THEME 1 ***/
 .theme1__templates .default .color1 {
@@ -578,6 +584,13 @@
 
 .theme6__templates .theme2 .color3 {
     background-color: #d5911a
+}
+
+.create-theme {
+    text-align: center;
+}
+.create-theme a {
+	margin-bottom: 0
 }
 @media(min-width:1201px) {
     .theme-select .item:hover {
