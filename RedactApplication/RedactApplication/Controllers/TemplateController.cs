@@ -893,5 +893,16 @@ namespace RedactApplication.Controllers
             Session["TemplateName"] = "Theme6";
             return View();
         }
+
+        public ActionResult Theme7(FormCollection collection)
+        {
+            if (!string.IsNullOrEmpty(collection["color-select"]))
+            {
+                string color_select = collection["color-select"];
+                Session["Color"] = get_css_link(color_select.Trim());
+            }
+            Session["TemplateName"] = "Theme7";
+            return View();
+        }
     }
 }
