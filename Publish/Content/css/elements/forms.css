@@ -79,7 +79,7 @@ textarea {
 select {
     display: block;
     width: 100%;
-    background: url(../../../images/select_arrow.png) no-repeat right center;
+    background: url(../../../images/select_arrow.png) no-repeat right center #fff;
     -webkit-appearance: none;
     -moz-appearance: none;
     -ms-appearance: none;
