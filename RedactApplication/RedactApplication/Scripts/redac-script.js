@@ -48,26 +48,33 @@ $(document).ready(function(){
     $('.first .file').append("<div class='filename'>" + fileName + "</div>");
   });
 
+    
 
-  $('input[type="file"]').change(function(e){
-    var fileName = e.target.files[0].name;
-    $('.file-name').text(fileName);
-});
-
-$('.theme-select .choose-color').click(function () {
-    var themeparam = $(this).next('.theme-param'),
-        actionBtn = $(this).closest('.create-theme').siblings();
-    var controlGroup = themeparam.children('.control-group');
-
-    controlGroup.removeClass('show');
-    controlGroup.toggleClass('show');
-   // console.log(actionBtn)
-    $('.theme-param').not(themeparam).hide();
-    themeparam.show();
-});
-
-$('.cancel-color-choice').click(function () {
-    $('.theme-param').hide();
-})
+	/* select theme */
+	$('.theme-select .item').click(function(){
+		
+		var themeparam = $(this).children('.theme-param'),
+			actionBtn = $(this).children().closest('.create-theme').siblings();
+		var controlGroup = themeparam.children('.control-group');
+		
+		controlGroup.removeClass('show');
+		controlGroup.toggleClass('show');
+		$('.theme-param').not(themeparam).hide();
+		themeparam.show();
+	});
+	
+	$('.cancel-color-choice').click(function(e){
+		var x = e.target;
+		$('.theme-param').hide(e.target);
+	})
+	
+	function removeFile(){
+		$("thumbnail-photo img").attr('src', '')
+	}
+	
+	$(".remove-file").click(function(e){
+		var el = e.target;
+		removeFile(el);
+	});
  
 });

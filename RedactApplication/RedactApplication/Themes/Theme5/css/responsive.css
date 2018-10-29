@@ -1,0 +1,55 @@
+@media screen and ( max-width: 1200px){
+	.template .wrapper {
+		padding: 0 40px;
+	}
+}
+
+@media screen and ( max-width: 768px){
+	.template .wrapper {
+		padding: 0 25px;
+	}
+	.divider {
+		margin-left: 47.5%;
+	}
+}
+@media screen and ( max-width: 640px){
+	.t-logo {
+		max-width: inherit;
+	}
+	.template #bloc1 .photo {
+		width: 100%;
+		max-width: 100%;
+		float: none;
+		margin: 0;
+	}
+	.template #bloc2 .photo {
+		margin: 0 0 20px;
+		max-width: 100%;
+		float: none;
+	}
+	.divider {
+		margin-bottom: 15px;
+		margin-left: 0;
+	}
+	.template #f1-footer {
+		position: relative;
+		padding: 70px 0 20px;
+	}
+	.template #f1-footer > div {
+		text-align: center;
+	}
+	.footer-logo {
+		padding: 10px;
+		top: -20px;
+		max-height: 110px;
+		width: 210px;
+		left: 0;
+		right: 0;
+		margin: auto;
+	}
+}
+@media screen and ( max-width: 500px){
+	.menu {
+		display: none;
+	}
+}

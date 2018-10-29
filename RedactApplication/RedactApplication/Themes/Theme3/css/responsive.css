@@ -1,0 +1,28 @@
+@media screen and ( max-width: 991px){
+	.template .wrapper { padding: 0 25px; max-width: 100%; }
+	
+	header { padding: 0; }
+	#topbar { border-radius: 0; max-width: 100%; top: 0}
+	.template .wrap { padding: 40px; }
+	.sidebar-menu { display: none; position: absolute; width: 100%; padding: 0; height: auto; border-radius: 0; margin-bottom: 2em; top: -49px; }
+	/* Menu navigation */
+	.menuMobile { width: auto; height: 76px; z-index: 80; transition: all 400ms ease-in-out; color: #222; font: normal 16px/62px swr; letter-spacing: .8px; cursor: pointer; text-transform: uppercase; position: absolute; right: 25px; top: 0; cursor: pointer; padding: 0; }
+	.menuMobile>div						{ width:auto; height:100%; position:relative; padding:0 40px 0 0;}
+	.menuMobile span					{ width:28px; height:3px; background:#fff; position:absolute; right:0; top:50%; display:block;}
+	.menuMobile span:before				{ width:100%; height:3px; background:#fff; position:absolute; right:0; top:9px; content:"";}
+	.menuMobile span:after				{ width:100%; height:3px; background:#fff; position:absolute; right:0; top:-9px; content:"";}
+	.menuMobile.active span				{ height:0px;}
+	.menuMobile.active span:before		{ top:0; transform:rotate(45deg);}
+	.menuMobile.active span:after		{ top:0; transform:rotate(-45deg);}
+	.menu { padding: 0 !important}
+	nav.menu a { padding: 16px 25px; text-align: left;}
+}
+
+@media screen and ( max-width: 768px){	
+	main { margin-top: 25px; }
+	h1 { padding: 10px 0 0px; }
+	header { padding: 0; }	
+	#topbar { max-width: 100%; top: 0; border-radius: 0; }
+	.template .wrap { padding: 25px;}	
+	.sidebar-menu { top: -25px;}
+}

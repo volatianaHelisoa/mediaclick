@@ -48,11 +48,7 @@ $(document).ready(function(){
     $('.first .file').append("<div class='filename'>" + fileName + "</div>");
   });
 
-
-  $('input[type="file"]').change(function(e){
-    var fileName = e.target.files[0].name;
-    $('.file-name').text(fileName);
-	});
+    
 
 	/* select theme */
 	$('.theme-select .item').click(function(){

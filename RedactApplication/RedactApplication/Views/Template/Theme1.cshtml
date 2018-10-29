@@ -12,6 +12,10 @@
 
 }
 
+
+
+
+
 <main id="wrapper">
     <div id="single-container">
         <div class="onglets ease-in-out">
@@ -21,290 +25,274 @@
             </ul>
         </div>
         <div class="theme-select grey-bg">
-            @using (Html.BeginForm("SaveTheme", "Template", FormMethod.Post, new { @class = "formfields", enctype = "multipart/form-data" }))
-            {
-                <div class="card back-office with-shadow">
-                    <section class="theme-customization clearfix">
-                        <div class="section-title">
-                            <span>Identité de votre site</span>
+            <section class="clearfix container">
+                <div class="row">
+                    <a href="" class="col-md-3 selected">
+                        <div class="thumb with-shadow"><img src="images/theme1_thumb.jpg" /></div>
+                        <span>Thème 1</span>
+                    </a>
+                </div>
+            </section>
+        </div>
+        @using (Html.BeginForm("SaveTheme", "Template", FormMethod.Post, new { @class = "formfields", enctype = "multipart/form-data" }))
+        {
+            <section class="theme-customization clearfix">
+                <div class="section-title">
+                    <span>Identité de votre site</span>
+                </div>
+
+                <div class="row site-identity">
+                    <div class="col-md-6">
+                        <div class="blk">
+                            <strong>Logo</strong>
+                            @Html.TextBoxFor(m => m.logoUrl, new { type = "file", accept = "image/*", name = "file", id = "logoUrl" })
+                            <label for="logoUrl" class="btn-upload"><span class="file-name">Choisir un fichier</span></label><i class="remove-file">&times;</i>
+                            <p>Image au format JPG, PNG ou GIF</p>
                         </div>
-                        <div class="row site-identity">
-                            <div class="col-md-4 logo-area">
-                                <label for="" class="col-100" style="margin-bottom: 30px;display: flex; justify-content: flex-start; align-items: center;">
-                                    <span class="thumbnail"></span>
-                                    @Html.TextBoxFor(m => m.logoUrl, new { type = "file", accept = "image/*", name = "file", id = "logoUrl" })
-                                    <div class="input-custom">
-                                        <label for="logoUrl" class="btn btn-warm btn-small" >Choisir le logo</label>
-                                    </div>
-                                </label>
-                                <label for="" class="col-100">
-                                    <i class="fa fa-link"></i>  L'url de votre site
-                                    @Html.TextBoxFor(m => m.site_url, new { placeholder = "www.example.com", required = true , type = "url" })
-                                </label>
-                            </div>
-                            
+                    </div>
+                    <div class="col-md-6">
+                        <div class="blk">
+                            <strong>L'url de votre site</strong>
+                            @Html.TextBoxFor(m => m.site_url, new { placeholder = "www.example.com", required = true, type = "url" })
                         </div>
-                        <label for="" class="col-50 pull-left" style="margin-top: 30px;">
-                            <i class="fa fa-bars"></i>  Nombre de menu
+                    </div>
+                    <div class="col-md-6">
+                        <div class="blk">
+                            <strong>Choisir un favicon</strong>
+                            @Html.TextBoxFor(m => m.favicone, new { type = "file", accept = "image/*", name = "file", id = "favicone" })
+                            <label for="favicone" class="btn-upload"><span class="file-name">Choisir un fichier</span></label><i class="remove-file">&times;</i>
+                            <p>Image au format JPG, PNG ou GIF</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="blk">
+                            <strong>Nombre de menu</strong>
                             <select id="nb-menu" name="nbmenu">
-                                <option value="1">Selectionner le nombre de menu</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
+                                <option>Ajouter jusqu'à 5 menu</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
                             </select>
-                        </label>
-                        <div class="col-50 pull-right favicon-select" style="margin-top: 30px;">
-                            <label for="" class="col-100">
-                                Choisir un favicon
-                                @Html.TextBoxFor(m => m.favicone, new { type = "file", accept = "image/*", name = "file", id = "favicone" })
-                                <div class="favicon-input-wrapper">
-                                    <div class="input-custom">
-                                        <label for="favicone" class="btn btn-warm btn-small">Parcourir</label>
-                                    </div>
-                                    
-                                    <span class="thumbnail"></span>
-                                </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- contenu bloc 1 -->
+                <div class="section-title">
+                    <span>Contenu du site</span>
+                </div>
+                <div class="content-to-show">
+                    <!-- TAB NAVIGATION -->
+                    <ul id="tab-navigation">
+                        <li><a href="javascript:void(0)" data-content="menu1" id="fire-menu1">Accueil</a></li>
+                        <li><a href="javascript:void(0)" data-content="menu2" id="fire-menu2">Menu 2</a></li>
+                        <li><a href="javascript:void(0)" data-content="menu3" id="fire-menu3">Menu 3</a></li>
+                        <li><a href="javascript:void(0)" data-content="menu4" id="fire-menu4">Menu 4</a></li>
+                    </ul>
+                    <div class="blk clearfix">
+                        <div class="item" id="menu1">
+                            <label for="" class="col-md-6">
+                                <strong>Titre accueil</strong>
+                                @Html.TextBoxFor(x => x.menu1_titre, new { placeholder = "Titre accueil", required = true })
+                            </label>
+                            <label for="" class="col-md-6">
+                                <strong>Méta description</strong>
+                                @Html.TextBoxFor(x => x.menu1_meta_description, new { required = true })
+                            </label>
+                            <span class="divider"></span>
+                            <label for="" class="col-md-6">
+                                <strong>Titre du paragraphe 1</strong>
+                                @Html.TextBoxFor(x => x.menu1_paragraphe1_titre, new { required = true })
+                            </label>
+                            <div class="col-md-6 custom-upload">
+                                @Html.TextBoxFor(x => x.menu1_paragraphe1_photoUrl, new { type = "file", accept = "image/*", name = "files", id = "menu1_paragraphe1_photoUrl" })
+                                <label for="menu1_paragraphe1_photoUrl" class="btn-upload"><span class="file-name">Choisir un fichier</span></label><i class="remove-file">&times;</i>
+                                <p>Image au format JPG, PNG ou GIF</p>
+                            </div>
+
+                            <label for="" class="col-md-12">
+                                <strong>Contenu 1</strong>
+                                @Html.TextAreaFor(x => x.menu1_contenu1)
+                            </label>
+                            <span class="divider"></span>
+                            <label for="" class="col-md-6">
+                                <strong>Titre du paragraphe 2</strong>
+                                @Html.TextBoxFor(x => x.menu1_paragraphe2_titre)
+                            </label>
+                            <div class="col-md-6 custom-upload">
+                                @Html.TextBoxFor(x => x.menu1_paragraphe2_photoUrl, new { type = "file", accept = "image/*", name = "files", id = "menu1_paragraphe2_photoUrl" })
+                                <label for="menu1_paragraphe2_photoUrl" class="btn-upload"><span class="file-name">Choisir un fichier</span></label><i class="remove-file">&times;</i>
+                                <p>Image au format JPG, PNG ou GIF</p>
+                            </div>
+                            <label for="" class="col-md-12">
+                                <strong>Contenu 2</strong>
+                                @Html.TextAreaFor(x => x.menu1_contenu2)
                             </label>
                         </div>
 
-                        <div class="content-to-show clearfix">
-                            <!-- TAB NAVIGATION -->
-                            <ul id="tab-navigation">
-                                <li><a href="#" data-content="menu1" id="fire-menu1">Accueil</a></li>
-                                <li><a href="#" data-content="menu2" id="fire-menu2">Menu 2</a></li>
-                                <li><a href="#" data-content="menu3" id="fire-menu3">Menu 3</a></li>
-                                <li><a href="#" data-content="menu4" id="fire-menu4">Menu 4</a></li>
-                            </ul>
-                            <div class="wrap-menu">
-                                <!-- Menu 1 -->
-                                <div class="item" id="menu1">
-                                    <div class="row">
-                                        <div class="clearfix">
-                                            <label for="" class="col-md-12">
-                                                Titre accueil
-                                                @Html.TextBoxFor(x => x.menu1_titre, new { placeholder = "Titre accueil", required = true })
-                                            </label>
-                                            <label for="" class="col-md-12 photo-field">
-                                                Méta description 
-                                                @Html.TextBoxFor(x => x.menu1_meta_description, new { required = true })
-                                            </label>
-
-                                            <label for="" class="col-md-12 photo-field">
-                                                @Html.TextBoxFor(x => x.menu1_paragraphe1_photoUrl, new { type = "file", accept = "image/*", name = "files", id = "menu1_paragraphe1_photoUrl" })
-                                                <div class="input-custom">
-                                                    <dd><i class="fa fa-image"></i>Photo 1</dd>
-                                                    <label for="menu1_paragraphe1_photoUrl" class="btn btn-primary btn-small"><i class="fa fa-download"></i> Choisir</label>
-                                                </div>
-                                                <span class="thumbnail-photo"></span>
-                                            </label>
-
-                                            <label for="" class="col-md-12">
-                                                Titre paragraphe 1
-                                                @Html.TextBoxFor(x => x.menu1_paragraphe1_titre, new { required = true })
-                                            </label>
-                                            <label for="" class="col-md-12">
-                                                Contenu 1
-                                                @Html.TextAreaFor(x => x.menu1_contenu1)
-                                            </label>
-                                        </div>
-                                        <div class="clearfix bloccontenu">
-                                            <label for="" class="col-md-12">
-                                                Titre paragraphe 2
-                                                @Html.TextBoxFor(x => x.menu1_paragraphe2_titre)
-                                            </label>
-
-
-                                            <label for="" class="col-md-12 photo-field">
-                                                @Html.TextBoxFor(x => x.menu1_paragraphe2_photoUrl, new { type = "file", accept = "image/*", name = "files", id = "menu1_paragraphe2_photoUrl" })
-                                                <div class="input-custom">
-                                                    <dd><i class="fa fa-image"></i>  Photo 2</dd>
-                                                    <label for="menu1_paragraphe2_photoUrl" class="btn btn-primary btn-small"><i class="fa fa-download"></i> Choisir</label>
-                                                </div>
-                                                <span class="thumbnail-photo"></span>
-                                            </label>
-                                            <label for="" class="col-md-12">
-                                                Contenu 2
-                                                @Html.TextAreaFor(x => x.menu1_contenu2)
-                                            </label>
-                                        </div>
-                                    </div>
+                        <div class="item" id="menu2">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <label for="" class="col-md-6">
+                                        <strong>Titre menu</strong>
+                                        @Html.TextBoxFor(x => x.menu2_titre, new { placeholder = "Titre du menu 2" })
+                                    </label>
+                                    <label for="" class="col-md-6">
+                                        <strong>Méta description</strong>
+                                        @Html.TextBoxFor(x => x.menu2_meta_description)
+                                    </label>
+                                    <span class="divider"></span>
+                                    <label for="" class="col-md-6">
+                                        Titre paragraphe 1
+                                        @Html.TextBoxFor(x => x.menu2_paragraphe1_titre)
+                                    </label>
+                                    <label for="" class="col-100">
+                                        Contenu 1
+                                        @Html.TextAreaFor(x => x.menu2_contenu1)
+                                    </label>
+                                    <label for="" class="col-100">
+                                        Titre paragraphe 2
+                                        @Html.TextBoxFor(x => x.menu2_paragraphe2_titre)
+                                    </label>
+                                    <label for="" class="col-100">
+                                        Contenu 2
+                                        @Html.TextAreaFor(x => x.menu2_contenu2)
+                                    </label>
                                 </div>
-
-                                <div class="item" id="menu2">
-                                    <div class="row">
-                                        <div class="clearfix">
-                                            <label for="" class="col-md-12">
-                                                Titre menu
-                                                @Html.TextBoxFor(x => x.menu2_titre, new { placeholder = "Titre du menu 2" })
-                                            </label>
-                                            <label for="" class="col-md-12 photo-field">
-                                                Méta description
-                                                @Html.TextBoxFor(x => x.menu2_meta_description)
-                                            </label>
-                                            <label for="" class="col-md-12">
-                                                Titre paragraphe 1
-                                                @Html.TextBoxFor(x => x.menu2_paragraphe1_titre)
-                                            </label>
-                                            <label for="" class="col-md-12 photo-field">
-                                                @Html.TextBoxFor(x => x.menu2_paragraphe1_photoUrl, new { type = "file", accept = "image/*", name = "files", id = "menu2_paragraphe1_photoUrl" })
-                                                <div class="input-custom">
-                                                    <dd><i class="fa fa-image"></i>  Photo 1</dd>
-                                                    <label for="menu2_paragraphe1_photoUrl" class="btn btn-primary btn-small"><i class="fa fa-download"></i> Choisir</label>
-                                                </div>
-                                                <span class="thumbnail-photo"></span>
-                                            </label>
-                                            <label for="" class="col-md-12">
-                                                Contenu 1
-                                                @Html.TextAreaFor(x => x.menu2_contenu1)
-                                            </label>
+                                <div class="col-md-4">
+                                    <label for="" class="col-100 photo-field">
+                                        @Html.TextBoxFor(x => x.menu2_paragraphe1_photoUrl, new { type = "file", accept = "image/*", name = "files", id = "menu2_paragraphe1_photoUrl" })
+                                        <div class="input-custom">
+                                            <dd><i class="fa fa-image"></i>  Photo 1</dd>
+                                            <label for="menu2_paragraphe1_photoUrl" class="btn btn-primary btn-small">Choisir</label>
                                         </div>
-                                        <div class="clearfix bloccontenu">
-                                            <label for="" class="col-md-12">
-                                                Titre paragraphe 2
-                                                @Html.TextBoxFor(x => x.menu2_paragraphe2_titre)
-                                            </label>
-                                            <label for="" class="col-md-12 photo-field">
-                                                @Html.TextBoxFor(x => x.menu2_paragraphe2_photoUrl, new { type = "file", accept = "image/*", name = "files", id = "menu2_paragraphe2_photoUrl" })
-                                                <div class="input-custom">
-                                                    <dd><i class="fa fa-image"></i>  Photo 2</dd>
-                                                    <label for="menu2_paragraphe2_photoUrl" class="btn btn-primary btn-small"><i class="fa fa-download"></i> Choisir</label>
-                                                </div>
-                                                <span class="thumbnail-photo"></span>
-                                            </label>
-                                            <label for="" class="col-md-12">
-                                                Contenu 2
-                                                @Html.TextAreaFor(x => x.menu2_contenu2)
-                                            </label>
-
+                                        <span class="remove-file">Delete photo</span>
+                                        <span class="thumbnail-photo"></span>
+                                    </label>
+                                    <label for="" class="col-100 photo-field">
+                                        @Html.TextBoxFor(x => x.menu2_paragraphe2_photoUrl, new { type = "file", accept = "image/*", name = "files", id = "menu2_paragraphe2_photoUrl" })
+                                        <div class="input-custom">
+                                            <dd><i class="fa fa-image"></i>  Photo 2</dd>
+                                            <label for="menu2_paragraphe2_photoUrl" class="btn btn-primary btn-small">Choisir</label>
                                         </div>
-                                    </div>
-                                </div>
-
-                                <!-- Menu 3 -->
-                                <div class="item" id="menu3">
-                                    <div class="row">
-                                        <div class="clearfix">
-                                            <label for="" class="col-md-12">
-                                                Titre menu
-                                                @Html.TextBoxFor(x => x.menu3_titre, new { placeholder = "Titre du menu 3" })
-                                            </label>
-                                            <label for="" class="col-md-12 photo-field">
-                                                Méta description
-                                                @Html.TextBoxFor(x => x.menu3_meta_description)
-                                            </label>
-                                            <label for="" class="col-md-12">
-                                                Titre paragraphe 1
-                                                @Html.TextBoxFor(x => x.menu3_paragraphe1_titre)
-                                            </label>
-
-
-                                            <label for="" class="col-md-12 photo-field">
-                                                @Html.TextBoxFor(x => x.menu3_paragraphe1_photoUrl, new { type = "file", accept = "image/*", name = "files", id = "menu3_paragraphe1_photoUrl" })
-                                                <div class="input-custom">
-                                                    <dd><i class="fa fa-image"></i>  Photo 1</dd>
-                                                    <label for="menu3_paragraphe1_photoUrl" class="btn btn-primary btn-small"><i class="fa fa-download"></i> Choisir</label>
-                                                </div>
-                                                <span class="thumbnail-photo"></span>
-                                            </label>
-                                            <label for="" class="col-md-12">
-                                                Contenu 1
-                                                @Html.TextAreaFor(x => x.menu3_contenu1)
-                                            </label>
-
-                                        </div>
-                                        <div class="clearfix bloccontenu">
-
-                                            <label for="" class="col-md-12">
-                                                Titre paragraphe 2
-                                                @Html.TextBoxFor(x => x.menu3_paragraphe2_titre)
-                                            </label>
-
-
-                                            <label for="" class="col-md-12 photo-field">
-                                                @Html.TextBoxFor(x => x.menu3_paragraphe2_photoUrl, new { type = "file", accept = "image/*", name = "files", id = "menu3_paragraphe2_photoUrl" })
-                                                <div class="input-custom">
-                                                    <dd><i class="fa fa-image"></i>  Photo 2</dd>
-                                                    <label for="menu3_paragraphe2_photoUrl" class="btn btn-primary btn-small"><i class="fa fa-download"></i> Choisir</label>
-                                                </div>
-                                                <span class="thumbnail-photo"></span>
-                                            </label>
-                                            <label for="" class="col-md-12">
-                                                Contenu 2
-                                                @Html.TextAreaFor(x => x.menu3_contenu2)
-                                            </label>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Menu 4 -->
-                                <div class="item" id="menu4">
-                                    <div class="row">
-                                        <div class="clearfix">
-
-                                            <label for="" class="col-md-12">
-                                                Titre menu
-                                                @Html.TextBoxFor(x => x.menu4_titre, new { placeholder = "Titre du menu 4" })
-                                            </label>
-                                            <label for="" class="col-md-12 photo-field">
-                                                Méta description
-                                                @Html.TextBoxFor(x => x.menu4_meta_description)
-                                            </label>
-                                            <label for="" class="col-md-12">
-                                                Titre paragraphe 1
-                                                @Html.TextBoxFor(x => x.menu4_paragraphe1_titre)
-                                            </label>
-
-
-                                            <label for="" class="col-md-12 photo-field">
-                                                @Html.TextBoxFor(x => x.menu4_paragraphe1_photoUrl, new { type = "file", accept = "image/*", name = "files", id = "menu4_paragraphe1_photoUrl" })
-                                                <div class="input-custom">
-                                                    <dd><i class="fa fa-image"></i>  Photo 1</dd>
-                                                    <label for="menu4_paragraphe1_photoUrl" class="btn btn-primary btn-small"><i class="fa fa-download"></i> Choisir</label>
-                                                </div>
-                                                <span class="thumbnail-photo"></span>
-                                            </label>
-                                            <label for="" class="col-md-12">
-                                                Contenu 1
-                                                @Html.TextAreaFor(x => x.menu4_contenu1)
-                                            </label>
-
-                                        </div>
-                                        <div class="clearfix bloccontenu">
-                                           
-                                                <label for="" class="col-md-12">
-                                                    Titre paragraphe 2
-                                                    @Html.TextBoxFor(x => x.menu4_paragraphe2_titre)
-                                                </label>
-                                              
-                                         
-                                                <label for="" class="col-md-12 photo-field">
-                                                    @Html.TextBoxFor(x => x.menu4_paragraphe2_photoUrl, new { type = "file", accept = "image/*", name = "files", id = "menu4_paragraphe2_photoUrl" })
-                                                    <div class="input-custom">
-                                                        <dd><i class="fa fa-image"></i>  Photo 2</dd>
-                                                        <label for="menu4_paragraphe2_photoUrl" class="btn btn-primary btn-small"><i class="fa fa-download"></i> Choisir</label>
-                                                    </div>
-                                                    <span class="thumbnail-photo"></span>
-                                                </label>
-                                              <label for="" class="col-md-12">
-                                                    Contenu 2
-                                                    @Html.TextAreaFor(x => x.menu4_contenu2)
-                                                </label>
-                                           
-                                        </div>
-                                    </div>
+                                        <span class="remove-file">Delete photo</span>
+                                        <span class="thumbnail-photo"></span>
+                                    </label>
                                 </div>
                             </div>
                         </div>
-                    </section>
 
-                    <section class="clearfix submit-area" id="toast">
-                        <input type="submit" value="Suivant" class="btn btn-success">
-                        @Html.ActionLink("Annuler", "ChoiceTemplate", "Template", new { }, new { @class = "btn btn-warning" })
-                    </section>
+                        <div class="item" id="menu3">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <label for="" class="col-md-6">
+                                        <strong>Titre menu</strong>
+                                        @Html.TextBoxFor(x => x.menu3_titre, new { placeholder = "Titre du menu 3" })
+                                    </label>
+                                    <label for="" class="col-md-6">
+                                        <strong>Méta description</strong>
+                                        @Html.TextBoxFor(x => x.menu3_meta_description)
+                                    </label>
+                                    <span class="divider"></span>
+                                    <label for="" class="col-md-6">
+                                        Titre paragraphe 1
+                                        @Html.TextBoxFor(x => x.menu3_paragraphe1_titre)
+                                    </label>
+                                    <label for="" class="col-100">
+                                        Contenu 1
+                                        @Html.TextAreaFor(x => x.menu3_contenu1)
+                                    </label>
+                                    <label for="" class="col-100">
+                                        Titre paragraphe 2
+                                        @Html.TextBoxFor(x => x.menu3_paragraphe2_titre)
+                                    </label>
+                                    <label for="" class="col-100">
+                                        Contenu 2
+                                        @Html.TextAreaFor(x => x.menu3_contenu2)
+                                    </label>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="" class="col-100 photo-field">
+                                        @Html.TextBoxFor(x => x.menu3_paragraphe1_photoUrl, new { type = "file", accept = "image/*", name = "files", id = "menu3_paragraphe1_photoUrl" })
+                                        <div class="input-custom">
+                                            <dd><i class="fa fa-image"></i>  Photo 1</dd>
+                                            <label for="menu3_paragraphe1_photoUrl" class="btn btn-primary btn-small">Choisir</label>
+                                        </div>
+                                        <span class="remove-file">Delete photo</span>
+                                        <span class="thumbnail-photo"></span>
+                                    </label>
+                                    <label for="" class="col-100 photo-field">
+                                        @Html.TextBoxFor(x => x.menu3_paragraphe2_photoUrl, new { type = "file", accept = "image/*", name = "files", id = "menu3_paragraphe2_photoUrl" })
+                                        <div class="input-custom">
+                                            <dd><i class="fa fa-image"></i>  Photo 2</dd>
+                                            <label for="menu3_paragraphe2_photoUrl" class="btn btn-primary btn-small">Choisir</label>
+                                        </div>
+                                        <span class="remove-file">Delete photo</span>
+                                        <span class="thumbnail-photo"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item" id="menu4">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <label for="" class="col-md-6">
+                                        <strong>Titre menu</strong>
+                                        @Html.TextBoxFor(x => x.menu4_titre, new { placeholder = "Titre du menu 4" })
+                                    </label>
+                                    <label for="" class="col-md-6">
+                                        <strong>Méta description</strong>
+                                        @Html.TextBoxFor(x => x.menu4_meta_description)
+                                    </label>
+                                    <span class="divider"></span>
+                                    <label for="" class="col-md-6">
+                                        Titre paragraphe 1
+                                        @Html.TextBoxFor(x => x.menu4_paragraphe1_titre)
+                                    </label>
+                                    <label for="" class="col-100">
+                                        Contenu 1
+                                        @Html.TextAreaFor(x => x.menu4_contenu1)
+                                    </label>
+                                    <label for="" class="col-100">
+                                        Titre paragraphe 2
+                                        @Html.TextBoxFor(x => x.menu4_paragraphe2_titre)
+                                    </label>
+                                    <label for="" class="col-100">
+                                        Contenu 2
+                                        @Html.TextAreaFor(x => x.menu4_contenu2)
+                                    </label>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="" class="col-100 photo-field">
+                                        @Html.TextBoxFor(x => x.menu4_paragraphe1_photoUrl, new { type = "file", accept = "image/*", name = "files", id = "menu4_paragraphe1_photoUrl" })
+                                        <div class="input-custom">
+                                            <dd><i class="fa fa-image"></i>  Photo 1</dd>
+                                            <label for="menu4_paragraphe1_photoUrl" class="btn btn-primary btn-small">Choisir</label>
+                                        </div>
+                                        <span class="remove-file">Delete photo</span>
+                                        <span class="thumbnail-photo"></span>
+                                    </label>
+                                    <label for="" class="col-100 photo-field">
+                                        @Html.TextBoxFor(x => x.menu4_paragraphe2_photoUrl, new { type = "file", accept = "image/*", name = "files", id = "menu4_paragraphe2_photoUrl" })
+                                        <div class="input-custom">
+                                            <dd><i class="fa fa-image"></i>  Photo 2</dd>
+                                            <label for="menu4_paragraphe2_photoUrl" class="btn btn-primary btn-small">Choisir</label>
+                                        </div>
+                                            <span class="remove-file">Delete photo</span>
+                                            <span class="thumbnail-photo"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            }
-        </div>
+            </section>
+            <section class="clearfix submit-area">        
+                <input type="submit" value="Suivant" class="btn btn-success">
+                @Html.ActionLink("Annuler", "ChoiceTemplate", "Template", new { }, new { @class = "btn btn-warning" })
+            </section>
+        }
     </div>
 </main>
-

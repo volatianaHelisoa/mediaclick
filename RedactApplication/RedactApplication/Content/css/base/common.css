@@ -156,7 +156,6 @@ body {
     -moz-transition: all ease-in-out linear 300ms;
 }
 
-
 /* POPUPS */
 .pop-up .pop-icon {
     width: 80px;
@@ -382,4 +381,7 @@ main.full {
 }
 .mce-branding {
     display:none !important;
+}
+.no-padd {
+    padding: 0 !important
 }

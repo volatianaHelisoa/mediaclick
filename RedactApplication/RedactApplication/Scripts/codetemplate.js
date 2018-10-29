@@ -54,17 +54,17 @@ var showThumbPhotos = (function (e) {
         }
     }
 });
-$('input[type=file]#logoUrl').bind("change", showThumb);
-$('input[type=file]#menu1_paragraphe1_photoUrl').bind("change", showThumbPhotos);
-$('input[type=file]#menu1_paragraphe2_photoUrl').bind("change", showThumbPhotos);
-$('input[type=file]#photoALaUneUrl').bind("change", showThumbPhotos);
-$('input[type=file]#menu2_paragraphe1_photoUrl').bind("change", showThumbPhotos);
-$('input[type=file]#menu2_paragraphe2_photoUrl').bind("change", showThumbPhotos);
-$('input[type=file]#menu3_paragraphe1_photoUrl').bind("change", showThumbPhotos);
-$('input[type=file]#menu3_paragraphe2_photoUrl').bind("change", showThumbPhotos);
-$('input[type=file]#menu4_paragraphe1_photoUrl').bind("change", showThumbPhotos);
-$('input[type=file]#menu4_paragraphe2_photoUrl').bind("change", showThumbPhotos);
-$('input[type=file]#favicone').bind("change", showThumb);
+//$('input[type=file]#logoUrl').bind("change", showThumb);
+//$('input[type=file]#menu1_paragraphe1_photoUrl').bind("change", showThumbPhotos);
+//$('input[type=file]#menu1_paragraphe2_photoUrl').bind("change", showThumbPhotos);
+//$('input[type=file]#photoALaUneUrl').bind("change", showThumbPhotos);
+//$('input[type=file]#menu2_paragraphe1_photoUrl').bind("change", showThumbPhotos);
+//$('input[type=file]#menu2_paragraphe2_photoUrl').bind("change", showThumbPhotos);
+//$('input[type=file]#menu3_paragraphe1_photoUrl').bind("change", showThumbPhotos);
+//$('input[type=file]#menu3_paragraphe2_photoUrl').bind("change", showThumbPhotos);
+//$('input[type=file]#menu4_paragraphe1_photoUrl').bind("change", showThumbPhotos);
+//$('input[type=file]#menu4_paragraphe2_photoUrl').bind("change", showThumbPhotos);
+//$('input[type=file]#favicone').bind("change", showThumb);
 
 $('.content-to-show').each(function () {
     var current = null;
@@ -110,16 +110,18 @@ $(document).ready(function () {
         }
     });
 
-    // var $inputFile = $("input[type='file']");
-    // $inputFile.on('change', function () {
-    //     var fileSize = (this.files[0].size / 1024 / 1024);
-    //     if (fileSize > 1) {
-    //         alert("Le fichier est trop volumineux, veuillez recommencer!");
-    //         console.log(fileSize + "MB");
-    //         $inputFile.val('');
-    //         return false;
-    //     }
-    // });
+    $('input[type="file"]').change(function (e) {
+        var fileName = e.target.files[0].name;
+        $(this).next('label').children('span').text(fileName);
+        $(this).parents().children('i').css("display", "inline-block");
+        
+    });
+
+    $(".remove-file").click(function (e) {
+        $(this).parents().children('input[type="file"]').val("").clone(true);
+        $(this).parents().children('label').children('.file-name').text("Choisir un fichier");
+        $(this).hide();
+    });
 
     tinymce.init({
         selector: 'textarea',

@@ -9,7 +9,11 @@
     <title>@Model.meta_title </title>
     <meta description="@Model.meta_description" />
     <link rel="icon" href="@Model.favicone">
-  
+	<link rel="stylesheet" href="@Session["Color"]">
+    @if (@Session["TemplateName"] != null && @Session["TemplateName"].ToString() == "Theme7")
+    {
+        <link href="css/bootstrap-grid.css" rel="stylesheet">
+    }
     @if (@Session["Color"] != null)
     {
         <link rel="stylesheet" href="@Session["Color"]">
@@ -22,21 +26,14 @@
 	else{	
 		<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
 	}
+	<link rel="stylesheet" href="css/responsive.css">
 
 </head>
 <body>
     @RenderBody()
     <footer></footer>
-
-
     @RenderSection("scripts", required: false)
-
-
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    @if (@Session["TemplateName"] != null && @Session["TemplateName"].ToString() == "Theme3")
-    {
-        <script src="js/theme.js"></script>
-    }
-
+    <script src="js/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="js/theme.js"></script>
 </body>
 </html>
