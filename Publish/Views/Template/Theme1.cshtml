@@ -9,12 +9,7 @@
 
     <script type="text/javascript" src="~/Scripts/codetemplate.js"></script>
     <script type="text/javascript" src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-
 }
-
-
-
-
 
 <main id="wrapper">
     <div id="single-container">
@@ -45,7 +40,7 @@
                     <div class="col-md-6">
                         <div class="blk">
                             <strong>Logo</strong>
-                            @Html.TextBoxFor(m => m.logoUrl, new { type = "file", accept = "image/*", name = "file", id = "logoUrl" })
+                            @Html.TextBoxFor(m => m.logoUrl, new { type = "file", accept = "image/*", name = "file", id = "logoUrl",  required = true })
                             <label for="logoUrl" class="btn-upload"><span class="file-name">Choisir un fichier</span></label><i class="remove-file">&times;</i>
                             <p>Image au format JPG, PNG ou GIF</p>
                         </div>
@@ -76,7 +71,6 @@
                             </select>
                         </div>
                     </div>
-
                 </div>
 
                 <!-- contenu bloc 1 -->
@@ -93,6 +87,7 @@
                     </ul>
                     <div class="blk clearfix">
                         <div class="item" id="menu1">
+                            <!-- Menu 1 -->
                             <label for="" class="col-md-6">
                                 <strong>Titre accueil</strong>
                                 @Html.TextBoxFor(x => x.menu1_titre, new { placeholder = "Titre accueil", required = true })
@@ -235,6 +230,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="item" id="menu4">
                             <div class="row">
                                 <div class="col-md-8">
@@ -294,5 +290,6 @@
                 @Html.ActionLink("Annuler", "ChoiceTemplate", "Template", new { }, new { @class = "btn btn-warning" })
             </section>
         }
+        
     </div>
 </main>
