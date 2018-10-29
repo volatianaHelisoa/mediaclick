@@ -91,59 +91,100 @@
 
     <main id="wrapper">
         <div id="single-container">
-            <div class="card back-office with-shadow">
-                <div class="head">
-                    <i class="icon icon-create-command"></i>
-                    <h1>Créer modèle</h1>
-                    <p>Veuillez remplir les champs Requis et appuyez sur Enregistrer pour éditer un modèle</p>
-
+                <div class="onglets ease-in-out">
+                    <ul>
+                        <li>@Html.ActionLink("Dashboard", "ListTemplate", new { controller = "Template" })</li>
+                        <li>@Html.ActionLink("Creation Site", "ChoiceTemplate", new { controller = "Template" }, new { @class = "active" })</li>
+                    </ul>
+                </div>
+                <div class="theme-select grey-bg">
                 </div>
 
                 @using (Html.BeginForm("SaveTemplate", "Template", FormMethod.Post, new { role = "form", @id = "createtemplate" }))
                 {
                     @Html.AntiForgeryToken()
-                    <!-- Champs -->
-                    <section class="clearfix">
-                        <label for="" class="col-50 pull-left">
-                            Projet
-                            @Html.DropDownListFor(x => Model.listprojetId, new SelectList(Model.ListProjet, "Value", "Text"), htmlAttributes: new { @id = "SelectItemProjet", @required = true })
-                        </label>
-                        <label class="col-50 pull-right">
-                            Ajouter un nouveau projet
-                            <button type="button" class="btn btn-primary" style="margin: 11px 0 40px;" data-toggle="modal" data-target="#createprojet"><i class="fa fa-plus"></i>  Nouveau projet</button>
-                        </label>
-                        <label for="" class="col-50 pull-left">
-                            Thématique
-                            @*@Html.DropDownListFor(x => Model.listThemeId, new SelectList(Model.ListTheme, "Value", "Text"), htmlAttributes: new { id = "SelectItemTheme", @required = true })*@
-                            @Html.EditorFor(model => model.THEME.theme_name, new { htmlAttributes = new { @placeholder = "Saisir Thème" } })
-                        </label>
+                    <section class="theme-customization clearfix">
+                        <div class="section-title">
+                            <span>Créer / Ajouter un modèle</span>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="blk">
+                                <strong>Choisir un projet</strong>
+                                @Html.DropDownListFor(x => Model.listprojetId, new SelectList(Model.ListProjet, "Value", "Text"), htmlAttributes: new { @id = "SelectItemProjet", @required = true })
+                            </div> 
+                        </div>
+                        <div class="col-md-2">
+                            <span
+                                style="
+                                text-align: center;
+                                font-size: 24px;
+                                display: inline-block;
+                                vertical-align: middle;
+                                line-height: 5.5em;
+                                width: 100%;"
+                            >
+                            Ou bien
+                        </span>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="blk">
+                                <strong>Ajouter un nouveau projet</strong>
+                                <span class="btn-add" data-toggle="modal" data-target="#createprojet">Nouveau projet</span>
+                            </div>                            
+                        </div>
+                        
+                        <!-- contenu bloc 1 -->
+                        <div class="section-title clearfix">
+                            <span>Préférences</span>
+                        </div>
+                        <div class="col-md-6"> 
+                            <div class="blk clearfix">
+                                <label for="">
+                                    <strong>Thématique</strong>
+                                    @*@Html.DropDownListFor(x => Model.listThemeId, new SelectList(Model.ListTheme, "Value", "Text"), htmlAttributes: new { id = "SelectItemTheme", @required = true })*@
+                                    @Html.EditorFor(model => model.THEME.theme_name, new { htmlAttributes = new { @placeholder = "Saisir Thème" } })
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6"> 
+                            <div class="blk clearfix">
+                                <label for="">
+                                    <strong>IP</strong>
+                                    @Html.TextBoxFor(x => x.ip, new { @required = true })
+                                </label>
+                            </div>
+                        </div>
 
-                    </section>
-                    <section class="clearfix">
-                        <label for="" class="col-50 pull-left">
-                            <i class="fa fa-desktop"></i>  IP
-                            @Html.TextBoxFor(x => x.ip, new { @required = true })
-                        </label>
-                        <label for="" class="col-50 pull-right">
-                            <i class="fa fa-upload"></i> FTP Hote
-                            @Html.TextBoxFor(x => x.url, new { @required = true })
-                        </label>
-                        <label for="" class="col-50 pull-left">
-                            <i class="fa fa-user"></i>  Utilisateur
-                            @Html.TextBoxFor(x => x.ftpUser, new { @name = "name", @required = true })
-                        </label>
-                        <label for="" class="col-50 pull-right">
-                            <i class="fa fa-lock"></i>  Mot de passe
-                            @Html.TextBoxFor(x => x.ftpPassword, new { required = true, @name = "name" })
-                        </label>
-                        <div class="ftp-area">
-                            <input type="button" value="Récupérer dossiers FTP" id="ftpList" />
+                        <div class="col-md-4"> 
+                            <div class="blk clearfix">
+                                <label for="">
+                                    <strong>FTP hôte</strong>
+                                    @Html.TextBoxFor(x => x.url, new { @required = true, @placeholder ="Adresse de l'hôte" })
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-4"> 
+                            <div class="blk clearfix">
+                                <label for="">
+                                    <strong>Utilisateur</strong>
+                                    @Html.TextBoxFor(x => x.ftpUser, new { @name = "name", @required = true, @placeholder ="Identifiant" })
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-4"> 
+                            <div class="blk clearfix">
+                                <label for="">
+                                    <strong>Mot de passe</strong>
+                                    @Html.TextBoxFor(x => x.ftpPassword, new { required = true, @name = "name", @placeholder = "********" })
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-12"> 
+                            <input type="button" value="Récupérer dossiers FTP" id="ftpList" class="btn btn-success"/>
                             <select id="ftpdir" name="ftpdirs"></select>
                         </div>
-                        <div class="ftp-error">                            
-                            <p class="error-msg text-centered">Veuillez vérifier vos paramètres de connexion sur le serveur.</p>
-                        </div>
                     </section>
+
                     <section class="clearfix submit-area save-template">
                         <input type="submit" value="Enregistrer" class="btn btn-success" />
                         @Html.ActionLink("Annuler", "ChoiceTemplate", "Template", new { @class = "btn btn-warning" })
