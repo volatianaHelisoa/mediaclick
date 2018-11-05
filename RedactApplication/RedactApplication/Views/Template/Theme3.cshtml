@@ -9,10 +9,6 @@
 
     <script type="text/javascript" src="~/Scripts/codetemplate.js"></script>
     <script type="text/javascript" src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-
-
-
-
 }
 
 <main id="wrapper">
@@ -27,7 +23,7 @@
             <section class="clearfix container">
                 <div class="row">
                     <a href="" class="col-md-3 selected">
-                        <div class="thumb with-shadow"><img src="images/theme3_thumb.jpg" /></div>
+                        <div class="thumb with-shadow"><img src="../../../images/theme3_thumb.jpg" /></div>
                         <span>Thème 3</span>
                     </a>
                 </div>
@@ -42,7 +38,7 @@
                         <div class="row site-identity">
                             <div class="col-md-6">
                                 <div class="blk">
-                                    <strong>Logo</strong>
+                                    <strong>Logo (*)</strong>
                                     @Html.TextBoxFor(m => m.logoUrl, new { type = "file", accept = "image/*", name = "file", id = "logoUrl",  required = true })
                                     <label for="logoUrl" class="btn-upload">
                                         <span class="file-name">Choisir un fichier</span>
@@ -53,15 +49,16 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="blk">
-                                    <strong>L'url de votre site</strong>
+                                    <strong>L'url de votre site (*)</strong>
                                     @Html.TextBoxFor(m => m.site_url, new { placeholder = "www.example.com", required = true, type = "url" })
                                 </div>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="blk">
+									<strong>Photo à la une</strong>
                                     @Html.TextBoxFor(x => x.photoALaUneUrl, new { type = "file", accept = "image/*", name = "files", id = "photoALaUneUrl" })
-                                    <label for="logoUrl" class="btn-upload">
+                                    <label for="photoALaUneUrl" class="btn-upload">
                                         <span class="file-name">Choisir un fichier</span>
                                     </label>
                                     <i class="remove-file">&times;</i>
@@ -71,8 +68,8 @@
 
                             <div class="col-md-6">
                                 <div class="blk">
-                                    <strong>Choisir un favicon</strong>
-                                    @Html.TextBoxFor(m => m.favicone, new { type = "file", accept = "image/*", name = "file", id = "favicone" })
+                                    <strong>Choisir un favicon (*)</strong>
+                                    @Html.TextBoxFor(m => m.favicone, new { type = "file", accept = "image/*", name = "file", required = "true", id = "favicone" })
                                     <label for="favicone" class="btn-upload"><span class="file-name">Choisir un fichier</span></label><i class="remove-file">&times;</i>
                                     <p>Image au format JPG, PNG ou GIF</p>
                                 </div>
@@ -82,7 +79,6 @@
                                 <div class="blk">
                                     <strong>Nombre de menu</strong>
                                     <select id="nb-menu" name="nbmenu">
-                                        <option>Ajouter jusqu'à 5 menu</option>
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
@@ -108,17 +104,17 @@
                             <div class="blk clearfix">
                                 <!-- Menu 1 -->
                                 <div class="item" id="menu1">
-                                     <label for="" class="col-md-6">
-                                        <strong>Titre accueil</strong>
+                                    <label for="" class="col-md-6">
+                                        <strong>Intitulé de la page d'accueil (*)</strong>
                                         @Html.TextBoxFor(x => x.menu1_titre, new { placeholder = "Titre accueil", required = true })
                                     </label>
                                     <label for="" class="col-md-6">
                                         <strong>Méta description</strong>
-                                        @Html.TextBoxFor(x => x.menu1_meta_description, new { required = true })
+                                        @Html.TextBoxFor(x => x.menu1_meta_description, new { placeholder = "Ajoutez votre description" })
                                     </label>
                                     
                                     <label for="" class="col-md-6">
-                                        <strong>Titre du paragraphe 1</strong>
+                                        <strong>Titre du paragraphe 1 (*)</strong>
                                         @Html.TextBoxFor(x => x.menu1_paragraphe1_titre, new { required = true })
                                     </label>
 
@@ -132,16 +128,16 @@
                                 <!-- Menu 2 -->
                                 <div class="item" id="menu2">
                                      <label for="" class="col-md-6">
-                                        <strong>Titre accueil</strong>
+                                        <strong>Intitulé de la page (*)</strong>
                                         @Html.TextBoxFor(x => x.menu2_titre, new { placeholder = "Titre accueil", required = true })
                                     </label>
                                     <label for="" class="col-md-6">
                                         <strong>Méta description</strong>
-                                        @Html.TextBoxFor(x => x.menu2_meta_description, new { required = true })
+                                        @Html.TextBoxFor(x => x.menu2_meta_description, new { placeholder = "Ajoutez votre description" })
                                     </label>
                                     
                                     <label for="" class="col-md-6">
-                                        <strong>Titre du paragraphe 1</strong>
+                                        <strong>Titre du paragraphe 1 (*)</strong>
                                         @Html.TextBoxFor(x => x.menu2_paragraphe1_titre, new { required = true })
                                     </label>
 
@@ -151,20 +147,20 @@
                                     </label>
                                     <span class="divider"></span>
                                 </div>
-
+								
                                 <!-- Menu 3 -->
                                 <div class="item" id="menu3">
                                      <label for="" class="col-md-6">
-                                        <strong>Titre accueil</strong>
+                                        <strong>Intitulé de la page d'accueil (*)</strong>
                                         @Html.TextBoxFor(x => x.menu3_titre, new { placeholder = "Titre accueil", required = true })
                                     </label>
                                     <label for="" class="col-md-6">
                                         <strong>Méta description</strong>
-                                        @Html.TextBoxFor(x => x.menu3_meta_description, new { required = true })
+                                        @Html.TextBoxFor(x => x.menu3_meta_description, new { placeholder = "Ajoutez votre description" })
                                     </label>
                                     
                                     <label for="" class="col-md-6">
-                                        <strong>Titre du paragraphe 1</strong>
+                                        <strong>Titre du paragraphe 1 (*)</strong>
                                         @Html.TextBoxFor(x => x.menu3_paragraphe1_titre, new { required = true })
                                     </label>
 
@@ -174,20 +170,20 @@
                                     </label>
                                     <span class="divider"></span>
                                 </div>
-
+								
                                 <!-- Menu 4 -->
                                 <div class="item" id="menu4">
                                      <label for="" class="col-md-6">
-                                        <strong>Titre accueil</strong>
+                                        <strong>Intitulé de la page d'accueil (*)</strong>
                                         @Html.TextBoxFor(x => x.menu4_titre, new { placeholder = "Titre accueil", required = true })
                                     </label>
                                     <label for="" class="col-md-6">
                                         <strong>Méta description</strong>
-                                        @Html.TextBoxFor(x => x.menu4_meta_description, new { required = true })
+                                        @Html.TextBoxFor(x => x.menu4_meta_description, new { placeholder = "Ajoutez votre description" })
                                     </label>
                                     
                                     <label for="" class="col-md-6">
-                                        <strong>Titre du paragraphe 1</strong>
+                                        <strong>Titre du paragraphe 1 (*)</strong>
                                         @Html.TextBoxFor(x => x.menu4_paragraphe1_titre, new { required = true })
                                     </label>
 

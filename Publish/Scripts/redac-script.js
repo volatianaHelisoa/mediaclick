@@ -43,13 +43,6 @@ $(document).ready(function(){
     });
   });
 
-  $('input[type="file"]').change(function(e){
-    var fileName = e.target.files[0].name;
-    $('.first .file').append("<div class='filename'>" + fileName + "</div>");
-  });
-
-    
-
 	/* select theme */
 	$('.theme-select .item').click(function(){
 		

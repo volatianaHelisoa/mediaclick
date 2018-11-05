@@ -24,6 +24,9 @@
         }
     }
 });
+/*
+Miniatures photos
+--------------------------------------------------------------------------------------------------
 var showThumbPhotos = (function (e) {
     var fileSize = (this.files[0].size / 1024 / 1024),
         elem = $(this),  
@@ -54,18 +57,7 @@ var showThumbPhotos = (function (e) {
         }
     }
 });
-//$('input[type=file]#logoUrl').bind("change", showThumb);
-//$('input[type=file]#menu1_paragraphe1_photoUrl').bind("change", showThumbPhotos);
-//$('input[type=file]#menu1_paragraphe2_photoUrl').bind("change", showThumbPhotos);
-//$('input[type=file]#photoALaUneUrl').bind("change", showThumbPhotos);
-//$('input[type=file]#menu2_paragraphe1_photoUrl').bind("change", showThumbPhotos);
-//$('input[type=file]#menu2_paragraphe2_photoUrl').bind("change", showThumbPhotos);
-//$('input[type=file]#menu3_paragraphe1_photoUrl').bind("change", showThumbPhotos);
-//$('input[type=file]#menu3_paragraphe2_photoUrl').bind("change", showThumbPhotos);
-//$('input[type=file]#menu4_paragraphe1_photoUrl').bind("change", showThumbPhotos);
-//$('input[type=file]#menu4_paragraphe2_photoUrl').bind("change", showThumbPhotos);
-//$('input[type=file]#favicone').bind("change", showThumb);
-
+*/
 $('.content-to-show').each(function () {
     var current = null;
     current = $(this).find('.item:first');
@@ -110,12 +102,23 @@ $(document).ready(function () {
         }
     });
 
-    $('input[type="file"]').change(function (e) {
-        var fileName = e.target.files[0].name;
-        $(this).next('label').children('span').text(fileName);
-        $(this).parents().children('i').css("display", "inline-block");
-        
-    });
+	$('input[type="file"]').change(function(e){
+		var fileName = e.target.files[0].name;
+		var fileSize = (this.files[0].size / 1024 / 1024 ),
+			files = e.target.files,
+			elem = $(e.target),
+			errorMessage = 'Fichier trop volumineux ou non pris en charge';
+
+		if (typeof FileReader == "undefined" || fileSize > 0.5){
+			elem.parents().children('p').text(errorMessage).addClass('error');
+		}
+		else {
+			$(this).next('label').children('span').text(fileName);
+			$(this).parents().children('i').css("display","inline-block");
+			elem.parents().children('p').text("Image au format JPG, PNG ou GIF").removeClass('error');
+		}
+	});
+
 
     $(".remove-file").click(function (e) {
         $(this).parents().children('input[type="file"]').val("").clone(true);

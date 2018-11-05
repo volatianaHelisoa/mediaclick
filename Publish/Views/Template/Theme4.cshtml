@@ -12,7 +12,6 @@
     <script type="text/javascript" src="//cdn.tinymce.com/4/tinymce.min.js"></script>
 }
 
-
 <main id="wrapper">
     <div id="single-container">
         <div class="onglets ease-in-out">
@@ -25,7 +24,7 @@
             <section class="clearfix container">
                 <div class="row">
                     <a href="" class="col-md-3 selected">
-                        <div class="thumb with-shadow"><img src="images/theme4_thumb.jpg" /></div>
+                        <div class="thumb with-shadow"><img src="../../../images/theme4_thumb.jpg" /></div>
                         <span>Thème 4</span>
                     </a>
                 </div>
@@ -41,7 +40,7 @@
                 <div class="row site-identity">
                     <div class="col-md-6">
                         <div class="blk">
-                            <strong>Logo</strong>
+                            <strong>Logo (*)</strong>
                             @Html.TextBoxFor(m => m.logoUrl, new { type = "file", accept = "image/*", name = "file", id = "logoUrl",  required = true })
                             <label for="logoUrl" class="btn-upload"><span class="file-name">Choisir un fichier</span></label><i class="remove-file">&times;</i>
                             <p>Image au format JPG, PNG ou GIF</p>
@@ -49,14 +48,14 @@
                     </div>
                     <div class="col-md-6">
                         <div class="blk">
-                            <strong>L'url de votre site</strong>
+                            <strong>L'url de votre site (*)</strong>
                             @Html.TextBoxFor(m => m.site_url, new { placeholder = "www.example.com", required = true, type = "url" })
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="blk">
-                            <strong>Choisir un favicon</strong>
-                            @Html.TextBoxFor(m => m.favicone, new { type = "file", accept = "image/*", name = "file", id = "favicone" })
+                            <strong>Choisir un favicon (*)</strong>
+                            @Html.TextBoxFor(m => m.favicone, new { type = "file", accept = "image/*", required = true, name = "file", id = "favicone" })
                             <label for="favicone" class="btn-upload"><span class="file-name">Choisir un fichier</span></label><i class="remove-file">&times;</i>
                             <p>Image au format JPG, PNG ou GIF</p>
                         </div>
@@ -64,6 +63,7 @@
                     
                     <div class="col-md-6">
                         <div class="blk">
+							<strong>Photo à la une</strong>
                             @Html.TextBoxFor(x => x.photoALaUneUrl, new { type = "file", accept = "image/*", name = "files", id = "photoALaUneUrl", required = true })
                             <label for="photoALaUneUrl" class="btn-upload"><span class="file-name">Choisir un fichier</span></label><i class="remove-file">&times;</i>
                             <p>Image au format JPG, PNG ou GIF</p>
@@ -78,12 +78,12 @@
                 <div class="blk clearfix">
                     <div class="item">
                         <label for="" class="col-md-6">
-                            <strong>Titre accueil</strong>
-                            @Html.TextBoxFor(x => x.menu1_titre, new { placeholder = "Titre accueil", required = true })
+                            <strong>Intitulé de la page d'accueil</strong>
+                            @Html.TextBoxFor(x => x.menu1_titre, new { placeholder = "Exemple: Accueil, Presentation,...etc", required = true })
                         </label>
                         <label for="" class="col-md-6">
                             <strong>Méta description</strong>
-                            @Html.TextBoxFor(x => x.menu1_meta_description, new { required = true })
+                            @Html.TextBoxFor(x => x.menu1_meta_description, new { placeholder = "Ajoutez votre description" })
                         </label>
                         <span class="divider"></span>
                         <label for="" class="col-md-6">
@@ -91,6 +91,7 @@
                             @Html.TextBoxFor(x => x.menu1_paragraphe1_titre, new { required = true })
                         </label>
                         <div class="col-md-6 custom-upload">
+							<strong>Photo paragraphe 1</strong>
                             @Html.TextBoxFor(x => x.menu1_paragraphe1_photoUrl, new { type = "file", accept = "image/*", name = "files", id = "menu1_paragraphe1_photoUrl" })
                             <label for="menu1_paragraphe1_photoUrl" class="btn-upload"><span class="file-name">Choisir un fichier</span></label><i class="remove-file">&times;</i>
                             <p>Image au format JPG, PNG ou GIF</p>
