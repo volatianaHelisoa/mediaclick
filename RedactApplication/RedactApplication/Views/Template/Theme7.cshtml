@@ -40,7 +40,7 @@
                 <div class="row site-identity">
                     <div class="col-md-6">
                         <div class="blk">
-                            <strong>Logo</strong>
+                            <strong>Logo (*)</strong>
                             @Html.TextBoxFor(m => m.logoUrl, new { type = "file", accept = "image/*", name = "file", id = "logoUrl",  required = true })
                             <label for="logoUrl" class="btn-upload"><span class="file-name">Choisir un fichier</span></label><i class="remove-file">&times;</i>
                             <p>Image au format JPG, PNG ou GIF</p>
@@ -48,13 +48,13 @@
                     </div>
                     <div class="col-md-6">
                         <div class="blk">
-                            <strong>L'url de votre site</strong>
+                            <strong>L'url de votre site (*)</strong>
                             @Html.TextBoxFor(m => m.site_url, new { placeholder = "www.example.com", required = true, type = "url" })
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="blk">
-                            <strong>Choisir un favicon</strong>
+                            <strong>Choisir un favicon (*)</strong>
                             @Html.TextBoxFor(m => m.favicone, new { type = "file", accept = "image/*", name = "file", id = "favicone" })
                             <label for="favicone" class="btn-upload"><span class="file-name">Choisir un fichier</span></label><i class="remove-file">&times;</i>
                             <p>Image au format JPG, PNG ou GIF</p>
@@ -64,7 +64,6 @@
                         <div class="blk">
                             <strong>Nombre de menu</strong>
                             <select id="nb-menu" name="nbmenu">
-                                <option>Ajouter jusqu'à 5 menu</option>
                                 <option>1</option>
                                 <option>2</option>
                                 <option>3</option>
@@ -90,12 +89,12 @@
                         <!-- Menu 1 -->
                         <div class="item" id="menu1">
                             <label for="" class="col-md-6">
-                                <strong>Titre accueil</strong>
-                                @Html.TextBoxFor(x => x.menu1_titre, new { placeholder = "Titre accueil", required = true })
+                                <strong>Intitulé de la page d'accueil (*)</strong>
+                                @Html.TextBoxFor(x => x.menu1_titre, new { placeholder = "Nom de la page", required = true })
                             </label>
                             <label for="" class="col-md-6">
                                 <strong>Méta description</strong>
-                                @Html.TextBoxFor(x => x.menu1_meta_description, new { required = true })
+                                @Html.TextBoxFor(x => x.menu1_meta_description, new { placeholder = "Ajoutez votre description" })
                             </label>
                             <span class="divider"></span>
                             <label for="" class="col-md-6">
@@ -103,12 +102,13 @@
                                 @Html.TextBoxFor(x => x.menu1_paragraphe1_titre, new { required = true })
                             </label>                            
                             <div class="col-md-6 custom-upload">
+								<strong>Photo paragraphe 1</strong>
                                 @Html.TextBoxFor(x => x.menu1_paragraphe1_photoUrl, new { type = "file", accept = "image/*", name = "files", id = "menu1_paragraphe1_photoUrl" })
                                 <label for="menu1_paragraphe1_photoUrl" class="btn-upload"><span class="file-name">Choisir un fichier</span></label><i class="remove-file">&times;</i>
                                 <p>Image au format JPG, PNG ou GIF</p>
                             </div>
                             <label for="" class="col-md-12">
-                                Contenu 1
+                                <strong>Contenu 1</strong>
                                 @Html.TextAreaFor(x => x.menu1_contenu1)
                             </label>
                             <span class="divider"></span>
@@ -117,6 +117,7 @@
                                 @Html.TextBoxFor(x => x.menu1_paragraphe2_titre)
                             </label>
                              <div class="col-md-6 custom-upload">
+								<strong>Photo paragraphe 2</strong>
                                 @Html.TextBoxFor(x => x.menu1_paragraphe2_photoUrl, new { type = "file", accept = "image/*", name = "files", id = "menu1_paragraphe2_photoUrl" })
                                 <label for="menu1_paragraphe2_photoUrl" class="btn-upload"><span class="file-name">Choisir un fichier</span></label><i class="remove-file">&times;</i>
                                 <p>Image au format JPG, PNG ou GIF</p>
@@ -130,33 +131,35 @@
                         <!-- Menu 2 -->
                         <div class="item" id="menu2">
                             <label for="" class="col-md-6">
-                                <strong>Titre accueil</strong>
-                                @Html.TextBoxFor(x => x.menu2_titre, new { placeholder = "Titre accueil", required = true })
+                                <strong>Intitulé de la page (*)</strong>
+                                @Html.TextBoxFor(x => x.menu2_titre, new { placeholder = "Nom de la page", required = true })
                             </label>
                             <label for="" class="col-md-6">
                                 <strong>Méta description</strong>
-                                @Html.TextBoxFor(x => x.menu2_meta_description, new { required = true })
+                                @Html.TextBoxFor(x => x.menu2_meta_description, new { placeholder = "Ajoutez votre description" })
                             </label>
                             <span class="divider"></span>
                             <label for="" class="col-md-6">
-                                <strong>Titre du paragraphe 1</strong>
+                                <strong>Titre du paragraphe 1 (*)</strong>
                                 @Html.TextBoxFor(x => x.menu2_paragraphe1_titre, new { required = true })
                             </label>                            
                             <div class="col-md-6 custom-upload">
+								<strong>Photo paragraphe 1</strong>
                                 @Html.TextBoxFor(x => x.menu2_paragraphe1_photoUrl, new { type = "file", accept = "image/*", name = "files", id = "menu2_paragraphe1_photoUrl" })
                                 <label for="menu2_paragraphe1_photoUrl" class="btn-upload"><span class="file-name">Choisir un fichier</span></label><i class="remove-file">&times;</i>
                                 <p>Image au format JPG, PNG ou GIF</p>
                             </div>
                             <label for="" class="col-md-12">
-                                Contenu 1
+                                <strong>Contenu 1</strong>
                                 @Html.TextAreaFor(x => x.menu2_contenu1)
                             </label>
                             <span class="divider"></span>
-                             <label for="" class="col-md-6">
+                            <label for="" class="col-md-6">
                                 <strong>Titre du paragraphe 2</strong>
                                 @Html.TextBoxFor(x => x.menu2_paragraphe2_titre)
                             </label>
                              <div class="col-md-6 custom-upload">
+								<strong>Photo paragraphe 2</strong>
                                 @Html.TextBoxFor(x => x.menu2_paragraphe2_photoUrl, new { type = "file", accept = "image/*", name = "files", id = "menu2_paragraphe2_photoUrl" })
                                 <label for="menu2_paragraphe2_photoUrl" class="btn-upload"><span class="file-name">Choisir un fichier</span></label><i class="remove-file">&times;</i>
                                 <p>Image au format JPG, PNG ou GIF</p>
@@ -170,25 +173,26 @@
                         <!-- Menu 3 -->
                         <div class="item" id="menu3">
                             <label for="" class="col-md-6">
-                                <strong>Titre accueil</strong>
-                                @Html.TextBoxFor(x => x.menu3_titre, new { placeholder = "Titre accueil", required = true })
+                                <strong>Intitulé de la page (*)</strong>
+                                @Html.TextBoxFor(x => x.menu3_titre, new { placeholder = "Nom de la page", required = true })
                             </label>
                             <label for="" class="col-md-6">
                                 <strong>Méta description</strong>
-                                @Html.TextBoxFor(x => x.menu3_meta_description, new { required = true })
+                                @Html.TextBoxFor(x => x.menu3_meta_description, new { placeholder = "Ajoutez votre description" })
                             </label>
                             <span class="divider"></span>
                             <label for="" class="col-md-6">
-                                <strong>Titre du paragraphe 1</strong>
+                                <strong>Titre du paragraphe 1 (*)</strong>
                                 @Html.TextBoxFor(x => x.menu3_paragraphe1_titre, new { required = true })
                             </label>                            
                             <div class="col-md-6 custom-upload">
+								<strong>Photo paragraphe 1</strong>
                                 @Html.TextBoxFor(x => x.menu3_paragraphe1_photoUrl, new { type = "file", accept = "image/*", name = "files", id = "menu3_paragraphe1_photoUrl" })
                                 <label for="menu3_paragraphe1_photoUrl" class="btn-upload"><span class="file-name">Choisir un fichier</span></label><i class="remove-file">&times;</i>
                                 <p>Image au format JPG, PNG ou GIF</p>
                             </div>
                             <label for="" class="col-md-12">
-                                Contenu 1
+                                <strong>Contenu 1</strong>
                                 @Html.TextAreaFor(x => x.menu3_contenu1)
                             </label>
                             <span class="divider"></span>
@@ -197,6 +201,7 @@
                                 @Html.TextBoxFor(x => x.menu3_paragraphe2_titre)
                             </label>
                              <div class="col-md-6 custom-upload">
+								<strong>Photo paragraphe 2</strong>
                                 @Html.TextBoxFor(x => x.menu3_paragraphe2_photoUrl, new { type = "file", accept = "image/*", name = "files", id = "menu3_paragraphe2_photoUrl" })
                                 <label for="menu3_paragraphe2_photoUrl" class="btn-upload"><span class="file-name">Choisir un fichier</span></label><i class="remove-file">&times;</i>
                                 <p>Image au format JPG, PNG ou GIF</p>
@@ -210,25 +215,26 @@
                         <!-- Menu 4 -->
                         <div class="item" id="menu4">
                             <label for="" class="col-md-6">
-                                <strong>Titre accueil</strong>
-                                @Html.TextBoxFor(x => x.menu4_titre, new { placeholder = "Titre accueil", required = true })
+                                <strong>Intitulé de la page (*)</strong>
+                                @Html.TextBoxFor(x => x.menu4_titre, new { placeholder = "Nom de la page", required = true })
                             </label>
                             <label for="" class="col-md-6">
                                 <strong>Méta description</strong>
-                                @Html.TextBoxFor(x => x.menu4_meta_description, new { required = true })
+                                @Html.TextBoxFor(x => x.menu4_meta_description, new { placeholder = "Ajoutez votre description" })
                             </label>
                             <span class="divider"></span>
                             <label for="" class="col-md-6">
-                                <strong>Titre du paragraphe 1</strong>
+                                <strong>Titre du paragraphe 1 (*)</strong>
                                 @Html.TextBoxFor(x => x.menu4_paragraphe1_titre, new { required = true })
                             </label>                            
                             <div class="col-md-6 custom-upload">
+								<strong>Photo paragraphe 1</strong>
                                 @Html.TextBoxFor(x => x.menu4_paragraphe1_photoUrl, new { type = "file", accept = "image/*", name = "files", id = "menu4_paragraphe1_photoUrl" })
                                 <label for="menu4_paragraphe1_photoUrl" class="btn-upload"><span class="file-name">Choisir un fichier</span></label><i class="remove-file">&times;</i>
                                 <p>Image au format JPG, PNG ou GIF</p>
                             </div>
                             <label for="" class="col-md-12">
-                                Contenu 1
+                                <strong>Contenu 1</strong>
                                 @Html.TextAreaFor(x => x.menu4_contenu1)
                             </label>
                             <span class="divider"></span>
@@ -237,6 +243,7 @@
                                 @Html.TextBoxFor(x => x.menu4_paragraphe2_titre)
                             </label>
                              <div class="col-md-6 custom-upload">
+								<strong>Photo paragraphe 2</strong>
                                 @Html.TextBoxFor(x => x.menu4_paragraphe2_photoUrl, new { type = "file", accept = "image/*", name = "files", id = "menu4_paragraphe2_photoUrl" })
                                 <label for="menu4_paragraphe2_photoUrl" class="btn-upload"><span class="file-name">Choisir un fichier</span></label><i class="remove-file">&times;</i>
                                 <p>Image au format JPG, PNG ou GIF</p>
