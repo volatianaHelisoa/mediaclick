@@ -487,8 +487,11 @@
     <Content Include="images\theme4_thumb.jpg" />
     <Content Include="images\theme5_thumb.jpg" />
     <Content Include="images\theme6_thumb.jpg" />
+    <Content Include="images\theme7_thumb.jpg" />
+    <Content Include="images\theme8_thumb.jpg" />
     <Content Include="images\Themes\financement sante.jpg" />
     <Content Include="images\Themes\pret epargne logement.jpg" />
+    <Content Include="images\upload_icon.svg" />
     <Content Include="Models\redactapplicationEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>redactapplicationEntities.edmx</DependentUpon>

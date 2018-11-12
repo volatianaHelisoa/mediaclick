@@ -290,3 +290,4 @@ D:\.NET Projet\mediaclick\RedactApplication\RedactApplication\obj\Debug\RedactAp
 D:\.NET Projet\mediaclick\RedactApplication\RedactApplication\obj\Debug\RedactApplication.csproj.CopyComplete
 D:\.NET Projet\mediaclick\RedactApplication\RedactApplication\obj\Debug\RedactApplication.dll
 D:\.NET Projet\mediaclick\RedactApplication\RedactApplication\obj\Debug\RedactApplication.pdb
+D:\.NET Projet\mediaclick\RedactApplication\RedactApplication\obj\Debug\RedactApplication.csprojAssemblyReference.cache
