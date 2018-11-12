@@ -394,3 +394,6 @@ main.full {
     color: #013956;
 	vertical-align: middle;
 }
+.error {
+	color: red;
+}
