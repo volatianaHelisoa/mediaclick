@@ -88,7 +88,34 @@
                                     <td>@item.THEME.theme_name</td>
                                     <td><span class="tag">@item.ip</span></td>
                                     <td>@item.MODELE.site_url</td>
-                                    <td><a class="btn btn-warm btn-small ftp-detail" data-toggle="modal" data-target="#myModal+@item.templateId"><i class="fa fa-lock"></i> Voir</a></td>
+                                    <td>
+                                        <a class="btn btn-warm btn-small ftp-detail" data-toggle="modal" data-target="#myModal-@item.templateId"><i class="fa fa-lock"></i> Voir</a>
+
+                                        <div class="modal fade" id="myModal-@item.templateId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-sm" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header clearfix">
+                                                        <h4 class="modal-title col-md-12" id="exampleModalLabel">Accès FTP</h4>
+                                                    </div>
+                                                    <div class="modal-body clearfix">
+                                                        <label class="col-md-6">
+                                                            <i class="fa fa-user"></i> Identifiant:
+                                                            <span class="field-info">@item.ftpUser</span>
+                                                        </label>
+
+                                                        <label class="col-md-6">
+                                                            <i class="fa fa-lock"></i> Mot de passe:
+                                                            <span class="field-info password">@item.ftpPassword</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </td>
                                     <td>@item.UTILISATEUR.userNom @item.UTILISATEUR.userPrenom</td>
                                     <td class="col-option">
                                         <div class="item">
@@ -99,30 +126,11 @@
                                             </div>
                                         </div>
                                     </td>
+
                                 </tr>
-                                <div class="modal fade" id="myModal+@item.templateId" role="dialog">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
-                                            <div class="modal-body">
-                                                <div class="wrap-field carte">
-                                                    <div class="title-field">FTP</div>
-                                                    <div class="field2 other-field">
-                                                        <label for="">Url : </label>
-                                                        <span id="url_res">@item.ftpUser</span>
-                                                    </div>
-                                                    <div class="field2 other-field">
-                                                        <label for="">Mot de passe : </label>
-                                                        <span id="login_res">@item.ftpPassword</span>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="submit" data-dismiss="modal">Ok</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            
+
+                                
                                 count++;
                             }
                         }
@@ -142,30 +150,7 @@
             @Html.Partial("~/Views/Template/DeleteTemplate.cshtml")
         </div>
 		
-		<div class="modal fade" id="ftp_detail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		  <div class="modal-dialog modal-sm" role="document">
-			<div class="modal-content">
-			  <div class="modal-header clearfix">
-				<h4 class="modal-title col-md-12" id="exampleModalLabel">Lorem ipsum dolor sit amet</h4>
-			  </div>
-			  <div class="modal-body clearfix">
-				<label class="col-md-6">
-					<i class="fa fa-user"></i> Identifiant:
-					<span class="field-info">Carole</span>
-				</label>
-				
-				<label class="col-md-6">
-					<i class="fa fa-lock"></i> Mot de passe:
-					<span class="field-info password">********</span>
-				</label>
-			  </div>
-			  <div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-				<button type="button" class="btn btn-primary">Enregistrer</button>
-			  </div>
-			</div>
-		  </div>
-		</div>
+		
 
     </main>
 
