@@ -617,6 +617,7 @@ i.fa.fa-times-circle.cancelText {
     border: none;
     padding: 15px 10px;
     font-size: 14px;
+	vertical-align: middle;
 }
 
 #myDataTable tfoot {
@@ -691,7 +692,7 @@ i.fa.fa-times-circle.cancelText {
 
 table#myDataTable {
     width: 100%;
-    border: none;
+    border: 1px solid #e0e0e0;
 }
 
 #toast {

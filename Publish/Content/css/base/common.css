@@ -385,3 +385,12 @@ main.full {
 .no-padd {
     padding: 0 !important
 }
+
+.tag {
+    display: inline-block;
+    background-color: #ddd;
+    padding: 6px 12px;
+    border-radius: 3px;
+    color: #013956;
+	vertical-align: middle;
+}
