@@ -17,6 +17,10 @@
             <ul>
                 <li> @Html.ActionLink("Dashboard", "ListTemplate", new { controller = "Template" }) </li>
                 <li> @Html.ActionLink("Creation Site", "ChoiceTemplate", new { controller = "Template" }, new { @class = "active" })</li>
+                @if (Session["name"] != null && @Session["role"] != null && @Session["role"].ToString() != "6")
+                {
+                    <li> @Html.ActionLink("Utilisateurs", "ListeUserTemplate", new { controller = "Home" }) </li>
+                }
             </ul>
         </div>
         <div class="theme-select grey-bg">
@@ -106,7 +110,7 @@
                                 <div class="item" id="menu1">
                                     <label for="" class="col-md-6">
                                         <strong>Intitulé de la page d'accueil (*)</strong>
-                                        @Html.TextBoxFor(x => x.menu1_titre, new { placeholder = "Titre accueil", required = true })
+                                        @Html.TextBoxFor(x => x.menu1_titre, new { placeholder = "Exemple: Accueil, Presentation,...etc", required = true })
                                     </label>
                                     <label for="" class="col-md-6">
                                         <strong>Méta description</strong>
@@ -129,7 +133,7 @@
                                 <div class="item" id="menu2">
                                      <label for="" class="col-md-6">
                                         <strong>Intitulé de la page (*)</strong>
-                                        @Html.TextBoxFor(x => x.menu2_titre, new { placeholder = "Titre accueil", required = true })
+                                        @Html.TextBoxFor(x => x.menu2_titre, new { placeholder = "Nom de la page" })
                                     </label>
                                     <label for="" class="col-md-6">
                                         <strong>Méta description</strong>
@@ -138,7 +142,7 @@
                                     
                                     <label for="" class="col-md-6">
                                         <strong>Titre du paragraphe 1 (*)</strong>
-                                        @Html.TextBoxFor(x => x.menu2_paragraphe1_titre, new { required = true })
+                                        @Html.TextBoxFor(x => x.menu2_paragraphe1_titre)
                                     </label>
 
                                     <label for="" class="col-md-12">
@@ -152,7 +156,7 @@
                                 <div class="item" id="menu3">
                                      <label for="" class="col-md-6">
                                         <strong>Intitulé de la page d'accueil (*)</strong>
-                                        @Html.TextBoxFor(x => x.menu3_titre, new { placeholder = "Titre accueil", required = true })
+                                        @Html.TextBoxFor(x => x.menu3_titre, new { placeholder = "Nom de la page"})
                                     </label>
                                     <label for="" class="col-md-6">
                                         <strong>Méta description</strong>
@@ -161,7 +165,7 @@
                                     
                                     <label for="" class="col-md-6">
                                         <strong>Titre du paragraphe 1 (*)</strong>
-                                        @Html.TextBoxFor(x => x.menu3_paragraphe1_titre, new { required = true })
+                                        @Html.TextBoxFor(x => x.menu3_paragraphe1_titre)
                                     </label>
 
                                     <label for="" class="col-md-12">
@@ -175,7 +179,7 @@
                                 <div class="item" id="menu4">
                                      <label for="" class="col-md-6">
                                         <strong>Intitulé de la page d'accueil (*)</strong>
-                                        @Html.TextBoxFor(x => x.menu4_titre, new { placeholder = "Titre accueil", required = true })
+                                        @Html.TextBoxFor(x => x.menu4_titre, new { placeholder = "Nom de la page" })
                                     </label>
                                     <label for="" class="col-md-6">
                                         <strong>Méta description</strong>
@@ -184,7 +188,7 @@
                                     
                                     <label for="" class="col-md-6">
                                         <strong>Titre du paragraphe 1 (*)</strong>
-                                        @Html.TextBoxFor(x => x.menu4_paragraphe1_titre, new { required = true })
+                                        @Html.TextBoxFor(x => x.menu4_paragraphe1_titre)
                                     </label>
 
                                     <label for="" class="col-md-12">

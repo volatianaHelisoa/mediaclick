@@ -16,7 +16,10 @@
                 <li> @Html.ActionLink("Dashboard", "ListTemplate", new { controller = "Template" }) </li>
 
                 <li> @Html.ActionLink("Creation Site", "ChoiceTemplate", new { controller = "Template" }, new { @class = "active" })</li>
-
+                @if (Session["name"] != null && @Session["role"] != null && @Session["role"].ToString() != "6")
+                {
+                    <li> @Html.ActionLink("Utilisateurs", "ListeUserTemplate", new { controller = "Home" }) </li>
+                }
             </ul>
         </div>
        
@@ -360,7 +363,7 @@
                         </div>
                     }
 					
-					@using (Html.BeginForm("Theme7", "Template", FormMethod.Post, new { @class = "formfields col-md-3" }))
+					@using (Html.BeginForm("Theme8", "Template", FormMethod.Post, new { @class = "formfields col-md-3" }))
                     {
                         <div class="item" data-index="1" id="theme8">
                             <div class="thumb with-shadow"><img src="~/images/theme8_thumb.jpg" /></div>
