@@ -83,12 +83,12 @@
                             foreach (var item in ViewBag.listeTemplateVm)
                             {
                                 <tr>
-                                    <td><input type="checkbox" class="checkbox" name="selectedTemplate" value="@item.templateId" /></td> 
-                                    <td>@item.PROJET.projet_name</td>  
-                                    <td>@item.THEME.theme_name</td>                                 
+                                    <td><input type="checkbox" class="checkbox" name="selectedTemplate" value="@item.templateId" /></td>
+                                    <td>@item.PROJET.projet_name</td>
+                                    <td>@item.THEME.theme_name</td>
                                     <td><span class="tag">@item.ip</span></td>
                                     <td>@item.MODELE.site_url</td>
-									<td><a class="btn btn-warm btn-small ftp-detail" data-projetId="" data-toggle="modal" data-target="#ftp_detail"><i class="fa fa-lock"></i> Voir</a></td>
+                                    <td><a class="btn btn-warm btn-small ftp-detail" data-toggle="modal" data-target="#myModal+@item.templateId"><i class="fa fa-lock"></i> Voir</a></td>
                                     <td>@item.UTILISATEUR.userNom @item.UTILISATEUR.userPrenom</td>
                                     <td class="col-option">
                                         <div class="item">
@@ -100,6 +100,29 @@
                                         </div>
                                     </td>
                                 </tr>
+                                <div class="modal fade" id="myModal+@item.templateId" role="dialog">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                                            <div class="modal-body">
+                                                <div class="wrap-field carte">
+                                                    <div class="title-field">FTP</div>
+                                                    <div class="field2 other-field">
+                                                        <label for="">Url : </label>
+                                                        <span id="url_res">@item.ftpUser</span>
+                                                    </div>
+                                                    <div class="field2 other-field">
+                                                        <label for="">Mot de passe : </label>
+                                                        <span id="login_res">@item.ftpPassword</span>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="submit" data-dismiss="modal">Ok</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 count++;
                             }
                         }
