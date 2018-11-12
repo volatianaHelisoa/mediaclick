@@ -527,11 +527,11 @@
 
 /*** THEME 7 ***/
 .theme7__templates .default .color1 {
-    background-color: #f9f9f9
+    background-color: #2e7514
 }
 
 .theme7__templates .default .color2 {
-    background-color: #308212
+    background-color: #fff
 }
 
 .theme7__templates .default .color3 {
@@ -829,7 +829,7 @@
     font-weight: bold;
 }
 .btn-upload {
-    background: #26b5ff url(../../images/upload_icon.svg) no-repeat 15px center;
+    background: #26b5ff url(../../../images/upload_icon.svg) no-repeat 15px center;
     padding: 0 15px 0 45px;
     color: white;
     text-align: center;
@@ -930,7 +930,7 @@
 }
 
 .content-to-show .custom-upload {
-    padding: 49px 15px 0
+    padding: 15px
 }
 
 .content-to-show .item label {
