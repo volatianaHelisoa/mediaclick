@@ -109,7 +109,7 @@ $(document).ready(function () {
 			elem = $(e.target),
 			errorMessage = 'Fichier trop volumineux ou non pris en charge';
 
-		if (typeof FileReader == "undefined" || fileSize > 0.5){
+		if (typeof FileReader == "undefined" || fileSize > 0.3){
 			elem.parents().children('p').text(errorMessage).addClass('error');
 		}
 		else {
