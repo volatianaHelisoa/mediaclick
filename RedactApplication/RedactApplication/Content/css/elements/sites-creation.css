@@ -524,6 +524,44 @@
     background-color: #d5911a
 }
 
+
+/*** THEME 7 ***/
+.theme7__templates .default .color1 {
+    background-color: #2e7514
+}
+
+.theme7__templates .default .color2 {
+    background-color: #fff
+}
+
+.theme7__templates .default .color3 {
+    background-color: #333
+}
+/*** theme 7 Dark ***/
+.theme7__templates .dark .color1 {
+    background-color: #4d2f00
+}
+
+.theme7__templates .dark .color2 {
+    background-color: white
+}
+
+.theme7__templates .dark .color3 {
+    background-color: #333
+}
+/*** theme 7 theme2 ***/
+.theme7__templates .theme2 .color1 {
+    background-color: #024da8
+}
+
+.theme7__templates .theme2 .color2 {
+    background-color: #fff
+}
+
+.theme7__templates .theme2 .color3 {
+    background-color: #333
+}
+
 .create-theme {
     text-align: center;
 }
@@ -854,7 +892,7 @@
     line-height: 40px;
     right: 0;
     color: white;
-    margin-left: -4px;
+    margin-left: 0;
     border-radius: 0 3px 3px 0;
     cursor: pointer;
     -moz-transition: ease 300ms all;
@@ -862,12 +900,12 @@
     transition: ease 300ms all;
     -ms-transition: ease 300ms all;
     display: none;
-	
 }
 
 .remove-file:hover {
 	background-color: #ff4026;
-}
+}
+
 
 .blk p {
     display: inline-block;
@@ -892,15 +930,11 @@
 }
 
 .content-to-show .custom-upload {
-    padding: 0 15px 0
+    padding: 15px
 }
 
 .content-to-show .item label {
     margin-bottom: 2em;
-}
-
-.content-to-show .custom-upload strong {
-	margin: 10px 0 18px;
 }
 
 .content-to-show .custom-upload label {
@@ -914,6 +948,12 @@
     height: 1px;
     margin: 10px 0 20px;
 }
-.error {
-	color: red
+
+#ftp_detail .field-info {
+	display: block;
+	padding: 7px 10px;
+	border: 1px solid #e0e0e0;
+	border-radius: 3px;
+	margin: 15px 0 0;
+	font-weight: normal;
 }

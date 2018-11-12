@@ -207,6 +207,11 @@ a.btn:hover,
     color: white;
 }
 
+.btn.ftp-detail {
+    display: inline-block;
+    text-align: center;
+}
+
 #reset-password input[type="password"] {
 	display: block;
 	margin: 0 auto 20px;

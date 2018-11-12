@@ -617,6 +617,7 @@ i.fa.fa-times-circle.cancelText {
     border: none;
     padding: 15px 10px;
     font-size: 14px;
+	vertical-align: middle;
 }
 
 #myDataTable tfoot {
@@ -691,13 +692,13 @@ i.fa.fa-times-circle.cancelText {
 
 table#myDataTable {
     width: 100%;
-    border: none;
+    border: 1px solid #e0e0e0;
 }
 
 #toast {
     max-width: inherit;
     width: 100%;
-    display: block;
+    display: block; 
     position: fixed;
     bottom: 0;
     left: 0;
@@ -709,7 +710,7 @@ table#myDataTable {
     -webkit-box-shadow: 0px -14px 20px rgba(0, 0, 0, .15);
     -moz-box-shadow: 0px -14px 20px rgba(0, 0, 0, .15);
     -ms-box-shadow: 0px -14px 20px rgba(0, 0, 0, .15);
-	z-index: 10;
+    z-index: 30;
 }
 
 .totalLigne td {

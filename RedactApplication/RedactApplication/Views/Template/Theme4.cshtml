@@ -18,6 +18,10 @@
             <ul>
                 <li> @Html.ActionLink("Dashboard", "ListTemplate", new { controller = "Template" }) </li>
                 <li> @Html.ActionLink("Creation Site", "ChoiceTemplate", new { controller = "Template" }, new { @class = "active" })</li>
+                @if (Session["name"] != null && @Session["role"] != null && @Session["role"].ToString() != "6")
+                {
+                    <li> @Html.ActionLink("Utilisateurs", "ListeUserTemplate", new { controller = "Home" }) </li>
+                }
             </ul>
         </div>
         <div class="theme-select grey-bg">
