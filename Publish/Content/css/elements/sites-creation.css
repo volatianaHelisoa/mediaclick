@@ -950,7 +950,13 @@
     font-size: 12px;
     margin-left: 1em
 }
-
+#createtemplate .blk label {
+	display: block;
+}
+#createtemplate #ftpList {
+    display: inline-block;
+    width: inherit;
+}
 .blk input {
     width: 100%;
 }
@@ -1001,4 +1007,15 @@ span.field-info {
     border: 1px solid #e0e0e0;
     margin: 20px 0 0;
     border-radius: 3px;
+}
+
+#PROJET_projet_name {
+	display: block;
+    width: 100%;
+    margin: 15px 0 30px;
+}
+
+
+.error {
+	color: red;
 }

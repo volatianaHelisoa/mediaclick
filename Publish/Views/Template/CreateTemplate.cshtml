@@ -168,7 +168,6 @@
 						<div class="blk clearfix">
 							<label for="">
 								<strong>Mot de passe</strong>
-								<input type="password" >
 								@Html.TextBoxFor(x => x.ftpPassword, new { required = true, @name = "name", @placeholder="********" })
 							</label>
 						</div>
@@ -176,13 +175,23 @@
 					<div class="ftp-error">                            
 						<p class="error-msg text-centered">Veuillez vérifier vos paramètres de connexion sur le serveur.</p>
 					</div>
-					<div class="col-md-12" style="text-align: center"> 
-						<input type="button" value="Récupérer dossiers FTP" id="ftpList" class="btn btn-success"/>
+					<div class="col-md-12 clearfix">
+						<div class="blk" style="text-align: center">
+							<input type="button" value="Récupérer dossiers FTP" id="ftpList" class="btn btn-success"/>
+							<select id="ftpdir" name="ftpdirs" style=" width: 50%; margin: 30px auto;"></select>
+							<section class="clearfix submit-area save-template">
+								<input type="submit" value="Enregistrer" class="btn btn-success" style="width: inherit;"/> 
+								@Html.ActionLink("Annuler", "ChoiceTemplate", "Template", new { @class = "btn btn-warning" })
+							</section> 							
+						</div>
+
 					</div>
 				}
 			</section>
-		</div>
-        
+			 
+				
+			
+		</div>        
 
         <div id="createprojet" class="modal modal-popup">
             <div class="flex-content flex-jcenter-acenter flex-col pop-up">
