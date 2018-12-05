@@ -1,23 +1,15 @@
 ﻿@model RedactApplication.Models.MODELEViewModel
 @{
-
     Layout = "~/Views/Shared/LayoutTemplate.cshtml";
-
 }
 @section Scripts{
 
 }
-
-
-
-
-
 @if (@Session["TemplateName"] != null && @Session["TemplateName"].ToString() == "Theme1")
 {
     <div class="template theme">
         <!-- Bloc header -->
         <header>
-
             <div class="wrapper">
                 <div id="topbar" class="clearfix">
                     <a href="@Model.site_url" class="t-logo theme">
@@ -1071,19 +1063,18 @@
             <main>
                 <section>
                     <article id="bloc1" class="flexitem container">
-                        <div class="wrap">
-                            @if (Model.menu1_paragraphe1_photoUrl != null && !String.IsNullOrEmpty(Model.menu1_paragraphe1_photoUrl))
-                            {
-                                <div class="photo">
-                                    <img src="@Html.Raw(Model.menu1_paragraphe1_photoUrl)" alt="@Model.menu1_paragraphe1_alt" srcset="">
-                                </div>
-                            }
-
+						<div class="wrap">
                             <div class="texte">
                                 <h1> @Model.menu1_paragraphe1_titre</h1>
                                 @Html.Raw(Model.menu1_contenu1)
                             </div>	
                         </div>
+						@if (Model.menu1_paragraphe1_photoUrl != null && !String.IsNullOrEmpty(Model.menu1_paragraphe1_photoUrl))
+						{
+							<div class="photo">
+								<img src="@Html.Raw(Model.menu1_paragraphe1_photoUrl)" alt="@Model.menu1_paragraphe1_alt" srcset="">
+							</div>
+						}
                     </article>
                 </section>
                 <section id="bloc3">
@@ -1094,10 +1085,12 @@
                                 <img src="@Html.Raw(Model.menu1_paragraphe2_photoUrl)" alt="@Model.menu1_paragraphe2_alt" srcset="">
                             </div>
                         }
-                        <div class="texte">
-                            <h2>@Model.menu1_paragraphe2_titre</h2>
-                            @Html.Raw(Model.menu1_contenu2)
-                        </div>
+						<div class="wrap">
+							<div class="texte">
+								<h2>@Model.menu1_paragraphe2_titre</h2>
+								@Html.Raw(Model.menu1_contenu2)
+							</div>
+						</div>
                     </div>
                 </section>
             </main>
@@ -1108,19 +1101,19 @@
             <main>
                 <section>
                     <article id="bloc1" class="flexitem container">
-                        <div class="wrap">
-                            @if (Model.menu2_paragraphe1_photoUrl != null && !String.IsNullOrEmpty(Model.menu2_paragraphe1_photoUrl))
-                            {
-                                <div class="photo">
-                                    <img src="@Html.Raw(Model.menu2_paragraphe1_photoUrl)" alt="@Model.menu2_paragraphe1_alt" srcset="">
-                                </div>
-                            }
-
+						<div class="wrap">
                             <div class="texte">
                                 <h1> @Model.menu2_paragraphe1_titre</h1>
                                 @Html.Raw(Model.menu2_contenu1)
                             </div>	
                         </div>
+                        
+						@if (Model.menu2_paragraphe1_photoUrl != null && !String.IsNullOrEmpty(Model.menu2_paragraphe1_photoUrl))
+						{
+							<div class="photo">
+								<img src="@Html.Raw(Model.menu2_paragraphe1_photoUrl)" alt="@Model.menu2_paragraphe1_alt" srcset="">
+							</div>
+						}
                     </article>
                 </section>
                 <section id="bloc3">
@@ -1131,10 +1124,12 @@
                                 <img src="@Html.Raw(Model.menu2_paragraphe2_photoUrl)" alt="@Model.menu2_paragraphe2_alt" srcset="">
                             </div>
                         }
-                        <div class="texte">
-                            <h2>@Model.menu2_paragraphe2_titre</h2>
-                            @Html.Raw(Model.menu2_contenu2)
-                        </div>
+						<div class="wrap">
+							<div class="texte">
+								<h2>@Model.menu2_paragraphe2_titre</h2>
+								@Html.Raw(Model.menu2_contenu2)
+							</div>
+						</div>
                     </div>
                 </section>
             </main>
@@ -1144,19 +1139,19 @@
             <main>
                 <section>
                     <article id="bloc1" class="flexitem container">
-                        <div class="wrap">
-                            @if (Model.menu3_paragraphe1_photoUrl != null && !String.IsNullOrEmpty(Model.menu3_paragraphe1_photoUrl))
-                            {
-                                <div class="photo">
-                                    <img src="@Html.Raw(Model.menu3_paragraphe1_photoUrl)" alt="@Model.menu3_paragraphe1_alt" srcset="">
-                                </div>
-                            }
-
+                            
+						<div class="wrap">
                             <div class="texte">
                                 <h1> @Model.menu3_paragraphe1_titre</h1>
                                 @Html.Raw(Model.menu3_contenu1)
                             </div>	
                         </div>
+						@if (Model.menu3_paragraphe1_photoUrl != null && !String.IsNullOrEmpty(Model.menu3_paragraphe1_photoUrl))
+						{
+							<div class="photo">
+								<img src="@Html.Raw(Model.menu3_paragraphe1_photoUrl)" alt="@Model.menu3_paragraphe1_alt" srcset="">
+							</div>
+						}
                     </article>
                 </section>
                 <section id="bloc3">
@@ -1167,10 +1162,12 @@
                                 <img src="@Html.Raw(Model.menu3_paragraphe2_photoUrl)" alt="@Model.menu3_paragraphe2_alt" srcset="">
                             </div>
                         }
-                        <div class="texte">
-                            <h2>@Model.menu3_paragraphe2_titre</h2>
-                            @Html.Raw(Model.menu3_contenu2)
-                        </div>
+						<div class="wrap">
+							<div class="texte">
+								<h2>@Model.menu3_paragraphe2_titre</h2>
+								@Html.Raw(Model.menu3_contenu2)
+							</div>
+						</div>
                     </div>
                 </section>
             </main>
@@ -1181,19 +1178,20 @@
             <main>
                 <section>
                     <article id="bloc1" class="flexitem container">
-                        <div class="wrap">
-                            @if (Model.menu4_paragraphe1_photoUrl != null && !String.IsNullOrEmpty(Model.menu4_paragraphe1_photoUrl))
-                            {
-                                <div class="photo">
-                                    <img src="@Html.Raw(Model.menu4_paragraphe1_photoUrl)" alt="@Model.menu4_paragraphe1_alt" srcset="">
-                                </div>
-                            }
-
+						<div class="wrap">
                             <div class="texte">
                                 <h1> @Model.menu4_paragraphe1_titre</h1>
                                 @Html.Raw(Model.menu4_contenu1)
                             </div>	
                         </div>
+                        
+						@if (Model.menu4_paragraphe1_photoUrl != null && !String.IsNullOrEmpty(Model.menu4_paragraphe1_photoUrl))
+						{
+							<div class="photo">
+								<img src="@Html.Raw(Model.menu4_paragraphe1_photoUrl)" alt="@Model.menu4_paragraphe1_alt" srcset="">
+							</div>
+						}
+						
                     </article>
                 </section>
                 <section id="bloc3">
@@ -1204,10 +1202,12 @@
                                 <img src="@Html.Raw(Model.menu4_paragraphe2_photoUrl)" alt="@Model.menu4_paragraphe2_alt" srcset="">
                             </div>
                         }
-                        <div class="texte">
-                            <h2>@Model.menu4_paragraphe2_titre</h2>
-                            @Html.Raw(Model.menu4_contenu2)
-                        </div>
+                        <div class="wrap">
+							<div class="texte">
+								<h2>@Model.menu4_paragraphe2_titre</h2>
+								@Html.Raw(Model.menu4_contenu2)
+							</div>
+						</div>
                     </div>
                 </section>
             </main>
