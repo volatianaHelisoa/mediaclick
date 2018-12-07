@@ -39,6 +39,7 @@
     display: block;
     margin-bottom: 10px;
     color: #898989;
+    font-size: 16px;
 }
 .commande-resume .wrap strong,
 .commande-resume .wrap strong {
@@ -206,7 +207,8 @@
 }
 
 
-#remarques {
+#remarques,
+#motcle2nd {
     display: block;
     margin-top: 30px;
 }
@@ -222,4 +224,8 @@
 
 #remarques .section-title span {
     background: #ff4026;
+}
+
+.back-office section.commande-resume.large {
+    max-width: 1024px;
 }
