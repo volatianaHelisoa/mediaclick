@@ -388,7 +388,7 @@ namespace RedactApplication.Controllers
 
             TEMPLATE newtemplate = new TEMPLATE();
             newtemplate.dateCreation = DateTime.Now;
-            newtemplate.url = modelVm.site_url;
+            newtemplate.url = model.url;
             newtemplate.ftpUser = model.ftpUser;
             newtemplate.ftpPassword = model.ftpPassword;
             newtemplate.modeleId = (Guid)Session["modeleId"];
@@ -915,5 +915,40 @@ namespace RedactApplication.Controllers
             Session["TemplateName"] = "Theme8";
             return View();
         }
+
+        public ActionResult EditTemplate(Guid? hash)
+        {
+            Templates val = new Templates();
+            TEMPLATEViewModel templateVm = val.GetDetailsTemplate(hash);
+
+            return View(templateVm);
+        }
+
+        [HttpPost]
+        [Authorize]
+        [ValidateInput(false)]
+        [MvcApplication.CheckSessionOut]
+        public ActionResult SaveEditTemplate(Guid idTemplate, TEMPLATEViewModel model, FormCollection collection)
+        {
+            var hash = idTemplate;
+            TEMPLATE template = db.TEMPLATEs.Find(hash);
+         
+            template.MODELE.site_url = model.MODELE.site_url;
+            template.url = model.url;
+            template.ftpUser = model.ftpUser;
+            template.ftpPassword = model.ftpPassword;          
+            template.ip = model.ip;
+
+            int result = db.SaveChanges();
+            if (result > 0)
+            {
+                return View("EditTemplateConfirmation");
+            }
+            else
+            {
+                return View("ErrorException");
+            }
+        }        
+        
     }
 }

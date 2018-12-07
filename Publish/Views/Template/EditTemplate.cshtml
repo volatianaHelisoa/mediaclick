@@ -1,0 +1,85 @@
+﻿@model RedactApplication.Models.TEMPLATEViewModel
+@{
+    ViewBag.Title = "EditTemplate";
+    Layout = "~/Views/Shared/LayoutConnected.cshtml";
+}
+
+
+
+
+<main id="wrapper">
+    <div id="single-container">
+        @using (Html.BeginForm("SaveEditTemplate", "Template", FormMethod.Post, new { @class = "formfields" }))
+        {
+            @Html.AntiForgeryToken()
+            <!-- Champs -->
+            <input type="hidden" name="idTemplate" value="@Model.templateId">
+
+            <section class="theme-customization clearfix">
+                <div class="section-title">
+                    <span>Modifier le template</span>
+                </div>
+
+                <div class="row site-identity">
+                    <div class="col-md-6">
+                        <div class="blk">
+                            <strong>L'url de votre site</strong>
+                            @Html.TextBoxFor(x => x.MODELE.site_url, new { @placeholder = "example.com" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="blk">
+                            <strong>Adresse IP</strong>
+                            @Html.TextBoxFor(x => x.ip, new { @placeholder = "192.168.0.1" })
+                        </div>
+                    </div>
+                </div>
+
+                <!-- contenu bloc 1 -->
+                <div class="section-title">
+                    <span>Accès</span>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="blk clearfix">
+                            <label for="">
+                                <strong>FTP hôte</strong>
+                                @Html.TextBoxFor(x => x.url, new { @placeholder = "Adresse de l'hôte" })
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="blk clearfix">
+                            <label for="">
+                                <strong>Utilisateur</strong>
+                                @Html.TextBoxFor(x => x.ftpUser, new { @placeholder = "Identifiant" })
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="blk clearfix">
+                            <label for="">
+                                <strong>Mot de passe</strong>
+                                @Html.TextBoxFor(x => x.ftpPassword, new { @type = "password" })
+                            </label>
+                        </div>
+                    </div>
+                </div>
+           
+            </section>
+            <section class="clearfix submit-area">
+                <input type="submit" value="Enregistrer" class="btn btn-success">              
+                @Html.ActionLink("Annuler", "ListTemplate", "Template", new { @class = "btn btn-warning" })
+            </section>
+        }
+    </div>
+</main>
+
+
+
+
+
+
+
+
+

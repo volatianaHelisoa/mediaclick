@@ -765,6 +765,8 @@
     <Content Include="Themes\Theme8\fonts\oswald-medium.ttf" />
     <Content Include="Themes\Theme8\fonts\oswald-medium.woff" />
     <Content Include="Views\Template\Theme8.cshtml" />
+    <Content Include="Views\Template\EditTemplate.cshtml" />
+    <Content Include="Views\Template\EditTemplateConfirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

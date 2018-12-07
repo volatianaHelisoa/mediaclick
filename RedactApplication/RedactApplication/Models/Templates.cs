@@ -42,6 +42,33 @@ namespace RedactApplication.Models
 
         }
 
+        public TEMPLATEViewModel GetDetailsTemplate(Guid? templateId)
+        {
+            redactapplicationEntities db = new redactapplicationEntities();
+            var template = db.TEMPLATEs.Find(templateId);
+
+            var templateVm = new TEMPLATEViewModel();
+            templateVm.dateCreation = template.dateCreation;
+            templateVm.projetId = template.projetId;
+            templateVm.PROJET = template.PROJET;
+            templateVm.THEME = template.THEME;
+            templateVm.themeId = template.themeId;
+            templateVm.url = template.url;
+            templateVm.modeleId = template.modeleId;
+            templateVm.templateId = template.templateId;
+
+            templateVm.MODELE = template.MODELE;
+            templateVm.ftpUser = template.ftpUser;
+            templateVm.ftpPassword = template.ftpPassword;
+            templateVm.userId = template.userId;
+            templateVm.UTILISATEUR = template.UTILISATEUR;
+            templateVm.html = template.html;
+            templateVm.ip = template.ip;
+
+            return templateVm;
+
+        }
+
         public IEnumerable<SelectListItem> GetListProjetItem()
         {
             using (var context = new redactapplicationEntities())

@@ -16,7 +16,7 @@
 }
 
 
-    <main id="wrapper">
+    <main id="wrapper"> 
         <div id="single-container">
             <div class="onglets ease-in-out">
                 <ul>
@@ -120,9 +120,9 @@
                                     <td class="col-option">
                                         <div class="item">
                                             <div class="option">
-                                                <a href="@Html.Raw(item.url)" title="Voir"><i class="fa fa-eye"></i></a>
+                                                <a href="@Html.Raw(item.MODELE.site_url)" title="Voir"><i class="fa fa-eye"></i></a>
                                                 <a onclick="DeleteTemplateClick('@item.templateId')" title="Supprimer template"><i class="fa fa-trash"></i></a>
-
+                                                <a href="~/Template/EditTemplate/@item.templateId" title="Editer"><i class="fa fa-edit"></i></a>
                                             </div>
                                         </div>
                                     </td>
